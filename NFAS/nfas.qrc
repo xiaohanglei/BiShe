@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/NFAS">
+        <file>Resources/logo.png</file>
+        <file>nfas_zh.qm</file>
+    </qresource>
+</RCC>
