@@ -54,12 +54,13 @@ void AcademicClassStudentTabWidget::AcademicAdd()
 		return;
 	}
 	Academic academic(acaid, acaname);
-	if (dataManager->AcademicOP(academic, 0)) {
+	if (dataManager->AcademicOP(academic, 0))//讲该学院插入数据库中
+	{
 		QMessageBox::information(0, tr("academic add"), tr("academic add successfully"), QMessageBox::Ok);
 		academicid->setText("");
 		academicname->setText("");
-		dataManager->updateAcademic();
-		updateComboBox();
+		dataManager->updateAcademic();//更新数据库中的数据
+		updateComboBox();//更新列表框
 		updateTree();
 	}
 	else {
@@ -76,16 +77,22 @@ void AcademicClassStudentTabWidget::AcademicDelete()
 {
 	auto s=academictree->selectedItems()[0];
 	auto p=s->parent();
-	if (p == nullptr) {
-		if (s->childCount() > 0) {
-			if (QMessageBox::information(0, tr("academic delete"), tr("class is not 0,are you sure to delete?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No) {
+	if (p == nullptr)
+	{
+		if (s->childCount() > 0) //确认删除
+		{
+			if (QMessageBox::information(0, tr("academic delete"), tr("class is not 0,are you sure to delete?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No)
+			{
 				return;
 			}
 		}
-		for (int i = 0; i < s->childCount(); i++) {
+		for (int i = 0; i < s->childCount(); i++)
+		{
 			dataManager->AclassOP(Aclass(s->child(i)->text(0).split("-")[0], "", ""), 2);
-			for (auto it = dataManager->GetStudent()->begin(); it != dataManager->GetStudent()->end(); it++) {
-				if (it->GetAclass() == s->child(i)->text(0).split("-")[0]) {
+			for (auto it = dataManager->GetStudent()->begin(); it != dataManager->GetStudent()->end(); it++) 
+			{
+				if (it->GetAclass() == s->child(i)->text(0).split("-")[0])
+				{
 					dataManager->StudentOP(Student(it->GetID(), "", 0, "", "", ""), 2);
 				}
 			}
@@ -93,7 +100,8 @@ void AcademicClassStudentTabWidget::AcademicDelete()
 		dataManager->updateStudent();
 		dataManager->updateClass();
 		QString acaid = s->text(0).split("-")[0];
-		if (dataManager->AcademicOP(Academic(acaid,""), 1)) {
+		if (dataManager->AcademicOP(Academic(acaid,""), 1)) 
+		{
 			QMessageBox::information(0, tr("academic delete"), tr("academic delete successfully"), QMessageBox::Ok);
 			dataManager->updateAcademic();
 			updateComboBox();
