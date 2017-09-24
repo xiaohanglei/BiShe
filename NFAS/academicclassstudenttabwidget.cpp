@@ -153,9 +153,11 @@ void AcademicClassStudentTabWidget::ClassModify()
 		return;
 	}
 	auto item = items[0];
-	if (item->parent() == nullptr) {
+	if (item->parent() == nullptr)
+	{
 		bool success = false;
-		for (int i = 0; i < academicclasstable->rowCount(); i++) {
+		for (int i = 0; i < academicclasstable->rowCount(); i++) 
+		{
 			QString claid = academicclasstable->item(i, 0)->text();
 			QString claname= academicclasstable->item(i, 1)->text();
 			auto item = (QComboBox*)academicclasstable->cellWidget(i, 2);
@@ -163,7 +165,8 @@ void AcademicClassStudentTabWidget::ClassModify()
 			Aclass clas(claid, claname, claaca);
 			success = dataManager->AclassOP(clas, 1);
 		}
-		if (success) {
+		if (success)
+		{
 			QMessageBox::information(0, tr("class modify"), tr("class modify successfully"), QMessageBox::Ok);
 			classid->setText("");
 			classname->setText("");
@@ -246,7 +249,8 @@ void AcademicClassStudentTabWidget::StudentModify()
 	auto item = items[0];
 	if (item->parent() != nullptr) {
 		bool success = false;
-		for (int i = 0; i < academicclasstable->rowCount(); i++) {
+		for (int i = 0; i < academicclasstable->rowCount(); i++) 
+		{
 			QString stuid = academicclasstable->item(i, 0)->text();
 			QString stuname = academicclasstable->item(i, 1)->text();
 			auto itemsex = (QComboBox*)academicclasstable->cellWidget(i, 2);
@@ -258,72 +262,86 @@ void AcademicClassStudentTabWidget::StudentModify()
 			Student stu(stuid, stuname, stusex, stuaca, stucla,"");
 			success = dataManager->StudentOP(stu, 1);
 		}
-		if (success) {
+		if (success) 
+		{
 			QMessageBox::information(0, tr("student modify"), tr("student modify successfully"), QMessageBox::Ok);
 			studentid->setText("");
 			studentname->setText("");
 			dataManager->updateStudent();
 			updateTree();
 		}
-		else {
+		else 
+		{
 			QMessageBox::information(0, tr("student modify"), tr("student modify failed"), QMessageBox::Ok);
 		}
 	}
-	else {
+	else 
+	{
 		QMessageBox::information(0, tr("student modify"), tr("please select class first"), QMessageBox::Ok);
 	}
 }
 
 void AcademicClassStudentTabWidget::StudentDelete()
 {
-	if (currenttable == 1) {
+	if (currenttable == 1) 
+	{
 		auto currentrow = academicclasstable->currentRow();
 		if (currentrow >= 0) {
 			auto item = academicclasstable->item(currentrow, 0)->text();
-			if (dataManager->StudentOP(Student(item, "", 0, "", "", ""), 2)) {
+			if (dataManager->StudentOP(Student(item, "", 0, "", "", ""), 2))
+			{
 				QMessageBox::information(0, tr("student delete"), tr("student delete successfully"), QMessageBox::Ok);
 				dataManager->updateStudent();
 			}
-			else {
+			else 
+			{
 				QMessageBox::information(0, tr("student delete"), tr("student delete failed"), QMessageBox::Ok);
 			}
 		}
-		else {
+		else 
+		{
 			QMessageBox::information(0, tr("student delete"), tr("please select student first"), QMessageBox::Ok);
 		}
 	}
-	else {
+	else
+	{
 		QMessageBox::information(0, tr("student delete"), tr("please select student first"), QMessageBox::Ok);
 	}
 }
 
-void AcademicClassStudentTabWidget::updateTable(QTreeWidgetItem* item, int col)
+void AcademicClassStudentTabWidget::updateTable(QTreeWidgetItem* item, int col)//更新学院详细信息表格 
 {
 	academicclasstable->clear();
 	academicclasstable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	academicclasstable->setRowCount(0);
 	QStringList header;
 	auto id = item->text(0).split("-")[0];
-	if (item->parent() == nullptr) {
+	if (item->parent() == nullptr) 
+	{
 		auto aclass = dataManager->GetAClass();
 		academicclasstable->setColumnCount(4);
 		header << tr("class id") << tr("class name") << tr("class academic") << tr("student number");
 		academicclasstable->setHorizontalHeaderLabels(header);
-		for (auto it = aclass->begin(); it != aclass->end(); it++) {
-			if (it->GetAcademic() == id) {
+		for (auto it = aclass->begin(); it != aclass->end(); it++) 
+		{
+			if (it->GetAcademic() == id) 
+			{
 				auto rowcount = academicclasstable->rowCount();
 				academicclasstable->insertRow(rowcount);
 				academicclasstable->setItem(rowcount, 0, new QTableWidgetItem(it->GetID()));
 				academicclasstable->setItem(rowcount, 1, new QTableWidgetItem(it->GetName()));
 				QComboBox* academicbox = new QComboBox;
-				for (auto ita = dataManager->GetAcademics()->begin(); ita != dataManager->GetAcademics()->end(); ita++) {
+
+				for (auto ita = dataManager->GetAcademics()->begin(); ita != dataManager->GetAcademics()->end(); ita++) 
+				{
 					academicbox->addItem(ita->GetID());
 				}
 				academicbox->setCurrentText(it->GetAcademic());
 				//academicclasstable->setItem(rowcount, 2, new QTableWidgetItem(it->GetAcademic()));
 				academicclasstable->setCellWidget(rowcount, 2, academicbox);
 				auto studentnumber = 0;
-				for (auto iter = dataManager->GetStudent()->begin(); iter != dataManager->GetStudent()->end(); iter++) {
+				for (auto iter = dataManager->GetStudent()->begin(); iter != dataManager->GetStudent()->end(); iter++) 
+				{
 					if (iter->GetAclass() == it->GetID()) {
 						studentnumber++;
 					}
@@ -337,7 +355,9 @@ void AcademicClassStudentTabWidget::updateTable(QTreeWidgetItem* item, int col)
 			academicclasstable->item(i, 0)->setFlags(academicclasstable->item(i, 0)->flags() & (~Qt::ItemIsEditable));
 			academicclasstable->item(i, 3)->setFlags(academicclasstable->item(i, 3)->flags() & (~Qt::ItemIsEditable));
 		}
-	}else{
+	}
+	else
+	{
 		auto student = dataManager->GetStudent();
 		academicclasstable->setColumnCount(11);
 		header << tr("student id") << tr("student name") << tr("student sex") << tr("student academic")<<tr("student class")<<tr("student figure")
@@ -585,7 +605,7 @@ void AcademicClassStudentTabWidget::updateTree()//更新信息管理的树形控
 	academictree->expandAll();
 }
 
-void AcademicClassStudentTabWidget::updateComboBox()//更新学院信息和班级信息列表框
+void AcademicClassStudentTabWidget::updateComboBox()//更新学院信息列表框
 {
 	classacademic->clear();
 	studentacademic->clear();
