@@ -219,11 +219,13 @@ void AcademicClassStudentTabWidget::StudentAdd()
 	int stusex = studentsex->currentIndex();
 	QString stuaca = studentacademic->currentText().split("-")[0];
 	QString stucla = studentclass->currentText().split("-")[0];
-	if (stuid.length() != 8) {
+	if (stuid.length() != 8) 
+	{
 		QMessageBox::information(0, tr("student add"), tr("length of student id must be 8"), QMessageBox::Ok);
 		return;
 	}
-	if (!(stuname.length() > 0)) {
+	if (!(stuname.length() > 0)) 
+	{
 		QMessageBox::information(0, tr("student add"), tr("student name is required"), QMessageBox::Ok);
 		return;
 	}
@@ -234,7 +236,8 @@ void AcademicClassStudentTabWidget::StudentAdd()
 		studentname->setText("");
 		dataManager->updateStudent();
 	}
-	else {
+	else
+	{
 		QMessageBox::information(0, tr("student add"), tr("student add failed"), QMessageBox::Ok);
 	}
 }
