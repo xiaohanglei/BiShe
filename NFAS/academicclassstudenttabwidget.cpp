@@ -8,7 +8,8 @@
 #include <QHeaderView>
 #include <QComboBox>
 
-AcademicClassStudentTabWidget::AcademicClassStudentTabWidget(DataManager *dm, QWidget * parent) : QWidget(parent) {
+AcademicClassStudentTabWidget::AcademicClassStudentTabWidget(DataManager *dm, QWidget * parent) : QWidget(parent)
+{
 	dataManager = dm;
 	setupUi();
 	connect(academicadd, SIGNAL(clicked()), this, SLOT(AcademicAdd()));//添加学院
@@ -32,7 +33,8 @@ AcademicClassStudentTabWidget::AcademicClassStudentTabWidget(DataManager *dm, QW
 	connect(academictree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(updateTable(QTreeWidgetItem*,int)));
 }
 
-AcademicClassStudentTabWidget::~AcademicClassStudentTabWidget() {
+AcademicClassStudentTabWidget::~AcademicClassStudentTabWidget() 
+{
 	
 }
 
@@ -45,11 +47,13 @@ void AcademicClassStudentTabWidget::AcademicAdd()
 {
 	QString acaid = academicid->text().trimmed();
 	QString acaname = academicname->text().trimmed();
-	if (acaid.length() != 4) {
+	if (acaid.length() != 4)
+	{
 		QMessageBox::information(0, tr("academic add"), tr("length of academic id must be 4"), QMessageBox::Ok);
 		return;
 	}
-	if (!(acaname.length() > 0)) {
+	if (!(acaname.length() > 0)) 
+	{
 		QMessageBox::information(0, tr("academic add"), tr("academic name is required"), QMessageBox::Ok);
 		return;
 	}
@@ -63,7 +67,8 @@ void AcademicClassStudentTabWidget::AcademicAdd()
 		updateComboBox();//更新列表框
 		updateTree();
 	}
-	else {
+	else 
+	{
 		QMessageBox::information(0, tr("academic add"), tr("academic add failed"), QMessageBox::Ok);
 	}
 }
@@ -107,7 +112,8 @@ void AcademicClassStudentTabWidget::AcademicDelete()
 			updateComboBox();
 			updateTree();
 		}
-		else {
+		else 
+		{
 			QMessageBox::information(0, tr("academic delete"), tr("academic delete failed"), QMessageBox::Ok);
 		}
 	}
@@ -123,16 +129,19 @@ void AcademicClassStudentTabWidget::ClassAdd()
 	QString claid = classid->text().trimmed();
 	QString claname = classname->text().trimmed();
 	QString claaca = classacademic->currentText().split("-")[0];
-	if (claid.length() != 4) {
+	if (claid.length() != 4) 
+	{
 		QMessageBox::information(0, tr("class add"), tr("length of class id must be 4"), QMessageBox::Ok);
 		return;
 	}
-	if (!(claname.length() > 0)) {
+	if (!(claname.length() > 0))
+	{
 		QMessageBox::information(0, tr("class add"), tr("class name is required"), QMessageBox::Ok);
 		return;
 	}
 	Aclass clas(claid, claname, claaca);
-	if (dataManager->AclassOP(clas, 0)) {
+	if (dataManager->AclassOP(clas, 0)) 
+	{
 		QMessageBox::information(0, tr("class add"), tr("class add successfully"), QMessageBox::Ok);
 		classid->setText("");
 		classname->setText("");
@@ -140,7 +149,8 @@ void AcademicClassStudentTabWidget::ClassAdd()
 		updateTree();
 		updateComboBox();
 	}
-	else {
+	else 
+	{
 		QMessageBox::information(0, tr("class add"), tr("class add failed"), QMessageBox::Ok);
 	}
 }
@@ -148,7 +158,8 @@ void AcademicClassStudentTabWidget::ClassAdd()
 void AcademicClassStudentTabWidget::ClassModify()
 {
 	auto items = academictree->selectedItems();
-	if (items.length() != 1) {
+	if (items.length() != 1)
+	{
 		QMessageBox::information(0, tr("class modify"), tr("please select academic first"), QMessageBox::Ok);
 		return;
 	}
@@ -174,11 +185,13 @@ void AcademicClassStudentTabWidget::ClassModify()
 			updateTree();
 			updateComboBox();
 		}
-		else {
+		else 
+		{
 			QMessageBox::information(0, tr("class modify"), tr("class modify failed"), QMessageBox::Ok);
 		}
 	}
-	else {
+	else
+	{
 		QMessageBox::information(0, tr("class modify"), tr("please select academic first"), QMessageBox::Ok);
 	}
 }
@@ -187,22 +200,27 @@ void AcademicClassStudentTabWidget::ClassDelete()
 {
 	auto s = academictree->selectedItems()[0];
 	auto p = s->parent();
-	if (p != nullptr) {
+	if (p != nullptr) 
+	{
 		QString classid = s->text(0).split("-")[0];
-		for (auto it = dataManager->GetStudent()->begin(); it != dataManager->GetStudent()->end(); it++) {
-			if (it->GetAclass() == classid) {
+		for (auto it = dataManager->GetStudent()->begin(); it != dataManager->GetStudent()->end(); it++) 
+		{
+			if (it->GetAclass() == classid) 
+			{
 				dataManager->StudentOP(Student(it->GetID(), "",0,"","",""), 2);
 			}
 		}
 		dataManager->updateStudent();
 
-		if (dataManager->AclassOP(Aclass(classid, "",""), 2)) {
+		if (dataManager->AclassOP(Aclass(classid, "",""), 2)) 
+		{
 			QMessageBox::information(0, tr("class delete"), tr("class delete successfully"), QMessageBox::Ok);
 			dataManager->updateClass();
 			updateTree();
 			updateComboBox();
 		}
-		else {
+		else 
+		{
 			QMessageBox::information(0, tr("class delete"), tr("class delete failed"), QMessageBox::Ok);
 		}
 	}
