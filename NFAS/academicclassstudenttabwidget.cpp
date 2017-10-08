@@ -248,7 +248,8 @@ void AcademicClassStudentTabWidget::StudentAdd()
 		return;
 	}
 	Student student(stuid, stuname,stusex,stuaca,stucla,GeneFigureInfo(stuid,stuname));
-	if (dataManager->StudentOP(student, 0)) {
+	if (dataManager->StudentOP(student, 0))
+	{
 		QMessageBox::information(0, tr("student add"), tr("student add successfully"), QMessageBox::Ok);
 		studentid->setText("");
 		studentname->setText("");
@@ -263,12 +264,14 @@ void AcademicClassStudentTabWidget::StudentAdd()
 void AcademicClassStudentTabWidget::StudentModify()
 {
 	auto items = academictree->selectedItems();
-	if (items.length() != 1) {
+	if (items.length() != 1) 
+	{
 		QMessageBox::information(0, tr("student modify"), tr("please select class first"), QMessageBox::Ok);
 		return;
 	}
 	auto item = items[0];
-	if (item->parent() != nullptr) {
+	if (item->parent() != nullptr)
+	{
 		bool success = false;
 		for (int i = 0; i < academicclasstable->rowCount(); i++) 
 		{
@@ -307,7 +310,8 @@ void AcademicClassStudentTabWidget::StudentDelete()
 	if (currenttable == 1) 
 	{
 		auto currentrow = academicclasstable->currentRow();
-		if (currentrow >= 0) {
+		if (currentrow >= 0) 
+		{
 			auto item = academicclasstable->item(currentrow, 0)->text();
 			if (dataManager->StudentOP(Student(item, "", 0, "", "", ""), 2))
 			{
@@ -363,7 +367,8 @@ void AcademicClassStudentTabWidget::updateTable(QTreeWidgetItem* item, int col)/
 				auto studentnumber = 0;
 				for (auto iter = dataManager->GetStudent()->begin(); iter != dataManager->GetStudent()->end(); iter++) 
 				{
-					if (iter->GetAclass() == it->GetID()) {
+					if (iter->GetAclass() == it->GetID()) 
+					{
 						studentnumber++;
 					}
 				}
@@ -385,8 +390,10 @@ void AcademicClassStudentTabWidget::updateTable(QTreeWidgetItem* item, int col)/
 			<<tr("in times") << tr("le times") << tr("ab times")
 			<<tr("to times")<<tr("on rate");
 		academicclasstable->setHorizontalHeaderLabels(header);
-		for (auto it = student->begin(); it != student->end(); it++) {
-			if (it->GetAclass() == id) {
+		for (auto it = student->begin(); it != student->end(); it++) 
+		{
+			if (it->GetAclass() == id) 
+			{
 				auto rowcount = academicclasstable->rowCount();
 				academicclasstable->insertRow(rowcount);
 				academicclasstable->setItem(rowcount, 0, new QTableWidgetItem(it->GetID()));
@@ -395,12 +402,14 @@ void AcademicClassStudentTabWidget::updateTable(QTreeWidgetItem* item, int col)/
 				stusexbox->addItems(QStringList() << tr("male") << tr("female"));
 				stusexbox->setCurrentText((it->GetSex() == 0) ? tr("male") : tr("female"));
 				QComboBox* stuacabox = new QComboBox;
-				for (auto ita = dataManager->GetAcademics()->begin(); ita != dataManager->GetAcademics()->end(); ita++) {
+				for (auto ita = dataManager->GetAcademics()->begin(); ita != dataManager->GetAcademics()->end(); ita++)
+				{
 					stuacabox->addItem(ita->GetID());
 				}
 				stuacabox->setCurrentText(it->GetAcademic());
 				QComboBox* stuclabox = new QComboBox;
-				for (auto ita = dataManager->GetAClass()->begin(); ita != dataManager->GetAClass()->end(); ita++) {
+				for (auto ita = dataManager->GetAClass()->begin(); ita != dataManager->GetAClass()->end(); ita++) 
+				{
 					stuclabox->addItem(ita->GetID());
 				}
 				stuclabox->setCurrentText(it->GetAclass());
@@ -431,6 +440,7 @@ void AcademicClassStudentTabWidget::updateTable(QTreeWidgetItem* item, int col)/
 
 //根据所选择的学院，来加载该学院的所有班级
 void AcademicClassStudentTabWidget::StudentAcademicClassChange(int index)
+
 {
 	//首先先清楚班级列表
 	studentclass->clear();
