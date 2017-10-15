@@ -9,30 +9,83 @@
 
 
 //学生类
-class Student{
+class Student
+{
 
 public:
 	Student();
 	Student(QString id, QString name, int sex, QString academic, QString sclass, QString figure,int in=0,int le=0,int ab=0,int to=0);
 
-	const QString GetID() const{ return studentid; }
-	const QString GetName() const{ return studentname; }
-	const QString GetAcademic() const{ return studentacademic; }
-	const QString GetAclass() const{ return studentclass; }
-	const int GetSex() const{ return studentsex; }
-	const QString GetFigure() const{ return studentfigure; }
-	const int GetIntimes() const { return intimes; }
-	const int GetLetimes() const { return letimes; }
-	const int GetAbtimes() const { return abtimes; }
-	const int GetTotimes() const { return totimes; }
-	void AddIntime() { ++intimes; }
-	void AddLetime() { ++letimes; }
-	void AddAbtime() { ++abtimes; }
-	void AddTotime() { ++totimes; }
-	void MinusIntime() { --intimes; }
-	void MinusLetime() { --letimes; }
-	void MinusAbtime() { --abtimes; }
-	void MinusTotime() { --totimes; }
+	const QString GetID() const
+	{ 
+		return studentid;
+	}
+	const QString GetName() const
+	{ 
+		return studentname;
+	}
+	const QString GetAcademic() const
+	{ return studentacademic; }
+	const QString GetAclass() const
+	{ 
+		return studentclass;
+	}
+	const int GetSex() const
+	{ 
+		return studentsex; 
+	}
+	const QString GetFigure() const
+	{ 
+		return studentfigure; 
+	}
+	const int GetIntimes() const
+	{ 
+		return intimes;
+	}
+	const int GetLetimes() const
+	{ 
+		return letimes;
+	}
+	const int GetAbtimes() const 
+	{ 
+		return abtimes; 
+	}
+	const int GetTotimes() const 
+	{ 
+		return totimes; 
+	}
+	void AddIntime() 
+	{ 
+		++intimes;
+	}
+	void AddLetime() 
+	{ 
+		++letimes; 
+	}
+	void AddAbtime() 
+	{ 
+		++abtimes;
+	}
+	void AddTotime()
+	{ 
+		++totimes;
+	}
+	void MinusIntime() 
+	{ 
+		--intimes; 
+	}
+	void MinusLetime()
+	{ 
+		--letimes; 
+	}
+	void MinusAbtime()
+	{ 
+		--abtimes; 
+	}
+	void MinusTotime() 
+	{ 
+		--totimes; 
+	}
 private:
 	QString studentid;
 	QString studentname;
@@ -47,7 +100,8 @@ private:
 };
 
 //班级类
-class Aclass {
+class Aclass 
+{
 
 public:
 	Aclass();
@@ -55,9 +109,18 @@ public:
 	Aclass(QString id, QString name,QString academic);
 	//Aclass(QString id, QString name, QString academic, QString student);
 
-	const QString GetID() const { return classid; }
-	const QString GetName() const { return classname; }
-	const QString GetAcademic() const { return classacademic; }
+	const QString GetID() const 
+	{ 
+		return classid; 
+	}
+	const QString GetName() const 
+	{
+		return classname;
+	}
+	const QString GetAcademic() const
+	{ 
+		return classacademic;
+	}
 
 private:
 	QString classid;
@@ -67,7 +130,8 @@ private:
 };
 
 //学院类
-class Academic{
+class Academic
+{
 
 public:
 	Academic();
@@ -77,8 +141,14 @@ public:
 
 	~Academic();
 
-	const QString GetID() const{ return academicid; }
-	const QString GetName() const{ return academicname; }
+	const QString GetID() const
+	{
+		return academicid;
+	}
+	const QString GetName() const
+	{ 
+		return academicname;
+	}
 
 private:
 	QString academicid;
@@ -88,18 +158,34 @@ private:
 
 
 //用户类
-class User {
+class User
+{
 
 public:
 	User();
 	User(QString id, QString psd, int identify);
 
-	const QString GetUID() const{ return userid; }
-	const QString GetPsd() const{ return password; }
-	const int GetIdentify() const{ return useridentify; }
+	const QString GetUID() const
+	{ 
+		return userid; 
+	}
+	const QString GetPsd() const
+	{ 
+		return password;
+	}
+	const int GetIdentify() const
+	{ 
+		return useridentify;
+	}
 
-	void SetUID(QString id) { userid = id; }
-	void SetIdentify(int identify) { useridentify = identify; }
+	void SetUID(QString id) 
+	{ 
+		userid = id;
+	}
+	void SetIdentify(int identify)
+	{ 
+		useridentify = identify;
+	}
 private:
 	QString userid;
 	QString password;
@@ -108,27 +194,70 @@ private:
 
 
 //考勤结果类
-class Result {
+class Result 
+{
 
 public:
 	Result();
 	Result(QString rid,QString id, int theory, int actual, QString absencs,QString leave,QString submit);
 
-	void SetRID(QString ri) { resultid = ri; }
-	void SetAID(QString id) { attendanceid = id; }
-	void SetTNum(int num) { theorynumber = num; }
-	void SetANum(int num) { actualnumber = num; }
-	void SetAStu(QString a) { absencestudent = a; }
-	void SetLStu(QString a) { leavestudent = a; }
-	void SetUID(QString a) { submituser = a; }
+	void SetRID(QString ri) 
+	{ 
+		resultid = ri; 
+	}
+	void SetAID(QString id) 
+	{ 
+		attendanceid = id;
+	}
+	void SetTNum(int num) 
+	{ 
+		theorynumber = num;
+	}
+	void SetANum(int num) 
+	{ 
+		actualnumber = num;
+	}
+	void SetAStu(QString a) 
+	{ 
+		absencestudent = a;
+	}
+	void SetLStu(QString a) 
+	{ 
+		leavestudent = a;
+	}
+	void SetUID(QString a) 
+	{ 
+		submituser = a; 
+	}
 
-	const QString GetRID() const { return resultid; }
-	const QString GetAID() const { return attendanceid; }
-	const int GetTNum() const { return theorynumber; }
-	const int GetANum() const { return actualnumber; }
-	const QString GetAStu() const { return absencestudent; }
-	const QString GetLStu() const { return leavestudent; }
-	const QString GetUID() const { return submituser; }
+	const QString GetRID() const
+	{ 
+		return resultid; 
+	}
+	const QString GetAID() const 
+	{
+		return attendanceid;
+	}
+	const int GetTNum() const
+	{ 
+		return theorynumber;
+	}
+	const int GetANum() const 
+	{ 
+		return actualnumber; 
+	}
+	const QString GetAStu() const 
+	{ 
+		return absencestudent;
+	}
+	const QString GetLStu() const
+	{ 
+		return leavestudent;
+	}
+	const QString GetUID() const 
+	{ 
+		return submituser; 
+	}
 
 private:
 	QString resultid;
@@ -142,7 +271,8 @@ private:
 
 
 //考勤信息类
-class Attendance {
+class Attendance 
+{
 
 public:
 	Attendance();
@@ -168,7 +298,8 @@ private:
 
 
 //数据管理类
-class DataManager:public QObject{
+class DataManager:public QObject
+{
 	Q_OBJECT
 public:
 	explicit DataManager(QString configfile);

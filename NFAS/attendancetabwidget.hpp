@@ -9,7 +9,8 @@
 #include <QPushButton>
 #include <QDateTimeEdit>
 
-class AttendanceTabWidget : public QWidget {
+class AttendanceTabWidget : public QWidget
+{
 	Q_OBJECT
 
 public:

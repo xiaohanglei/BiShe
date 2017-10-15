@@ -8,7 +8,8 @@
 #include <QComboBox>
 #include <QPushButton>
 
-class AcademicClassStudentTabWidget : public QWidget {
+class AcademicClassStudentTabWidget : public QWidget 
+{
 	Q_OBJECT
 
 public:
