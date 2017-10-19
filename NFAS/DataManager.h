@@ -282,10 +282,22 @@ public:
 	//QString TimeToString();
 	//QString StudentToString();
 
-	const QString GetID() const { return attendanceid; }
-	const QString GetName() const { return attendancename; }
-	const QString GetMID() const { return attendancemachineid; }
-	const QString GetAclass() const { return attendanceclass; }
+	const QString GetID() const
+	{
+		return attendanceid;
+	}
+	const QString GetName() const
+	{
+		return attendancename;
+	}
+	const QString GetMID() const 
+	{
+		return attendancemachineid;
+	}
+	const QString GetAclass() const
+	{
+		return attendanceclass;
+	}
 	const QString GetSETime() const;
 private:
 	QString attendanceid;
@@ -330,13 +342,34 @@ public:
 	QList<Aclass> GetClassFromString(QStringList classes);
 	QList<Student> GetStudentFromString(QStringList students);
 
-	QVector<Academic>* GetAcademics() { return academics; }
-	QVector<Aclass>* GetAClass() { return classes; }
-	QVector<Student>* GetStudent() { return students; }
-	QVector<Attendance>* GetAttendance() { return attendances; }
-	QVector<Result>* GetResult() { return results; }
-	QVector<User>* GetUser() { return users; }
-	User GetCurrentUser() { return currentusers; }
+	QVector<Academic>* GetAcademics() 
+	{
+		return academics;
+	}
+	QVector<Aclass>* GetAClass()
+	{
+		return classes;
+	}
+	QVector<Student>* GetStudent()
+	{
+		return students;
+	}
+	QVector<Attendance>* GetAttendance()
+	{
+		return attendances;
+	}
+	QVector<Result>* GetResult()
+	{
+		return results;
+	}
+	QVector<User>* GetUser()
+	{
+		return users;
+	}
+	User GetCurrentUser()
+	{
+		return currentusers;
+	}
 
 private:
 
