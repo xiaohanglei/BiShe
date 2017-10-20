@@ -7,7 +7,8 @@
 #include <QTableWidget>
 #include <QComboBox>
 
-class UserTabWidget : public QWidget {
+class UserTabWidget : public QWidget 
+{
 	Q_OBJECT
 
 public:

@@ -5,7 +5,8 @@
 #include <QPushButton>
 #include <QLineEdit>
 
-class LoginDialog : public QDialog {
+class LoginDialog : public QDialog
+{
 	Q_OBJECT
 
 public:

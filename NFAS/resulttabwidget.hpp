@@ -23,7 +23,8 @@
 #endif
 
 
-class ResultTabWidget : public QWidget {
+class ResultTabWidget : public QWidget 
+{
 	Q_OBJECT
 
 public:
