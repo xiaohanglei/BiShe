@@ -7,7 +7,8 @@
 #include <QDateTime>
 #include <QHeaderView>
 
-AttendanceTabWidget::AttendanceTabWidget(DataManager *dm, QWidget * parent) : QWidget(parent) {
+AttendanceTabWidget::AttendanceTabWidget(DataManager *dm, QWidget * parent) : QWidget(parent) 
+{
 	dataManager = dm;
 	setupUi();
 
@@ -18,7 +19,8 @@ AttendanceTabWidget::AttendanceTabWidget(DataManager *dm, QWidget * parent) : QW
 	connect(classtree, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(updateAttendanceClass(QTreeWidgetItem*, int)));
 }
 
-AttendanceTabWidget::~AttendanceTabWidget() {
+AttendanceTabWidget::~AttendanceTabWidget() 
+{
 	
 }
 
@@ -29,17 +31,20 @@ void AttendanceTabWidget::UpdateTab()
 void AttendanceTabWidget::AttendanceModify()
 {
 	auto items = attendancetree->selectedItems();
-	if (items.length() != 1) {
+	if (items.length() != 1) 
+	{
 		QMessageBox::information(0, tr("attendance modify"), tr("please select attendance first"), QMessageBox::Ok);
 		return;
 	}
-	if (attendanceclass->text().split(",").length() == 0) {
+	if (attendanceclass->text().split(",").length() == 0) 
+	{
 		QMessageBox::information(0, tr("attendance modify"), tr("please select attendance class first"), QMessageBox::Ok);
 		return;
 	}
 	QString aid = items[0]->text(0).split("-")[0];
 	Attendance attendance(aid, QString(""), QString(""), QString(""), attendanceclass->text());
-	if (dataManager->AttendanceOP(attendance, 1)) {
+	if (dataManager->AttendanceOP(attendance, 1)) 
+	{
 		QMessageBox::information(0, tr("attendance modify"), tr("attendance modify successfully"), QMessageBox::Ok);
 		attendanceid->setText("");
 		attendancename->setText("");
@@ -48,7 +53,8 @@ void AttendanceTabWidget::AttendanceModify()
 		dataManager->updateAttendance();
 		updateTree();
 	}
-	else {
+	else 
+	{
 		QMessageBox::information(0, tr("academic modify"), tr("academic modify failed"), QMessageBox::Ok);
 	}
 }
@@ -56,18 +62,22 @@ void AttendanceTabWidget::AttendanceModify()
 void AttendanceTabWidget::AttendanceDelete()
 {
 	auto items = attendancetree->selectedItems();
-	if (items.size() == 1) {
+	if (items.size() == 1) 
+	{
 		auto aid = items[0]->text(0).split("-")[0];
-		if (dataManager->AttendanceOP(Attendance(aid, "", "", "", ""), 2)) {
+		if (dataManager->AttendanceOP(Attendance(aid, "", "", "", ""), 2))
+		{
 			QMessageBox::information(0, tr("attendance delete"), tr("attendance delete successfully"), QMessageBox::Ok);
 			dataManager->updateResult(dataManager->GetCurrentUser());
 			dataManager->updateAttendance();
 		}
-		else {
+		else
+		{
 			QMessageBox::information(0, tr("attendance delete"), tr("attendance delete failed"), QMessageBox::Ok);
 		}
 	}
-	else {
+	else 
+	{
 		QMessageBox::information(0, tr("attendance delete"), tr("please select attendance first"), QMessageBox::Ok);
 	}
 	
@@ -83,13 +93,18 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 	header << tr("student id") << tr("student name") << tr("student sex") << tr("student academic") << tr("student class") << tr("student figure");
 	attendancetable->setHorizontalHeaderLabels(header);
 	auto s = item->text(0).split("-")[0];
-	for (auto it = dataManager->GetAttendance()->begin(); it != dataManager->GetAttendance()->end(); it++) {
-		if (it->GetID() == s) {
+	for (auto it = dataManager->GetAttendance()->begin(); it != dataManager->GetAttendance()->end(); it++) 
+	{
+		if (it->GetID() == s) 
+		{
 			QStringList aclass = it->GetAclass().split(",");
-			for (int i = 0; i < aclass.size(); i++) {
+			for (int i = 0; i < aclass.size(); i++) 
+			{
 				auto acla = aclass.at(i);
-				for (auto iter = dataManager->GetStudent()->begin(); iter != dataManager->GetStudent()->end(); iter++) {
-					if (iter->GetAclass() == acla) {
+				for (auto iter = dataManager->GetStudent()->begin(); iter != dataManager->GetStudent()->end(); iter++) 
+				{
+					if (iter->GetAclass() == acla) 
+					{
 						auto rowcount = attendancetable->rowCount();
 						attendancetable->insertRow(rowcount);
 						attendancetable->setItem(rowcount, 0, new QTableWidgetItem(iter->GetID()));
@@ -118,15 +133,18 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 void AttendanceTabWidget::updateAttendanceClass(QTreeWidgetItem * item, int col)
 {
 	QStringList aclass;
-	if (attendanceclass->text().trimmed().length() > 0) {
+	if (attendanceclass->text().trimmed().length() > 0) 
+	{
 		aclass = attendanceclass->text().trimmed().split(",");
 	}
 	auto sclassid = item->text(0).split("-")[0];
 	auto index = aclass.indexOf(sclassid);
-	if (index >= 0) {
+	if (index >= 0) 
+	{
 		aclass.removeAt(index);
 	}
-	else {
+	else 
+	{
 		aclass.append(sclassid);
 	}
 	attendanceclass->setText(aclass.join(","));
@@ -140,35 +158,42 @@ void AttendanceTabWidget::AttendanceAdd()
 	QDateTime starttime = attendancestarttime->dateTime();
 	QDateTime endtime = attendanceendtime->dateTime();
 	QString aclass = attendanceclass->text().trimmed();
-	if (aid.length() != 8) {
+	if (aid.length() != 8) 
+	{
 		QMessageBox::information(0, tr("attendance add"), tr("length of attendance id must be 8"), QMessageBox::Ok);
 		return;
 	}
-	if (amid.length() != 6) {
+	if (amid.length() != 6) 
+	{
 		QMessageBox::information(0, tr("attendance add"), tr("length of attendance classroom id must be 6"), QMessageBox::Ok);
 		return;
 	}
-	if (!(aname.length() > 0)) {
+	if (!(aname.length() > 0)) 
+	{
 		QMessageBox::information(0, tr("attendance add"), tr("attendance name is required"), QMessageBox::Ok);
 		return;
 	}
-	if (!(aclass.length() > 0)) {
+	if (!(aclass.length() > 0)) 
+	{
 		QMessageBox::information(0, tr("attendance add"), tr("please select attendance class"), QMessageBox::Ok);
 		return;
 	}
 	QDateTime datetime;
 	auto now = datetime.currentDateTime();
-	if (starttime.toTime_t() - now.toTime_t() < 10 * 60) {
+	if (starttime.toTime_t() - now.toTime_t() < 10 * 60) 
+	{
 		QMessageBox::information(0, tr("attendance add"), tr("start time must later than now more than 10 mins"), QMessageBox::Ok);
 		return;
 	}
-	if (endtime.toTime_t() - starttime.toTime_t() < 30 * 60) {
+	if (endtime.toTime_t() - starttime.toTime_t() < 30 * 60)
+	{
 		QMessageBox::information(0, tr("attendance add"), tr("end time must later than start time more than 30 mins"), QMessageBox::Ok);
 		return;
 	}
 	
 	Attendance attendance(aid, amid, aname, starttime, endtime, aclass);
-	if (dataManager->AttendanceOP(attendance, 0)) {
+	if (dataManager->AttendanceOP(attendance, 0)) 
+	{
 		QMessageBox::information(0, tr("attendance add"), tr("attendance add successfully"), QMessageBox::Ok);
 		attendanceid->setText("");
 		attendancename->setText("");
@@ -177,7 +202,8 @@ void AttendanceTabWidget::AttendanceAdd()
 		dataManager->updateAttendance();
 		updateTree();
 	}
-	else {
+	else
+	{
 		QMessageBox::information(0, tr("academic add"), tr("academic add failed"), QMessageBox::Ok);
 	}
 }
@@ -274,14 +300,16 @@ void AttendanceTabWidget::setupUi()
 void AttendanceTabWidget::updateTree()
 {
 	attendancetree->clear();
-	for (auto iter = dataManager->GetAttendance()->begin(); iter != dataManager->GetAttendance()->end(); iter++) {
+	for (auto iter = dataManager->GetAttendance()->begin(); iter != dataManager->GetAttendance()->end(); iter++) 
+	{
 		auto parent = new QTreeWidgetItem(QStringList() << iter->GetID() + "-" + iter->GetName()+ "-" + iter->GetMID());
 		attendancetree->addTopLevelItem(parent);
 	}
 	//attendancetree->expandAll();
 
 	classtree->clear();
-	for (auto iter = dataManager->GetAClass()->begin(); iter != dataManager->GetAClass()->end(); iter++) {
+	for (auto iter = dataManager->GetAClass()->begin(); iter != dataManager->GetAClass()->end(); iter++) 
+	{
 		auto parent = new QTreeWidgetItem(QStringList() << iter->GetID() +"-" + iter->GetName());
 		classtree->addTopLevelItem(parent);
 	}
