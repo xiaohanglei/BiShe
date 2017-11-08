@@ -130,7 +130,8 @@ Attendance::Attendance(QString id, QString mid, QString name, QString time, QStr
 	attendanceclass(aclass)
 {
 	auto times = time.split("-");
-	if (times.length() == 2) {
+	if (times.length() == 2)
+	{
 		attendancestarttime = QDateTime::fromString(times[0], "yyyy/MM/dd HH:mm");
 		attendanceendtime = QDateTime::fromString(times[1], "yyyy/MM/dd HH:mm");
 	}
@@ -486,7 +487,8 @@ QList<Student> DataManager::GetStudentFromString(QStringList students)
 void DataManager::InitAcademics()
 {
 	QSqlQuery query("SELECT * FROM academictable");
-	while (query.next()) {
+	while (query.next())
+	{
 		QString id = query.value(0).toString();
 		QString name = query.value(1).toString();
 		//QString aclass = query.value(2).toString();
@@ -497,7 +499,8 @@ void DataManager::InitAcademics()
 void DataManager::InitStudents()
 {
 	QSqlQuery query("SELECT * FROM studenttable");
-	while (query.next()) {
+	while (query.next()) 
+	{
 		QString id = query.value(0).toString();
 		QString name = query.value(1).toString();
 		int sex = query.value(2).toInt();
@@ -555,7 +558,8 @@ void DataManager::InitResult(User user)
 void DataManager::InitUser()
 {
 	QSqlQuery query("SELECT * FROM admintable");
-	while (query.next()) {
+	while (query.next()) 
+	{
 		QString id = query.value(0).toString();
 		int identify = query.value(2).toInt();
 		users->append(User(id, "", identify));
@@ -580,7 +584,8 @@ bool DataManager::UserLogin(User user)
 void DataManager::InitAttendances()
 {
 	QSqlQuery query("SELECT * FROM attendancetable");
-	while (query.next()) {
+	while (query.next())
+	{
 		QString id = query.value(0).toString();
 		QString mid = query.value(1).toString();
 		QString name = query.value(2).toString();
