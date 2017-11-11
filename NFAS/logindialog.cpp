@@ -4,7 +4,8 @@
 #include <QMessageBox>
 #include <QLabel>
 
-LoginDialog::LoginDialog(DataManager* dm,QWidget * parent) : QDialog(parent) {
+LoginDialog::LoginDialog(DataManager* dm,QWidget * parent) : QDialog(parent) 
+{
 	dataManager = dm;
 	setupUi();
 
@@ -13,7 +14,8 @@ LoginDialog::LoginDialog(DataManager* dm,QWidget * parent) : QDialog(parent) {
 	connect(login, SIGNAL(clicked()), this, SLOT(Login()));
 }
 
-LoginDialog::~LoginDialog() {
+LoginDialog::~LoginDialog() 
+{
 	
 }
 
