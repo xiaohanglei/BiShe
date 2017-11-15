@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 	{
 		return -1;
 	}
-	NFAS w(&dataManager);
+	NFAS w(&dataManager);//加载主界面
 	w.show();
 	return a.exec();
 }
