@@ -731,7 +731,7 @@ void ResultTabWidget::setupUi()
 	attendancetable = new QTableWidget;
 	attendancetable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	resultadd = new QPushButton(tr("result add"));
-	//resultadd = new QPushButton(tr("雷小航"));
+	
 	resultmodify = new QPushButton(tr("result modify"));
 	resultdelete = new QPushButton(tr("result delete"));
 	QHBoxLayout* filelayout = new QHBoxLayout;
@@ -772,7 +772,7 @@ void ResultTabWidget::setupUi()
 	main_layout->addWidget(resulttree);
 	main_layout->addLayout(rightlayout);
 
-#ifdef _DEBUG
+#ifdef _DEBUG//生成考勤测试文件
 	debugfile=new QPushButton(tr("generate test file"));
 	QHBoxLayout* debuglayout = new QHBoxLayout;
 	attendance = new QComboBox;
