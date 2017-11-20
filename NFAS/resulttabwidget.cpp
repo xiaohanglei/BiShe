@@ -8,7 +8,8 @@
 #include <QFileDialog>
 #include <QDateTime>
 
-ResultTabWidget::ResultTabWidget(DataManager *dm, QWidget * parent) : QWidget(parent) {
+ResultTabWidget::ResultTabWidget(DataManager *dm, QWidget * parent) : QWidget(parent) 
+{
 	dataManager = dm;
 	setupUi();
 
@@ -23,7 +24,8 @@ ResultTabWidget::ResultTabWidget(DataManager *dm, QWidget * parent) : QWidget(pa
 #endif
 }
 
-ResultTabWidget::~ResultTabWidget() {
+ResultTabWidget::~ResultTabWidget()
+{
 }
 
 void ResultTabWidget::UpdateTab()
@@ -33,10 +35,12 @@ void ResultTabWidget::UpdateTab()
 
 void ResultTabWidget::ResultAModify()
 {
-	if (currenttablefrom == 1) {
+	if (currenttablefrom == 1)
+	{
 		auto items = resulttree->selectedItems();
 
-		if (items.size() == 1) {
+		if (items.size() == 1) 
+		{
 			QString aid = resulttree->selectedItems()[0]->parent()->text(0).split("-")[0];
 			QString rid = resulttree->selectedItems()[0]->text(0);
 			int absence = 0;
@@ -55,13 +59,17 @@ void ResultTabWidget::ResultAModify()
 				auto itemleaveclass = attendancetable->item(i, 6)->text() == QString(tr("yes")) ? 1 : 0;
 				auto itemabclass = attendancetable->item(i, 7)->text() == QString(tr("yes")) ? 1 : 0;
 
-				if (iteminclass == 0) {
-					if (itemleaveclass == 1) {
+				if (iteminclass == 0) 
+				{
+					if (itemleaveclass == 1) 
+					{
 						leave++;
 						leavestudent << itemid;
 					}
-					else {
-						if (itemabclass == 1) {
+					else
+					{
+						if (itemabclass == 1) 
+						{
 							absence++;
 							absencsstudent << itemid;
 						}
@@ -78,17 +86,23 @@ void ResultTabWidget::ResultAModify()
 			if (dataManager->ResultOP(attendanceresult, 1)) {
 				QMessageBox::information(0, tr("result modify"), tr("result modify successfully"), QMessageBox::Ok);
 
-				for (auto it = dataManager->GetResult()->begin(); it != dataManager->GetResult()->end(); it++) {
-					if (it->GetAID() == attendanceresult.GetAID() && it->GetRID() == attendanceresult.GetRID()) {
+				for (auto it = dataManager->GetResult()->begin(); it != dataManager->GetResult()->end(); it++) 
+				{
+					if (it->GetAID() == attendanceresult.GetAID() && it->GetRID() == attendanceresult.GetRID()) 
+					{
 						auto abstu = it->GetAStu().split(",");
 						auto lestu = it->GetLStu().split(",");
 						QStringList allstudent,instu,instudent;
 						
-						for (auto iter = dataManager->GetAttendance()->begin(); iter != dataManager->GetAttendance()->end(); iter++) {
-							if (iter->GetID() == it->GetAID()) {
+						for (auto iter = dataManager->GetAttendance()->begin(); iter != dataManager->GetAttendance()->end(); iter++)
+						{
+							if (iter->GetID() == it->GetAID()) 
+							{
 								auto aclass = iter->GetAclass().split(",");
-								for (int i = 0; i < aclass.size(); i++) {
-									for (auto its = dataManager->GetStudent()->begin(); its != dataManager->GetStudent()->end(); its++) {
+								for (int i = 0; i < aclass.size(); i++) 
+								{
+									for (auto its = dataManager->GetStudent()->begin(); its != dataManager->GetStudent()->end(); its++) 
+									{
 										allstudent << its->GetID();
 									}
 								}
@@ -97,27 +111,39 @@ void ResultTabWidget::ResultAModify()
 						}
 
 						for (int i = 0; i < allstudent.size(); i++) {
-							if (lestu.indexOf(allstudent[i]) < 0 && abstu.indexOf(allstudent[i]) < 0) {
+							if (lestu.indexOf(allstudent[i]) < 0 && abstu.indexOf(allstudent[i]) < 0) 
+							{
+
 								instu << allstudent[i];
 							}
 						}
 
 						for (int i = 0; i < allstudent.size(); i++) {
-							if (leavestudent.indexOf(allstudent[i]) < 0 && absencsstudent.indexOf(allstudent[i]) < 0) {
+							if (leavestudent.indexOf(allstudent[i]) < 0 && absencsstudent.indexOf(allstudent[i]) < 0) 
+							{
 								instudent << allstudent[i];
 							}
 						}
 
-						for (auto iter = dataManager->GetAttendance()->begin(); iter != dataManager->GetAttendance()->end(); iter++) {
-							if (iter->GetID() == it->GetAID()) {
+						for (auto iter = dataManager->GetAttendance()->begin(); iter != dataManager->GetAttendance()->end(); iter++) 
+						{
+							if (iter->GetID() == it->GetAID()) 
+							{
 								auto aclass = iter->GetAclass().split(",");
-								for (int i = 0; i < aclass.size(); i++) {
-									for (auto its = dataManager->GetStudent()->begin(); its != dataManager->GetStudent()->end(); its++) {
-										if (its->GetAclass() == aclass[i]) {
-											if (absencsstudent.indexOf(its->GetID())>=0) {
-												if (abstu.indexOf(its->GetID()) < 0) {
+								for (int i = 0; i < aclass.size(); i++) 
+								{
+
+									for (auto its = dataManager->GetStudent()->begin(); its != dataManager->GetStudent()->end(); its++) 
+									{
+										if (its->GetAclass() == aclass[i]) 
+										{
+											if (absencsstudent.indexOf(its->GetID())>=0) 
+											{
+												if (abstu.indexOf(its->GetID()) < 0) 
+												{
 													its->AddAbtime();
-													if (lestu.indexOf(its->GetID()) > 0) {
+													if (lestu.indexOf(its->GetID()) > 0) 
+													{
 														its->MinusLetime();
 													}
 													else {
@@ -125,21 +151,28 @@ void ResultTabWidget::ResultAModify()
 													}
 												}
 											}
-											else if (leavestudent.indexOf(its->GetID()) >= 0) {
-												if (lestu.indexOf(its->GetID()) < 0) {
+											else if (leavestudent.indexOf(its->GetID()) >= 0) 
+											{
+												if (lestu.indexOf(its->GetID()) < 0) 
+												{
 													its->AddLetime();
-													if (abstu.indexOf(its->GetID()) > 0) {
+													if (abstu.indexOf(its->GetID()) > 0) 
+													{
 														its->MinusAbtime();
 													}
-													else {
+													else 
+													{
 														its->MinusIntime();
 													}
 												}
 											}
-											else if(instudent.indexOf(its->GetID()) >= 0){
-												if (instu.indexOf(its->GetID()) < 0) {
+											else if(instudent.indexOf(its->GetID()) >= 0)
+											{
+												if (instu.indexOf(its->GetID()) < 0) 
+												{
 													its->AddIntime();
-													if (abstu.indexOf(its->GetID()) > 0) {
+													if (abstu.indexOf(its->GetID()) > 0) 
+													{
 														its->MinusAbtime();
 													}
 													else {
@@ -165,53 +198,70 @@ void ResultTabWidget::ResultAModify()
 				QMessageBox::information(0, tr("result modify"), tr("result modify failed"), QMessageBox::Ok);
 			}
 		}
-		else {
+		else 
+		{
 			QMessageBox::information(0, tr("result modify"), tr("please select result first"), QMessageBox::Ok);
 		}
 	}
-	else {
+	else
+	{
 		QMessageBox::information(0, tr("result modify"), tr("please select result first"), QMessageBox::Ok);
 	}
 }
 
 void ResultTabWidget::ResultDelete()
 {
-	if (currenttablefrom == 1) {
+	if (currenttablefrom == 1)
+	{
 		auto items = resulttree->selectedItems();
 		auto parent = items[0]->parent();
-		if (parent == nullptr) {
+		if (parent == nullptr) 
+		{
 			QMessageBox::information(0, tr("result delete"), tr("please select result first"), QMessageBox::Ok);
 		}
-		else {
-			if (items.size() == 1) {
+		else 
+		{
+			if (items.size() == 1) 
+			{
 				QString aid = parent->text(0).split("-")[0];
 				QString rid = items[0]->text(0);
 
 				attendanceresult.SetAID(aid);
 				attendanceresult.SetRID(rid);
 
-				if (dataManager->ResultOP(attendanceresult, 2)) {
-					for (auto it = dataManager->GetResult()->begin(); it != dataManager->GetResult()->end(); it++) {
+				if (dataManager->ResultOP(attendanceresult, 2))
+				{
+					for (auto it = dataManager->GetResult()->begin(); it != dataManager->GetResult()->end(); it++) 
+					{
 						auto abstu = it->GetAStu().split(",");
 						auto lestu = it->GetLStu().split(",");
-						if (it->GetAID() == aid&&it->GetRID() == rid) {
-							for (auto iter = dataManager->GetAttendance()->begin(); iter != dataManager->GetAttendance()->end(); iter++) {
-								if (iter->GetID() == it->GetAID()) {
+						if (it->GetAID() == aid&&it->GetRID() == rid)
+						{
+							for (auto iter = dataManager->GetAttendance()->begin(); iter != dataManager->GetAttendance()->end(); iter++)
+							{
+								if (iter->GetID() == it->GetAID()) 
+								{
 									auto aclass = iter->GetAclass().split(",");
-									for (int i = 0; i < aclass.size(); i++) {
-										for (auto its = dataManager->GetStudent()->begin(); its != dataManager->GetStudent()->end(); its++) {
-											if (its->GetAclass() == aclass[i]) {
+									for (int i = 0; i < aclass.size(); i++)
+									{
+										for (auto its = dataManager->GetStudent()->begin(); its != dataManager->GetStudent()->end(); its++)
+										{
+											if (its->GetAclass() == aclass[i]) 
+											{
 												its->MinusTotime();
-												if (abstu.indexOf(its->GetID()) >= 0) {
+												if (abstu.indexOf(its->GetID()) >= 0) 
+												{
 													its->MinusAbtime();
 													dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", 0, 0, its->GetAbtimes(),its->GetTotimes()), 5);
 													
 												}
-												else if (lestu.indexOf(its->GetID()) >= 0) {
+												else if (lestu.indexOf(its->GetID()) >= 0) 
+												{
 													its->MinusLetime();
 													dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", 0, its->GetLetimes(), 0, its->GetTotimes()), 4);
 												}
-												else {
+												else 
+												{
 													its->MinusIntime();
 													dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", its->GetIntimes(), 0, 0, its->GetTotimes()), 3);
 												}
@@ -233,13 +283,15 @@ void ResultTabWidget::ResultDelete()
 					QMessageBox::information(0, tr("result delete"), tr("result delete failed"), QMessageBox::Ok);
 				}
 			}
-			else {
+			else 
+			{
 				QMessageBox::information(0, tr("result delete"), tr("please select result first"), QMessageBox::Ok);
 			}
 		}
 		
 	}
-	else if (currenttablefrom == 2) {
+	else if (currenttablefrom == 2)
+	{
 		auto items = resulttree->selectedItems();
 		auto parent = items[0]->parent();
 		if (parent == nullptr) {
@@ -248,29 +300,39 @@ void ResultTabWidget::ResultDelete()
 			attendanceresult.SetAID(aid);
 			attendanceresult.SetRID("");
 
-			if (dataManager->ResultOP(attendanceresult, 2)) {
+			if (dataManager->ResultOP(attendanceresult, 2)) 
+			{
 				QMessageBox::information(0, tr("result delete"), tr("result delete successfully"), QMessageBox::Ok);
-				for (auto it = dataManager->GetResult()->begin(); it != dataManager->GetResult()->end(); it++) {
+				for (auto it = dataManager->GetResult()->begin(); it != dataManager->GetResult()->end(); it++) 
+				{
 					auto abstu = it->GetAStu().split(",");
 					auto lestu = it->GetLStu().split(",");
 					if (it->GetAID() == aid) {
-						for (auto iter = dataManager->GetAttendance()->begin(); iter != dataManager->GetAttendance()->end(); iter++) {
-							if (iter->GetID() == it->GetAID()) {
+						for (auto iter = dataManager->GetAttendance()->begin(); iter != dataManager->GetAttendance()->end(); iter++) 
+						{
+							if (iter->GetID() == it->GetAID()) 
+							{
 								auto aclass = iter->GetAclass().split(",");
-								for (int i = 0; i < aclass.size(); i++) {
-									for (auto its = dataManager->GetStudent()->begin(); its != dataManager->GetStudent()->end(); its++) {
-										if (its->GetAclass() == aclass[i]) {
+								for (int i = 0; i < aclass.size(); i++) 
+								{
+									for (auto its = dataManager->GetStudent()->begin(); its != dataManager->GetStudent()->end(); its++)
+									{
+										if (its->GetAclass() == aclass[i]) 
+										{
 											its->MinusTotime();
-											if (abstu.indexOf(its->GetID()) >= 0) {
+											if (abstu.indexOf(its->GetID()) >= 0)
+											{
 												its->MinusAbtime();
 												dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", 0, 0, its->GetAbtimes(),its->GetTotimes()), 5);
 
 											}
-											else if (lestu.indexOf(its->GetID()) >= 0) {
+											else if (lestu.indexOf(its->GetID()) >= 0) 
+											{
 												its->MinusLetime();
 												dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", 0, its->GetLetimes(), 0, its->GetTotimes()), 4);
 											}
-											else {
+											else 
+											{
 												its->MinusIntime();
 												dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", its->GetIntimes(), 0, 0, its->GetTotimes()), 3);
 											}
@@ -290,11 +352,13 @@ void ResultTabWidget::ResultDelete()
 				QMessageBox::information(0, tr("result delete"), tr("result delete failed"), QMessageBox::Ok);
 			}
 		}
-		else {
+		else 
+		{
 			QMessageBox::information(0, tr("result delete"), tr("please select result first"), QMessageBox::Ok);
 		}
 	}
-	else {
+	else 
+	{
 		QMessageBox::information(0, tr("result delete"), tr("please select result first"), QMessageBox::Ok);
 	}
 	attendancetable->clear();
@@ -303,7 +367,8 @@ void ResultTabWidget::ResultDelete()
 void ResultTabWidget::updateTable(QTreeWidgetItem * item, int col)
 {
 	auto parent = item->parent();
-	if (parent == nullptr) {
+	if (parent == nullptr)
+	{
 		currenttablefrom = 2;
 		attendancetable->clear();
 		attendancetable->setRowCount(1);
@@ -315,19 +380,25 @@ void ResultTabWidget::updateTable(QTreeWidgetItem * item, int col)
 		QString aname = "";
 		int missnumber = 0;
 		int totalnumber = 0;
-		for (auto it = dataManager->GetAttendance()->begin(); it != dataManager->GetAttendance()->end(); it++) {
-			if (it->GetID() == id) {
+		for (auto it = dataManager->GetAttendance()->begin(); it != dataManager->GetAttendance()->end(); it++) 
+		{
+			if (it->GetID() == id)
+			{
 				aname = it->GetName();
 				break;
 			}
 		}
-		for (auto it = dataManager->GetResult()->begin(); it != dataManager->GetResult()->end(); it++) {
-			if (it->GetAID() == id) {
+		for (auto it = dataManager->GetResult()->begin(); it != dataManager->GetResult()->end(); it++)
+		{
+			if (it->GetAID() == id) 
+			{
 				int ls=0,as=0;
-				if (it->GetLStu().length() > 0) {
+				if (it->GetLStu().length() > 0) 
+				{
 					ls = it->GetLStu().split(",").size();
 				}
-				if (it->GetAStu().length() > 0) {
+				if (it->GetAStu().length() > 0) 
+				{
 					as = it->GetAStu().split(",").size();
 				}
 				missnumber += (as+ls);
@@ -347,7 +418,8 @@ void ResultTabWidget::updateTable(QTreeWidgetItem * item, int col)
 			attendancetable->item(i, 3)->setFlags(attendancetable->item(i, 3)->flags() & (~Qt::ItemIsEditable));
 		}
 	}
-	else {
+	else 
+	{
 		currenttablefrom = 1;
 		attendancetable->clear();
 		attendancetable->setRowCount(0);
@@ -361,18 +433,24 @@ void ResultTabWidget::updateTable(QTreeWidgetItem * item, int col)
 		auto total = 0;
 		auto leave = 0;
 		auto abnumber = 0;
-		for (auto it = dataManager->GetResult()->begin(); it != dataManager->GetResult()->end(); it++) {
-			if (it->GetRID() == rid) {
+		for (auto it = dataManager->GetResult()->begin(); it != dataManager->GetResult()->end(); it++)
+		{
+			if (it->GetRID() == rid) 
+			{
 				auto lestudent = it->GetLStu().split(",");
 				auto abstudent = it->GetAStu().split(",");
 				for (auto iter = dataManager->GetAttendance()->begin(); iter != dataManager->GetAttendance()->end(); iter++)
 				{
-					if (iter->GetID() == it->GetAID()) {
+					if (iter->GetID() == it->GetAID()) 
+					{
 
 						auto aclass = iter->GetAclass().split(",");
-						for (int i = 0; i < aclass.size(); i++) {
-							for (auto its = dataManager->GetStudent()->begin(); its != dataManager->GetStudent()->end(); its++) {
-								if (its->GetAclass() == aclass.at(i)) {
+						for (int i = 0; i < aclass.size(); i++) 
+						{
+							for (auto its = dataManager->GetStudent()->begin(); its != dataManager->GetStudent()->end(); its++)
+							{
+								if (its->GetAclass() == aclass.at(i)) 
+								{
 									total++;
 									auto rowcount = attendancetable->rowCount();
 									attendancetable->insertRow(rowcount);
@@ -384,13 +462,15 @@ void ResultTabWidget::updateTable(QTreeWidgetItem * item, int col)
 									QString inbox = QString(tr("no"));
 									QString lebox = QString(tr("no"));
 									QString abbox = QString(tr("no"));
-									if (lestudent.indexOf(its->GetID()) >= 0) {
+									if (lestudent.indexOf(its->GetID()) >= 0) 
+									{
 										leave++;
 										lebox = QString(tr("yes"));
 										/*its->AddLetime();
 										dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", 0, its->GetLetimes(), 0), 4);*/
 									}
-									else if (abstudent.indexOf(its->GetID()) >= 0) {
+									else if (abstudent.indexOf(its->GetID()) >= 0) 
+									{
 										abnumber++;
 										abbox = QString(tr("yes"));
 										/*its->AddAbtime();
@@ -451,7 +531,8 @@ void ResultTabWidget::AttendanceFileGet()
 	if (xlsx.read(1, 1).toString() != tr("student id") || xlsx.read(1, 2).toString() != tr("student name")
 		|| xlsx.read(1, 3).toString() != tr("student academic") || xlsx.read(1, 4).toString() != tr("student class")
 		|| xlsx.read(1, 5).toString() != tr("student figure") || xlsx.read(1, 6).toString() != tr("in class")
-		|| xlsx.read(1, 7).toString() != tr("leave class") || xlsx.read(1, 8).toString() != tr("absencs class")) {
+		|| xlsx.read(1, 7).toString() != tr("leave class") || xlsx.read(1, 8).toString() != tr("absencs class")) 
+	{
 		QMessageBox::information(0, tr("attendance file select"), tr("please select right file"), QMessageBox::Ok);
 		return;
 	}
@@ -461,7 +542,8 @@ void ResultTabWidget::AttendanceFileGet()
 	int leave = 0;
 	QStringList absencsstudent;
 	QStringList leavestudent;
-	for (int row = 2;; row++) {
+	for (int row = 2;; row++) 
+	{
 		QString stuid = xlsx.read(row, 1).toString();
 		if (stuid == "")	break;
 		total++;
@@ -485,13 +567,16 @@ void ResultTabWidget::AttendanceFileGet()
 		QString lebox = QString(tr("no"));
 		QString abbox = QString(tr("no"));
 
-		if (stuin == 1) {
+		if (stuin == 1) 
+		{
 			inbox = QString(tr("yes"));
 		}
-		else if (stuleave == 1) {
+		else if (stuleave == 1) 
+		{
 			lebox = QString(tr("yes"));
 		}
-		else if (stuabsencs == 1) {
+		else if (stuabsencs == 1) 
+		{
 			abbox = QString(tr("yes"));
 		}
 
@@ -499,13 +584,16 @@ void ResultTabWidget::AttendanceFileGet()
 		attendancetable->setItem(rowcount, 6, new QTableWidgetItem(lebox));
 		attendancetable->setItem(rowcount, 7, new QTableWidgetItem(abbox));
 
-		if (stuin == 0) {
-			if (stuleave == 1) {
+		if (stuin == 0) 
+		{
+			if (stuleave == 1)
+			{
 				leave++;
 				leavestudent << stuid;
 			}
 			else {
-				if (stuabsencs == 1) {
+				if (stuabsencs == 1) 
+				{
 					absence++;
 					absencsstudent << stuid;
 				}
@@ -538,12 +626,15 @@ void ResultTabWidget::AttendanceFileGet()
 
 void ResultTabWidget::CheckChange(QTableWidgetItem * item)
 {
-	if (attendancetable->columnCount() == 8) {
+	if (attendancetable->columnCount() == 8) 
+	{
 		auto col = attendancetable->currentColumn();
 		if (col >= 5 && col <= 7) {
 			auto row = attendancetable->currentRow();
-			if (col == 5) {
-				if (attendancetable->item(row, 5)->text() == QString(tr("no"))) {
+			if (col == 5) 
+			{
+				if (attendancetable->item(row, 5)->text() == QString(tr("no"))) 
+				{
 					attendancetable->item(row, 5)->setText(QString(tr("yes")));
 					attendancetable->item(row, 6)->setText(QString(tr("no")));
 					attendancetable->item(row, 7)->setText(QString(tr("no")));
@@ -551,7 +642,8 @@ void ResultTabWidget::CheckChange(QTableWidgetItem * item)
 			}
 			else if (col == 6)
 			{
-				if (attendancetable->item(row, 6)->text() == QString(tr("no"))) {
+				if (attendancetable->item(row, 6)->text() == QString(tr("no"))) 
+				{
 					attendancetable->item(row, 6)->setText(QString(tr("yes")));
 					attendancetable->item(row, 5)->setText(QString(tr("no")));
 					attendancetable->item(row, 7)->setText(QString(tr("no")));
@@ -559,7 +651,9 @@ void ResultTabWidget::CheckChange(QTableWidgetItem * item)
 			}
 			else if (col == 7)
 			{
-				if (attendancetable->item(row, 7)->text() == QString(tr("no"))) {
+				if (attendancetable->item(row, 7)->text() == QString(tr("no"))) 
+				{
+
 					attendancetable->item(row, 7)->setText(QString(tr("yes")));
 					attendancetable->item(row, 5)->setText(QString(tr("no")));
 					attendancetable->item(row, 6)->setText(QString(tr("no")));
@@ -571,7 +665,8 @@ void ResultTabWidget::CheckChange(QTableWidgetItem * item)
 		int leave = 0;
 
 		for (int i = 0; i < total; i++) {
-			if (attendancetable->item(i, 6)->text() == QString(tr("yes"))) {
+			if (attendancetable->item(i, 6)->text() == QString(tr("yes"))) 
+			{
 				leave++;
 			}
 			else if (attendancetable->item(i, 7)->text() == QString(tr("yes")))
@@ -590,8 +685,10 @@ void ResultTabWidget::GeneTestData()
 {
 #ifdef _DEBUG//测试考勤结果生成
 	auto aid = attendance->currentText().split("-")[0];
-	for (auto it = dataManager->GetAttendance()->begin(); it != dataManager->GetAttendance()->end(); it++) {
-		if (it->GetID() == aid) {
+	for (auto it = dataManager->GetAttendance()->begin(); it != dataManager->GetAttendance()->end(); it++)
+	{
+		if (it->GetID() == aid) 
+		{
 			
 			QString filename = attendance->currentText() + ".xlsx";
 			QFile file(filename);
@@ -610,11 +707,13 @@ void ResultTabWidget::GeneTestData()
 			xlsx.setColumnWidth(5, 40);
 			auto aclass = it->GetAclass().split(",");
 			int index = 2;
-			for (int i = 0; i < aclass.size(); i++) {
+			for (int i = 0; i < aclass.size(); i++) 
+			{
 				auto classid = aclass.at(i);
 				for (auto iter = dataManager->GetStudent()->begin(); iter != dataManager->GetStudent()->end(); iter++)
 				{
-					if (classid == iter->GetAclass()) {
+					if (classid == iter->GetAclass()) 
+					{
 						xlsx.write(index, 1,iter->GetID(), format);
 						xlsx.write(index, 2, iter->GetName(), format);
 						xlsx.write(index, 3, iter->GetAcademic(), format);
@@ -636,7 +735,8 @@ void ResultTabWidget::GeneTestData()
 
 void ResultTabWidget::ResultAdd()
 {
-	if (currenttablefrom == 0) {
+	if (currenttablefrom == 0) 
+	{
 		int absence = 0;
 		int leave = 0;
 		QStringList absencsstudent;
@@ -653,13 +753,17 @@ void ResultTabWidget::ResultAdd()
 			auto itemleaveclass = attendancetable->item(i, 6)->text() == QString(tr("yes")) ? 1 : 0;
 			auto itemabclass = attendancetable->item(i, 7)->text() == QString(tr("yes")) ? 1 : 0;
 
-			if (iteminclass == 0) {
-				if (itemleaveclass == 1) {
+			if (iteminclass == 0) 
+			{
+				if (itemleaveclass == 1) 
+				{
 					leave++;
 					leavestudent << itemid;
 				}
-				else {
-					if (itemabclass == 1) {
+				else 
+				{
+					if (itemabclass == 1)
+					{
 						absence++;
 						absencsstudent << itemid;
 					}
@@ -671,30 +775,41 @@ void ResultTabWidget::ResultAdd()
 		attendanceresult.SetLStu(leavestudent.join(","));
 		attendanceresult.SetAStu(absencsstudent.join(","));
 		attendanceresult.SetUID(dataManager->GetCurrentUser().GetUID());
-		if (dataManager->ResultOP(attendanceresult, 0)) {
+		if (dataManager->ResultOP(attendanceresult, 0)) 
+		{
 			QMessageBox::information(0, tr("result add"), tr("result add successfully"), QMessageBox::Ok);
 			dataManager->updateResult(dataManager->GetCurrentUser());
-			for (auto it = dataManager->GetResult()->begin(); it != dataManager->GetResult()->end(); it++) {
+			for (auto it = dataManager->GetResult()->begin(); it != dataManager->GetResult()->end(); it++)
+			{
 				auto abstu = it->GetAStu().split(",");
 				auto lestu = it->GetLStu().split(",");
-				if (it->GetAID() == attendanceresult.GetAID()&&it->GetRID() == attendanceresult.GetRID()) {
-					for (auto iter = dataManager->GetAttendance()->begin(); iter != dataManager->GetAttendance()->end(); iter++) {
-						if (iter->GetID() == it->GetAID()) {
+				if (it->GetAID() == attendanceresult.GetAID()&&it->GetRID() == attendanceresult.GetRID())
+				{
+					for (auto iter = dataManager->GetAttendance()->begin(); iter != dataManager->GetAttendance()->end(); iter++) 
+					{
+						if (iter->GetID() == it->GetAID()) 
+						{
 							auto aclass = iter->GetAclass().split(",");
-							for (int i = 0; i < aclass.size(); i++) {
-								for (auto its = dataManager->GetStudent()->begin(); its != dataManager->GetStudent()->end(); its++) {
-									if (its->GetAclass() == aclass[i]) {
+							for (int i = 0; i < aclass.size(); i++) 
+							{
+								for (auto its = dataManager->GetStudent()->begin(); its != dataManager->GetStudent()->end(); its++) 
+								{
+									if (its->GetAclass() == aclass[i]) 
+									{
 										its->AddTotime();
-										if (abstu.indexOf(its->GetID()) >= 0) {
+										if (abstu.indexOf(its->GetID()) >= 0) 
+										{
 											its->AddAbtime();
 											dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", 0, 0, its->GetAbtimes(),its->GetTotimes()), 5);
 
 										}
-										else if (lestu.indexOf(its->GetID()) >= 0) {
+										else if (lestu.indexOf(its->GetID()) >= 0) 
+										{
 											its->AddLetime();
 											dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", 0, its->GetLetimes(), 0, its->GetTotimes()), 4);
 										}
-										else {
+										else 
+										{
 											its->AddIntime();
 											dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", its->GetIntimes(), 0, 0, its->GetTotimes()), 3);
 										}
@@ -714,7 +829,8 @@ void ResultTabWidget::ResultAdd()
 			QMessageBox::information(0, tr("result add"), tr("result add failed"), QMessageBox::Ok);
 		}
 	}
-	else {
+	else
+	{
 		QMessageBox::information(0, tr("result add"), tr("please select attendance result file first"), QMessageBox::Ok);
 	}
 }
@@ -795,12 +911,16 @@ void ResultTabWidget::updateTree()
 {
 	resulttree->clear();
 	QStringList current;
-	for (auto it = dataManager->GetResult()->begin(); it != dataManager->GetResult()->end(); it++) {
-		if (current.indexOf(it->GetAID()) < 0) {
+	for (auto it = dataManager->GetResult()->begin(); it != dataManager->GetResult()->end(); it++) 
+	{
+		if (current.indexOf(it->GetAID()) < 0) 
+		{
 			current << it->GetAID();
 			auto parent = new QTreeWidgetItem(QStringList() << it->GetAID() + "-" + it->GetUID());
-			for (auto iter = dataManager->GetResult()->begin(); iter != dataManager->GetResult()->end(); iter++) {
-				if (iter->GetAID() == it->GetAID()) {
+			for (auto iter = dataManager->GetResult()->begin(); iter != dataManager->GetResult()->end(); iter++)
+			{
+				if (iter->GetAID() == it->GetAID()) 
+				{
 					parent->addChild(new QTreeWidgetItem(QStringList() << iter->GetRID()));
 				}
 			}
