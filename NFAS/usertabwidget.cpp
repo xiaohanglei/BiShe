@@ -5,7 +5,8 @@
 #include <QHeaderView>
 #include <QMessageBox>
 
-UserTabWidget::UserTabWidget(DataManager *dm, QWidget * parent) : QWidget(parent) {
+UserTabWidget::UserTabWidget(DataManager *dm, QWidget * parent) : QWidget(parent)
+{
 	dataManager = dm;
 	setupUi();
 
@@ -14,7 +15,8 @@ UserTabWidget::UserTabWidget(DataManager *dm, QWidget * parent) : QWidget(parent
 	connect(userdelete, SIGNAL(clicked()), this, SLOT(UserDelete()));
 }
 
-UserTabWidget::~UserTabWidget() {
+UserTabWidget::~UserTabWidget()
+{
 
 }
 
@@ -28,19 +30,23 @@ void UserTabWidget::UserAdd()
 	QString psd = userpsd->text();
 	QString psda = userpsdagain->text();
 	int identify = useridentify->currentIndex();
-	if (uid.length() != 6) {
+	if (uid.length() != 6)
+	{
 		QMessageBox::information(0, tr("user add"), tr("length of user id must be 8"), QMessageBox::Ok);
 		return;
 	}
-	if (psd.length() == 0) {
+	if (psd.length() == 0) 
+	{
 		QMessageBox::information(0, tr("user add"), tr("length of user password is required"), QMessageBox::Ok);
 		return;
 	}
-	if (psd != psda) {
+	if (psd != psda)
+	{
 		QMessageBox::information(0, tr("user add"), tr("password and passwordagain donot match"), QMessageBox::Ok);
 		return;
 	}
-	if (dataManager->UserOP(User(uid, psd, identify), 0)) {
+	if (dataManager->UserOP(User(uid, psd, identify), 0)) 
+	{
 		QMessageBox::information(0, tr("user add"), tr("user add successfully"), QMessageBox::Ok);
 		userid->setText("");
 		userpsd->setText("");
@@ -48,7 +54,8 @@ void UserTabWidget::UserAdd()
 		dataManager->updateUser();
 		updateTable();
 	}
-	else {
+	else 
+	{
 		QMessageBox::information(0, tr("user add"), tr("user add failed"), QMessageBox::Ok);
 	}
 }
