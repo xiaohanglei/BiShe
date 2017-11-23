@@ -63,16 +63,19 @@ void UserTabWidget::UserAdd()
 void UserTabWidget::UserModify()
 {
 	bool success = true;
-	for (int i = 0; i < usertable->rowCount(); i++) {
+	for (int i = 0; i < usertable->rowCount(); i++) 
+	{
 		auto uid = usertable->item(i, 0)->text();
 		auto identify = ((QComboBox*)(usertable->cellWidget(i, 1)))->currentIndex();
 		success = dataManager->UserOP(User(uid, "", identify), 1);
 	}
-	if (success) {
+	if (success) 
+	{
 		QMessageBox::information(0, tr("user modify"), tr("user modify successfully"), QMessageBox::Ok);
 		dataManager->updateUser();
 	}
-	else {
+	else 
+	{
 		QMessageBox::information(0, tr("user modify"), tr("user modify failed"), QMessageBox::Ok);
 	}
 }
@@ -80,9 +83,11 @@ void UserTabWidget::UserModify()
 void UserTabWidget::UserDelete()
 {
 	auto row = usertable->currentRow();
-	if (row > 0) {
+	if (row > 0)
+	{
 		auto uid = usertable->item(row, 0)->text();
-		if (dataManager->UserOP(User(uid, "", 0), 2)){
+		if (dataManager->UserOP(User(uid, "", 0), 2))
+		{
 			QMessageBox::information(0, tr("user delete"), tr("user delete successfully"), QMessageBox::Ok);
 			dataManager->updateUser();
 			updateTable();
@@ -92,7 +97,8 @@ void UserTabWidget::UserDelete()
 			QMessageBox::information(0, tr("user delete"), tr("user delete failed"), QMessageBox::Ok);
 		}
 	}
-	else {
+	else 
+	{
 		QMessageBox::information(0, tr("user delete"), tr("please select user first"), QMessageBox::Ok);
 	}
 }
