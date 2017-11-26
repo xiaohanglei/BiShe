@@ -112,13 +112,15 @@ void UserTabWidget::updateTable()
 	QStringList header;
 	header << tr("user id") << tr("user identify");
 	usertable->setHorizontalHeaderLabels(header);
-	for (auto it = dataManager->GetUser()->begin(); it != dataManager->GetUser()->end(); it++) {
+	for (auto it = dataManager->GetUser()->begin(); it != dataManager->GetUser()->end(); it++)
+	{
 		auto rowcount = usertable->rowCount();
 		usertable->insertRow(rowcount);
 		usertable->setItem(rowcount, 0, new QTableWidgetItem(it->GetUID()));
 		QComboBox* itembox = new QComboBox;
 		itembox->addItems(QStringList() << tr("administrator") << tr("teacher"));
-		if (it->GetIdentify() == 1) {
+		if (it->GetIdentify() == 1) 
+		{
 			itembox->setCurrentIndex(1);
 		}
 		usertable->setCellWidget(rowcount, 1, itembox);
