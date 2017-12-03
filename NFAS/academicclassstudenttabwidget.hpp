@@ -21,6 +21,7 @@ public:
 public slots:
 	void AcademicAdd();
 	//void AcademicModify();
+
 	void AcademicDelete();
 	void ClassAdd();
 	void ClassModify();
