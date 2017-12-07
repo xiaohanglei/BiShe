@@ -1,2 +1,14 @@
-﻿  NFAS.vcxproj -> C:\Users\XiaoHang\Desktop\NFAS\x64\Debug\NFAS.exe
+﻿  Moc'ing nfas.h...
+  Rcc'ing nfas.qrc...
+  Moc'ing academicclassstudenttabwidget.hpp...
+  moc_academicclassstudenttabwidget.cpp
+  moc_nfas.cpp
+  moc_resulttabwidget.cpp
+  academicclassstudenttabwidget.cpp
+  main.cpp
+  nfas.cpp
+  resulttabwidget.cpp
+  正在生成代码...
+  qrc_nfas.cpp
+  NFAS.vcxproj -> C:\Users\XiaoHang\Desktop\NFAS\x64\Debug\NFAS.exe
   NFAS.vcxproj -> C:\Users\XiaoHang\Desktop\NFAS\x64\Debug\NFAS.pdb (Full PDB)
