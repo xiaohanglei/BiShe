@@ -51,7 +51,7 @@ void AttendanceTabWidget::AttendanceModify()
 		attendanceclassroomid->setText("");
 		attendanceclass->setText("");
 		dataManager->updateAttendance();
-		updateTree();
+		updateTree();//更新树形空间
 	}
 	else 
 	{

@@ -98,7 +98,7 @@ void AcademicClassStudentTabWidget::AcademicDelete()
 			{
 				if (it->GetAclass() == s->child(i)->text(0).split("-")[0])
 				{
-					dataManager->StudentOP(Student(it->GetID(), "", 0, "", "", ""), 2);
+					dataManager->StudentOP(Student(it->GetID(), "", 0, "", "", ""), 2);//删除该id的学生信息
 				}
 			}
 		}
