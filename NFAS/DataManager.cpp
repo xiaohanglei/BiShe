@@ -105,7 +105,7 @@ Result::Result()
 {
 
 }
-
+//结果
 Result::Result(QString ri,QString id, int theory, int actual, QString absencs, QString leave, QString submit):
 	resultid(ri),
 	attendanceid(id),
@@ -123,6 +123,7 @@ Attendance::Attendance()
 
 }
 
+//考勤项目
 Attendance::Attendance(QString id, QString mid, QString name, QString time, QString aclass):
 	attendanceid(id),
 	attendancemachineid(mid),

@@ -130,7 +130,7 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 	}
 }
 
-void AttendanceTabWidget::updateAttendanceClass(QTreeWidgetItem * item, int col)
+void AttendanceTabWidget::updateAttendanceClass(QTreeWidgetItem * item, int col)//更新考勤班级
 {
 	QStringList aclass;
 	if (attendanceclass->text().trimmed().length() > 0) 
