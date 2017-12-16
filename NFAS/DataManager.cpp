@@ -131,6 +131,7 @@ Attendance::Attendance(QString id, QString mid, QString name, QString time, QStr
 	attendanceclass(aclass)
 {
 	auto times = time.split("-");
+	//设置考勤时间,实际没什么用
 	if (times.length() == 2)
 	{
 		attendancestarttime = QDateTime::fromString(times[0], "yyyy/MM/dd HH:mm");
