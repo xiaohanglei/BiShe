@@ -354,7 +354,7 @@ public:
 	{
 		return students;
 	}
-	QVector<Attendance>* GetAttendance()
+	QVector<Attendance>* GetAttendance()//返回考勤信息列表
 	{
 		return attendances;
 	}
@@ -366,7 +366,7 @@ public:
 	{
 		return users;
 	}
-	User GetCurrentUser()
+	User GetCurrentUser()//当前用户
 	{
 		return currentusers;
 	}
