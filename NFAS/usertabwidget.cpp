@@ -148,6 +148,7 @@ void UserTabWidget::setupUi()
 	userdelete = new QPushButton(tr("user delete"));
 	userdelete->setMinimumWidth(100);
 	useridentify = new QComboBox;
+	//权限列表
 	useridentify->addItems(QStringList() << tr("administrator") << tr("teacher"));
 	QHBoxLayout* idlayout = new QHBoxLayout;
 	idlayout->addWidget(labeluserid);

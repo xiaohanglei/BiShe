@@ -33,7 +33,7 @@ void ResultTabWidget::UpdateTab()
 
 }
 
-void ResultTabWidget::ResultAModify()
+void ResultTabWidget::ResultAModify()//修稿考勤结果数据
 {
 	if (currenttablefrom == 1)
 	{
@@ -50,6 +50,7 @@ void ResultTabWidget::ResultAModify()
 			int total = attendancetable->rowCount();
 			for (int i = 0; i < total; i++)
 			{
+				//读取考勤结果
 				auto itemid = attendancetable->item(i, 0)->text();
 				auto itemname = attendancetable->item(i, 1)->text();
 				auto itemaca = attendancetable->item(i, 2)->text();

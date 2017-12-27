@@ -18,6 +18,7 @@ public:
 	void UpdateTab();
 
 public slots:
+//增删改
 	void UserAdd();
 	void UserModify();
 	void UserDelete();
