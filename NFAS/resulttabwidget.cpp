@@ -84,7 +84,8 @@ void ResultTabWidget::ResultAModify()//修稿考勤结果数据
 			attendanceresult.SetLStu(leavestudent.join(","));
 			attendanceresult.SetAStu(absencsstudent.join(","));
 			attendanceresult.SetUID(dataManager->GetCurrentUser().GetUID());
-			if (dataManager->ResultOP(attendanceresult, 1)) {
+			if (dataManager->ResultOP(attendanceresult, 1)) 
+			{
 				QMessageBox::information(0, tr("result modify"), tr("result modify successfully"), QMessageBox::Ok);
 
 				for (auto it = dataManager->GetResult()->begin(); it != dataManager->GetResult()->end(); it++) 
@@ -111,7 +112,8 @@ void ResultTabWidget::ResultAModify()//修稿考勤结果数据
 							}
 						}
 
-						for (int i = 0; i < allstudent.size(); i++) {
+						for (int i = 0; i < allstudent.size(); i++) 
+						{
 							if (lestu.indexOf(allstudent[i]) < 0 && abstu.indexOf(allstudent[i]) < 0) 
 							{
 
@@ -119,7 +121,8 @@ void ResultTabWidget::ResultAModify()//修稿考勤结果数据
 							}
 						}
 
-						for (int i = 0; i < allstudent.size(); i++) {
+						for (int i = 0; i < allstudent.size(); i++) 
+						{
 							if (leavestudent.indexOf(allstudent[i]) < 0 && absencsstudent.indexOf(allstudent[i]) < 0) 
 							{
 								instudent << allstudent[i];
@@ -147,7 +150,8 @@ void ResultTabWidget::ResultAModify()//修稿考勤结果数据
 													{
 														its->MinusLetime();
 													}
-													else {
+													else 
+													{
 														its->MinusIntime();
 													}
 												}
@@ -176,12 +180,13 @@ void ResultTabWidget::ResultAModify()//修稿考勤结果数据
 													{
 														its->MinusAbtime();
 													}
-													else {
+													else 
+													{
 														its->MinusLetime();
 													}
 												}
 											}
-											dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", its->GetIntimes(), its->GetLetimes(), its->GetAbtimes(), its->GetTotimes()), 6);
+											dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", its->GetIntimes(), its->GetLetimes(), its->GetAbtimes(), its->GetTotimes()), 6);//修改
 										}
 									}
 								}

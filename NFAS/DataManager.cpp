@@ -302,7 +302,7 @@ bool DataManager::StudentOP(const Student& s, int op)
 		query1.bindValue(4, s.GetAclass());
 		query1.bindValue(5, s.GetFigure());
 		break;
-	case 1:
+	case 1://修改学生信息
 		query1.prepare("UPDATE studenttable SET studentname=?,studentsex=?,studentacademic=?,studentclass=? WHERE studentid=?");
 		query1.bindValue(0, s.GetName());
 		query1.bindValue(1, s.GetSex());
@@ -314,25 +314,25 @@ bool DataManager::StudentOP(const Student& s, int op)
 		query1.prepare("DELETE FROM studenttable WHERE studentid=?");
 		query1.bindValue(0, s.GetID());
 		break;
-	case 3:
+	case 3://修改签到次数和应到次数
 		query1.prepare("UPDATE studenttable SET intimes=?,totimes=? WHERE studentid=?");
 		query1.bindValue(0, s.GetIntimes());
 		query1.bindValue(1, s.GetTotimes());
 		query1.bindValue(2, s.GetID());
 		break;
-	case 4:
+	case 4://修改请假次数和应到次数
 		query1.prepare("UPDATE studenttable SET letimes=?,totimes=? WHERE studentid=?");
 		query1.bindValue(0, s.GetLetimes());
 		query1.bindValue(1, s.GetTotimes());
 		query1.bindValue(2, s.GetID());
 		break;
-	case 5:
+	case 5://修改缺勤次数和应到次数
 		query1.prepare("UPDATE studenttable SET abtimes=?,totimes=? WHERE studentid=?");
 		query1.bindValue(0, s.GetAbtimes());
 		query1.bindValue(1, s.GetTotimes());
 		query1.bindValue(2, s.GetID());
 		break;
-	case 6:
+	case 6://修改该学生出勤情况
 		query1.prepare("UPDATE studenttable SET intimes=?,letimes=?,abtimes=?,totimes=? WHERE studentid=?");
 		query1.bindValue(0, s.GetIntimes());
 		query1.bindValue(1, s.GetLetimes());
