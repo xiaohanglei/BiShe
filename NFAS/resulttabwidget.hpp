@@ -39,8 +39,8 @@ public slots:
 	void ResultDelete();
 	void updateTable(QTreeWidgetItem* item, int col);
 	void AttendanceFileGet();
-	void CheckChange(QTableWidgetItem *item);
-	void GeneTestData();
+	void CheckChange(QTableWidgetItem *item);//更新表格文件
+	void GeneTestData();//生成测试文件
 
 private:
 	void setupUi();
@@ -52,7 +52,7 @@ private:
 	QLineEdit* attendencefile;
 	QPushButton* attendancefileselect;	
 	QTreeWidget* resulttree;
-	QTableWidget* attendancetable;
+	QTableWidget* attendancetable;//考勤結果表 
 	QPushButton* resultadd;
 	QPushButton* resultmodify;
 	QPushButton* resultdelete;

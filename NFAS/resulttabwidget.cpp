@@ -18,7 +18,7 @@ ResultTabWidget::ResultTabWidget(DataManager *dm, QWidget * parent) : QWidget(pa
 	connect(resultdelete, SIGNAL(clicked()), this, SLOT(ResultDelete()));
 	connect(attendancefileselect, SIGNAL(clicked()), this, SLOT(AttendanceFileGet()));
 	connect(resulttree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(updateTable(QTreeWidgetItem*, int)));
-	connect(attendancetable, SIGNAL(itemDoubleClicked(QTableWidgetItem*)), this, SLOT(CheckChange(QTableWidgetItem*)));
+	connect(attendancetable, SIGNAL(itemDoubleClicked(QTableWidgetItem*)), this, SLOT(CheckChange(QTableWidgetItem*)));//双击s
 #ifdef _DEBUG
 	connect(debugfile, SIGNAL(clicked()), this, SLOT(GeneTestData()));
 #endif
@@ -31,6 +31,117 @@ ResultTabWidget::~ResultTabWidget()
 void ResultTabWidget::UpdateTab()
 {
 
+}
+
+void ResultTabWidget::ResultAdd()
+{
+	if (currenttablefrom == 0)
+	{
+		int absence = 0;
+		int leave = 0;
+		QStringList absencsstudent;//缺勤学生的列表
+		QStringList leavestudent;//请假学生的列表 
+		int total = attendancetable->rowCount();//获得行数
+		for (int i = 0; i < total; i++)
+		{
+			auto itemid = attendancetable->item(i, 0)->text();
+			auto itemname = attendancetable->item(i, 1)->text();
+			auto itemaca = attendancetable->item(i, 2)->text();
+			auto itemcla = attendancetable->item(i, 3)->text();
+			auto itemfigure = attendancetable->item(i, 4)->text();
+			auto iteminclass = attendancetable->item(i, 5)->text() == QString(tr("yes")) ? 1 : 0;//到课
+			auto itemleaveclass = attendancetable->item(i, 6)->text() == QString(tr("yes")) ? 1 : 0;//请假
+			auto itemabclass = attendancetable->item(i, 7)->text() == QString(tr("yes")) ? 1 : 0;//缺勤
+
+			if (iteminclass == 0) //是否签到
+			{
+				if (itemleaveclass == 1) //如果没有签到，则判断是否请假
+				{
+					leave++;//请假次数+1
+					leavestudent << itemid;//将该学生的id存入请假列表中
+				}
+				else //如果没有请假，则算缺勤
+				{
+					if (itemabclass == 1)
+					{
+						absence++;//同上
+						absencsstudent << itemid;
+					}
+				}
+			}
+		}
+		attendanceresult.SetANum(total - absence - leave);//实到人数
+		attendanceresult.SetTNum(total);//应签到人数
+		attendanceresult.SetLStu(leavestudent.join(","));//将学生id列表
+		attendanceresult.SetAStu(absencsstudent.join(","));
+		attendanceresult.SetUID(dataManager->GetCurrentUser().GetUID());
+
+		if (dataManager->ResultOP(attendanceresult, 0)) //将该考勤结果插入数据库
+		{
+			QMessageBox::information(0, tr("result add"), tr("result add successfully"), QMessageBox::Ok);
+
+			dataManager->updateResult(dataManager->GetCurrentUser());//从数据库中重新加载考勤结果数据
+
+			for (auto it = dataManager->GetResult()->begin(); it != dataManager->GetResult()->end(); it++)
+			{
+				auto abstu = it->GetAStu().split(",");//缺勤学生的id列表
+				auto lestu = it->GetLStu().split(",");//请假学生的id列表
+
+				if (it->GetAID() == attendanceresult.GetAID() && it->GetRID() == attendanceresult.GetRID())//是否是当前的考勤结果
+				{
+					for (auto iter = dataManager->GetAttendance()->begin(); iter != dataManager->GetAttendance()->end(); iter++)//是否是当前的考勤项目
+					{
+						if (iter->GetID() == it->GetAID())//考勤结果的考勤编号和考勤项目的编号是否匹配
+						{
+							auto aclass = iter->GetAclass().split(",");//该考勤项目所属的考勤班级列表
+							for (int i = 0; i < aclass.size(); i++)//遍历该班级列表
+							{
+								for (auto its = dataManager->GetStudent()->begin(); its != dataManager->GetStudent()->end(); its++)
+								{
+									//遍历所有学生列表，找到该班级的所有学生
+									if (its->GetAclass() == aclass[i])//判断该学生所在班级和当前班级是否匹配
+									{
+										its->AddTotime();//考勤次数+1
+
+										//统计该学生的考勤情况更新到数据库中
+										if (abstu.indexOf(its->GetID()) >= 0)//通过索引号判断该学生是否在缺勤列表中
+										{
+											its->AddAbtime();//缺勤次数+1
+											
+											//更新该学生在数据库中信息
+											dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", 0, 0, its->GetAbtimes(), its->GetTotimes()), 5);
+
+										}
+										else if (lestu.indexOf(its->GetID()) >= 0)
+										{
+											its->AddLetime();
+											dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", 0, its->GetLetimes(), 0, its->GetTotimes()), 4);
+										}
+										else
+										{
+											its->AddIntime();
+											dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", its->GetIntimes(), 0, 0, its->GetTotimes()), 3);
+										}
+									}
+								}
+							}
+							break;
+						}
+					}
+					break;
+				}
+			}
+			updateTree();
+		}
+		else
+		{
+			QMessageBox::information(0, tr("result add"), tr("result add failed"), QMessageBox::Ok);
+		}
+	}
+	else
+	{
+		QMessageBox::information(0, tr("result add"), tr("please select attendance result file first"), QMessageBox::Ok);
+	}
 }
 
 void ResultTabWidget::ResultAModify()//修稿考勤结果数据
@@ -519,21 +630,25 @@ void ResultTabWidget::updateTable(QTreeWidgetItem * item, int col)
 	}
 }
 
-void ResultTabWidget::AttendanceFileGet()
+
+//获得考勤文件信息
+void ResultTabWidget::AttendanceFileGet()//获得 考勤文件中的数据加载到表格控件中
 {
 	currenttablefrom = 0;
 	attendancetable->clear();
-	attendancetable->setRowCount(0);
-	attendancetable->setColumnCount(8);
+	attendancetable->setRowCount(0);//行数,初始化为0行
+	attendancetable->setColumnCount(8); //设置表格控件的列数
 	QStringList header;
 	header << tr("student id") << tr("student name") << tr("student academic") << tr("student class")
 		<< tr("student figure") << tr("in class") << tr("leave class") << tr("absencs class");
-	attendancetable->setHorizontalHeaderLabels(header);
+	attendancetable->setHorizontalHeaderLabels(header);//设置表头
 
-	QString filename = QFileDialog::getOpenFileName(NULL, tr("select attendance file"), ".", "Excel Files(*.xlsx)");
+	QString filename = QFileDialog::getOpenFileName(NULL, tr("select attendance file"), ".", "Excel Files(*.xlsx)");//通过文件选择空间来获得考勤文件的路径
 	attendencefile->setText(filename);
-	QXlsx::Document xlsx(filename);
+	QXlsx::Document xlsx(filename);//打开考勤文件
 
+
+	//判断xlsx的考勤文件格式是否正确
 	if (xlsx.read(1, 1).toString() != tr("student id") || xlsx.read(1, 2).toString() != tr("student name")
 		|| xlsx.read(1, 3).toString() != tr("student academic") || xlsx.read(1, 4).toString() != tr("student class")
 		|| xlsx.read(1, 5).toString() != tr("student figure") || xlsx.read(1, 6).toString() != tr("in class")
@@ -543,16 +658,21 @@ void ResultTabWidget::AttendanceFileGet()
 		return;
 	}
 
-	int total = 0;
+	int total = 0;//统计考勤人数
 	int absence = 0;
 	int leave = 0;
 	QStringList absencsstudent;
 	QStringList leavestudent;
-	for (int row = 2;; row++) 
+
+	//读取考勤文件的内容到表格控件中
+	for (int row = 2;; row++) //跳过列号和字段名
 	{
+		//读取具体考勤信息
+
 		QString stuid = xlsx.read(row, 1).toString();
-		if (stuid == "")	break;
-		total++;
+		if (stuid == "")//结束条件
+			break;
+		total++;//人数 +1
 		QString stuname = xlsx.read(row, 2).toString();
 		QString stuaca = xlsx.read(row, 3).toString();
 		QString stucla = xlsx.read(row, 4).toString();
@@ -561,14 +681,16 @@ void ResultTabWidget::AttendanceFileGet()
 		int stuleave = xlsx.read(row, 7).toInt();
 		int stuabsencs = xlsx.read(row, 8).toInt();
 
-		auto rowcount = attendancetable->rowCount();
-		attendancetable->insertRow(rowcount);
+		auto rowcount = attendancetable->rowCount();//行号下标
+		attendancetable->insertRow(rowcount);//插入一行
 		attendancetable->setItem(rowcount, 0, new QTableWidgetItem(stuid));
 		attendancetable->setItem(rowcount, 1, new QTableWidgetItem(stuname));
 		attendancetable->setItem(rowcount, 2, new QTableWidgetItem(stuaca));
 		attendancetable->setItem(rowcount, 3, new QTableWidgetItem(stucla));
 		attendancetable->setItem(rowcount, 4, new QTableWidgetItem(stufigure));
 
+
+		//根据学生的考勤情况显示“是”或“否”
 		QString inbox=QString(tr("no"));
 		QString lebox = QString(tr("no"));
 		QString abbox = QString(tr("no"));
@@ -590,15 +712,18 @@ void ResultTabWidget::AttendanceFileGet()
 		attendancetable->setItem(rowcount, 6, new QTableWidgetItem(lebox));
 		attendancetable->setItem(rowcount, 7, new QTableWidgetItem(abbox));
 
-		if (stuin == 0) 
+
+		//统计学生的考勤情况
+		if (stuin == 0) //学生是否签到
 		{
-			if (stuleave == 1)
+			if (stuleave == 1)//是否请假
 			{
 				leave++;
 				leavestudent << stuid;
 			}
-			else {
-				if (stuabsencs == 1) 
+			else
+			{
+				if (stuabsencs == 1) //是否缺席
 				{
 					absence++;
 					absencsstudent << stuid;
@@ -607,9 +732,10 @@ void ResultTabWidget::AttendanceFileGet()
 		}
 	}
 
-	for (int i = 0; i < attendancetable->rowCount(); i++)
+
+	for (int i = 0; i < attendancetable->rowCount(); i++)//设置表格属性
 	{
-		attendancetable->item(i, 0)->setFlags(attendancetable->item(i, 0)->flags() & (~Qt::ItemIsEditable));
+		attendancetable->item(i, 0)->setFlags(attendancetable->item(i, 0)->flags() & (~Qt::ItemIsEditable));//可编辑
 		attendancetable->item(i, 1)->setFlags(attendancetable->item(i, 1)->flags() & (~Qt::ItemIsEditable));
 		attendancetable->item(i, 2)->setFlags(attendancetable->item(i, 2)->flags() & (~Qt::ItemIsEditable));
 		attendancetable->item(i, 3)->setFlags(attendancetable->item(i, 3)->flags() & (~Qt::ItemIsEditable));
@@ -619,11 +745,11 @@ void ResultTabWidget::AttendanceFileGet()
 		attendancetable->item(i, 7)->setFlags(attendancetable->item(i, 7)->flags() & (~Qt::ItemIsEditable));
 	}
 
-	QString attenfileid = filename.split("/").last().split("-")[0];
+	QString attenfileid = filename.split("/").last().split("-")[0];//取出文件名中的考勤项目编号
 	attendanceresult.SetAID(attenfileid);
 	QDateTime datetime;
 	auto now = datetime.currentDateTime();
-	attendanceresult.SetRID(now.toString("yyyyMMddHHmmss"));
+	attendanceresult.SetRID(now.toString("yyyyMMddHHmmss"));//以当前时间戳为考勤结果的id
 
 	totalnumber->setText(QString::number(total));
 	leavenumber->setText(QString::number(leave));
@@ -632,13 +758,19 @@ void ResultTabWidget::AttendanceFileGet()
 
 void ResultTabWidget::CheckChange(QTableWidgetItem * item)
 {
+
+	//更改考勤表格中的数据
 	if (attendancetable->columnCount() == 8) 
 	{
-		auto col = attendancetable->currentColumn();
-		if (col >= 5 && col <= 7) {
-			auto row = attendancetable->currentRow();
+		auto col = attendancetable->currentColumn();//当前双击的列号
+		if (col >= 5 && col <= 7) //只能限制用户双击后三列的数据
+		{
+			auto row = attendancetable->currentRow();//当前的行号
 			if (col == 5) 
 			{
+
+				//只是更改双击为否的
+
 				if (attendancetable->item(row, 5)->text() == QString(tr("no"))) 
 				{
 					attendancetable->item(row, 5)->setText(QString(tr("yes")));
@@ -666,11 +798,13 @@ void ResultTabWidget::CheckChange(QTableWidgetItem * item)
 				}
 			}
 		}
-		int total = attendancetable->rowCount();
-		int absence = 0;
+		int total = attendancetable->rowCount();//行数
+
+		int absence = 0;//统计缺勤人数和请假人数
 		int leave = 0;
 
-		for (int i = 0; i < total; i++) {
+		for (int i = 0; i < total; i++) 
+		{
 			if (attendancetable->item(i, 6)->text() == QString(tr("yes"))) 
 			{
 				leave++;
@@ -681,7 +815,7 @@ void ResultTabWidget::CheckChange(QTableWidgetItem * item)
 			}
 		}
 
-		totalnumber->setText(QString::number(total));
+		totalnumber->setText(QString::number(total));//窗体显示考勤情况
 		leavenumber->setText(QString::number(leave));
 		absencenumber->setText(QString::number(absence));
 	}
@@ -690,19 +824,23 @@ void ResultTabWidget::CheckChange(QTableWidgetItem * item)
 void ResultTabWidget::GeneTestData()
 {
 #ifdef _DEBUG//测试考勤结果生成
-	auto aid = attendance->currentText().split("-")[0];
+	auto aid = attendance->currentText().split("-")[0];//获得考勤项目的编号
 	for (auto it = dataManager->GetAttendance()->begin(); it != dataManager->GetAttendance()->end(); it++)
 	{
-		if (it->GetID() == aid) 
+		if (it->GetID() == aid) //找到该考勤项目
 		{
 			
-			QString filename = attendance->currentText() + ".xlsx";
+
+			//将考勤项目所有学生成一个测试文件
+			QString filename = attendance->currentText() + ".xlsx";//将当前考勤项目的编号+名称作为考勤结果文件的文件名
 			QFile file(filename);
 			QXlsx::Document xlsx;
 			QXlsx::Format format;
+
 			format.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
 			format.setVerticalAlignment(QXlsx::Format::AlignVCenter);
-			xlsx.write(1, 1, tr("student id"), format);
+
+			xlsx.write(1, 1, tr("student id"), format);//表头
 			xlsx.write(1, 2, tr("student name"), format);
 			xlsx.write(1, 3, tr("student academic"), format);
 			xlsx.write(1, 4, tr("student class"), format);
@@ -711,9 +849,9 @@ void ResultTabWidget::GeneTestData()
 			xlsx.write(1, 7, tr("leave class"), format);
 			xlsx.write(1, 8, tr("absencs class"), format);
 			xlsx.setColumnWidth(5, 40);
-			auto aclass = it->GetAclass().split(",");
+			auto aclass = it->GetAclass().split(",");//找到该考勤项目下辖的班级列表
 			int index = 2;
-			for (int i = 0; i < aclass.size(); i++) 
+			for (int i = 0; i < aclass.size(); i++) //将该考勤项目下的所有班级的学生都写入测试文件
 			{
 				auto classid = aclass.at(i);
 				for (auto iter = dataManager->GetStudent()->begin(); iter != dataManager->GetStudent()->end(); iter++)
@@ -737,108 +875,6 @@ void ResultTabWidget::GeneTestData()
 		}
 	}
 #endif
-}
-
-void ResultTabWidget::ResultAdd()
-{
-	if (currenttablefrom == 0) 
-	{
-		int absence = 0;
-		int leave = 0;
-		QStringList absencsstudent;
-		QStringList leavestudent;
-		int total = attendancetable->rowCount();
-		for (int i = 0; i < total; i++)
-		{
-			auto itemid = attendancetable->item(i, 0)->text();
-			auto itemname = attendancetable->item(i, 1)->text();
-			auto itemaca = attendancetable->item(i, 2)->text();
-			auto itemcla = attendancetable->item(i, 3)->text();
-			auto itemfigure = attendancetable->item(i, 4)->text();
-			auto iteminclass = attendancetable->item(i, 5)->text() == QString(tr("yes")) ? 1 : 0;
-			auto itemleaveclass = attendancetable->item(i, 6)->text() == QString(tr("yes")) ? 1 : 0;
-			auto itemabclass = attendancetable->item(i, 7)->text() == QString(tr("yes")) ? 1 : 0;
-
-			if (iteminclass == 0) 
-			{
-				if (itemleaveclass == 1) 
-				{
-					leave++;
-					leavestudent << itemid;
-				}
-				else 
-				{
-					if (itemabclass == 1)
-					{
-						absence++;
-						absencsstudent << itemid;
-					}
-				}
-			}
-		}
-		attendanceresult.SetANum(total - absence);
-		attendanceresult.SetTNum(total);
-		attendanceresult.SetLStu(leavestudent.join(","));
-		attendanceresult.SetAStu(absencsstudent.join(","));
-		attendanceresult.SetUID(dataManager->GetCurrentUser().GetUID());
-		if (dataManager->ResultOP(attendanceresult, 0)) 
-		{
-			QMessageBox::information(0, tr("result add"), tr("result add successfully"), QMessageBox::Ok);
-			dataManager->updateResult(dataManager->GetCurrentUser());
-			for (auto it = dataManager->GetResult()->begin(); it != dataManager->GetResult()->end(); it++)
-			{
-				auto abstu = it->GetAStu().split(",");
-				auto lestu = it->GetLStu().split(",");
-				if (it->GetAID() == attendanceresult.GetAID()&&it->GetRID() == attendanceresult.GetRID())
-				{
-					for (auto iter = dataManager->GetAttendance()->begin(); iter != dataManager->GetAttendance()->end(); iter++) 
-					{
-						if (iter->GetID() == it->GetAID()) 
-						{
-							auto aclass = iter->GetAclass().split(",");
-							for (int i = 0; i < aclass.size(); i++) 
-							{
-								for (auto its = dataManager->GetStudent()->begin(); its != dataManager->GetStudent()->end(); its++) 
-								{
-									if (its->GetAclass() == aclass[i]) 
-									{
-										its->AddTotime();
-										if (abstu.indexOf(its->GetID()) >= 0) 
-										{
-											its->AddAbtime();
-											dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", 0, 0, its->GetAbtimes(),its->GetTotimes()), 5);
-
-										}
-										else if (lestu.indexOf(its->GetID()) >= 0) 
-										{
-											its->AddLetime();
-											dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", 0, its->GetLetimes(), 0, its->GetTotimes()), 4);
-										}
-										else 
-										{
-											its->AddIntime();
-											dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", its->GetIntimes(), 0, 0, its->GetTotimes()), 3);
-										}
-									}
-								}
-							}
-							break;
-						}
-					}
-					break;
-				}
-			}
-			updateTree();
-		}
-		else
-		{
-			QMessageBox::information(0, tr("result add"), tr("result add failed"), QMessageBox::Ok);
-		}
-	}
-	else
-	{
-		QMessageBox::information(0, tr("result add"), tr("please select attendance result file first"), QMessageBox::Ok);
-	}
 }
 
 void ResultTabWidget::setupUi()
@@ -919,15 +955,18 @@ void ResultTabWidget::updateTree()
 	QStringList current;
 	for (auto it = dataManager->GetResult()->begin(); it != dataManager->GetResult()->end(); it++) 
 	{
-		if (current.indexOf(it->GetAID()) < 0) 
+		if (current.indexOf(it->GetAID()) < 0) //判断该考勤id是否在列表中
 		{
 			current << it->GetAID();
-			auto parent = new QTreeWidgetItem(QStringList() << it->GetAID() + "-" + it->GetUID());
+			auto parent = new QTreeWidgetItem(QStringList() << it->GetAID() + "-" + it->GetUID());//每一个考勤项目都新建一个父级树（考勤编号-提交用户）
+
+
+			//找到和该考勤结果有相同的考勤项目编号的所有考勤结果
 			for (auto iter = dataManager->GetResult()->begin(); iter != dataManager->GetResult()->end(); iter++)
 			{
 				if (iter->GetAID() == it->GetAID()) 
 				{
-					parent->addChild(new QTreeWidgetItem(QStringList() << iter->GetRID()));
+					parent->addChild(new QTreeWidgetItem(QStringList() << iter->GetRID()));//同一个考勤项目的考勤结果都作为子树
 				}
 			}
 			resulttree->addTopLevelItem(parent);
