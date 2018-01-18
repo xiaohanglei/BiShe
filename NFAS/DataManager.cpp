@@ -158,43 +158,68 @@ const QString Attendance::GetSETime() const
 
 DataManager::DataManager(QString configfile)//从配置文件中读取数据库连接信息
 {
+
+	tcp = new TcpServer;
+
 	QString server = "127.0.0.1";//默认连接信息
 	QString database = "nfas";
 	QString uid = "sa";
 	QString pwd = "586926";
 
 	//配置文件操作类
-	QSettings *configIni = new QSettings(configfile, QSettings::IniFormat);
-	
-	
-	
+	QSettings *configIni = new QSettings(configfile, QSettings::IniFormat);	
+
 	QFile config(configfile);//判断文件是否存在
 	if (!config.exists())//如果文件不存在.自动生成
 	{
-	/*	config.open(QIODevice::WriteOnly| QIODevice::Text);
-		QTextStream configout(&config);
-		configout << "Server:" << server << endl;
-		configout << "DataBase:" << database << endl;
-		configout << "UserID:" << uid << endl;
-		configout << "Password:" << pwd << endl;
-		config.close();*/
-
 		//----------------	
-		configIni->setValue("DBServer/ip", server);
+		/*configIni->setValue("DBServer/ip", server);
 		configIni->setValue("/DBServer/database", database);
 		configIni->setValue("/DBServer/uid", uid);
-		configIni->setValue("/DBServer/pwd", pwd);
+		configIni->setValue("/DBServer/pwd", pwd);*/
+		QMessageBox::information(0, "配置文件出错", "找不到配置文件，请检查配置文件！", QMessageBox::Ok);
+		return;
 	}
 	else//读取配置文件
 	{
-		//--------------		
+		//--------------		读取数据库连接信息
 		server		=	configIni->value("/DBServer/ip").toString();
 		database	=	configIni->value("/DBServer/database").toString();
 		uid			=	configIni->value("/DBServer/uid").toString();
 		pwd			=	configIni->value("/DBServer/pwd").toString();
-	}
 
-	//新建数据类对象保存数据
+		//--------------		读取TCP服务器连接信息
+		QByteArray ip;
+		ip = configIni->value("/TcpServer/ip").toByteArray();
+		strcpy(tcp->m_IpAadress, ip.data());
+		tcp->m_Port = configIni->value("/TcpServer/port").toInt();
+	
+		//读取配置文件中所有的客户端列表
+		ALLCLIENTLIST tempClient;
+		QString tempQS;
+		QByteArray tempQB;
+		int sum = 0;
+		sum = configIni->value("/ClientList/sum").toInt();
+		for (int i = 0; i < sum; i++)
+		{
+			tempQS = configIni->value("/ClientList/" + QString::number(i,10)).toString();
+
+			tempQB = tempQS.split("#")[0].toLatin1();
+			strcpy(tempClient.name, tempQB.data());
+
+			tempQB = tempQS.split("#")[1].toLatin1();
+			strcpy(tempClient.ip, tempQB.data());
+
+			tcp->m_AllClientList.append(tempClient);
+		}		
+
+	}
+	delete configIni;
+
+	//新建数据类对象保存数据	
+	tcp->LoadWinSock();//开启tcp服务
+	tcp->StartServer();
+
 
 	//学院、学生、班级、考勤、用户、考勤结果
 	academics = new QVector<Academic>;
@@ -207,8 +232,7 @@ DataManager::DataManager(QString configfile)//从配置文件中读取数据库连接信息
 	if (!InitDataBase(server, database, uid, pwd)) //数据库连接
 	{
 		exit(-1);
-	}
-	delete configIni;
+	}	
 }
 
 //数据库连接

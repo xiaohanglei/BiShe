@@ -34,6 +34,9 @@
       <Extensions>ts</Extensions>
       <ParseFiles>false</ParseFiles>
     </Filter>
+    <Filter Include="Tool">
+      <UniqueIdentifier>{09122976-bbf6-4469-8dac-4cbc302e1ab6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -105,6 +108,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_academicclassstudenttabwidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="TcpServer.cpp">
+      <Filter>Tool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="nfas.h">
@@ -136,5 +142,10 @@
     <None Include="nfas_zh.ts">
       <Filter>Translation Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TcpServer.h">
+      <Filter>Tool</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

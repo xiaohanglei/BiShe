@@ -3,6 +3,7 @@
 #include <QTranslator>
 #include "DataManager.h"
 #include "logindialog.hpp"
+#include <TcpServer.h>
 
 int main(int argc, char *argv[])
 {
@@ -12,6 +13,17 @@ int main(int argc, char *argv[])
 	a.installTranslator(&qtTranslator);
 
 	QString config = "config.ini";
+
+	//调试
+
+
+
+
+
+	//-------------------
+
+
+
 
 	//创建本程序所用到的所有数据管理类
 	DataManager dataManager(config);

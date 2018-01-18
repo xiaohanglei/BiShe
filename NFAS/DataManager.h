@@ -6,7 +6,10 @@
 #include <QDateTime>
 #include <QObject>
 #include <QVector>
+#include <TcpServer.h>
 
+
+#define  MAX_BUF_LEN 1024*1024
 
 //学生类
 class Student
@@ -392,6 +395,10 @@ private:
 	QVector<Result>* results;//考勤结果表
 	QVector<User>* users;//用户列表
 	User currentusers;//当前用户
+
+public:
+	TcpServer *tcp;//通讯
+
 };
 
 

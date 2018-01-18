@@ -38,8 +38,9 @@ private:
 	void updateComboBox();
 	
 	QString GeneFigureInfo(QString id,QString name);
-	//控件
+	
 	DataManager* dataManager;
+	//控件
 	QTreeWidget* academictree;
 	QTableWidget* academicclasstable;
 

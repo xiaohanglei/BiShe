@@ -74,5 +74,8 @@ void NFAS::setupUi()
 	QVBoxLayout* main_layout = new QVBoxLayout;
 	main_layout->addWidget(main_tab);
 	this->setLayout(main_layout);
+
+	//¿ªÆôÏß³Ì
+	_beginthread(TcpServer::RecvClientProc, 0, dataManager->tcp);
 	
 }

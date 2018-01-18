@@ -180,12 +180,14 @@ void AttendanceTabWidget::AttendanceAdd()
 	}
 	QDateTime datetime;
 	auto now = datetime.currentDateTime();
+	//必须提前10分钟以上发送开始考勤时间
 	if (starttime.toTime_t() - now.toTime_t() < 10 * 60) 
 	{
+		//考勤开始时间必须比当前时间晚10分钟以上
 		QMessageBox::information(0, tr("attendance add"), tr("start time must later than now more than 10 mins"), QMessageBox::Ok);
 		return;
 	}
-	if (endtime.toTime_t() - starttime.toTime_t() < 30 * 60)
+	if (endtime.toTime_t() - starttime.toTime_t() < 30 * 60)//考勤时长不得低于30分钟
 	{
 		QMessageBox::information(0, tr("attendance add"), tr("end time must later than start time more than 30 mins"), QMessageBox::Ok);
 		return;
