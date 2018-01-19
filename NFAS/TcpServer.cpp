@@ -114,6 +114,9 @@ void TcpServer::RecvClientProc(LPVOID another)
 			tempClient.sock = *SocketClient;
 			strcpy(tempClient.name, "未知客户端");
 
+
+			EnterCriticalSection(&tcp->g_cs);//客户端列表操作加上线程锁
+
 			//获取IP,并查找配置文件中是否有该客户端的信息
 			sprintf(tempClient.ip, inet_ntoa(ClientAddress.sin_addr));
 			for (QVector<ALLCLIENTLIST>::iterator it = tcp->m_AllClientList.begin(); it != tcp->m_AllClientList.end(); it++)//遍历所有客户端列表
@@ -125,6 +128,10 @@ void TcpServer::RecvClientProc(LPVOID another)
 				}
 			}
 			tcp->m_ClientList.push_back(tempClient);//放入在线客户端列表
+
+			LeaveCriticalSection(&tcp->g_cs);//解开线程锁
+
+
 			THREADARG * tmp = new THREADARG;
 			tmp->tcp = tcp;
 			tmp->ssock = *SocketClient;
@@ -154,8 +161,7 @@ void TcpServer::RecvDataProc(LPVOID another)
 		}
 		Recvbuf[Bytes] = '\0';//给接收的数据末尾加 结束标记	
 
-		//----------------------------------------------------------接收成功以后，调用处理模块进行数据处理帧
-		
+		//----------------------------------------------------------接收成功以后，调用处理模块进行数据处理帧		
 	}
 
 	delete Recvbuf;

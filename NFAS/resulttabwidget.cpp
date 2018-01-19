@@ -643,6 +643,9 @@ void ResultTabWidget::AttendanceFileGet()//获得 考勤文件中的数据加载
 		<< tr("student figure") << tr("in class") << tr("leave class") << tr("absencs class");
 	attendancetable->setHorizontalHeaderLabels(header);//设置表头
 
+
+	//----------xls文件操作
+
 	QString filename = QFileDialog::getOpenFileName(NULL, tr("select attendance file"), ".", "Excel Files(*.xlsx)");//通过文件选择空间来获得考勤文件的路径
 	attendencefile->setText(filename);
 	QXlsx::Document xlsx(filename);//打开考勤文件
@@ -657,6 +660,9 @@ void ResultTabWidget::AttendanceFileGet()//获得 考勤文件中的数据加载
 		QMessageBox::information(0, tr("attendance file select"), tr("please select right file"), QMessageBox::Ok);
 		return;
 	}
+	// -------------------------
+
+
 
 	int total = 0;//统计考勤人数
 	int absence = 0;
