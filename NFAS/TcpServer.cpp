@@ -87,7 +87,8 @@ SOCKET * TcpServer::GetServerSock()
 
 void TcpServer::RecvClientProc(LPVOID another)
 {
-	TcpServer *tcp = (TcpServer *)another;
+	DataManager * datamanager = (DataManager*)another;
+	TcpServer *tcp = datamanager->GetTcp();
 
 	while (1)
 	{
@@ -113,17 +114,17 @@ void TcpServer::RecvClientProc(LPVOID another)
 			CLIENTLIST tempClient;//构造客户端列表对象
 			tempClient.sock = *SocketClient;
 			strcpy(tempClient.name, "未知客户端");
-
+			sprintf(tempClient.ip, inet_ntoa(ClientAddress.sin_addr));
 
 			EnterCriticalSection(&tcp->g_cs);//客户端列表操作加上线程锁
 
 			//获取IP,并查找配置文件中是否有该客户端的信息
-			sprintf(tempClient.ip, inet_ntoa(ClientAddress.sin_addr));
-			for (QVector<ALLCLIENTLIST>::iterator it = tcp->m_AllClientList.begin(); it != tcp->m_AllClientList.end(); it++)//遍历所有客户端列表
+			
+			for (QVector<Device>::iterator it = datamanager->GetDevice()->begin(); it != datamanager->GetDevice()->end(); it++)//遍历所有设备列表
 			{
-				if (strcmp(it->ip, tempClient.ip) == 0)
+				if (strcmp(it->GetIp().toLatin1(), tempClient.ip) == 0)
 				{
-					strcpy(tempClient.name, it->name);
+					strcpy(tempClient.name, it->GetName().toLatin1());
 					break;
 				}
 			}
@@ -139,7 +140,6 @@ void TcpServer::RecvClientProc(LPVOID another)
 			_beginthread(TcpServer::RecvDataProc, 0,tmp);//为该客户端开辟一个接收数据的线程
 
 		}
-
 	}
 
 }

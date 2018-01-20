@@ -7,6 +7,7 @@
 #include <QVector>
 
 
+
 struct CLIENTLIST//在线
 {
 	int num;//序号
@@ -30,7 +31,8 @@ public:
 	SOCKET m_ServerSock;//服务端sock
 
 	std::vector<CLIENTLIST> m_ClientList;//在线客户端列表
-	QVector <ALLCLIENTLIST> m_AllClientList;//全部客户端列表
+	//QVector <ALLCLIENTLIST> m_AllClientList;//全部客户端列表
+	
 
 	CRITICAL_SECTION g_cs;//临界区变量
 

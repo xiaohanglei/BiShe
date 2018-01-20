@@ -195,6 +195,23 @@ private:
 	int useridentify;
 };
 
+//设备类
+class Device
+{
+public :
+	Device();
+	Device(QString qname,QString qip);
+	~Device();
+
+	void SetName(QString qname);
+	void SetIp(QString qip);
+	QString GetName();
+	QString GetIp();
+private:
+	QString name;
+	QString ip;
+};
+
 
 //考勤结果类
 class Result 
@@ -369,6 +386,14 @@ public:
 	{
 		return users;
 	}
+	QVector<Device>* GetDevice()
+	{
+		return devices;
+	}
+	TcpServer *GetTcp()
+	{
+		return tcp;
+	}
 	User GetCurrentUser()//当前用户
 	{
 		return currentusers;
@@ -387,6 +412,7 @@ private:
 	void InitResult(User user);
 	void InitUser();
 	void InitAttendances();
+	void InitDevics();
 
 	QVector<Academic>* academics;//学院列表
 	QVector<Aclass>* classes;//班级列表
@@ -394,9 +420,9 @@ private:
 	QVector<Attendance>* attendances;//考勤列表
 	QVector<Result>* results;//考勤结果表
 	QVector<User>* users;//用户列表
+	QVector<Device>* devices;//设备列表
 	User currentusers;//当前用户
 
-public:
 	TcpServer *tcp;//通讯
 
 };

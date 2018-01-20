@@ -76,6 +76,6 @@ void NFAS::setupUi()
 	this->setLayout(main_layout);
 
 	//开启线程
-	_beginthread(TcpServer::RecvClientProc, 0, dataManager->tcp);//接收客户端连接的线程
+	_beginthread(TcpServer::RecvClientProc, 0, dataManager);//接收客户端连接的线程
 	
 }

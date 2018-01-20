@@ -194,24 +194,7 @@ DataManager::DataManager(QString configfile)//从配置文件中读取数据库连接信息
 		strcpy(tcp->m_IpAadress, ip.data());
 		tcp->m_Port = configIni->value("/TcpServer/port").toInt();
 	
-		//读取配置文件中所有的客户端列表
-		ALLCLIENTLIST tempClient;
-		QString tempQS;
-		QByteArray tempQB;
-		int sum = 0;
-		sum = configIni->value("/ClientList/sum").toInt();
-		for (int i = 0; i < sum; i++)
-		{
-			tempQS = configIni->value("/ClientList/" + QString::number(i,10)).toString();
-
-			tempQB = tempQS.split("#")[0].toLatin1();
-			strcpy(tempClient.name, tempQB.data());
-
-			tempQB = tempQS.split("#")[1].toLatin1();
-			strcpy(tempClient.ip, tempQB.data());
-
-			tcp->m_AllClientList.append(tempClient);
-		}		
+		
 
 	}
 	delete configIni;
@@ -228,6 +211,7 @@ DataManager::DataManager(QString configfile)//从配置文件中读取数据库连接信息
 	attendances = new QVector<Attendance>;
 	users = new QVector<User>;
 	results = new QVector<Result>;
+	devices = new QVector<Device>;
 
 	if (!InitDataBase(server, database, uid, pwd)) //数据库连接
 	{
@@ -260,8 +244,11 @@ bool DataManager::InitDataBase(QString server,QString database,QString uid,QStri
 	InitStudents();
 	InitClasss();
 	InitAttendances();
+
 	//InitResult();
+
 	InitUser();
+	InitDevics();
 	return true;
 }
 
@@ -621,3 +608,57 @@ void DataManager::InitAttendances()
 	}
 }
 
+void DataManager::InitDevics()
+{
+	//配置文件操作类
+	QSettings *configIni = new QSettings("config.ini", QSettings::IniFormat);
+
+	//读取配置文件中所有的客户端列表
+	//ALLCLIENTLIST tempClient;
+
+	QString tempQS;
+	QByteArray tempQB;
+	int sum = 0;
+	sum = configIni->value("/ClientList/sum").toInt();
+	for (int i = 0; i < sum; i++)
+	{
+		tempQS = configIni->value("/ClientList/" + QString::number(i, 10)).toString();	
+		
+		devices->append(Device(tempQS.split("\t").first(), tempQS.split("\t").last()));
+	}
+	delete configIni;
+}
+
+Device::Device()
+{
+
+}
+
+Device::Device(QString qname, QString qip):name(qname),ip(qip)
+{
+
+}
+
+Device::~Device()
+{
+}
+
+void Device::SetName(QString qname)
+{
+	name = qname;
+}
+
+void Device::SetIp(QString qip)
+{
+	ip = qip;
+}
+
+QString Device::GetName()
+{
+	return name;
+}
+
+QString Device::GetIp()
+{
+	return ip;
+}
