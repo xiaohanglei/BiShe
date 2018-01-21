@@ -37,6 +37,11 @@
     <Filter Include="Tool">
       <UniqueIdentifier>{09122976-bbf6-4469-8dac-4cbc302e1ab6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -111,6 +116,15 @@
     <ClCompile Include="TcpServer.cpp">
       <Filter>Tool</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_devicewidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_devicewidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="devicewidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="nfas.h">
@@ -137,6 +151,12 @@
     <CustomBuild Include="academicclassstudenttabwidget.hpp">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="devicewidget.hpp">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="devicewidget.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="nfas_zh.ts">
@@ -146,6 +166,9 @@
   <ItemGroup>
     <ClInclude Include="TcpServer.h">
       <Filter>Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_devicewidget.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

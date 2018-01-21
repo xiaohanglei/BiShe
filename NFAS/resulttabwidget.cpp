@@ -755,8 +755,10 @@ void ResultTabWidget::AttendanceFileGet()//获得 考勤文件中的数据加载
 	attendanceresult.SetAID(attenfileid);
 	QDateTime datetime;
 	auto now = datetime.currentDateTime();
-	attendanceresult.SetRID(now.toString("yyyyMMddHHmmss"));//以当前时间戳为考勤结果的id
+	attendanceresult.SetRID(attenfileid + QString("-") + now.toString("yyyyMMddHHmmss"));//以当前时间戳为考勤结果的id
 
+
+	int a = attendanceresult.GetRID().length();
 	totalnumber->setText(QString::number(total));
 	leavenumber->setText(QString::number(leave));
 	absencenumber->setText(QString::number(absence));

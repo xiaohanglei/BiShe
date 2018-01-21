@@ -7,6 +7,7 @@
 #include "resulttabwidget.hpp"
 #include "usertabwidget.hpp"
 #include "academicclassstudenttabwidget.hpp"
+#include "devicewidget.hpp"
 
 
 NFAS::NFAS(DataManager *dm,QWidget *parent)
@@ -70,6 +71,7 @@ void NFAS::setupUi()
 	{
 		main_tab->addTab(new UserTabWidget(dataManager), tr("user information"));//用户管理
 	}
+	main_tab->addTab(new devicewidget(dataManager),"设备信息");
 	//设置布局
 	QVBoxLayout* main_layout = new QVBoxLayout;
 	main_layout->addWidget(main_tab);

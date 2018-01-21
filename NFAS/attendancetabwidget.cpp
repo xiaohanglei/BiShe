@@ -42,7 +42,8 @@ void AttendanceTabWidget::AttendanceModify()
 		return;
 	}
 	QString aid = items[0]->text(0).split("-")[0];
-	Attendance attendance(aid, QString(""), QString(""), QString(""), attendanceclass->text());
+
+	Attendance attendance(aid, attendanceclassroomid->text().trimmed(), attendancename->text().trimmed(), attendancestarttime->dateTime(), attendanceendtime->dateTime(), attendanceclass->text());
 	if (dataManager->AttendanceOP(attendance, 1)) 
 	{
 		QMessageBox::information(0, tr("attendance modify"), tr("attendance modify successfully"), QMessageBox::Ok);
@@ -55,7 +56,7 @@ void AttendanceTabWidget::AttendanceModify()
 	}
 	else 
 	{
-		QMessageBox::information(0, tr("academic modify"), tr("academic modify failed"), QMessageBox::Ok);
+		QMessageBox::information(0, tr("attendance modify"), tr("attendance modify failed"), QMessageBox::Ok);
 	}
 }
 
@@ -68,8 +69,17 @@ void AttendanceTabWidget::AttendanceDelete()
 		if (dataManager->AttendanceOP(Attendance(aid, "", "", "", ""), 2))
 		{
 			QMessageBox::information(0, tr("attendance delete"), tr("attendance delete successfully"), QMessageBox::Ok);
+
+
+			attendanceid->setText("");
+			attendancename->setText("");
+			attendanceclassroomid->setText("");
+			attendanceclass->setText("");
+
 			dataManager->updateResult(dataManager->GetCurrentUser());
 			dataManager->updateAttendance();
+			updateTree();//更新树形空间
+
 		}
 		else
 		{
@@ -97,6 +107,12 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 	{
 		if (it->GetID() == s) 
 		{
+			//
+			attendanceid->setText(it->GetID());
+			attendancename->setText(it->GetName());
+			attendanceclassroomid->setText(it->GetMID());
+			attendanceclass->setText(it->GetAclass());
+
 			QStringList aclass = it->GetAclass().split(",");
 			for (int i = 0; i < aclass.size(); i++) 
 			{
@@ -128,6 +144,12 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 		attendancetable->item(i, 4)->setFlags(attendancetable->item(i, 4)->flags() & (~Qt::ItemIsEditable));
 		attendancetable->item(i, 5)->setFlags(attendancetable->item(i, 5)->flags() & (~Qt::ItemIsEditable));
 	}
+
+	//
+
+
+
+
 }
 
 void AttendanceTabWidget::updateAttendanceClass(QTreeWidgetItem * item, int col)//更新考勤班级

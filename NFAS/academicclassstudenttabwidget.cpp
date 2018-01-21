@@ -247,13 +247,14 @@ void AcademicClassStudentTabWidget::StudentAdd()
 		QMessageBox::information(0, tr("student add"), tr("student name is required"), QMessageBox::Ok);
 		return;
 	}
-	Student student(stuid, stuname,stusex,stuaca,stucla,GeneFigureInfo(stuid,stuname));
+	Student student(stuid, stuname,stusex,stuaca,stucla,GeneFigureInfo(stuid,QDateTime::currentDateTime().toString()));
 	if (dataManager->StudentOP(student, 0))
 	{
 		QMessageBox::information(0, tr("student add"), tr("student add successfully"), QMessageBox::Ok);
 		studentid->setText("");
 		studentname->setText("");
 		dataManager->updateStudent();
+		updateTree();
 	}
 	else
 	{
@@ -317,6 +318,7 @@ void AcademicClassStudentTabWidget::StudentDelete()
 			{
 				QMessageBox::information(0, tr("student delete"), tr("student delete successfully"), QMessageBox::Ok);
 				dataManager->updateStudent();
+				updateTree();
 			}
 			else 
 			{
@@ -654,11 +656,24 @@ void AcademicClassStudentTabWidget::updateComboBox()//更新学院信息列表�
 	}*/
 }
 
-QString AcademicClassStudentTabWidget::GeneFigureInfo(QString id, QString name)
+QString AcademicClassStudentTabWidget::GeneFigureInfo(QString id, QString currtime)
 {
 	QByteArray byte_array;
 	byte_array.append(id);
-	byte_array.append(name);
+	byte_array.append(currtime);
 	QByteArray hash_byte_array = QCryptographicHash::hash(byte_array, QCryptographicHash::Md5);
+
+
 	return hash_byte_array.toHex();
+
+	//QString byte_array;
+	//byte_array.append(id);
+	//byte_array.append(name);
+	//QByteArray hash_byte_array = QCryptographicHash::hash(byte_array.toLatin1(), QCryptographicHash::Md5);
+
+
+	//QString ret = hash_byte_array.toHex();
+	//return ret;
+
+
 }

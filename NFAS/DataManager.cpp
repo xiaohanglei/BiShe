@@ -397,9 +397,13 @@ bool DataManager::AttendanceOP(const Attendance& a, int op)
 		query.bindValue(4, a.GetAclass());
 		break;
 	case 1:
-		query.prepare("UPDATE attendancetable SET attendanceclass=? WHERE attendanceid=?");
-		query.bindValue(0, a.GetAclass());
-		query.bindValue(1, a.GetID());
+		query.prepare("UPDATE attendancetable SET attendanceid = ?,attendancemachineid = ?,attendancename = ?,attendancetime = ?,attendanceclass = ? WHERE attendanceid=?");
+		query.bindValue(0, a.GetID());
+		query.bindValue(1, a.GetMID());
+		query.bindValue(2, a.GetName());
+		query.bindValue(3, a.GetSETime());
+		query.bindValue(4, a.GetAclass());
+		query.bindValue(5, a.GetID());
 		break;
 	case 2:
 		query.prepare("DELETE FROM attendancetable WHERE attendanceid=?");
@@ -622,7 +626,7 @@ void DataManager::InitDevics()
 	sum = configIni->value("/ClientList/sum").toInt();
 	for (int i = 0; i < sum; i++)
 	{
-		tempQS = configIni->value("/ClientList/" + QString::number(i, 10)).toString();	
+		tempQS = configIni->value("/ClientList/" + QString::number(i+1, 10)).toString();	
 		
 		devices->append(Device(tempQS.split("\t").first(), tempQS.split("\t").last()));
 	}
