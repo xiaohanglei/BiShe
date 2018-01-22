@@ -42,6 +42,9 @@
       <Extensions>ui</Extensions>
       <ParseFiles>true</ParseFiles>
     </Filter>
+    <Filter Include="Deal">
+      <UniqueIdentifier>{e19d1817-b26b-4551-921a-054c5f1bb401}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -125,6 +128,15 @@
     <ClCompile Include="devicewidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="deal.cpp">
+      <Filter>Deal</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_deal.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_deal.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="nfas.h">
@@ -156,6 +168,9 @@
     </CustomBuild>
     <CustomBuild Include="devicewidget.ui">
       <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="deal.hpp">
+      <Filter>Deal</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

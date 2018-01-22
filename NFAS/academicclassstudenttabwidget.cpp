@@ -674,6 +674,4 @@ QString AcademicClassStudentTabWidget::GeneFigureInfo(QString id, QString currti
 
 	//QString ret = hash_byte_array.toHex();
 	//return ret;
-
-
 }

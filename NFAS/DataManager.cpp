@@ -213,6 +213,10 @@ DataManager::DataManager(QString configfile)//从配置文件中读取数据库连接信息
 	results = new QVector<Result>;
 	devices = new QVector<Device>;
 
+	//xinxibao = new QList<NETBAO>;
+
+	g_cNETBAO = new CRITICAL_SECTION;
+
 	if (!InitDataBase(server, database, uid, pwd)) //数据库连接
 	{
 		exit(-1);

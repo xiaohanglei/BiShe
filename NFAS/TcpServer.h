@@ -5,6 +5,7 @@
 #include <vector>
 #include <QString>
 #include <QVector>
+//
 
 
 
@@ -53,9 +54,6 @@ private:
 
 };
 
-typedef struct
-{
-	TcpServer *tcp;
-	SOCKET ssock;
-}THREADARG;
+
+
 

@@ -6,10 +6,14 @@
 #include <QDateTime>
 #include <QObject>
 #include <QVector>
-#include <TcpServer.h>
+#include <QList>
+//#include <TcpServer.h>
+#include "TcpServer.h"
+
 
 
 #define  MAX_BUF_LEN 1024*1024
+
 
 //学生类
 class Student
@@ -390,7 +394,7 @@ public:
 	{
 		return devices;
 	}
-	TcpServer *GetTcp()
+	TcpServer * GetTcp()
 	{
 		return tcp;
 	}
@@ -398,7 +402,6 @@ public:
 	{
 		return currentusers;
 	}
-
 private:
 
 	//数据库连接
@@ -423,9 +426,16 @@ private:
 	QVector<Device>* devices;//设备列表
 	User currentusers;//当前用户
 
-	TcpServer *tcp;//通讯
+		TcpServer * tcp;
+	
+
+	CRITICAL_SECTION *g_cNETBAO;
 
 };
 
-
+typedef struct
+{
+	DataManager *dm;
+	SOCKET ssock;
+}THREADARG;
 #endif // DATAMANAGER_H

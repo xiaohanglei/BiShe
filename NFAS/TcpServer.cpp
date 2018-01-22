@@ -6,6 +6,8 @@
 #include <DataManager.h>
 #pragma comment(lib,"ws2_32.lib")
 
+#include "Deal.hpp"
+
 TcpServer::TcpServer()
 {
 	InitializeCriticalSection(&g_cs);//初始化线程锁
@@ -134,11 +136,9 @@ void TcpServer::RecvClientProc(LPVOID another)
 
 
 			THREADARG * tmp = new THREADARG;
-			tmp->tcp = tcp;
+			tmp->dm = datamanager;
 			tmp->ssock = *SocketClient;
-
 			_beginthread(TcpServer::RecvDataProc, 0,tmp);//为该客户端开辟一个接收数据的线程
-
 		}
 	}
 
@@ -149,6 +149,8 @@ void TcpServer::RecvDataProc(LPVOID another)
 	THREADARG * tmp = (THREADARG *)another;
 	UCHAR *Recvbuf = new UCHAR[MAX_BUF_LEN];
 	int Bytes = 0;//接受的长度
+
+	Deal de;
 
 	while (1)
 	{
@@ -161,7 +163,9 @@ void TcpServer::RecvDataProc(LPVOID another)
 		}
 		Recvbuf[Bytes] = '\0';//给接收的数据末尾加 结束标记	
 
-		//----------------------------------------------------------接收成功以后，调用处理模块进行数据处理帧		
+		//----------------------------------------------------------接收成功以后，调用处理模块进行数据处理帧	
+		de.FenLiZhen(Recvbuf, Bytes,tmp->ssock);
+
 	}
 
 	delete Recvbuf;
