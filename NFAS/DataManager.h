@@ -7,13 +7,23 @@
 #include <QObject>
 #include <QVector>
 #include <QList>
-//#include <TcpServer.h>
+
 #include "TcpServer.h"
 
 
 
 #define  MAX_BUF_LEN 1024*1024
+struct NETBAO
+{
+	UCHAR mdstation[7];//目的电报码
+	UCHAR sostation[7];//源电报码
+	UCHAR baolx;//包类型
 
+	UCHAR lxm;//类型码
+
+	UCHAR xinxibao[1024 * 100];
+	SOCKET sock;
+};
 
 //学生类
 class Student
@@ -402,6 +412,20 @@ public:
 	{
 		return currentusers;
 	}
+	QList<NETBAO> * GetNetBao()
+	{
+		return netbao;
+	}
+
+	bool FindDevic(QString name);
+
+
+	CRITICAL_SECTION * GetCriNetBao()
+	{
+		return g_cNETBAO;
+	}
+
+
 private:
 
 	//数据库连接
@@ -426,9 +450,9 @@ private:
 	QVector<Device>* devices;//设备列表
 	User currentusers;//当前用户
 
-		TcpServer * tcp;
+	TcpServer * tcp;
 	
-
+	QList<NETBAO> * netbao;
 	CRITICAL_SECTION *g_cNETBAO;
 
 };

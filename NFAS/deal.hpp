@@ -6,17 +6,7 @@
 #define MAX_BUFF 1024 * 1024//分帧缓冲区大小
 
 
-struct NETBAO
-{
-	UCHAR mdstation[6];//目的电报码
-	UCHAR sostation[6];//源电报码
-	UCHAR baolx;//包类型
 
-	UCHAR lxm;//类型码
-
-	UCHAR xinxibao[1024 * 100];
-	SOCKET clientsock;
-};
 
 class Deal : public QObject 
 {
@@ -26,13 +16,15 @@ public:
 	Deal(QObject * parent = Q_NULLPTR);
 	~Deal();
 
-	void FenLiZhen(UCHAR * recvbuff, int len, SOCKET sock);//分帧
+	void FenLiZhen(UCHAR * recvbuff, int len, SOCKET sock, DataManager * dm);//分帧
+
+	
 
 	static void Deal_Attendance_MingLing(NETBAO bao);//请求考勤数据命令
-	static void Deal_Attendance_HuiZhi(UCHAR *sostation, SOCKET sock);//回执待考勤数据
+	static void Deal_Attendance_HuiZhi(UCHAR *sostation, SOCKET sock, DataManager * dm);//回执待考勤数据
 	
 	static void Deal_Result_MingLing(NETBAO bao);//处理考勤设备推送的考勤结果
-	static void Deal_Result_HuiZhi();//回执给考勤设备的处理结果
+	static void Deal_Result_HuiZhi(UCHAR *sostation, SOCKET sock);//回执给考勤设备的处理结果
 
 
 private:

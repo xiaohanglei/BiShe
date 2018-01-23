@@ -9,9 +9,10 @@ LoginDialog::LoginDialog(DataManager* dm,QWidget * parent) : QDialog(parent)
 	dataManager = dm;
 	setupUi();
 
-
+	
 	//将登录按钮和槽函数进行连接
 	connect(login, SIGNAL(clicked()), this, SLOT(Login()));
+	
 }
 
 LoginDialog::~LoginDialog() 

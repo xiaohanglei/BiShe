@@ -311,12 +311,16 @@ void AttendanceTabWidget::setupUi()
 	attendanceop->addWidget(attendancedelete);
 	attendacelayout->addLayout(attendanceop);
 	attendancegroup->setLayout(attendacelayout);
+
+	
 	rightlayout->addWidget(attendancegroup);
+	//rightlayout->addStretch(10);
 
 	QHBoxLayout* main_layout = new QHBoxLayout;
 	main_layout->addLayout(leftlayout);
 	main_layout->addLayout(rightlayout);
 	this->setLayout(main_layout);
+
 
 	updateTree();
 }

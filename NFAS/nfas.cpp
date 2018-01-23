@@ -24,8 +24,57 @@ NFAS::~NFAS()
 
 }
 
+void NFAS::ExeMingLingProc(LPVOID another)
+{
+	DataManager * dm = (DataManager *)another;
+
+	NETBAO xinxibao ;
+
+	while (1)
+	{
+		Sleep(1000);
+	
+		EnterCriticalSection(dm->GetCriNetBao());//线程锁
+		
+		if (dm->GetNetBao()->isEmpty())//当命令队列为空时，跳过本次循环
+		{
+			LeaveCriticalSection(dm->GetCriNetBao());
+			continue;
+		}
+
+		xinxibao = dm->GetNetBao()->front();//取出命令队列中的首条命令
+		dm->GetNetBao()->pop_front();//取出要执行的命令以后，从队列中删除该条命令		
+
+		LeaveCriticalSection(dm->GetCriNetBao());
+
+		//检查设备列表中有无该设备
+		QString tempQS;
+		tempQS = QString(QLatin1String((char * )xinxibao.sostation));
+
+		if ( !dm->FindDevic(tempQS))
+			continue;
+
+		switch (xinxibao.lxm)
+		{
+		case 0x11://待考勤学生名单命令
+			//Deal::Deal_Attendance_MingLing(xinxibao);
+			Deal::Deal_Attendance_HuiZhi(xinxibao.sostation, xinxibao.sock,dm);//不用解析命令，直接回执
+			break;
+		case 0x12://推送考勤记录表命令
+			Deal::Deal_Result_MingLing(xinxibao);
+			break;
+
+		}
+
+
+		
+	}
+
+}
+
 //选项卡切换
 void NFAS::UpdateTab(int index)
+
 {
 	//只有当前用户为管理员则可以显示所有选项卡，切换
 	if (dataManager->GetCurrentUser().GetIdentify() == 0)
@@ -71,7 +120,7 @@ void NFAS::setupUi()
 	{
 		main_tab->addTab(new UserTabWidget(dataManager), tr("user information"));//用户管理
 	}
-	main_tab->addTab(new devicewidget(dataManager),"设备信息");
+	main_tab->addTab(new devicewidget(dataManager),tr("Device information"));//设备管理
 	//设置布局
 	QVBoxLayout* main_layout = new QVBoxLayout;
 	main_layout->addWidget(main_tab);
@@ -79,5 +128,7 @@ void NFAS::setupUi()
 
 	//开启线程
 	_beginthread(TcpServer::RecvClientProc, 0, dataManager);//接收客户端连接的线程
+
+	_beginthread(ExeMingLingProc, 0, dataManager);//处理考勤设备发来的命令
 	
 }

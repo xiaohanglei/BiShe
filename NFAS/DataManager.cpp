@@ -213,7 +213,7 @@ DataManager::DataManager(QString configfile)//从配置文件中读取数据库连接信息
 	results = new QVector<Result>;
 	devices = new QVector<Device>;
 
-	//xinxibao = new QList<NETBAO>;
+	netbao = new QList<NETBAO>;
 
 	g_cNETBAO = new CRITICAL_SECTION;
 
@@ -221,6 +221,17 @@ DataManager::DataManager(QString configfile)//从配置文件中读取数据库连接信息
 	{
 		exit(-1);
 	}	
+}
+
+bool DataManager::FindDevic(QString name)
+{
+	
+	for (QVector<Device>::iterator it = devices->begin(); it != devices->end(); it++)
+	{
+		if (it->GetName() == name)
+			return true;
+	}	
+	return false;
 }
 
 //数据库连接

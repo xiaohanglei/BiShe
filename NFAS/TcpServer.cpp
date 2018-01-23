@@ -164,7 +164,7 @@ void TcpServer::RecvDataProc(LPVOID another)
 		Recvbuf[Bytes] = '\0';//给接收的数据末尾加 结束标记	
 
 		//----------------------------------------------------------接收成功以后，调用处理模块进行数据处理帧	
-		de.FenLiZhen(Recvbuf, Bytes,tmp->ssock);
+		de.FenLiZhen(Recvbuf, Bytes,tmp->ssock,tmp->dm);
 
 	}
 

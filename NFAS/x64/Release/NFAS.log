@@ -1,2 +1,26 @@
-﻿  deal.cpp
+﻿  Moc'ing nfas.h...
+  Moc'ing DataManager.h...
+  Moc'ing deal.hpp...
+  DataManager.cpp
+  moc_DataManager.cpp
+  moc_academicclassstudenttabwidget.cpp
+  moc_attendancetabwidget.cpp
+  moc_deal.cpp
+  moc_devicewidget.cpp
+  moc_logindialog.cpp
+  moc_nfas.cpp
+  moc_resulttabwidget.cpp
+  moc_usertabwidget.cpp
+  TcpServer.cpp
+  academicclassstudenttabwidget.cpp
+  attendancetabwidget.cpp
+  deal.cpp
+  devicewidget.cpp
+  logindialog.cpp
+  main.cpp
+  nfas.cpp
+  resulttabwidget.cpp
+  usertabwidget.cpp
+  正在生成代码...
+  qrc_nfas.cpp
   NFAS.vcxproj -> H:\BiShe\NFAS\BiShe\x64\Release\NFAS.exe

@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "DataManager.h"
+#include "deal.hpp"
 
 class QTabWidget;
 
@@ -15,6 +16,9 @@ class NFAS : public QDialog
 public:
 	NFAS(DataManager *dm, QWidget *parent = 0);
 	~NFAS();
+
+
+	static void ExeMingLingProc(LPVOID another);//处理考勤设备的命令线程 
 
 public slots:
 	void UpdateTab(int index);

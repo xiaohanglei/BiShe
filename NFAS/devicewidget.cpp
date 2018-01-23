@@ -21,7 +21,7 @@ void devicewidget::updateTable()
 
 	QStringList header;
 	//QStringLiteral
-	header << QStringLiteral("教 室") << QStringLiteral("设备IP");
+	header << tr("Class room") << tr("Device IP");
 	ui.devicetable->setHorizontalHeaderLabels(header);
 
 	int i = 0;
@@ -33,10 +33,14 @@ void devicewidget::updateTable()
 		ui.devicetable->setItem(rowcount, 1, new QTableWidgetItem(it->GetIp()));
 
 		//设置格式
-		ui.devicetable->item(i, 0)->setFlags(ui.devicetable->item(i, 0)->flags() & (~Qt::ItemIsEditable));
-		ui.devicetable->item(i, 1)->setFlags(ui.devicetable->item(i, 1)->flags() & (~Qt::ItemIsEditable));
+		//ui.devicetable->item(i, 0)->setFlags(ui.devicetable->item(i, 0)->flags() & (~Qt::ItemIsEditable));
+		//ui.devicetable->item(i, 1)->setFlags(ui.devicetable->item(i, 1)->flags() & (~Qt::ItemIsEditable));
 		ui.devicetable->item(i, 0)->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 		ui.devicetable->item(i, 1)->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
+
+		ui.devicetable->item(i, 0)->setFlags(ui.devicetable->item(i, 0)->flags() & (~Qt::ItemIsEditable));
+		ui.devicetable->item(i, 1)->setFlags(ui.devicetable->item(i, 1)->flags() & (~Qt::ItemIsEditable));
 	}
 
 }

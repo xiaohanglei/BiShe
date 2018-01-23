@@ -11,7 +11,7 @@ Deal::~Deal()
 	
 }
 
-void Deal::FenLiZhen(UCHAR * recvbuff, int len, SOCKET sock)
+void Deal::FenLiZhen(UCHAR * recvbuff, int len, SOCKET sock, DataManager * dm)
 {
 #if 1
 	if (len <= 0) return;
@@ -63,26 +63,76 @@ void Deal::FenLiZhen(UCHAR * recvbuff, int len, SOCKET sock)
 			j = 0;
 			continue;;
 		}
-
+  
 #endif		
 		//处理数据
 
 		//------------------------分离成功，开始解析数据帧------------------------------------
 		NETBAO bao;
 		memcpy(bao.mdstation, &recvbuff[5], 6);//目的站码
+		bao.mdstation[6] = '\0';
+
 		memcpy(bao.sostation, &recvbuff[11], 6);//源站码
+		bao.sostation[6] = '\0';
+
 		bao.baolx = recvbuff[17];
+		if (bao.baolx != 0x01)//只处理命令
+		{
+			j = 0;
+			continue;
+		}
+
 		bao.lxm = recvbuff[18];//类型码
 
-		memcpy(bao.xinxibao, &recvbuff[19], DATALEN - 14);
+		memcpy(bao.xinxibao, &recvbuff[19], DATALEN - 14);//详细信息包
 
-		//EnterCriticalSection(&(dm->GetCNetBao()));//命令入队，加锁
+		bao.sock = sock;		
 
-		int a = 0;
-		//dm.GetCNetBao();
+		EnterCriticalSection(dm->GetCriNetBao());//命令入队，加锁
 
-		//LeaveCriticalSection(&(dm->GetCNetBao()));
 		
-
+		dm->GetNetBao()->push_back(bao);//放到队列尾部
+		
+		LeaveCriticalSection(dm->GetCriNetBao());
+		
+		
+		j = 0;
 	}
+}
+
+void Deal::Deal_Attendance_MingLing(NETBAO bao)
+{
+}
+
+void Deal::Deal_Attendance_HuiZhi(UCHAR * sostation, SOCKET sock, DataManager * dm)
+{
+	//找到该考勤设备在当前时段所负责的考勤项目
+
+	QStringList attendanceIdList;
+	QString tempQS;
+
+	for (QVector<Attendance>::iterator it = dm->GetAttendance()->begin(); it != dm->GetAttendance()->end(); it++)
+	{
+		tempQS = QString(QLatin1String((char *)sostation));//查找考勤项目的考勤教室为该设备所在教室的考勤项目ID
+		if (it->GetMID() == tempQS )
+		{
+			attendanceIdList << it->GetID();//将该考勤项目的ID放入列表中
+		}
+	}
+
+
+	//组织数据，封装成数据帧
+
+
+
+	//发送到该设备
+
+}
+
+void Deal::Deal_Result_MingLing(NETBAO bao)
+{
+}
+
+void Deal::Deal_Result_HuiZhi(UCHAR *sostation, SOCKET sock)
+{
 }
