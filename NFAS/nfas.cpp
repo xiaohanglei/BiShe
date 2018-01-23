@@ -2,6 +2,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QTabWidget>
+
 //#include "studenttabwidget.hpp"
 #include "attendancetabwidget.hpp"
 #include "resulttabwidget.hpp"
@@ -9,6 +10,8 @@
 #include "academicclassstudenttabwidget.hpp"
 #include "devicewidget.hpp"
 
+//#include <QtWidgets/QApplication>
+#include <QDesktopWidget>
 
 NFAS::NFAS(DataManager *dm,QWidget *parent)
 	: QDialog(parent)
@@ -64,10 +67,7 @@ void NFAS::ExeMingLingProc(LPVOID another)
 			Deal::Deal_Result_MingLing(xinxibao);
 			break;
 
-		}
-
-
-		
+		}		
 	}
 
 }
@@ -103,8 +103,20 @@ void NFAS::UpdateTab(int index)
 void NFAS::setupUi()
 {
 	this->setWindowTitle(tr("Network fingerprint attendance system"));
-	this->setWindowFlags(Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint);//关闭和最小化按钮
-	this->setFixedSize(QSize(1200, 850));
+	this->setWindowFlags(Qt::WindowCloseButtonHint /*| Qt::WindowMinimizeButtonHint*/ | Qt::WindowMaximizeButtonHint/*| Qt::Widget | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint*/);//关闭和最小化按钮
+	//this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint);
+
+	//this->setFixedSize(QSize(1440,900));
+
+	QRect a = (QApplication::desktop())->availableGeometry();
+	this->setGeometry(0,30,1440,900);
+	//this->setFixedSize(QSize(a.width(), a.height()-100));
+	//this->showFullScreen();//全屏显示
+	this->showMaximized();
+
+	
+	
+
 	main_tab = new QTabWidget;
 
 	//添加选项卡

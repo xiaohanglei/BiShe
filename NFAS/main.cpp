@@ -5,6 +5,7 @@
 #include "logindialog.hpp"
 #include <TcpServer.h>
 
+
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
@@ -16,7 +17,7 @@ int main(int argc, char *argv[])
 
 	//ต๗สิ
 
-
+	//QApplication::desktop()->availableGeometry();
 
 
 
