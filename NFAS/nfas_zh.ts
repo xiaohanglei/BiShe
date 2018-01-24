@@ -10,27 +10,27 @@
         <location filename="academicclassstudenttabwidget.cpp" line="72"/>
         <location filename="academicclassstudenttabwidget.cpp" line="492"/>
         <source>academic add</source>
-        <translation type="unfinished">添加学院</translation>
+        <translation>添加学院</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="52"/>
         <source>length of academic id must be 4</source>
-        <translation type="unfinished">学院编号长度必须为4</translation>
+        <translation>学院编号长度必须为4</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="57"/>
         <source>academic name is required</source>
-        <translation type="unfinished">学院名称必须填写</translation>
+        <translation>学院名称必须填写</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="63"/>
         <source>academic add successfully</source>
-        <translation type="unfinished">学院信息添加成功</translation>
+        <translation>学院信息添加成功</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="72"/>
         <source>academic add failed</source>
-        <translation type="unfinished">学院信息添加失败</translation>
+        <translation>学院信息添加失败</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="89"/>
@@ -39,29 +39,29 @@
         <location filename="academicclassstudenttabwidget.cpp" line="122"/>
         <location filename="academicclassstudenttabwidget.cpp" line="496"/>
         <source>academic delete</source>
-        <translation type="unfinished">删除学院</translation>
+        <translation>删除学院</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="89"/>
         <source>class is not 0,are you sure to delete?</source>
-        <translation type="unfinished">检测到当前学院下存在班级，是否确定删除？</translation>
+        <translation>检测到当前学院下存在班级，是否确定删除？</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="110"/>
         <source>academic delete successfully</source>
-        <translation type="unfinished">删除学院成功</translation>
+        <translation>删除学院成功</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="117"/>
         <source>academic delete failed</source>
-        <translation type="unfinished">删除学院失败</translation>
+        <translation>删除学院失败</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="122"/>
         <location filename="academicclassstudenttabwidget.cpp" line="163"/>
         <location filename="academicclassstudenttabwidget.cpp" line="195"/>
         <source>please select academic first</source>
-        <translation type="unfinished">请先选择学院</translation>
+        <translation>请先选择学院</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="134"/>
@@ -70,37 +70,37 @@
         <location filename="academicclassstudenttabwidget.cpp" line="154"/>
         <location filename="academicclassstudenttabwidget.cpp" line="531"/>
         <source>class add</source>
-        <translation type="unfinished">添加班级</translation>
+        <translation>添加班级</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="134"/>
         <source>length of class id must be 4</source>
-        <translation type="unfinished">班级编号长度必须为4</translation>
+        <translation>班级编号长度必须为4</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="139"/>
         <source>class name is required</source>
-        <translation type="unfinished">班级名称必须填写</translation>
+        <translation>班级名称必须填写</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="145"/>
         <source>class add successfully</source>
-        <translation type="unfinished">添加班级成功</translation>
+        <translation>添加班级成功</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="154"/>
         <source>class add failed</source>
-        <translation type="unfinished">添加班级失败</translation>
+        <translation>添加班级失败</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="181"/>
         <source>class modify successfully</source>
-        <translation type="unfinished">班级信息修改成功</translation>
+        <translation>班级信息修改成功</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="190"/>
         <source>class modify failed</source>
-        <translation type="unfinished">班级信息修改失败</translation>
+        <translation>班级信息修改失败</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="217"/>
@@ -108,24 +108,24 @@
         <location filename="academicclassstudenttabwidget.cpp" line="229"/>
         <location filename="academicclassstudenttabwidget.cpp" line="535"/>
         <source>class delete</source>
-        <translation type="unfinished">删除班级</translation>
+        <translation>删除班级</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="217"/>
         <source>class delete successfully</source>
-        <translation type="unfinished">删除班级成功</translation>
+        <translation>删除班级成功</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="224"/>
         <source>class delete failed</source>
-        <translation type="unfinished">删除班级失败</translation>
+        <translation>删除班级失败</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="229"/>
         <location filename="academicclassstudenttabwidget.cpp" line="270"/>
         <location filename="academicclassstudenttabwidget.cpp" line="305"/>
         <source>please select class first</source>
-        <translation type="unfinished">请先选择班级</translation>
+        <translation>请先选择班级</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="242"/>
@@ -134,37 +134,37 @@
         <location filename="academicclassstudenttabwidget.cpp" line="261"/>
         <location filename="academicclassstudenttabwidget.cpp" line="586"/>
         <source>student add</source>
-        <translation type="unfinished">添加学生</translation>
+        <translation>添加学生</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="242"/>
         <source>length of student id must be 8</source>
-        <translation type="unfinished">学生编号长度必须为8</translation>
+        <translation>学生编号长度必须为8</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="247"/>
         <source>student name is required</source>
-        <translation type="unfinished">学生名称必须填写</translation>
+        <translation>学生名称必须填写</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="253"/>
         <source>student add successfully</source>
-        <translation type="unfinished">添加学生成功</translation>
+        <translation>添加学生成功</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="261"/>
         <source>student add failed</source>
-        <translation type="unfinished">添加学生失败</translation>
+        <translation>添加学生失败</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="292"/>
         <source>student modify successfully</source>
-        <translation type="unfinished">学生信息修改成功</translation>
+        <translation>学生信息修改成功</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="300"/>
         <source>student modify failed</source>
-        <translation type="unfinished">学生信息修改失败</translation>
+        <translation>学生信息修改失败</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="319"/>
@@ -173,145 +173,145 @@
         <location filename="academicclassstudenttabwidget.cpp" line="335"/>
         <location filename="academicclassstudenttabwidget.cpp" line="590"/>
         <source>student delete</source>
-        <translation type="unfinished">删除学生</translation>
+        <translation>删除学生</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="319"/>
         <source>student delete successfully</source>
-        <translation type="unfinished">删除学生成功</translation>
+        <translation>删除学生成功</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="325"/>
         <source>student delete failed</source>
-        <translation type="unfinished">删除学生失败</translation>
+        <translation>删除学生失败</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="330"/>
         <location filename="academicclassstudenttabwidget.cpp" line="335"/>
         <source>please select student first</source>
-        <translation type="unfinished">请先选择学生</translation>
+        <translation>请先选择学生</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="350"/>
         <location filename="academicclassstudenttabwidget.cpp" line="513"/>
         <source>class id</source>
-        <translation type="unfinished">班级编号</translation>
+        <translation>班级编号</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="350"/>
         <location filename="academicclassstudenttabwidget.cpp" line="515"/>
         <source>class name</source>
-        <translation type="unfinished">班级名称</translation>
+        <translation>班级名称</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="350"/>
         <location filename="academicclassstudenttabwidget.cpp" line="514"/>
         <source>class academic</source>
-        <translation type="unfinished">所属学院</translation>
+        <translation>所属学院</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="350"/>
         <source>student number</source>
-        <translation type="unfinished">学生数量</translation>
+        <translation>学生数量</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="391"/>
         <location filename="academicclassstudenttabwidget.cpp" line="553"/>
         <source>student id</source>
-        <translation type="unfinished">学生编号</translation>
+        <translation>学生编号</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="391"/>
         <location filename="academicclassstudenttabwidget.cpp" line="554"/>
         <source>student name</source>
-        <translation type="unfinished">学生名称</translation>
+        <translation>学生名称</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="391"/>
         <location filename="academicclassstudenttabwidget.cpp" line="555"/>
         <source>student sex</source>
-        <translation type="unfinished">学生性别</translation>
+        <translation>学生性别</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="391"/>
         <location filename="academicclassstudenttabwidget.cpp" line="556"/>
         <source>student academic</source>
-        <translation type="unfinished">所在学院</translation>
+        <translation>所在学院</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="391"/>
         <location filename="academicclassstudenttabwidget.cpp" line="557"/>
         <source>student class</source>
-        <translation type="unfinished">所在班级</translation>
+        <translation>所在班级</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="391"/>
         <source>student figure</source>
-        <translation type="unfinished">学生指纹信息</translation>
+        <translation>学生指纹信息</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="392"/>
         <source>in times</source>
-        <translation type="unfinished">签到次数</translation>
+        <translation>签到次数</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="392"/>
         <source>le times</source>
-        <translation type="unfinished">请假次数</translation>
+        <translation>请假次数</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="392"/>
         <source>ab times</source>
-        <translation type="unfinished">缺勤次数</translation>
+        <translation>缺勤次数</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="393"/>
         <source>on rate</source>
-        <translation type="unfinished">到课率</translation>
+        <translation>到课率</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="393"/>
         <source>to times</source>
-        <translation type="unfinished">需签到次数</translation>
+        <translation>需签到次数</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="404"/>
         <location filename="academicclassstudenttabwidget.cpp" line="405"/>
         <location filename="academicclassstudenttabwidget.cpp" line="563"/>
         <source>male</source>
-        <translation type="unfinished">男</translation>
+        <translation>男</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="404"/>
         <location filename="academicclassstudenttabwidget.cpp" line="405"/>
         <location filename="academicclassstudenttabwidget.cpp" line="563"/>
         <source>female</source>
-        <translation type="unfinished">女</translation>
+        <translation>女</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="468"/>
         <source>academic class information</source>
-        <translation type="unfinished">学院-班级信息</translation>
+        <translation>学院-班级信息</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="475"/>
         <source>academic administrate</source>
-        <translation type="unfinished">学院管理</translation>
+        <translation>学院管理</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="478"/>
         <source>academic id</source>
-        <translation type="unfinished">学院编号</translation>
+        <translation>学院编号</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="479"/>
         <source>academic name</source>
-        <translation type="unfinished">学院名称</translation>
+        <translation>学院名称</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="510"/>
         <source>class administrate</source>
-        <translation type="unfinished">班级管理</translation>
+        <translation>班级管理</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="163"/>
@@ -320,12 +320,12 @@
         <location filename="academicclassstudenttabwidget.cpp" line="195"/>
         <location filename="academicclassstudenttabwidget.cpp" line="533"/>
         <source>class modify</source>
-        <translation type="unfinished">修改班级</translation>
+        <translation>修改班级</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="549"/>
         <source>student administrate</source>
-        <translation type="unfinished">学生管理</translation>
+        <translation>学生管理</translation>
     </message>
     <message>
         <location filename="academicclassstudenttabwidget.cpp" line="270"/>
@@ -334,65 +334,66 @@
         <location filename="academicclassstudenttabwidget.cpp" line="305"/>
         <location filename="academicclassstudenttabwidget.cpp" line="588"/>
         <source>student modify</source>
-        <translation type="unfinished">修改学生</translation>
+        <translation>修改学生</translation>
     </message>
 </context>
 <context>
     <name>AttendanceTabWidget</name>
     <message>
-        <location filename="attendancetabwidget.cpp" line="111"/>
+        <location filename="attendancetabwidget.cpp" line="112"/>
         <source>student id</source>
         <translation>学生编号</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="111"/>
+        <location filename="attendancetabwidget.cpp" line="112"/>
         <source>student name</source>
         <translation>学生名称</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="111"/>
+        <location filename="attendancetabwidget.cpp" line="112"/>
         <source>student sex</source>
         <translation>学生性别</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="111"/>
+        <location filename="attendancetabwidget.cpp" line="112"/>
         <source>student academic</source>
         <translation>所在学院</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="111"/>
+        <location filename="attendancetabwidget.cpp" line="112"/>
         <source>student class</source>
         <translation>所在班级</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="111"/>
+        <location filename="attendancetabwidget.cpp" line="112"/>
         <source>student figure</source>
         <translation>学生指纹信息</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="141"/>
+        <location filename="attendancetabwidget.cpp" line="142"/>
         <source>male</source>
         <translation>男</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="141"/>
+        <location filename="attendancetabwidget.cpp" line="142"/>
         <source>female</source>
         <translation>女</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="471"/>
-        <location filename="attendancetabwidget.cpp" line="476"/>
-        <location filename="attendancetabwidget.cpp" line="481"/>
-        <location filename="attendancetabwidget.cpp" line="486"/>
-        <location filename="attendancetabwidget.cpp" line="495"/>
-        <location filename="attendancetabwidget.cpp" line="500"/>
-        <location filename="attendancetabwidget.cpp" line="507"/>
-        <location filename="attendancetabwidget.cpp" line="590"/>
+        <location filename="attendancetabwidget.cpp" line="472"/>
+        <location filename="attendancetabwidget.cpp" line="477"/>
+        <location filename="attendancetabwidget.cpp" line="482"/>
+        <location filename="attendancetabwidget.cpp" line="487"/>
+        <location filename="attendancetabwidget.cpp" line="492"/>
+        <location filename="attendancetabwidget.cpp" line="501"/>
+        <location filename="attendancetabwidget.cpp" line="506"/>
+        <location filename="attendancetabwidget.cpp" line="513"/>
+        <location filename="attendancetabwidget.cpp" line="596"/>
         <source>attendance add</source>
         <translation>添加考勤信息</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="471"/>
+        <location filename="attendancetabwidget.cpp" line="472"/>
         <source>length of attendance id must be 8</source>
         <translation>考勤信息编号长度必须为8</translation>
     </message>
@@ -401,26 +402,26 @@
         <translation type="obsolete">考勤机编号长度必须为6</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="44"/>
-        <location filename="attendancetabwidget.cpp" line="49"/>
-        <location filename="attendancetabwidget.cpp" line="57"/>
-        <location filename="attendancetabwidget.cpp" line="67"/>
+        <location filename="attendancetabwidget.cpp" line="45"/>
+        <location filename="attendancetabwidget.cpp" line="50"/>
+        <location filename="attendancetabwidget.cpp" line="58"/>
+        <location filename="attendancetabwidget.cpp" line="68"/>
         <source>attendance modify</source>
         <translation>考勤信息修改</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="44"/>
-        <location filename="attendancetabwidget.cpp" line="99"/>
+        <location filename="attendancetabwidget.cpp" line="45"/>
+        <location filename="attendancetabwidget.cpp" line="100"/>
         <source>please select attendance first</source>
         <translation>请先选择需修改的考勤信息</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="49"/>
+        <location filename="attendancetabwidget.cpp" line="50"/>
         <source>please select attendance class first</source>
         <translation>请选择需要修改的考勤班级信息</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="57"/>
+        <location filename="attendancetabwidget.cpp" line="58"/>
         <source>attendance modify successfully</source>
         <translation>考勤信息修改成功</translation>
     </message>
@@ -433,112 +434,99 @@
         <translation type="obsolete">学院修改失败</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="67"/>
+        <location filename="attendancetabwidget.cpp" line="68"/>
         <source>attendance modify failed</source>
         <translation>考勤信息修改失败</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="79"/>
+        <location filename="attendancetabwidget.cpp" line="80"/>
         <source>attendance delete successfully</source>
         <translation>考勤信息删除成功</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="94"/>
+        <location filename="attendancetabwidget.cpp" line="95"/>
         <source>attendance delete failed</source>
         <translation>考勤信息删除失败</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="476"/>
+        <location filename="attendancetabwidget.cpp" line="477"/>
         <source>length of attendance classroom id must be 6</source>
         <translation>考勤教室编号长度必须为6</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="481"/>
+        <location filename="attendancetabwidget.cpp" line="482"/>
+        <source>The classroom has no available attendance equipment</source>
+        <translation>该教室没有可用的考勤设备</translation>
+    </message>
+    <message>
+        <location filename="attendancetabwidget.cpp" line="487"/>
         <source>attendance name is required</source>
         <translation>考勤信息名称必须填写</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="486"/>
+        <location filename="attendancetabwidget.cpp" line="492"/>
         <source>please select attendance class</source>
         <translation>请选择待考勤班级</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="495"/>
+        <location filename="attendancetabwidget.cpp" line="501"/>
         <source>start time must later than now more than 10 mins</source>
         <translation>考勤开始时间必须比当前时间晚10分钟以上</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="500"/>
+        <location filename="attendancetabwidget.cpp" line="506"/>
         <source>end time must later than start time more than 30 mins</source>
         <translation>考勤结束时间必须比考勤结束时间晚30分钟以上</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="507"/>
+        <location filename="attendancetabwidget.cpp" line="513"/>
         <source>attendance add successfully</source>
         <translation>考勤信息添加成功</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="517"/>
+        <location filename="attendancetabwidget.cpp" line="523"/>
         <source>academic add</source>
         <translation>添加考勤信息</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="517"/>
+        <location filename="attendancetabwidget.cpp" line="523"/>
         <source>academic add failed</source>
         <translation>考勤信息添加失败</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="527"/>
+        <location filename="attendancetabwidget.cpp" line="533"/>
         <source>attendance information</source>
         <translation>考勤信息</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="537"/>
+        <location filename="attendancetabwidget.cpp" line="543"/>
         <source>class information</source>
         <translation>班级信息</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="540"/>
+        <location filename="attendancetabwidget.cpp" line="546"/>
         <source>attendance information administrate</source>
         <translation>考勤信息管理</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="548"/>
+        <location filename="attendancetabwidget.cpp" line="554"/>
         <source>attendance id</source>
         <translation>考勤信息编号</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="549"/>
+        <location filename="attendancetabwidget.cpp" line="555"/>
         <source>attendance name</source>
         <translation>考勤信息名称</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="550"/>
+        <location filename="attendancetabwidget.cpp" line="556"/>
         <source>classroom id</source>
         <translation>教室编号</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="620"/>
+        <location filename="attendancetabwidget.cpp" line="626"/>
         <source>Monday</source>
         <translation>周一</translation>
-    </message>
-    <message>
-        <location filename="attendancetabwidget.cpp" line="622"/>
-        <location filename="attendancetabwidget.cpp" line="640"/>
-        <location filename="attendancetabwidget.cpp" line="658"/>
-        <location filename="attendancetabwidget.cpp" line="677"/>
-        <location filename="attendancetabwidget.cpp" line="695"/>
-        <source>time1</source>
-        <translation>时段一</translation>
-    </message>
-    <message>
-        <location filename="attendancetabwidget.cpp" line="625"/>
-        <location filename="attendancetabwidget.cpp" line="643"/>
-        <location filename="attendancetabwidget.cpp" line="661"/>
-        <location filename="attendancetabwidget.cpp" line="680"/>
-        <location filename="attendancetabwidget.cpp" line="698"/>
-        <source>time2</source>
-        <translation>时段二</translation>
     </message>
     <message>
         <location filename="attendancetabwidget.cpp" line="628"/>
@@ -546,8 +534,8 @@
         <location filename="attendancetabwidget.cpp" line="664"/>
         <location filename="attendancetabwidget.cpp" line="683"/>
         <location filename="attendancetabwidget.cpp" line="701"/>
-        <source>time3</source>
-        <translation>时段三</translation>
+        <source>time1</source>
+        <translation>时段一</translation>
     </message>
     <message>
         <location filename="attendancetabwidget.cpp" line="631"/>
@@ -555,8 +543,8 @@
         <location filename="attendancetabwidget.cpp" line="667"/>
         <location filename="attendancetabwidget.cpp" line="686"/>
         <location filename="attendancetabwidget.cpp" line="704"/>
-        <source>time4</source>
-        <translation>时段四</translation>
+        <source>time2</source>
+        <translation>时段二</translation>
     </message>
     <message>
         <location filename="attendancetabwidget.cpp" line="634"/>
@@ -564,41 +552,59 @@
         <location filename="attendancetabwidget.cpp" line="670"/>
         <location filename="attendancetabwidget.cpp" line="689"/>
         <location filename="attendancetabwidget.cpp" line="707"/>
+        <source>time3</source>
+        <translation>时段三</translation>
+    </message>
+    <message>
+        <location filename="attendancetabwidget.cpp" line="637"/>
+        <location filename="attendancetabwidget.cpp" line="655"/>
+        <location filename="attendancetabwidget.cpp" line="673"/>
+        <location filename="attendancetabwidget.cpp" line="692"/>
+        <location filename="attendancetabwidget.cpp" line="710"/>
+        <source>time4</source>
+        <translation>时段四</translation>
+    </message>
+    <message>
+        <location filename="attendancetabwidget.cpp" line="640"/>
+        <location filename="attendancetabwidget.cpp" line="658"/>
+        <location filename="attendancetabwidget.cpp" line="676"/>
+        <location filename="attendancetabwidget.cpp" line="695"/>
+        <location filename="attendancetabwidget.cpp" line="713"/>
         <source>time5</source>
         <translation>时段五</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="639"/>
+        <location filename="attendancetabwidget.cpp" line="645"/>
         <source>Tuesday</source>
         <translation>周二</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="657"/>
+        <location filename="attendancetabwidget.cpp" line="663"/>
         <source>Wednesday</source>
         <translation>周三</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="676"/>
+        <location filename="attendancetabwidget.cpp" line="682"/>
         <source>Thursday</source>
         <translation>周四</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="694"/>
+        <location filename="attendancetabwidget.cpp" line="700"/>
         <source>Friday</source>
         <translation>周五</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="712"/>
+        <location filename="attendancetabwidget.cpp" line="718"/>
         <source>Saturday</source>
         <translation>周六</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="713"/>
+        <location filename="attendancetabwidget.cpp" line="719"/>
         <source>Sunday</source>
         <translation>周天</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="922"/>
+        <location filename="attendancetabwidget.cpp" line="964"/>
         <source>attendance time frame</source>
         <translation>考勤时段</translation>
     </message>
@@ -607,30 +613,30 @@
         <translation type="obsolete">考勤机编号</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="551"/>
+        <location filename="attendancetabwidget.cpp" line="557"/>
         <source>start time</source>
         <translation>考勤开始时间</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="552"/>
+        <location filename="attendancetabwidget.cpp" line="558"/>
         <source>end time</source>
         <translation>考勤结束时间</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="553"/>
+        <location filename="attendancetabwidget.cpp" line="559"/>
         <source>attendance class</source>
         <translation>待考勤班级</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="591"/>
+        <location filename="attendancetabwidget.cpp" line="597"/>
         <source>atendance modify</source>
         <translation>修改考勤信息</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="79"/>
-        <location filename="attendancetabwidget.cpp" line="94"/>
-        <location filename="attendancetabwidget.cpp" line="99"/>
-        <location filename="attendancetabwidget.cpp" line="592"/>
+        <location filename="attendancetabwidget.cpp" line="80"/>
+        <location filename="attendancetabwidget.cpp" line="95"/>
+        <location filename="attendancetabwidget.cpp" line="100"/>
+        <location filename="attendancetabwidget.cpp" line="598"/>
         <source>attendance delete</source>
         <translation>删除考勤信息</translation>
     </message>
@@ -750,7 +756,7 @@
         <location filename="resulttabwidget.cpp" line="655"/>
         <location filename="resulttabwidget.cpp" line="851"/>
         <source>student id</source>
-        <translation type="unfinished">学生编号</translation>
+        <translation>学生编号</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="545"/>
@@ -758,7 +764,7 @@
         <location filename="resulttabwidget.cpp" line="655"/>
         <location filename="resulttabwidget.cpp" line="852"/>
         <source>student name</source>
-        <translation type="unfinished">学生名称</translation>
+        <translation>学生名称</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="545"/>
@@ -766,7 +772,7 @@
         <location filename="resulttabwidget.cpp" line="656"/>
         <location filename="resulttabwidget.cpp" line="853"/>
         <source>student academic</source>
-        <translation type="unfinished">所在学院</translation>
+        <translation>所在学院</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="545"/>
@@ -774,7 +780,7 @@
         <location filename="resulttabwidget.cpp" line="656"/>
         <location filename="resulttabwidget.cpp" line="854"/>
         <source>student class</source>
-        <translation type="unfinished">所在班级</translation>
+        <translation>所在班级</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="546"/>
@@ -782,7 +788,7 @@
         <location filename="resulttabwidget.cpp" line="657"/>
         <location filename="resulttabwidget.cpp" line="856"/>
         <source>in class</source>
-        <translation type="unfinished">到课</translation>
+        <translation>到课</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="546"/>
@@ -790,7 +796,7 @@
         <location filename="resulttabwidget.cpp" line="658"/>
         <location filename="resulttabwidget.cpp" line="857"/>
         <source>leave class</source>
-        <translation type="unfinished">请假</translation>
+        <translation>请假</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="546"/>
@@ -798,7 +804,7 @@
         <location filename="resulttabwidget.cpp" line="658"/>
         <location filename="resulttabwidget.cpp" line="858"/>
         <source>absencs class</source>
-        <translation type="unfinished">缺课</translation>
+        <translation>缺课</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="546"/>
@@ -806,7 +812,7 @@
         <location filename="resulttabwidget.cpp" line="657"/>
         <location filename="resulttabwidget.cpp" line="855"/>
         <source>student figure</source>
-        <translation type="unfinished">学生指纹信息</translation>
+        <translation>学生指纹信息</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="579"/>
@@ -825,49 +831,49 @@
         <location filename="resulttabwidget.cpp" line="804"/>
         <location filename="resulttabwidget.cpp" line="805"/>
         <source>no</source>
-        <translation type="unfinished">否</translation>
+        <translation>否</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="649"/>
         <location filename="resulttabwidget.cpp" line="895"/>
         <source>select attendance file</source>
-        <translation type="unfinished">请选择考勤结果文件</translation>
+        <translation>请选择考勤结果文件</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="660"/>
         <source>please select right file</source>
-        <translation type="unfinished">请选择格式正确的考勤文件</translation>
+        <translation>请选择格式正确的考勤文件</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="877"/>
         <source>student information output:</source>
-        <translation type="unfinished">学生信息输出：</translation>
+        <translation>学生信息输出：</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="81"/>
         <source>result add successfully</source>
-        <translation type="unfinished">考勤结果添加成功</translation>
+        <translation>考勤结果添加成功</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="138"/>
         <source>result add failed</source>
-        <translation type="unfinished">考勤结果添加失败</translation>
+        <translation>考勤结果添加失败</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="143"/>
         <source>please select attendance result file first</source>
-        <translation type="unfinished">请先选择考勤结果文件</translation>
+        <translation>请先选择考勤结果文件</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="891"/>
         <source>result information</source>
-        <translation type="unfinished">考勤结果</translation>
+        <translation>考勤结果</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="660"/>
         <location filename="resulttabwidget.cpp" line="893"/>
         <source>attendance file select</source>
-        <translation type="unfinished">考勤结果文件选择</translation>
+        <translation>考勤结果文件选择</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="81"/>
@@ -875,7 +881,7 @@
         <location filename="resulttabwidget.cpp" line="143"/>
         <location filename="resulttabwidget.cpp" line="899"/>
         <source>result add</source>
-        <translation type="unfinished">考勤信息添加</translation>
+        <translation>考勤信息添加</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="200"/>
@@ -884,7 +890,7 @@
         <location filename="resulttabwidget.cpp" line="325"/>
         <location filename="resulttabwidget.cpp" line="901"/>
         <source>result modify</source>
-        <translation type="unfinished">考勤信息修改</translation>
+        <translation>考勤信息修改</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="52"/>
@@ -905,17 +911,17 @@
         <location filename="resulttabwidget.cpp" line="816"/>
         <location filename="resulttabwidget.cpp" line="820"/>
         <source>yes</source>
-        <translation type="unfinished">是</translation>
+        <translation>是</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="200"/>
         <source>result modify successfully</source>
-        <translation type="unfinished">考勤结果修改成功</translation>
+        <translation>考勤结果修改成功</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="315"/>
         <source>result modify failed</source>
-        <translation type="unfinished">考勤结果修改失败</translation>
+        <translation>考勤结果修改失败</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="320"/>
@@ -925,7 +931,7 @@
         <location filename="resulttabwidget.cpp" line="474"/>
         <location filename="resulttabwidget.cpp" line="479"/>
         <source>please select result first</source>
-        <translation type="unfinished">请先选择考勤结果</translation>
+        <translation>请先选择考勤结果</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="337"/>
@@ -938,64 +944,64 @@
         <location filename="resulttabwidget.cpp" line="479"/>
         <location filename="resulttabwidget.cpp" line="902"/>
         <source>result delete</source>
-        <translation type="unfinished">删除考勤信息</translation>
+        <translation>删除考勤信息</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="394"/>
         <location filename="resulttabwidget.cpp" line="422"/>
         <source>result delete successfully</source>
-        <translation type="unfinished">考勤结果删除成功</translation>
+        <translation>考勤结果删除成功</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="400"/>
         <location filename="resulttabwidget.cpp" line="469"/>
         <source>result delete failed</source>
-        <translation type="unfinished">考勤结果删除失败</translation>
+        <translation>考勤结果删除失败</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="494"/>
         <source>attendance id</source>
-        <translation type="unfinished">考勤信息编号</translation>
+        <translation>考勤信息编号</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="494"/>
         <source>attendance name</source>
-        <translation type="unfinished">考勤信息名称</translation>
+        <translation>考勤信息名称</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="494"/>
         <source>miss number</source>
-        <translation type="unfinished">累计缺勤人数</translation>
+        <translation>累计缺勤人数</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="494"/>
         <source>on rate</source>
-        <translation type="unfinished">到课率</translation>
+        <translation>到课率</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="909"/>
         <source>total number</source>
-        <translation type="unfinished">考勤人数</translation>
+        <translation>考勤人数</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="911"/>
         <source>leave number</source>
-        <translation type="unfinished">请假人数</translation>
+        <translation>请假人数</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="913"/>
         <source>absence number</source>
-        <translation type="unfinished">缺勤人数</translation>
+        <translation>缺勤人数</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="931"/>
         <source>result administrator</source>
-        <translation type="unfinished">考勤结果管理</translation>
+        <translation>考勤结果管理</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="942"/>
         <source>generate test file</source>
-        <translation type="unfinished">生成考勤测试文件</translation>
+        <translation>生成考勤测试文件</translation>
     </message>
 </context>
 <context>

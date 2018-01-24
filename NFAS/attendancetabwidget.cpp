@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <QDateTime>
 #include <QHeaderView>
+//#include <Vertical>
 
 AttendanceTabWidget::AttendanceTabWidget(DataManager *dm, QWidget * parent) : QWidget(parent) 
 {
@@ -471,9 +472,14 @@ void AttendanceTabWidget::AttendanceAdd()
 		QMessageBox::information(0, tr("attendance add"), tr("length of attendance id must be 8"), QMessageBox::Ok);
 		return;
 	}
-	if (amid.length() != 6) 
+	if (amid.length() != 6 && dataManager->FindDevic(amid)) 
 	{
 		QMessageBox::information(0, tr("attendance add"), tr("length of attendance classroom id must be 6"), QMessageBox::Ok);
+		return;
+	}
+	if (!dataManager->FindDevic(amid))
+	{
+		QMessageBox::information(0, tr("attendance add"), tr("The classroom has no available attendance equipment"), QMessageBox::Ok);
 		return;
 	}
 	if (!(aname.length() > 0)) 
@@ -726,26 +732,39 @@ void AttendanceTabWidget::setupUi()
 	QHBoxLayout * mondaytime1layout = new QHBoxLayout;
 	mondaytime1layout->addWidget(time1monday);
 	mondaytime1layout->addWidget(starttimemonday1);
+	QLabel *lable1 = new QLabel(tr(" to "));
+	mondaytime1layout->addWidget(lable1);
 	mondaytime1layout->addWidget(endtimemonday1);
+
 
 	QHBoxLayout * mondaytime2layout = new QHBoxLayout;
 	mondaytime2layout->addWidget(time2monday);
 	mondaytime2layout->addWidget(starttimemonday2);
+	QLabel *lable2 = new QLabel(tr(" to "));
+	mondaytime2layout->addWidget(lable2);
 	mondaytime2layout->addWidget(endtimemonday2);
+
 
 	QHBoxLayout * mondaytime3layout = new QHBoxLayout;
 	mondaytime3layout->addWidget(time3monday);
 	mondaytime3layout->addWidget(starttimemonday3);
+	QLabel *lable3 = new QLabel(tr(" to "));
+	mondaytime3layout->addWidget(lable3);
 	mondaytime3layout->addWidget(endtimemonday3);
+
 
 	QHBoxLayout * mondaytime4layout = new QHBoxLayout;
 	mondaytime4layout->addWidget(time4monday);
 	mondaytime4layout->addWidget(starttimemonday4);
+	QLabel *lable4 = new QLabel(tr(" to "));
+	mondaytime4layout->addWidget(lable4);
 	mondaytime4layout->addWidget(endtimemonday4);
 
 	QHBoxLayout * mondaytime5layout = new QHBoxLayout;
 	mondaytime5layout->addWidget(time5monday);
 	mondaytime5layout->addWidget(starttimemonday5);
+	QLabel *lable5 = new QLabel(tr(" to "));
+	mondaytime5layout->addWidget(lable5);
 	mondaytime5layout->addWidget(endtimemonday5);
 
 
@@ -762,26 +781,36 @@ void AttendanceTabWidget::setupUi()
 	QHBoxLayout *Tuesdaytime1layout = new QHBoxLayout;
 	Tuesdaytime1layout->addWidget(time1Tuesday);
 	Tuesdaytime1layout->addWidget(starttimeTuesday1);
+	QLabel *lablet1 = new QLabel(tr(" to "));
+	Tuesdaytime1layout->addWidget(lablet1);
 	Tuesdaytime1layout->addWidget(endtimeTuesday1);
 
 	QHBoxLayout *Tuesdaytime2layout = new QHBoxLayout;
 	Tuesdaytime2layout->addWidget(time2Tuesday);
 	Tuesdaytime2layout->addWidget(starttimeTuesday2);
+	QLabel *lablet2 = new QLabel(tr(" to "));
+	Tuesdaytime2layout->addWidget(lablet2);
 	Tuesdaytime2layout->addWidget(endtimeTuesday2);
 
 	QHBoxLayout * Tuesdaytime3layout = new QHBoxLayout;
 	Tuesdaytime3layout->addWidget(time3Tuesday);
 	Tuesdaytime3layout->addWidget(starttimeTuesday3);
+	QLabel *lablet3 = new QLabel(tr(" to "));
+	Tuesdaytime3layout->addWidget(lablet3);
 	Tuesdaytime3layout->addWidget(endtimeTuesday3);
 
 	QHBoxLayout * Tuesdaytime4layout = new QHBoxLayout;
 	Tuesdaytime4layout->addWidget(time4Tuesday);
 	Tuesdaytime4layout->addWidget(starttimeTuesday4);
+	QLabel *lablet4 = new QLabel(tr(" to "));
+	Tuesdaytime4layout->addWidget(lablet4);
 	Tuesdaytime4layout->addWidget(endtimeTuesday4);
 
 	QHBoxLayout * Tuesdaytime5layout = new QHBoxLayout;
 	Tuesdaytime5layout->addWidget(time5Tuesday);
 	Tuesdaytime5layout->addWidget(starttimeTuesday5);
+	QLabel *lablet5 = new QLabel(tr(" to "));
+	Tuesdaytime5layout->addWidget(lablet5);
 	Tuesdaytime5layout->addWidget(endtimeTuesday5);
 
 
@@ -797,26 +826,36 @@ void AttendanceTabWidget::setupUi()
 	QHBoxLayout *Wednesdaytime1layout = new QHBoxLayout;
 	Wednesdaytime1layout->addWidget(time1Wednesday);
 	Wednesdaytime1layout->addWidget(starttimeWednesday1);
+	QLabel *lablew1 = new QLabel(tr(" to "));
+	Wednesdaytime1layout->addWidget(lablew1);
 	Wednesdaytime1layout->addWidget(endtimeWednesday1);
 
 	QHBoxLayout *Wednesdaytime2layout = new QHBoxLayout;
 	Wednesdaytime2layout->addWidget(time2Wednesday);
 	Wednesdaytime2layout->addWidget(starttimeWednesday2);
+	QLabel *lablew2 = new QLabel(tr(" to "));
+	Wednesdaytime2layout->addWidget(lablew2);
 	Wednesdaytime2layout->addWidget(endtimeWednesday2);
 
 	QHBoxLayout * Wednesdaytime3layout = new QHBoxLayout;
 	Wednesdaytime3layout->addWidget(time3Wednesday);
 	Wednesdaytime3layout->addWidget(starttimeWednesday3);
+	QLabel *lablew3 = new QLabel(tr(" to "));
+	Wednesdaytime3layout->addWidget(lablew3);
 	Wednesdaytime3layout->addWidget(endtimeWednesday3);
 
 	QHBoxLayout * Wednesdaytime4layout = new QHBoxLayout;
 	Wednesdaytime4layout->addWidget(time4Wednesday);
 	Wednesdaytime4layout->addWidget(starttimeWednesday4);
+	QLabel *lablew4 = new QLabel(tr(" to "));
+	Wednesdaytime4layout->addWidget(lablew4);
 	Wednesdaytime4layout->addWidget(endtimeWednesday4);
 
 	QHBoxLayout * Wednesdaytime5layout = new QHBoxLayout;
 	Wednesdaytime5layout->addWidget(time5Wednesday);
 	Wednesdaytime5layout->addWidget(starttimeWednesday5);
+	QLabel *lablew5 = new QLabel(tr(" to "));
+	Wednesdaytime5layout->addWidget(lablew5);
 	Wednesdaytime5layout->addWidget(endtimeWednesday5);
 
 
@@ -834,26 +873,36 @@ void AttendanceTabWidget::setupUi()
 	QHBoxLayout *Thursdaytime1layout = new QHBoxLayout;
 	Thursdaytime1layout->addWidget(time1Thursday);
 	Thursdaytime1layout->addWidget(starttimeThursday1);
+	QLabel *lablewth1 = new QLabel(tr(" to "));
+	Thursdaytime1layout->addWidget(lablewth1);
 	Thursdaytime1layout->addWidget(endtimeThursday1);
 
 	QHBoxLayout *Thursdaytime2layout = new QHBoxLayout;
 	Thursdaytime2layout->addWidget(time2Thursday);
 	Thursdaytime2layout->addWidget(starttimeThursday2);
+	QLabel *lablewth2 = new QLabel(tr(" to "));
+	Thursdaytime2layout->addWidget(lablewth2);
 	Thursdaytime2layout->addWidget(endtimeThursday2);
 
 	QHBoxLayout * Thursdaytime3layout = new QHBoxLayout;
 	Thursdaytime3layout->addWidget(time3Thursday);
 	Thursdaytime3layout->addWidget(starttimeThursday3);
+	QLabel *lablewth3 = new QLabel(tr(" to "));
+	Thursdaytime3layout->addWidget(lablewth3);
 	Thursdaytime3layout->addWidget(endtimeThursday3);
 
 	QHBoxLayout * Thursdaytime4layout = new QHBoxLayout;
 	Thursdaytime4layout->addWidget(time4Thursday);
 	Thursdaytime4layout->addWidget(starttimeThursday4);
+	QLabel *lablewth4 = new QLabel(tr(" to "));
+	Thursdaytime4layout->addWidget(lablewth4);
 	Thursdaytime4layout->addWidget(endtimeThursday4);
 
 	QHBoxLayout * Thursdaytime5layout = new QHBoxLayout;
 	Thursdaytime5layout->addWidget(time5Thursday);
 	Thursdaytime5layout->addWidget(starttimeThursday5);
+	QLabel *lablewth5 = new QLabel(tr(" to "));
+	Thursdaytime5layout->addWidget(lablewth5);
 	Thursdaytime5layout->addWidget(endtimeThursday5);
 
 
@@ -871,26 +920,36 @@ void AttendanceTabWidget::setupUi()
 	QHBoxLayout *Fridaytime1layout = new QHBoxLayout;
 	Fridaytime1layout->addWidget(time1Friday);
 	Fridaytime1layout->addWidget(starttimeFriday1);
+	QLabel *lablef1 = new QLabel(tr(" to "));
+	Fridaytime1layout->addWidget(lablef1);
 	Fridaytime1layout->addWidget(endtimeFriday1);
 
 	QHBoxLayout *Fridaytime2layout = new QHBoxLayout;
 	Fridaytime2layout->addWidget(time2Friday);
 	Fridaytime2layout->addWidget(starttimeFriday2);
+	QLabel *lablef2 = new QLabel(tr(" to "));
+	Fridaytime2layout->addWidget(lablef2);
 	Fridaytime2layout->addWidget(endtimeFriday2);
 
 	QHBoxLayout * Fridaytime3layout = new QHBoxLayout;
 	Fridaytime3layout->addWidget(time3Friday);
 	Fridaytime3layout->addWidget(starttimeFriday3);
+	QLabel *lablef3 = new QLabel(tr(" to "));
+	Fridaytime3layout->addWidget(lablef3);
 	Fridaytime3layout->addWidget(endtimeFriday3);
 
 	QHBoxLayout * Fridaytime4layout = new QHBoxLayout;
 	Fridaytime4layout->addWidget(time4Friday);
 	Fridaytime4layout->addWidget(starttimeFriday4);
+	QLabel *lablef4 = new QLabel(tr(" to "));
+	Fridaytime4layout->addWidget(lablef4);
 	Fridaytime4layout->addWidget(endtimeFriday4);
 
 	QHBoxLayout * Fridaytime5layout = new QHBoxLayout;
 	Fridaytime5layout->addWidget(time5Friday);
 	Fridaytime5layout->addWidget(starttimeFriday5);
+	QLabel *lablef5 = new QLabel(tr(" to "));
+	Fridaytime5layout->addWidget(lablef5);
 	Fridaytime5layout->addWidget(endtimeFriday5);
 
 
@@ -907,24 +966,61 @@ void AttendanceTabWidget::setupUi()
 	//Saturdaylayout->addWidget(checkSaturday);
 	//Sundaylayout->addWidget(checkSunday);
 	
+	QFrame *line = new QFrame;
+	line->setObjectName(QStringLiteral("line"));
+	//line->setGeometry(QRect(250, 140, 20, 141));
+	line->setFrameShape(QFrame::VLine);
+	line->setFrameShadow(QFrame::Sunken);
+	QFrame *line2 = new QFrame;
+	line2->setObjectName(QStringLiteral("line"));
+	line2->setFrameShape(QFrame::VLine);
+	line2->setFrameShadow(QFrame::Sunken);
+	QFrame *line3 = new QFrame;
+	line3->setObjectName(QStringLiteral("line"));
+	line3->setFrameShape(QFrame::VLine);
+	line3->setFrameShadow(QFrame::Sunken);
+	QFrame *line4 = new QFrame;
+	line4->setObjectName(QStringLiteral("line"));
+	//line->setGeometry(QRect(250, 140, 20, 141));
+	line4->setFrameShape(QFrame::VLine);
+	line4->setFrameShadow(QFrame::Sunken);
 
-
+	
 	attendacemanagerlayout->addLayout(mondaylayout);
+
+	attendacemanagerlayout->addStretch(1);
+	attendacemanagerlayout ->addWidget(line);
+	attendacemanagerlayout->addStretch(1);
+
 	attendacemanagerlayout->addLayout(Tuesdaylayout);
+	attendacemanagerlayout->addStretch(1);
+	attendacemanagerlayout->addWidget(line2);
+	attendacemanagerlayout->addStretch(1);
+
 	attendacemanagerlayout->addLayout(Wednesdaylayout);
+
+	attendacemanagerlayout->addStretch(1);
+	attendacemanagerlayout->addWidget(line3);
+	attendacemanagerlayout->addStretch(1);
+
 	attendacemanagerlayout->addLayout(Thursdaylayout);
+
+	attendacemanagerlayout->addStretch(1);
+	attendacemanagerlayout->addWidget(line4);
+	attendacemanagerlayout->addStretch(1);
+
 	attendacemanagerlayout->addLayout(Fridaylayout);
-	attendacemanagerlayout->addLayout(Saturdaylayout);
-	attendacemanagerlayout->addLayout(Sundaylayout);
+	attendacemanagerlayout->addStretch(12);
 
-
+	//attendacemanagerlayout->addLayout(Saturdaylayout);
+	//attendacemanagerlayout->addLayout(Sundaylayout);
 
 	QGroupBox* attendancegroup1 = new QGroupBox(tr("attendance time frame"));
 	attendancegroup1->setLayout(attendacemanagerlayout);
 
 	
 	rightlayout->addWidget(attendancegroup1);
-	rightlayout->addStretch(5);
+	//rightlayout->addStretch(5);
 	rightlayout->addWidget(attendancegroup);
 	//-----------------
 
