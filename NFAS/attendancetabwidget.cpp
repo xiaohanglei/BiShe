@@ -33,6 +33,166 @@ AttendanceTabWidget::~AttendanceTabWidget()
 	
 }
 
+bool AttendanceTabWidget::AttendanceTimePutDB(QString aid, ATTENDANCETIME monday_attend, ATTENDANCETIME Tuesday_attend, ATTENDANCETIME Wednesday_attend, ATTENDANCETIME Thursday_attend , ATTENDANCETIME Friday_attend)
+{
+	if (monday_attend.time1start != "")
+		if (dataManager->AttendanceTimeOP(aid, "1", monday_attend.time1start, monday_attend.time1end) == false)
+			return false;
+	if (monday_attend.time2start != "")
+		if (dataManager->AttendanceTimeOP(aid, "1", monday_attend.time2start, monday_attend.time2end) == false)
+			return false;
+	if (monday_attend.time3start != "")
+		if (dataManager->AttendanceTimeOP(aid, "1", monday_attend.time3start, monday_attend.time3end) == false)
+			return false;
+	if (monday_attend.time4start != "")
+		if (dataManager->AttendanceTimeOP(aid, "1", monday_attend.time4start, monday_attend.time4end) == false)
+			return false;
+	if (monday_attend.time5start != "")
+		if (dataManager->AttendanceTimeOP(aid, "1", monday_attend.time5start, monday_attend.time5end) == false)
+			return false;
+
+
+	if (Tuesday_attend.time1start != "")
+		if (dataManager->AttendanceTimeOP(aid, "2", Tuesday_attend.time1start, Tuesday_attend.time1end) == false)
+			return false;
+	if (Tuesday_attend.time2start != "")
+		if (dataManager->AttendanceTimeOP(aid, "2", Tuesday_attend.time2start, Tuesday_attend.time2end) == false)
+			return false;
+	if (Tuesday_attend.time3start != "")
+		if (dataManager->AttendanceTimeOP(aid, "2", Tuesday_attend.time3start, Tuesday_attend.time3end) == false)
+			return false;
+	if (Tuesday_attend.time4start != "")
+		if (dataManager->AttendanceTimeOP(aid, "2", Tuesday_attend.time4start, Tuesday_attend.time4end) == false )
+			return false;
+	if (Tuesday_attend.time5start != "")
+		if (dataManager->AttendanceTimeOP(aid, "2", Tuesday_attend.time5start, Tuesday_attend.time5end) == false)
+			return false;
+
+
+	if (Wednesday_attend.time1start != "")
+		if (dataManager->AttendanceTimeOP(aid, "3", Wednesday_attend.time1start, Wednesday_attend.time1end) == false)
+			return false;
+	if (Wednesday_attend.time2start != "")
+		if (dataManager->AttendanceTimeOP(aid, "3", Wednesday_attend.time2start, Wednesday_attend.time2end) == false)
+			return false;
+	if (Wednesday_attend.time3start != "")
+		if (dataManager->AttendanceTimeOP(aid, "3", Wednesday_attend.time3start, Wednesday_attend.time3end) == false)
+			return false;
+	if (Wednesday_attend.time4start != "")
+		if (dataManager->AttendanceTimeOP(aid, "3", Wednesday_attend.time4start, Wednesday_attend.time4end) == false)
+			return false;
+	if (Wednesday_attend.time5start != "")
+		if (dataManager->AttendanceTimeOP(aid, "3", Wednesday_attend.time5start, Wednesday_attend.time5end) == false)
+			return false;
+
+	if (Thursday_attend.time1start != "")
+		if (dataManager->AttendanceTimeOP(aid, "4", Thursday_attend.time1start, Thursday_attend.time1end) == false)
+			return false;
+	if (Thursday_attend.time2start != "")
+		if (dataManager->AttendanceTimeOP(aid, "4", Thursday_attend.time2start, Thursday_attend.time2end) == false)
+			return false;
+	if (Thursday_attend.time3start != "")
+		if (dataManager->AttendanceTimeOP(aid, "4", Thursday_attend.time3start, Thursday_attend.time3end) == false)
+			return false;
+	if (Thursday_attend.time4start != "")
+		if (dataManager->AttendanceTimeOP(aid, "4", Thursday_attend.time4start, Thursday_attend.time4end) == false)
+			return false;
+	if (Thursday_attend.time5start != "")
+		if (dataManager->AttendanceTimeOP(aid, "4", Thursday_attend.time5start, Thursday_attend.time5end) == false)
+			return false;
+
+	if (Friday_attend.time1start != "")
+		if (dataManager->AttendanceTimeOP(aid, "5", Friday_attend.time1start, Friday_attend.time1end) == false)
+			return false;
+	if (Friday_attend.time2start != "")
+		if (dataManager->AttendanceTimeOP(aid, "5", Friday_attend.time2start, Friday_attend.time2end) == false)
+			return false;
+	if (Friday_attend.time3start != "")
+		if (dataManager->AttendanceTimeOP(aid, "5", Friday_attend.time3start, Friday_attend.time3end) == false)
+			return false;
+	if (Friday_attend.time4start != "")
+		if (dataManager->AttendanceTimeOP(aid, "5", Friday_attend.time4start, Friday_attend.time4end) == false)
+			return false;
+	if (Friday_attend.time5start != "")
+		if (dataManager->AttendanceTimeOP(aid, "5", Friday_attend.time5start, Friday_attend.time5end) == false)
+			return false;
+
+	return true;
+}
+
+void AttendanceTabWidget::RestAttendanceTime()
+{
+	starttimemonday1->setTime((QTime::fromString("00:00","hh:mm")));
+	starttimemonday2->setTime((QTime::fromString("00:00", "hh:mm")));
+	starttimemonday3->setTime((QTime::fromString("00:00", "hh:mm")));
+	starttimemonday4->setTime((QTime::fromString("00:00", "hh:mm")));
+	starttimemonday5->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimemonday1->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimemonday2->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimemonday3->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimemonday4->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimemonday5->setTime((QTime::fromString("00:00", "hh:mm")));
+
+	starttimeTuesday1->setTime((QTime::fromString("00:00", "hh:mm")));
+	starttimeTuesday2->setTime((QTime::fromString("00:00", "hh:mm")));
+	starttimeTuesday3->setTime((QTime::fromString("00:00", "hh:mm")));
+	starttimeTuesday4->setTime((QTime::fromString("00:00", "hh:mm")));
+	starttimeTuesday5->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimeTuesday1->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimeTuesday2->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimeTuesday3->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimeTuesday4->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimeTuesday5->setTime((QTime::fromString("00:00", "hh:mm")));
+
+
+	starttimeWednesday1->setTime((QTime::fromString("00:00", "hh:mm")));
+	starttimeWednesday2->setTime((QTime::fromString("00:00", "hh:mm")));
+	starttimeWednesday3->setTime((QTime::fromString("00:00", "hh:mm")));
+	starttimeWednesday4->setTime((QTime::fromString("00:00", "hh:mm")));
+	starttimeWednesday5->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimeWednesday1->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimeWednesday2->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimeWednesday3->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimeWednesday4->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimeWednesday5->setTime((QTime::fromString("00:00", "hh:mm")));
+
+	starttimeThursday1->setTime((QTime::fromString("00:00", "hh:mm")));
+	starttimeThursday2->setTime((QTime::fromString("00:00", "hh:mm")));
+	starttimeThursday3->setTime((QTime::fromString("00:00", "hh:mm")));
+	starttimeThursday4->setTime((QTime::fromString("00:00", "hh:mm")));
+	starttimeThursday5->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimeThursday1->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimeThursday2->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimeThursday3->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimeThursday4->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimeThursday5->setTime((QTime::fromString("00:00", "hh:mm")));
+
+	starttimeFriday1->setTime((QTime::fromString("00:00", "hh:mm")));
+	starttimeFriday2->setTime((QTime::fromString("00:00", "hh:mm")));
+	starttimeFriday3->setTime((QTime::fromString("00:00", "hh:mm")));
+	starttimeFriday4->setTime((QTime::fromString("00:00", "hh:mm")));
+	starttimeFriday5->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimeFriday1->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimeFriday2->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimeFriday3->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimeFriday4->setTime((QTime::fromString("00:00", "hh:mm")));
+	endtimeFriday5->setTime((QTime::fromString("00:00", "hh:mm")));
+
+	//将复选框重置为未选中
+	checkmonday->setCheckState(Qt::CheckState(0));
+	checkTuesday->setCheckState(Qt::CheckState(0));
+	checkWednesday->setCheckState(Qt::CheckState(0));
+	checkThursday->setCheckState(Qt::CheckState(0));
+	checkFriday->setCheckState(Qt::CheckState(0));
+
+
+	//发送改变复选框状态的信号
+	ChangeCheckMonday(0);
+	ChangeCheckTuesday(0);
+	ChangeCheckWednesday(0);
+	ChangeCheckThursday(0);
+	ChangeCheckFriday(0);
+}
 void AttendanceTabWidget::UpdateTab()
 {
 }
@@ -52,8 +212,206 @@ void AttendanceTabWidget::AttendanceModify()
 	}
 	QString aid = items[0]->text(0).split("-")[0];
 
+//读取界面中考勤时段的值
+#if 1
+	ATTENDANCETIME monday_attend;//周一考勤时段
+	if (checkmonday->checkState() == Qt::CheckState(2))//判断周一是否选中
+	{
+		//判断周一的时段是否选中
+		if (time1monday->checkState() == Qt::CheckState(2))
+		{
+			monday_attend.time1start = starttimemonday1->text();
+			monday_attend.time1end = endtimemonday1->text();
+
+			if (time2monday->checkState() == Qt::CheckState(2))
+			{
+				monday_attend.time2start = starttimemonday2->text();
+				monday_attend.time2end = endtimemonday2->text();
+				if (time3monday->checkState() == Qt::CheckState(2))
+				{
+					monday_attend.time3start = starttimemonday3->text();
+					monday_attend.time3end = endtimemonday3->text();
+					if (time4monday->checkState() == Qt::CheckState(2))
+					{
+						monday_attend.time4start = starttimemonday4->text();
+						monday_attend.time4end = endtimemonday4->text();
+						if (time5monday->checkState() == Qt::CheckState(2))
+						{
+							monday_attend.time5start = starttimemonday5->text();
+							monday_attend.time5end = endtimemonday5->text();
+
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+	//Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+	ATTENDANCETIME Tuesday_attend;//周二考勤时段
+	if (checkTuesday->checkState() == Qt::CheckState(2))//判断周一是否选中
+	{
+		//判断周二的时段是否选中
+		if (time1Tuesday->checkState() == Qt::CheckState(2))
+		{
+			Tuesday_attend.time1start = starttimeTuesday1->text();
+			Tuesday_attend.time1end = endtimeTuesday1->text();
+
+			if (time2Tuesday->checkState() == Qt::CheckState(2))
+			{
+				Tuesday_attend.time2start = starttimeTuesday2->text();
+				Tuesday_attend.time2end = endtimeTuesday2->text();
+				if (time3Tuesday->checkState() == Qt::CheckState(2))
+				{
+					Tuesday_attend.time3start = starttimeTuesday3->text();
+					Tuesday_attend.time3end = endtimeTuesday3->text();
+					if (time4Tuesday->checkState() == Qt::CheckState(2))
+					{
+						Tuesday_attend.time4start = starttimeTuesday4->text();
+						Tuesday_attend.time4end = endtimeTuesday4->text();
+						if (time5Tuesday->checkState() == Qt::CheckState(2))
+						{
+							Tuesday_attend.time5start = starttimeTuesday5->text();
+							Tuesday_attend.time5end = endtimeTuesday5->text();
+
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+	ATTENDANCETIME Wednesday_attend;//周三考勤时段
+	if (checkWednesday->checkState() == Qt::CheckState(2))//判断周一是否选中
+	{
+		//判断周三的时段是否选中
+		if (time1Wednesday->checkState() == Qt::CheckState(2))
+		{
+			Wednesday_attend.time1start = starttimeWednesday1->text();
+			Wednesday_attend.time1end = endtimeWednesday1->text();
+
+			if (time2Wednesday->checkState() == Qt::CheckState(2))
+			{
+				Wednesday_attend.time2start = starttimeWednesday2->text();
+				Wednesday_attend.time2end = endtimeWednesday2->text();
+				if (time3Wednesday->checkState() == Qt::CheckState(2))
+				{
+					Wednesday_attend.time3start = starttimeWednesday3->text();
+					Wednesday_attend.time3end = endtimeWednesday3->text();
+					if (time4Wednesday->checkState() == Qt::CheckState(2))
+					{
+						Wednesday_attend.time4start = starttimeWednesday4->text();
+						Wednesday_attend.time4end = endtimeWednesday4->text();
+						if (time5Wednesday->checkState() == Qt::CheckState(2))
+						{
+							Wednesday_attend.time5start = starttimeWednesday5->text();
+							Wednesday_attend.time5end = endtimeWednesday5->text();
+
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+	ATTENDANCETIME Thursday_attend;//周四考勤时段
+	if (checkThursday->checkState() == Qt::CheckState(2))//判断周一是否选中
+	{
+		//判断周四的时段是否选中
+		if (time1Thursday->checkState() == Qt::CheckState(2))
+		{
+			Thursday_attend.time1start = starttimeThursday1->text();
+			Thursday_attend.time1end = endtimeThursday1->text();
+
+			if (time2Thursday->checkState() == Qt::CheckState(2))
+			{
+				Thursday_attend.time2start = starttimeThursday2->text();
+				Thursday_attend.time2end = endtimeThursday2->text();
+				if (time3Thursday->checkState() == Qt::CheckState(2))
+				{
+					Thursday_attend.time3start = starttimeThursday3->text();
+					Thursday_attend.time3end = endtimeThursday3->text();
+					if (time4Thursday->checkState() == Qt::CheckState(2))
+					{
+						Thursday_attend.time4start = starttimeThursday4->text();
+						Thursday_attend.time4end = endtimeThursday4->text();
+						if (time5Thursday->checkState() == Qt::CheckState(2))
+						{
+							Thursday_attend.time5start = starttimeThursday5->text();
+							Thursday_attend.time5end = endtimeThursday5->text();
+
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+	ATTENDANCETIME Friday_attend;//周五考勤时段
+	if (checkFriday->checkState() == Qt::CheckState(2))//判断周一是否选中
+	{
+		//判断周五的时段是否选中
+		if (time1Friday->checkState() == Qt::CheckState(2))
+		{
+			Friday_attend.time1start = starttimeFriday1->text();
+			Friday_attend.time1end = endtimeFriday1->text();
+
+			if (time2Friday->checkState() == Qt::CheckState(2))
+			{
+				Friday_attend.time2start = starttimeFriday2->text();
+				Friday_attend.time2end = endtimeFriday2->text();
+				if (time3Friday->checkState() == Qt::CheckState(2))
+				{
+					Friday_attend.time3start = starttimeFriday3->text();
+					Friday_attend.time3end = endtimeFriday3->text();
+					if (time4Friday->checkState() == Qt::CheckState(2))
+					{
+						Friday_attend.time4start = starttimeFriday4->text();
+						Friday_attend.time4end = endtimeFriday4->text();
+						if (time5Friday->checkState() == Qt::CheckState(2))
+						{
+							Friday_attend.time5start = starttimeFriday5->text();
+							Friday_attend.time5end = endtimeFriday5->text();
+
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+#endif
+
+
 	Attendance attendance(aid, attendanceclassroomid->text().trimmed(), attendancename->text().trimmed(), attendancestarttime->dateTime(), attendanceendtime->dateTime(), attendanceclass->text());
-	if (dataManager->AttendanceOP(attendance, 1)) 
+
+	//先删除掉该考勤项目的考勤时段
+	dataManager->AttendanceOP(attendance, 3);
+	//然后再重新插入
+	if (dataManager->AttendanceOP(attendance, 1) && AttendanceTimePutDB(aid,monday_attend,Tuesday_attend,Wednesday_attend,Thursday_attend,Friday_attend)) 
 	{
 		QMessageBox::information(0, tr("attendance modify"), tr("attendance modify successfully"), QMessageBox::Ok);
 		attendanceid->setText("");
@@ -75,7 +433,7 @@ void AttendanceTabWidget::AttendanceDelete()
 	if (items.size() == 1) 
 	{
 		auto aid = items[0]->text(0).split("-")[0];
-		if (dataManager->AttendanceOP(Attendance(aid, "", "", "", ""), 2))
+		if (dataManager->AttendanceOP(Attendance(aid, "", "", "", ""), 2) && dataManager->AttendanceOP(Attendance(aid, "", "", "", ""), 3))
 		{
 			QMessageBox::information(0, tr("attendance delete"), tr("attendance delete successfully"), QMessageBox::Ok);
 
@@ -116,7 +474,7 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 	{
 		if (it->GetID() == s) 
 		{
-			//
+			//将该考勤项目的信息反应到界面控件中
 			attendanceid->setText(it->GetID());
 			attendancename->setText(it->GetName());
 			attendanceclassroomid->setText(it->GetMID());
@@ -126,6 +484,408 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 			QString endtime = it->GetSETime().split("-").last();
 			attendancestarttime->setDateTime(QDateTime::fromString(satrttime, "yyyy/MM/dd hh:mm"));
 			attendanceendtime->setDateTime(QDateTime::fromString(endtime, "yyyy/MM/dd hh:mm"));
+
+			//将该考勤项目的考勤时段反应到界面的复选框和时间空间中
+
+			//遍历该考勤项目的考勤时段列表
+			//Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+			int MondayCount = 0;
+			int TuesdayCount = 0;
+			int WednesdayCount = 0;
+			int ThursdayCount = 0;
+			int FridayCount = 0;
+
+
+			//计算出每个工作日的考勤时段个数
+			for (QVector<ATTENDTIME>::iterator itattendtime = it->attendancetime.begin(); itattendtime != it->attendancetime.end(); itattendtime++)
+			{
+				//判断星期几
+				if (itattendtime->weekday == "1")//周一
+				{
+					//starttimemonday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					//
+					MondayCount++;
+				} 
+				//统计每个工作日的时段数量
+				if (itattendtime->weekday == "2")//周
+				{
+					TuesdayCount++;
+				}
+				if (itattendtime->weekday == "3")//周
+				{
+					WednesdayCount++;
+				}
+				if (itattendtime->weekday == "4")//周
+				{
+					ThursdayCount++;
+				}
+				if (itattendtime->weekday == "5")//周
+				{
+					FridayCount++;
+				}
+
+			}
+			
+
+			RestAttendanceTime();//重置考勤时段控件
+			//分别显示各项对话框
+			for (QVector<ATTENDTIME>::iterator itattendtime = it->attendancetime.begin(); itattendtime != it->attendancetime.end();)
+			{
+				if (MondayCount > 0)
+					checkmonday->setCheckState(Qt::CheckState(2));
+				switch (MondayCount)
+				{
+				case 1:			
+
+					time1monday->setCheckState(Qt::CheckState(2));
+					starttimemonday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+
+					itattendtime++;
+					break;
+				case 2:
+					time1monday->setCheckState(Qt::CheckState(2));
+					time2monday->setCheckState(Qt::CheckState(2));
+
+					starttimemonday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimemonday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					break;
+				case 3:
+					time1monday->setCheckState(Qt::CheckState(2));
+					time2monday->setCheckState(Qt::CheckState(2));
+					time3monday->setCheckState(Qt::CheckState(2));
+					
+
+					starttimemonday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimemonday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimemonday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					break;
+				case 4:
+					time1monday->setCheckState(Qt::CheckState(2));
+					time2monday->setCheckState(Qt::CheckState(2));
+					time3monday->setCheckState(Qt::CheckState(2));
+					time4monday->setCheckState(Qt::CheckState(2));
+					
+					starttimemonday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimemonday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimemonday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimemonday4->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					break;
+				case 5:
+					time1monday->setCheckState(Qt::CheckState(2));
+					time2monday->setCheckState(Qt::CheckState(2));
+					time3monday->setCheckState(Qt::CheckState(2));
+					time4monday->setCheckState(Qt::CheckState(2));
+					time5monday->setCheckState(Qt::CheckState(2));
+
+					starttimemonday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimemonday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimemonday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimemonday4->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimemonday5->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					break;
+				}
+				
+				if (TuesdayCount > 0)
+					checkTuesday->setCheckState(Qt::CheckState(2));
+				switch (TuesdayCount)
+				{
+				case 1:
+
+					time1Tuesday->setCheckState(Qt::CheckState(2));
+					starttimeTuesday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+
+					itattendtime++;
+					break;
+				case 2:
+					time1Tuesday->setCheckState(Qt::CheckState(2));
+					time2Tuesday->setCheckState(Qt::CheckState(2));
+
+					starttimeTuesday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeTuesday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					break;
+				case 3:
+					time1Tuesday->setCheckState(Qt::CheckState(2));
+					time2Tuesday->setCheckState(Qt::CheckState(2));
+					time3Tuesday->setCheckState(Qt::CheckState(2));
+
+
+					starttimeTuesday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeTuesday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeTuesday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					break;
+				case 4:
+					time1Tuesday->setCheckState(Qt::CheckState(2));
+					time2Tuesday->setCheckState(Qt::CheckState(2));
+					time3Tuesday->setCheckState(Qt::CheckState(2));
+					time4Tuesday->setCheckState(Qt::CheckState(2));
+
+					starttimeTuesday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeTuesday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeTuesday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeTuesday4->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					break;
+				case 5:
+					time1Tuesday->setCheckState(Qt::CheckState(2));
+					time2Tuesday->setCheckState(Qt::CheckState(2));
+					time3Tuesday->setCheckState(Qt::CheckState(2));
+					time4Tuesday->setCheckState(Qt::CheckState(2));
+					time5Tuesday->setCheckState(Qt::CheckState(2));
+
+					starttimeTuesday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeTuesday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeTuesday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeTuesday4->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeTuesday5->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					break;
+				}
+
+
+				if (WednesdayCount > 0)
+					checkWednesday->setCheckState(Qt::CheckState(2));
+				switch (WednesdayCount)
+				{
+				case 1:
+
+					time1Wednesday->setCheckState(Qt::CheckState(2));
+					starttimeWednesday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+
+					itattendtime++;
+					break;
+				case 2:
+					time1Wednesday->setCheckState(Qt::CheckState(2));
+					time2Wednesday->setCheckState(Qt::CheckState(2));
+
+					starttimeWednesday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeWednesday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					break;
+				case 3:
+					time1Wednesday->setCheckState(Qt::CheckState(2));
+					time2Wednesday->setCheckState(Qt::CheckState(2));
+					time3Wednesday->setCheckState(Qt::CheckState(2));
+
+
+					starttimeWednesday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeWednesday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeWednesday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					break;
+				case 4:
+					time1Wednesday->setCheckState(Qt::CheckState(2));
+					time2Wednesday->setCheckState(Qt::CheckState(2));
+					time3Wednesday->setCheckState(Qt::CheckState(2));
+					time4Wednesday->setCheckState(Qt::CheckState(2));
+
+					starttimeWednesday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeWednesday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeWednesday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeWednesday4->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					break;
+				case 5:
+					time1Wednesday->setCheckState(Qt::CheckState(2));
+					time2Wednesday->setCheckState(Qt::CheckState(2));
+					time3Wednesday->setCheckState(Qt::CheckState(2));
+					time4Wednesday->setCheckState(Qt::CheckState(2));
+					time5Wednesday->setCheckState(Qt::CheckState(2));
+
+					starttimeWednesday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeWednesday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeWednesday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeWednesday4->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeWednesday5->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					break;
+				}
+
+
+				if (ThursdayCount > 0)
+					checkThursday->setCheckState(Qt::CheckState(2));
+				switch (ThursdayCount)
+				{
+				case 1:
+
+					time1Thursday->setCheckState(Qt::CheckState(2));
+					starttimeThursday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+
+					itattendtime++;
+					break;
+				case 2:
+					time1Thursday->setCheckState(Qt::CheckState(2));
+					time2Thursday->setCheckState(Qt::CheckState(2));
+
+					starttimeThursday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeThursday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					break;
+				case 3:
+					time1Thursday->setCheckState(Qt::CheckState(2));
+					time2Thursday->setCheckState(Qt::CheckState(2));
+					time3Thursday->setCheckState(Qt::CheckState(2));
+
+
+					starttimeThursday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeThursday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeThursday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					break;
+				case 4:
+					time1Thursday->setCheckState(Qt::CheckState(2));
+					time2Thursday->setCheckState(Qt::CheckState(2));
+					time3Thursday->setCheckState(Qt::CheckState(2));
+					time4Thursday->setCheckState(Qt::CheckState(2));
+
+					starttimeThursday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeThursday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeThursday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeThursday4->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					break;
+				case 5:
+					time1Thursday->setCheckState(Qt::CheckState(2));
+					time2Thursday->setCheckState(Qt::CheckState(2));
+					time3Thursday->setCheckState(Qt::CheckState(2));
+					time4Thursday->setCheckState(Qt::CheckState(2));
+					time5Thursday->setCheckState(Qt::CheckState(2));
+
+					starttimeThursday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeThursday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeThursday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeThursday4->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeThursday5->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					break;
+				}
+
+
+				if (FridayCount > 0)
+					checkFriday->setCheckState(Qt::CheckState(2));
+				switch (FridayCount)
+				{
+				case 1:
+
+					time1Friday->setCheckState(Qt::CheckState(2));
+					starttimeFriday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+
+					itattendtime++;
+					break;
+				case 2:
+					time1Friday->setCheckState(Qt::CheckState(2));
+					time2Friday->setCheckState(Qt::CheckState(2));
+
+					starttimeFriday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeFriday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					break;
+				case 3:
+					time1Friday->setCheckState(Qt::CheckState(2));
+					time2Friday->setCheckState(Qt::CheckState(2));
+					time3Friday->setCheckState(Qt::CheckState(2));
+
+
+					starttimeFriday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeFriday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeFriday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					break;
+				case 4:
+					time1Friday->setCheckState(Qt::CheckState(2));
+					time2Friday->setCheckState(Qt::CheckState(2));
+					time3Friday->setCheckState(Qt::CheckState(2));
+					time4Friday->setCheckState(Qt::CheckState(2));
+
+					starttimeFriday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeFriday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeFriday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeFriday4->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					break;
+				case 5:
+					time1Friday->setCheckState(Qt::CheckState(2));
+					time2Friday->setCheckState(Qt::CheckState(2));
+					time3Friday->setCheckState(Qt::CheckState(2));
+					time4Friday->setCheckState(Qt::CheckState(2));
+					time5Friday->setCheckState(Qt::CheckState(2));
+
+					starttimeFriday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeFriday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeFriday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeFriday4->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					starttimeFriday5->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					itattendtime++;
+					break;
+				}
+
+
+			}
+
+
+
+
+
+
+
+
+
+
 
 			QStringList aclass = it->GetAclass().split(",");
 			for (int i = 0; i < aclass.size(); i++) 
@@ -466,7 +1226,201 @@ void AttendanceTabWidget::AttendanceAdd()
 	QString amid = attendanceclassroomid->text().trimmed();
 	QDateTime starttime = attendancestarttime->dateTime();
 	QDateTime endtime = attendanceendtime->dateTime();
-	QString aclass = attendanceclass->text().trimmed();
+	QString aclass = attendanceclass->text().trimmed();	
+
+#if 1//读取界面中考勤时段的值
+	ATTENDANCETIME monday_attend;//周一考勤时段
+	if (checkmonday->checkState() == Qt::CheckState(2))//判断周一是否选中
+	{
+		//判断周一的时段是否选中
+		if (time1monday->checkState() == Qt::CheckState(2))
+		{
+			monday_attend.time1start = starttimemonday1->text();
+			monday_attend.time1end = endtimemonday1->text();
+
+			if (time2monday->checkState() == Qt::CheckState(2))
+			{
+				monday_attend.time2start = starttimemonday2->text();
+				monday_attend.time2end = endtimemonday2->text();
+				if (time3monday->checkState() == Qt::CheckState(2))
+				{
+					monday_attend.time3start = starttimemonday3->text();
+					monday_attend.time3end = endtimemonday3->text();
+					if (time4monday->checkState() == Qt::CheckState(2))
+					{
+						monday_attend.time4start = starttimemonday4->text();
+						monday_attend.time4end = endtimemonday4->text();
+						if (time5monday->checkState() == Qt::CheckState(2))
+						{
+							monday_attend.time5start = starttimemonday5->text();
+							monday_attend.time5end = endtimemonday5->text();
+
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+		
+	}
+	//Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+	ATTENDANCETIME Tuesday_attend;//周二考勤时段
+	if (checkTuesday->checkState() == Qt::CheckState(2))//判断周一是否选中
+	{
+		//判断周二的时段是否选中
+		if (time1Tuesday->checkState() == Qt::CheckState(2))
+		{
+			Tuesday_attend.time1start = starttimeTuesday1->text();
+			Tuesday_attend.time1end = endtimeTuesday1->text();
+
+			if (time2Tuesday->checkState() == Qt::CheckState(2))
+			{
+				Tuesday_attend.time2start = starttimeTuesday2->text();
+				Tuesday_attend.time2end = endtimeTuesday2->text();
+				if (time3Tuesday->checkState() == Qt::CheckState(2))
+				{
+					Tuesday_attend.time3start = starttimeTuesday3->text();
+					Tuesday_attend.time3end = endtimeTuesday3->text();
+					if (time4Tuesday->checkState() == Qt::CheckState(2))
+					{
+						Tuesday_attend.time4start = starttimeTuesday4->text();
+						Tuesday_attend.time4end = endtimeTuesday4->text();
+						if (time5Tuesday->checkState() == Qt::CheckState(2))
+						{
+							Tuesday_attend.time5start = starttimeTuesday5->text();
+							Tuesday_attend.time5end = endtimeTuesday5->text();
+
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+	ATTENDANCETIME Wednesday_attend;//周三考勤时段
+	if (checkWednesday->checkState() == Qt::CheckState(2))//判断周一是否选中
+	{
+		//判断周三的时段是否选中
+		if (time1Wednesday->checkState() == Qt::CheckState(2))
+		{
+			Wednesday_attend.time1start = starttimeWednesday1->text();
+			Wednesday_attend.time1end = endtimeWednesday1->text();
+
+			if (time2Wednesday->checkState() == Qt::CheckState(2))
+			{
+				Wednesday_attend.time2start = starttimeWednesday2->text();
+				Wednesday_attend.time2end = endtimeWednesday2->text();
+				if (time3Wednesday->checkState() == Qt::CheckState(2))
+				{
+					Wednesday_attend.time3start = starttimeWednesday3->text();
+					Wednesday_attend.time3end = endtimeWednesday3->text();
+					if (time4Wednesday->checkState() == Qt::CheckState(2))
+					{
+						Wednesday_attend.time4start = starttimeWednesday4->text();
+						Wednesday_attend.time4end = endtimeWednesday4->text();
+						if (time5Wednesday->checkState() == Qt::CheckState(2))
+						{
+							Wednesday_attend.time5start = starttimeWednesday5->text();
+							Wednesday_attend.time5end = endtimeWednesday5->text();
+
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+	ATTENDANCETIME Thursday_attend;//周四考勤时段
+	if (checkThursday->checkState() == Qt::CheckState(2))//判断周一是否选中
+	{
+		//判断周四的时段是否选中
+		if (time1Thursday->checkState() == Qt::CheckState(2))
+		{
+			Thursday_attend.time1start = starttimeThursday1->text();
+			Thursday_attend.time1end = endtimeThursday1->text();
+
+			if (time2Thursday->checkState() == Qt::CheckState(2))
+			{
+				Thursday_attend.time2start = starttimeThursday2->text();
+				Thursday_attend.time2end = endtimeThursday2->text();
+				if (time3Thursday->checkState() == Qt::CheckState(2))
+				{
+					Thursday_attend.time3start = starttimeThursday3->text();
+					Thursday_attend.time3end = endtimeThursday3->text();
+					if (time4Thursday->checkState() == Qt::CheckState(2))
+					{
+						Thursday_attend.time4start = starttimeThursday4->text();
+						Thursday_attend.time4end = endtimeThursday4->text();
+						if (time5Thursday->checkState() == Qt::CheckState(2))
+						{
+							Thursday_attend.time5start = starttimeThursday5->text();
+							Thursday_attend.time5end = endtimeThursday5->text();
+
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+	ATTENDANCETIME Friday_attend;//周五考勤时段
+	if (checkFriday->checkState() == Qt::CheckState(2))//判断周一是否选中
+	{
+		//判断周五的时段是否选中
+		if (time1Friday->checkState() == Qt::CheckState(2))
+		{
+			Friday_attend.time1start = starttimeFriday1->text();
+			Friday_attend.time1end = endtimeFriday1->text();
+
+			if (time2Friday->checkState() == Qt::CheckState(2))
+			{
+				Friday_attend.time2start = starttimeFriday2->text();
+				Friday_attend.time2end = endtimeFriday2->text();
+				if (time3Friday->checkState() == Qt::CheckState(2))
+				{
+					Friday_attend.time3start = starttimeFriday3->text();
+					Friday_attend.time3end = endtimeFriday3->text();
+					if (time4Friday->checkState() == Qt::CheckState(2))
+					{
+						Friday_attend.time4start = starttimeFriday4->text();
+						Friday_attend.time4end = endtimeFriday4->text();
+						if (time5Friday->checkState() == Qt::CheckState(2))
+						{
+							Friday_attend.time5start = starttimeFriday5->text();
+							Friday_attend.time5end = endtimeFriday5->text();
+
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+#endif
+
+	//-----------------------------------------------------------------------------------------
 	if (aid.length() != 8) 
 	{
 		QMessageBox::information(0, tr("attendance add"), tr("length of attendance id must be 8"), QMessageBox::Ok);
@@ -507,9 +1461,14 @@ void AttendanceTabWidget::AttendanceAdd()
 		return;
 	}
 	
-	Attendance attendance(aid, amid, aname, starttime, endtime, aclass);
-	if (dataManager->AttendanceOP(attendance, 0)) 
+	
+
+	Attendance attendance(aid, amid, aname, starttime, endtime, aclass);//考勤信息
+	
+	if (dataManager->AttendanceOP(attendance, 0) && AttendanceTimePutDB(aid,monday_attend,Tuesday_attend,Wednesday_attend,Thursday_attend,Friday_attend)) //将考勤时段入库	
 	{
+			
+		//Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
 		QMessageBox::information(0, tr("attendance add"), tr("attendance add successfully"), QMessageBox::Ok);
 		attendanceid->setText("");
 		attendancename->setText("");
@@ -627,6 +1586,12 @@ void AttendanceTabWidget::setupUi()
 	
 	time1monday = new QCheckBox(tr("time1"));
 	starttimemonday1 = new QTimeEdit;
+
+
+	//
+	starttimemonday1->setTime(QTime::fromString("00:00", "hh:mm"));
+
+
 	endtimemonday1 = new QTimeEdit;
 	time2monday = new QCheckBox(tr("time2"));
 	starttimemonday2 = new QTimeEdit;
@@ -1033,7 +1998,10 @@ void AttendanceTabWidget::setupUi()
 	this->setLayout(main_layout);
 
 
+
 	updateTree();
+
+	RestAttendanceTime();//重置考勤时段控件
 }
 
 void AttendanceTabWidget::updateTree()

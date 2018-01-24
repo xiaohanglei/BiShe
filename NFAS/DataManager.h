@@ -13,7 +13,7 @@
 
 
 #define  MAX_BUF_LEN 1024*1024
-struct NETBAO
+struct NETBAO//网络数据帧
 {
 	UCHAR mdstation[7];//目的电报码
 	UCHAR sostation[7];//源电报码
@@ -23,6 +23,14 @@ struct NETBAO
 
 	UCHAR xinxibao[1024 * 100];
 	SOCKET sock;
+};
+
+struct ATTENDTIME
+{
+	//QString id;
+	QString weekday;//星期几
+	QString starttime;//开始时间
+	QString endtime;//结束时间
 };
 
 //学生类
@@ -333,6 +341,8 @@ public:
 		return attendanceclass;
 	}
 	const QString GetSETime() const;
+
+	QVector<ATTENDTIME> attendancetime;//考勤时段
 private:
 	QString attendanceid;
 	QString attendancemachineid;
@@ -340,6 +350,7 @@ private:
 	QDateTime attendancestarttime;
 	QDateTime attendanceendtime;
 	QString attendanceclass;
+	
 };
 
 
@@ -359,6 +370,7 @@ public:
 	bool StudentOP(const Student& s, int op);
 	bool UserOP(const User& u, int op);
 	bool AttendanceOP(const Attendance& a, int op);
+	bool AttendanceTimeOP(QString id, QString weekday, QString starttime, QString endtime);
 	bool ResultOP(const Result& a, int op);
 
 	bool UserLogin(User user);

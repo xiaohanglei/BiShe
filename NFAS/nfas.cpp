@@ -103,7 +103,7 @@ void NFAS::UpdateTab(int index)
 void NFAS::setupUi()
 {
 	this->setWindowTitle(tr("Network fingerprint attendance system"));
-	this->setWindowFlags(Qt::WindowCloseButtonHint /*| Qt::WindowMinimizeButtonHint*/ | Qt::WindowMaximizeButtonHint/*| Qt::Widget | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint*/);//关闭和最小化按钮
+	this->setWindowFlags(Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint/*| Qt::Widget | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint*/);//关闭和最小化按钮
 	//this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint);
 
 	//this->setFixedSize(QSize(1440,900));
@@ -112,10 +112,7 @@ void NFAS::setupUi()
 	this->setGeometry(0,30,1440,900);
 	//this->setFixedSize(QSize(a.width(), a.height()-100));
 	//this->showFullScreen();//全屏显示
-	this->showMaximized();
-
-	
-	
+	this->showMaximized();	
 
 	main_tab = new QTabWidget;
 

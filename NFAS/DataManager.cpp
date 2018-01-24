@@ -424,10 +424,27 @@ bool DataManager::AttendanceOP(const Attendance& a, int op)
 		query.prepare("DELETE FROM attendancetable WHERE attendanceid=?");
 		query.bindValue(0, a.GetID());
 		break;
+	case 3://删除该考勤项目的考勤时段
+		query.prepare("DELETE FROM attendancetimetable WHERE attendanceid=?");
+		query.bindValue(0, a.GetID());
+		break;
 	default:
 		break;
 	}
 	return query.exec() /*&& ResultOP(Result(a.GetRID(), 0, 0,"","",""), 2)*/;
+}
+
+bool DataManager::AttendanceTimeOP(QString id, QString weekday, QString starttime, QString endtime)
+{
+	QSqlQuery query;
+
+	query.prepare("INSERT INTO attendancetimetable (attendanceid,attendanceweekday,starttime,endtime) VALUES (?,?,?,?)");
+	query.bindValue(0, id);
+	query.bindValue(1, weekday);
+	query.bindValue(2, starttime);
+	query.bindValue(3, endtime);
+
+	return query.exec();
 }
 
 bool DataManager::ResultOP(const Result& a, int op)
@@ -624,6 +641,23 @@ void DataManager::InitAttendances()
 		QString time = query.value(3).toString();
 		QString aclass = query.value(4).toString();
 		attendances->append(Attendance(id, mid, name, time, aclass));
+
+		//该考勤项目的考勤时段
+		//QString sql = "select * from attendancetimetable where attendanceid =?" ;
+		QSqlQuery querytime(QString("select * from attendancetimetable where attendanceid = '%1' order by attendanceweekday").arg(id));
+
+		while (querytime.next())
+		{
+			ATTENDTIME tempAttendTime;
+			//tempAttendTime.id = querytime.value(0).toString();
+			tempAttendTime.weekday = querytime.value(1).toString();
+			tempAttendTime.starttime = querytime.value(2).toString();
+			tempAttendTime.endtime = querytime.value(3).toString();
+
+			QVector<Attendance>::iterator it = attendances->end()-1;
+			it->attendancetime.append(tempAttendTime);
+		}
+
 	}
 }
 

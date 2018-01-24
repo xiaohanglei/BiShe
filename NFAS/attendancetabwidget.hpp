@@ -11,6 +11,27 @@
 #include <QCheckBox>
 #include <QTimeEdit>
 
+struct ATTENDANCETIME//考勤时段
+{
+	QString time1start;
+	QString time1end;
+
+	QString time2start;
+	QString time2end;
+
+	QString time3start;
+	QString time3end;
+
+	QString time4start;
+	QString time4end;
+
+	QString time5start;
+	QString time5end;
+
+};
+
+
+
 class AttendanceTabWidget : public QWidget
 {
 	Q_OBJECT
@@ -18,6 +39,10 @@ class AttendanceTabWidget : public QWidget
 public:
 	AttendanceTabWidget(DataManager *dm, QWidget * parent = 0);
 	~AttendanceTabWidget();
+
+	bool AttendanceTimePutDB(QString aid, ATTENDANCETIME monday_attend, ATTENDANCETIME Tuesday_attend, ATTENDANCETIME Wednesday_attend, ATTENDANCETIME Thursday_attend, ATTENDANCETIME Friday_attend);
+
+	void RestAttendanceTime();
 
 	void UpdateTab();
 
