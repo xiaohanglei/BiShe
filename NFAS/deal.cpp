@@ -170,6 +170,19 @@ void Deal::Deal_Attendance_HuiZhi(UCHAR * sostation, SOCKET sock, DataManager * 
 						attendanceId = it->GetID();
 						aclass = it->GetAclass().split(",");//获得该考勤项目下辖的班级
 
+						//根据考勤项目id找到找到该考勤项目下辖的所有学生信息
+
+						for (int i = 0; i < aclass.size(); i++)
+						{
+							auto acla = aclass.at(i);
+							for (auto iter = dm->GetStudent()->begin(); iter != dm->GetStudent()->end(); iter++)
+							{
+								if (iter->GetAclass() == acla)
+								{
+									students.append(*iter);
+								}
+							}
+						}
 						atttime = *ittime;//保存该项目的考勤时段
 
 						flg = true;
@@ -185,37 +198,7 @@ void Deal::Deal_Attendance_HuiZhi(UCHAR * sostation, SOCKET sock, DataManager * 
 			break;
 	}
 
-
-	//根据考勤项目id找到找到该考勤项目下辖的所有学生信息
-	
-	for (int i = 0; i < aclass.size(); i++)
-	{
-		auto acla = aclass.at(i);
-		for (auto iter = dm->GetStudent()->begin(); iter != dm->GetStudent()->end(); iter++)
-		{
-			if (iter->GetAclass() == acla)
-			{
-				students.append(*iter);
-			}
-		}
-	}
-
-
-
 	//组织数据，封装成数据帧
-
-	//获取时间戳
-	int istarttime = 0, iendtime = 0;
-
-	QDateTime QDatetime1 = QDateTime::currentDateTime();
-	QDatetime1.setTime(QTime::fromString(atttime.starttime,"HH:mm"));//将设置考勤开始时间
-	
-	istarttime = QDatetime1.toTime_t();//获得开始时间戳
-
-	QDatetime1.setTime(QTime::fromString(atttime.endtime, "HH:mm"));//将设置考勤截至时间
-	
-	iendtime = QDatetime1.toTime_t();
-
 	//
 
 	int sendlen = 0;
@@ -235,44 +218,61 @@ void Deal::Deal_Attendance_HuiZhi(UCHAR * sostation, SOCKET sock, DataManager * 
 
 	sendlen += 2;
 
-	//考勤项目编号
-	QByteArray tempQB = attendanceId.toLatin1();
-	char * id = new char[tempQB.size()];
-	id = tempQB.data();
-	memcpy(&ptrSendData[19], id, 8);//
-
-	sendlen += 8;
-
-	memcpy(&ptrSendData[27], &istarttime, 4);//开始时间
-	memcpy(&ptrSendData[31], &iendtime, 4);//结束时间
-
-	sendlen += 8;
-	
-	WORD count = students.size();//需要考勤的学生数量
-
-	memcpy(&ptrSendData[35], &count, 2);//记录数
-
-	sendlen += 2;
-
-
-
-	QByteArray tempsid;
-	QByteArray tempsfig;
-	char * sid = new char[8];
-	char * sfig = new char[32];
-
-	for (int i = 0; i < count; i++)
+	if (students.size() != 0)//判断有无考勤数据
 	{
-		tempsid = students.at(i).GetID().toLatin1();
-		tempsfig = students.at(i).GetFigure().toLatin1();
-		sid = tempsid.data();
-		sfig = tempsfig.data();
+		//获取时间戳
+		int istarttime = 0, iendtime = 0;
 
-		memcpy(&ptrSendData[37 + i * 40], sid, 8);//学号
-		memcpy(&ptrSendData[45 + i * 40] , sfig, 32);//指纹
+		QDateTime QDatetime1 = QDateTime::currentDateTime();
+		QDatetime1.setTime(QTime::fromString(atttime.starttime, "HH:mm"));//将设置考勤开始时间
+
+		istarttime = QDatetime1.toTime_t();//获得开始时间戳
+
+		QDatetime1.setTime(QTime::fromString(atttime.endtime, "HH:mm"));//将设置考勤截至时间
+
+		iendtime = QDatetime1.toTime_t();
+
+		//考勤项目编号
+		QByteArray tempQB = attendanceId.toLatin1();
+		char *id = nullptr;
+		id = tempQB.data();
+		memcpy(&ptrSendData[19], id, 8);//
+
+		sendlen += 8;
+
+		memcpy(&ptrSendData[27], &istarttime, 4);//开始时间
+		memcpy(&ptrSendData[31], &iendtime, 4);//结束时间
+
+		sendlen += 8;
+
+		WORD count = students.size();//需要考勤的学生数量
+
+		memcpy(&ptrSendData[35], &count, 2);//记录数
+
+		sendlen += 2;
+
+		QByteArray tempsid;
+		QByteArray tempsfig;
+		char * sid =nullptr;
+		char * sfig = nullptr;
+
+		for (int i = 0; i < count; i++)
+		{
+			tempsid = students.at(i).GetID().toLatin1();
+			tempsfig = students.at(i).GetFigure().toLatin1();
+			sid = tempsid.data();
+			sfig = tempsfig.data();
+
+			memcpy(&ptrSendData[37 + i * 40], sid, 8);//学号
+			memcpy(&ptrSendData[45 + i * 40], sfig, 32);//指纹
+		}
+		sendlen += count * 40;	
 	}
-	sendlen += count * 40;
-
+	else
+	{
+		ptrSendData[19] = 0x00;//表示没有考勤数据
+		sendlen += 1;
+	}
 	ptrSendData[sendlen + 5] = 0xff;//结尾标记
 
 	sendlen += 1;
@@ -289,6 +289,7 @@ void Deal::Deal_Attendance_HuiZhi(UCHAR * sostation, SOCKET sock, DataManager * 
 		return;
 	}
 
+	delete ptrSendData;
 }
 
 void Deal::Deal_Result_MingLing(NETBAO bao)
@@ -327,8 +328,53 @@ void Deal::Deal_Result_MingLing(NETBAO bao)
 
 		resultnet.students.append(tempstud);
 	}
+
+	//回执
+
+	Deal_Result_HuiZhi(bao.sostation, bao.sock);
+
 }
 
 void Deal::Deal_Result_HuiZhi(UCHAR *sostation, SOCKET sock)
 {
+	//组织数据，封装成数据帧
+	//
+
+	int sendlen = 0;
+	UCHAR * ptrSendData = new UCHAR[MAX_BUF_LEN];
+	memset(ptrSendData, 0, MAX_BUF_LEN);
+	ptrSendData[4] = 0x8f;
+
+	memcpy(&ptrSendData[5], sostation, 6);//将考勤设备的源电报码作为回执的目的电报码
+
+	UCHAR mdstation[7] = "Server";
+	memcpy(&ptrSendData[11], mdstation, 6);//填写服务器为回执的源电报码
+
+	sendlen += 12;
+
+	ptrSendData[17] = 0x00;//数据
+	ptrSendData[18] = 0x12;//处理结果
+
+	sendlen += 2;
+
+	ptrSendData[19] = 0x01;//00 表示出错，01表示成功
+	sendlen += 1;
+
+	ptrSendData[sendlen + 5] = 0xff;//结尾标记
+
+	sendlen += 1;
+
+	memcpy(&ptrSendData[0], &sendlen, 4);//填充data_len的大小
+										 //发送到该设备
+
+	int sendvlen = 0;
+	if ((sendvlen = send(sock, (char*)ptrSendData, sendlen + 5, 0)) == SOCKET_ERROR)
+	{
+		QMessageBox::information(0, tr("Feedback failure"), tr("fan kui shi bai ,kao qin jiao shi wei :"), QMessageBox::Ok);
+		return;
+	}
+
+	delete ptrSendData;
+
+
 }
