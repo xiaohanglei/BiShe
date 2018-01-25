@@ -293,6 +293,40 @@ void Deal::Deal_Attendance_HuiZhi(UCHAR * sostation, SOCKET sock, DataManager * 
 
 void Deal::Deal_Result_MingLing(NETBAO bao)
 {
+	//解析命令
+	UCHAR * ptrXinXiBao = bao.xinxibao;
+	char attendid[9] = { 0 };//考勤项目ID
+	
+	WORD count = 0;//记录数
+				   //QVector<STATTEND> students;
+
+	RESULT resultnet;
+
+	memcpy(attendid, &ptrXinXiBao[0], 8);
+	
+	memcpy(&count, &ptrXinXiBao[8], 2);
+
+	resultnet.attendid = QString(QLatin1String(attendid));
+
+	QDateTime currdatetime = QDateTime::currentDateTime();
+
+	resultnet.resultid = resultnet.attendid + "-" + currdatetime.toString("yyyyMMddHHmmss");
+
+	char sid[9] = { 0 };//
+	bool isq;
+	STATTEND tempstud;
+	for (int i = 0; i < count; i++)
+	{
+		memcpy(sid, &ptrXinXiBao[10 + i * 9], 8);
+
+		tempstud.sid = QString(QLatin1String(sid));
+		if (ptrXinXiBao[18 + i * 9] == 0x01)
+			tempstud.isq = true;
+		else
+			tempstud.isq = false;
+
+		resultnet.students.append(tempstud);
+	}
 }
 
 void Deal::Deal_Result_HuiZhi(UCHAR *sostation, SOCKET sock)

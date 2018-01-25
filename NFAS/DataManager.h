@@ -34,6 +34,20 @@ struct ATTENDTIME
 	QString endtime;//结束时间
 };
 
+struct STATTEND
+{
+	QString sid;//学号
+	bool isq;//是否签到
+};
+
+struct RESULT
+{
+	QString attendid;//考勤项目编号
+	QString resultid;//考勤结果编号
+	QVector<STATTEND> students;//考勤学生列表
+};
+
+
 //学生类
 class Student
 {
