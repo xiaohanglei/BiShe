@@ -47,7 +47,7 @@ BOOL TcpServer::StartServer()
 	//创建套接字
 	if ((this->m_ServerSock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) == INVALID_SOCKET)
 	{
-		QMessageBox::information(0, "出错", "创建套接字失败，服务器启动失败！", QMessageBox::Ok);
+		QMessageBox::information(0, QStringLiteral("出错"), QStringLiteral("Failure to create a socket, server startup failure"), QMessageBox::Ok);
 		return FALSE;
 	}
 
@@ -68,7 +68,7 @@ BOOL TcpServer::StartServer()
 	ret = bind(m_ServerSock, (sockaddr*)&ServerAddress, sizeof(ServerAddress));
 	if (ret == SOCKET_ERROR)
 	{
-		QMessageBox::information(0, "出错", "地址绑定失败！", QMessageBox::Ok);//,WSAGetLastError()
+		QMessageBox::information(0, QStringLiteral("出错"), QStringLiteral("地址绑定失败！"), QMessageBox::Ok);//,WSAGetLastError()
 		return FALSE;
 	}
 
@@ -76,7 +76,7 @@ BOOL TcpServer::StartServer()
 
 	if ((listen(m_ServerSock, SOMAXCONN)) == SOCKET_ERROR)
 	{
-		QMessageBox::information(0, "出错", "监听失败！", QMessageBox::Ok);
+		QMessageBox::information(0, QStringLiteral("出错"), QStringLiteral("监听失败！"), QMessageBox::Ok);
 		return FALSE;
 	}
 	return TRUE;

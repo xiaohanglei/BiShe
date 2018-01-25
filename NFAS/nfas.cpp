@@ -119,17 +119,18 @@ void NFAS::setupUi()
 	//添加选项卡
 	if (dataManager->GetCurrentUser().GetIdentify() == 0) //只有当前用户为管理员时，才添加所有选项卡，否则只添加考勤结果选项卡
 	{
-		main_tab->addTab(new AcademicClassStudentTabWidget(dataManager), tr("Academic class student"));//学院、班级、学生
 		main_tab->addTab(new AttendanceTabWidget(dataManager), tr("attendance information"));//考勤信息
+			
 	}
-
 	main_tab->addTab(new ResultTabWidget(dataManager), tr("result information"));//考勤结果
 
 	if (dataManager->GetCurrentUser().GetIdentify() == 0) 
 	{
+		main_tab->addTab(new AcademicClassStudentTabWidget(dataManager), tr("Academic class student"));//学院、班级、学生	
 		main_tab->addTab(new UserTabWidget(dataManager), tr("user information"));//用户管理
+		main_tab->addTab(new devicewidget(dataManager), tr("Device information"));//设备管理
 	}
-	main_tab->addTab(new devicewidget(dataManager),tr("Device information"));//设备管理
+	
 	//设置布局
 	QVBoxLayout* main_layout = new QVBoxLayout;
 	main_layout->addWidget(main_tab);
@@ -139,5 +140,12 @@ void NFAS::setupUi()
 	_beginthread(TcpServer::RecvClientProc, 0, dataManager);//接收客户端连接的线程
 
 	_beginthread(ExeMingLingProc, 0, dataManager);//处理考勤设备发来的命令
+
+
+//测试
+	//UCHAR station[7] = "10-211";
+	//Deal::Deal_Attendance_HuiZhi(station, 0, dataManager);
+
+	//
 	
 }
