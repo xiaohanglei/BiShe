@@ -7,13 +7,12 @@
 #include <QObject>
 #include <QVector>
 #include <QList>
-#include <QtWidgets/QApplication>
+
 #include "TcpServer.h"
 
 
 
 #define  MAX_BUF_LEN 1024*1024
-#define MAX_ATTEND_TIME 20//系统向考勤设备发送待考勤数据的时间，不超过20分钟
 struct NETBAO//网络数据帧
 {
 	UCHAR mdstation[7];//目的电报码

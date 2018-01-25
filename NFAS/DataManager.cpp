@@ -177,7 +177,7 @@ DataManager::DataManager(QString configfile)//从配置文件中读取数据库连接信息
 		configIni->setValue("/DBServer/database", database);
 		configIni->setValue("/DBServer/uid", uid);
 		configIni->setValue("/DBServer/pwd", pwd);*/
-		QMessageBox::information(0,tr("Configuration file error"), tr("The configuration file can not be found. Please check the configuration file!"), QMessageBox::Ok);
+		QMessageBox::information(0, "配置文件出错", "找不到配置文件，请检查配置文件！", QMessageBox::Ok);
 		return;
 	}
 	else//读取配置文件
@@ -192,7 +192,9 @@ DataManager::DataManager(QString configfile)//从配置文件中读取数据库连接信息
 		QByteArray ip;
 		ip = configIni->value("/TcpServer/ip").toByteArray();
 		strcpy(tcp->m_IpAadress, ip.data());
-		tcp->m_Port = configIni->value("/TcpServer/port").toInt();		
+		tcp->m_Port = configIni->value("/TcpServer/port").toInt();
+	
+		
 
 	}
 	delete configIni;
@@ -662,7 +664,7 @@ void DataManager::InitAttendances()
 void DataManager::InitDevics()
 {
 	//配置文件操作类
-	QSettings *configIni = new QSettings(QCoreApplication::applicationDirPath() + "/config.ini", QSettings::IniFormat);
+	QSettings *configIni = new QSettings("config.ini", QSettings::IniFormat);
 
 	//读取配置文件中所有的客户端列表
 	//ALLCLIENTLIST tempClient;

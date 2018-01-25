@@ -500,26 +500,26 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 			for (QVector<ATTENDTIME>::iterator itattendtime = it->attendancetime.begin(); itattendtime != it->attendancetime.end(); itattendtime++)
 			{
 				//判断星期几
-			
 				if (itattendtime->weekday == "1")//周一
 				{
-					
+					//starttimemonday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
+					//
 					MondayCount++;
 				} 
 				//统计每个工作日的时段数量
-				else if (itattendtime->weekday == "2")//周
+				if (itattendtime->weekday == "2")//周
 				{
 					TuesdayCount++;
 				}
-				else if (itattendtime->weekday == "3")//周
+				if (itattendtime->weekday == "3")//周
 				{
 					WednesdayCount++;
 				}
-				else if (itattendtime->weekday == "4")//周
+				if (itattendtime->weekday == "4")//周
 				{
 					ThursdayCount++;
 				}
-				else if (itattendtime->weekday == "5")//周
+				if (itattendtime->weekday == "5")//周
 				{
 					FridayCount++;
 				}
@@ -529,7 +529,6 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 
 			RestAttendanceTime();//重置考勤时段控件
 			//分别显示各项对话框
-			//更新考勤时段控件的状态和值
 			for (QVector<ATTENDTIME>::iterator itattendtime = it->attendancetime.begin(); itattendtime != it->attendancetime.end();)
 			{
 				if (MondayCount > 0)
@@ -540,7 +539,6 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 
 					time1monday->setCheckState(Qt::CheckState(2));
 					starttimemonday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimemonday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 
 					itattendtime++;
 					break;
@@ -549,10 +547,8 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 					time2monday->setCheckState(Qt::CheckState(2));
 
 					starttimemonday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimemonday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimemonday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimemonday2->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					break;
 				case 3:
@@ -562,13 +558,10 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 					
 
 					starttimemonday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimemonday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimemonday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimemonday2->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimemonday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimemonday3->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					break;
 				case 4:
@@ -578,16 +571,12 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 					time4monday->setCheckState(Qt::CheckState(2));
 					
 					starttimemonday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimemonday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimemonday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimemonday2->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimemonday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimemonday3->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimemonday4->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimemonday4->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					break;
 				case 5:
@@ -598,19 +587,14 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 					time5monday->setCheckState(Qt::CheckState(2));
 
 					starttimemonday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimemonday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimemonday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimemonday2->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimemonday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimemonday3->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimemonday4->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimemonday4->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimemonday5->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimemonday5->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					break;
 				}
@@ -623,7 +607,6 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 
 					time1Tuesday->setCheckState(Qt::CheckState(2));
 					starttimeTuesday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeTuesday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 
 					itattendtime++;
 					break;
@@ -632,10 +615,8 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 					time2Tuesday->setCheckState(Qt::CheckState(2));
 
 					starttimeTuesday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeTuesday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeTuesday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeTuesday2->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					break;
 				case 3:
@@ -645,13 +626,10 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 
 
 					starttimeTuesday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeTuesday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeTuesday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeTuesday2->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeTuesday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeTuesday3->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					break;
 				case 4:
@@ -661,16 +639,12 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 					time4Tuesday->setCheckState(Qt::CheckState(2));
 
 					starttimeTuesday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeTuesday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeTuesday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeTuesday2->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeTuesday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeTuesday3->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeTuesday4->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeTuesday4->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					break;
 				case 5:
@@ -681,19 +655,14 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 					time5Tuesday->setCheckState(Qt::CheckState(2));
 
 					starttimeTuesday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeTuesday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeTuesday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeTuesday2->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeTuesday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeTuesday3->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeTuesday4->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeTuesday4->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeTuesday5->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeTuesday5->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					break;
 				}
@@ -707,7 +676,6 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 
 					time1Wednesday->setCheckState(Qt::CheckState(2));
 					starttimeWednesday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeWednesday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 
 					itattendtime++;
 					break;
@@ -716,10 +684,8 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 					time2Wednesday->setCheckState(Qt::CheckState(2));
 
 					starttimeWednesday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeWednesday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeWednesday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeWednesday2->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					break;
 				case 3:
@@ -729,13 +695,10 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 
 
 					starttimeWednesday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeWednesday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeWednesday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeWednesday2->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeWednesday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeWednesday3->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					break;
 				case 4:
@@ -745,16 +708,12 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 					time4Wednesday->setCheckState(Qt::CheckState(2));
 
 					starttimeWednesday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeWednesday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeWednesday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeWednesday2->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeWednesday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeWednesday3->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeWednesday4->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeWednesday4->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					break;
 				case 5:
@@ -765,19 +724,14 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 					time5Wednesday->setCheckState(Qt::CheckState(2));
 
 					starttimeWednesday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeWednesday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeWednesday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeWednesday2->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeWednesday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeWednesday3->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeWednesday4->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeWednesday4->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeWednesday5->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeWednesday5->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					break;
 				}
@@ -791,7 +745,6 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 
 					time1Thursday->setCheckState(Qt::CheckState(2));
 					starttimeThursday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeThursday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 
 					itattendtime++;
 					break;
@@ -800,10 +753,8 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 					time2Thursday->setCheckState(Qt::CheckState(2));
 
 					starttimeThursday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeThursday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeThursday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeThursday2->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					break;
 				case 3:
@@ -813,13 +764,10 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 
 
 					starttimeThursday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeThursday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeThursday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeThursday2->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeThursday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeThursday3->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					break;
 				case 4:
@@ -829,16 +777,12 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 					time4Thursday->setCheckState(Qt::CheckState(2));
 
 					starttimeThursday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeThursday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeThursday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeThursday2->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeThursday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeThursday3->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeThursday4->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeThursday4->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					break;
 				case 5:
@@ -849,19 +793,14 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 					time5Thursday->setCheckState(Qt::CheckState(2));
 
 					starttimeThursday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeThursday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeThursday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeThursday2->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeThursday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeThursday3->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeThursday4->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeThursday4->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeThursday5->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeThursday5->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					break;
 				}
@@ -875,7 +814,6 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 
 					time1Friday->setCheckState(Qt::CheckState(2));
 					starttimeFriday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeFriday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 
 					itattendtime++;
 					break;
@@ -884,10 +822,8 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 					time2Friday->setCheckState(Qt::CheckState(2));
 
 					starttimeFriday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeFriday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeFriday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeFriday2->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					break;
 				case 3:
@@ -897,13 +833,10 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 
 
 					starttimeFriday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeFriday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeFriday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeFriday2->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeFriday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeFriday3->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					break;
 				case 4:
@@ -913,16 +846,12 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 					time4Friday->setCheckState(Qt::CheckState(2));
 
 					starttimeFriday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeFriday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeFriday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeFriday2->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeFriday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeFriday3->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeFriday4->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeFriday4->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					break;
 				case 5:
@@ -933,25 +862,30 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 					time5Friday->setCheckState(Qt::CheckState(2));
 
 					starttimeFriday1->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeFriday1->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeFriday2->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeFriday2->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeFriday3->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeFriday3->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeFriday4->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeFriday4->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					starttimeFriday5->setTime(QTime::fromString(itattendtime->starttime, "hh:mm"));
-					endtimeFriday5->setTime(QTime::fromString(itattendtime->endtime, "hh:mm"));
 					itattendtime++;
 					break;
 				}
 
 
 			}
+
+
+
+
+
+
+
+
+
+
 
 			QStringList aclass = it->GetAclass().split(",");
 			for (int i = 0; i < aclass.size(); i++) 
