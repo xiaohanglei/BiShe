@@ -4,6 +4,7 @@
 #include "DataManager.h"
 #include "logindialog.hpp"
 #include <TcpServer.h>
+#include <QDir>
 
 
 int main(int argc, char *argv[])
@@ -13,17 +14,11 @@ int main(int argc, char *argv[])
 	qtTranslator.load(":/NFAS/nfas_zh.qm");//加载语言翻译文件
 	a.installTranslator(&qtTranslator);
 
-	QString config = "config.ini";
-
+	QString config = QCoreApplication::applicationDirPath() + "/config.ini";
 	//调试
 
 	//QApplication::desktop()->availableGeometry();
-
-
-
 	//-------------------
-
-
 
 
 	//创建本程序所用到的所有数据管理类
