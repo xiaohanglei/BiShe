@@ -18,6 +18,7 @@ AttendanceTabWidget::AttendanceTabWidget(DataManager *dm, QWidget * parent) : QW
 	connect(attendancedelete, SIGNAL(clicked()), this, SLOT(AttendanceDelete()));
 	connect(attendancetree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(updateTable(QTreeWidgetItem*, int)));
 	connect(classtree, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(updateAttendanceClass(QTreeWidgetItem*, int)));
+	connect(leadertree, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(updateAttendanceLeader(QTreeWidgetItem*, int)));
 
 	connect(checkmonday, SIGNAL(stateChanged(int)), this, SLOT(ChangeCheckMonday(int)));
 	connect(checkTuesday, SIGNAL(stateChanged(int)), this, SLOT(ChangeCheckTuesday(int)));
@@ -405,8 +406,62 @@ void AttendanceTabWidget::AttendanceModify()
 	}
 #endif
 
+	//QString aid = attendanceid->text().trimmed();
+	QString aname = attendancename->text().trimmed();
+	QString amid = attendanceclassroomid->text().trimmed();
+	QDateTime starttime = attendancestarttime->dateTime();
+	QDateTime endtime = attendanceendtime->dateTime();
+	QString leader = attendanceleader->text().trimmed();
+	QString aclass = attendanceclass->text().trimmed();
+	//-----------------------------------------------------------------------------------------
+	if (aid.length() != 8)
+	{
+		QMessageBox::information(0, tr("attendance add"), tr("length of attendance id must be 8"), QMessageBox::Ok);
+		return;
+	}
+	if (amid.length() != 6)
+	{
+		QMessageBox::information(0, tr("attendance add"), tr("length of attendance classroom id must be 6"), QMessageBox::Ok);
+		return;
+	}
+	if (!dataManager->FindDevic(amid))
+	{
+		QMessageBox::information(0, tr("attendance add"), tr("The classroom has no available attendance equipment"), QMessageBox::Ok);
+		return;
+	}
+	if (!(aname.length() > 0))
+	{
+		QMessageBox::information(0, tr("attendance add"), tr("attendance name is required"), QMessageBox::Ok);
+		return;
+	}
+	if (!(leader.length() > 0))
+	{
+		QMessageBox::information(0, tr("attendance add"), tr("leader name is required"), QMessageBox::Ok);
+		return;
+	}
+	if (!(aclass.length() > 0))
+	{
+		QMessageBox::information(0, tr("attendance add"), tr("please select attendance class"), QMessageBox::Ok);
+		return;
+	}
+	QDateTime datetime;
+	auto now = datetime.currentDateTime();
+	//必须提前10分钟以上发送开始考勤时间
+	if (starttime.toTime_t() - now.toTime_t() < 10 * 60)
+	{
+		//考勤开始时间必须比当前时间晚10分钟以上
+		QMessageBox::information(0, tr("attendance add"), tr("start time must later than now more than 10 mins"), QMessageBox::Ok);
+		return;
+	}
+	if (endtime.toTime_t() - starttime.toTime_t() < 30 * 60)//考勤时长不得低于30分钟
+	{
+		QMessageBox::information(0, tr("attendance add"), tr("end time must later than start time more than 30 mins"), QMessageBox::Ok);
+		return;
+	}
 
-	Attendance attendance(aid, attendanceclassroomid->text().trimmed(), attendancename->text().trimmed(), attendancestarttime->dateTime(), attendanceendtime->dateTime(), attendanceclass->text());
+
+
+	Attendance attendance(aid, amid, aname, starttime, endtime, aclass,leader);
 
 	//先删除掉该考勤项目的考勤时段
 	dataManager->AttendanceOP(attendance, 3);
@@ -433,7 +488,7 @@ void AttendanceTabWidget::AttendanceDelete()
 	if (items.size() == 1) 
 	{
 		auto aid = items[0]->text(0).split("-")[0];
-		if (dataManager->AttendanceOP(Attendance(aid, "", "", "", ""), 2) && dataManager->AttendanceOP(Attendance(aid, "", "", "", ""), 3))
+		if (dataManager->AttendanceOP(Attendance(aid, "", "", "", "",""), 2) && dataManager->AttendanceOP(Attendance(aid, "", "", "", "",""), 3))
 		{
 			QMessageBox::information(0, tr("attendance delete"), tr("attendance delete successfully"), QMessageBox::Ok);
 
@@ -470,6 +525,7 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 	header << tr("student id") << tr("student name") << tr("student sex") << tr("student academic") << tr("student class") << tr("student figure");
 	attendancetable->setHorizontalHeaderLabels(header);
 	auto s = item->text(0).split("-")[0];
+	
 	for (auto it = dataManager->GetAttendance()->begin(); it != dataManager->GetAttendance()->end(); it++) 
 	{
 		if (it->GetID() == s) 
@@ -484,8 +540,9 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 			QString endtime = it->GetSETime().split("-").last();
 			attendancestarttime->setDateTime(QDateTime::fromString(satrttime, "yyyy/MM/dd hh:mm"));
 			attendanceendtime->setDateTime(QDateTime::fromString(endtime, "yyyy/MM/dd hh:mm"));
+			attendanceleader->setText(it->GetLeader());
 
-			//将该考勤项目的考勤时段反应到界面的复选框和时间空间中
+			//将该考勤项目的考勤时段反应到界面的复选框和时间控件中
 
 			//遍历该考勤项目的考勤时段列表
 			//Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
@@ -975,6 +1032,7 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 			break;
 		}
 	}
+	
 	for (int i = 0; i < attendancetable->rowCount(); i++)
 	{
 		attendancetable->item(i, 0)->setFlags(attendancetable->item(i, 0)->flags() & (~Qt::ItemIsEditable));
@@ -986,10 +1044,24 @@ void AttendanceTabWidget::updateTable(QTreeWidgetItem * item, int col)
 	}
 
 	//
+}
+
+void AttendanceTabWidget::updateAttendanceLeader(QTreeWidgetItem * item, int col)//设置考勤负责人
+{
+	QString username = item->text(0);
 
 
+	//判断选择的负责人是否在用户列表中
+	for (auto it = dataManager->GetUser()->begin(); it != dataManager->GetUser()->end(); it++)
+	{
+		if (username == it->GetUID())
+		{
+			attendanceleader->setText(username);
+			return;
+		}
+	}
 
-
+		
 }
 
 void AttendanceTabWidget::updateAttendanceClass(QTreeWidgetItem * item, int col)//更新考勤班级
@@ -1292,6 +1364,7 @@ void AttendanceTabWidget::AttendanceAdd()
 	QString amid = attendanceclassroomid->text().trimmed();
 	QDateTime starttime = attendancestarttime->dateTime();
 	QDateTime endtime = attendanceendtime->dateTime();
+	QString leader = attendanceleader->text().trimmed();
 	QString aclass = attendanceclass->text().trimmed();	
 
 #if 1//读取界面中考勤时段的值
@@ -1492,7 +1565,7 @@ void AttendanceTabWidget::AttendanceAdd()
 		QMessageBox::information(0, tr("attendance add"), tr("length of attendance id must be 8"), QMessageBox::Ok);
 		return;
 	}
-	if (amid.length() != 6 && dataManager->FindDevic(amid)) 
+	if (amid.length() != 6 ) 
 	{
 		QMessageBox::information(0, tr("attendance add"), tr("length of attendance classroom id must be 6"), QMessageBox::Ok);
 		return;
@@ -1505,6 +1578,11 @@ void AttendanceTabWidget::AttendanceAdd()
 	if (!(aname.length() > 0)) 
 	{
 		QMessageBox::information(0, tr("attendance add"), tr("attendance name is required"), QMessageBox::Ok);
+		return;
+	}
+	if (!(leader.length() > 0))
+	{
+		QMessageBox::information(0, tr("attendance add"), tr("leader name is required"), QMessageBox::Ok);
 		return;
 	}
 	if (!(aclass.length() > 0)) 
@@ -1525,11 +1603,9 @@ void AttendanceTabWidget::AttendanceAdd()
 	{
 		QMessageBox::information(0, tr("attendance add"), tr("end time must later than start time more than 30 mins"), QMessageBox::Ok);
 		return;
-	}
-	
-	
+	}	
 
-	Attendance attendance(aid, amid, aname, starttime, endtime, aclass);//考勤信息
+	Attendance attendance(aid, amid, aname, starttime, endtime, aclass,leader);//考勤信息
 	
 	if (dataManager->AttendanceOP(attendance, 0) && AttendanceTimePutDB(aid,monday_attend,Tuesday_attend,Wednesday_attend,Thursday_attend,Friday_attend)) //将考勤时段入库	
 	{
@@ -1567,6 +1643,13 @@ void AttendanceTabWidget::setupUi()
 	classtree->setMaximumWidth(150);
 	classtree->setHeaderLabel(tr("class information"));
 	rightclasslayout->addWidget(classtree);
+
+	leadertree = new QTreeWidget;
+	leadertree->setColumnCount(1);
+	leadertree->setMaximumWidth(150);
+	leadertree->setHeaderLabel(tr("leader information"));
+	rightclasslayout->addWidget(leadertree);
+
 	rightlayout->addLayout(rightclasslayout);
 	QGroupBox* attendancegroup = new QGroupBox(tr("attendance information administrate"));
 	QVBoxLayout* attendacelayout = new QVBoxLayout;
@@ -1582,9 +1665,12 @@ void AttendanceTabWidget::setupUi()
 	QLabel* labelstarttime = new QLabel(tr("start time"));
 	QLabel* labelendtime = new QLabel(tr("end time"));
 	QLabel* labelclass = new QLabel(tr("attendance class"));
+	QLabel * labelleader = new QLabel(tr("leader name"));
 	attendanceid = new QLineEdit;
 	attendanceid->setMaxLength(8);
-	attendancename = new QLineEdit;
+	attendanceid->setMinimumWidth(110);
+
+	attendancename = new QLineEdit;	
 	attendanceclassroomid = new QLineEdit;
 	attendanceclassroomid->setMaxLength(6);
 	QDateTime datetime;
@@ -1597,8 +1683,15 @@ void AttendanceTabWidget::setupUi()
 	attendanceendtime->setDisplayFormat("yyyy/MM/dd HH:mm");
 	attendanceendtime->setDateTime(current.addSecs(45*60));
 	attendanceendtime->setCalendarPopup(true);
+
+	attendanceleader = new QLineEdit;
+	//attendanceleader->setEnabled(false);
+	attendanceleader->setReadOnly(true);
+	attendanceleader->setMaxLength(6);//输入限制
+
 	attendanceclass = new QLineEdit;
-	attendanceclass->setEnabled(false);
+	attendanceclass->setMinimumWidth(800);
+	attendanceclass->setReadOnly(true);
 	attendanceinfo1->addWidget(labelattendaceid);
 	attendanceinfo1->addWidget(attendanceid);
 	attendanceinfo1->addStretch(1);
@@ -1607,14 +1700,26 @@ void AttendanceTabWidget::setupUi()
 	attendanceinfo1->addStretch(1);
 	attendanceinfo1->addWidget(labelattendanceclassroomid);
 	attendanceinfo1->addWidget(attendanceclassroomid);
+
+	attendanceinfo1->addStretch(8);
+
 	attendanceinfo2->addWidget(labelstarttime);
 	attendanceinfo2->addWidget(attendancestarttime);
-	attendanceinfo2->addStretch(1);
+	attendanceinfo2->addStretch(2);
 	attendanceinfo2->addWidget(labelendtime);
 	attendanceinfo2->addWidget(attendanceendtime);
+
 	attendanceinfo2->addStretch(2);
+
+	attendanceinfo2->addWidget(labelleader);
+	attendanceinfo2->addWidget(attendanceleader);	
+
+	attendanceinfo2->addStretch(13);
+	
 	attendanceinfo3->addWidget(labelclass);
 	attendanceinfo3->addWidget(attendanceclass);
+	attendanceinfo3->addStretch(1);
+
 	attendacelayout->addLayout(attendanceinfo1);
 	attendacelayout->addLayout(attendanceinfo2);
 	attendacelayout->addLayout(attendanceinfo3);
@@ -2087,4 +2192,28 @@ void AttendanceTabWidget::updateTree()
 		classtree->addTopLevelItem(parent);
 	}
 	//classtree->expandAll();
+
+	leadertree->clear();
+
+	auto admini = new QTreeWidgetItem(QStringList() << tr("Administrators"));
+	auto teacher = new QTreeWidgetItem(QStringList() << tr("Teachers"));
+	
+	for (auto iter = dataManager->GetUser()->begin(); iter != dataManager->GetUser()->end(); iter++)
+	{
+		auto parent = new QTreeWidgetItem(QStringList() << iter->GetUID());
+		if (iter->GetIdentify() == 0)//管理员
+		{ 			
+			admini->addChild(parent);
+		}
+		else//普通教师
+		{
+			
+			teacher->addChild(parent);
+		}		
+	}
+	leadertree->addTopLevelItem(admini);
+	leadertree->addTopLevelItem(teacher);
+
+	leadertree->expandAll();//展开	
+
 }

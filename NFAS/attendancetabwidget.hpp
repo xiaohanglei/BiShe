@@ -52,6 +52,7 @@ public slots:
 	void AttendanceDelete();
 	void updateTable(QTreeWidgetItem* item, int col);
 	void updateAttendanceClass(QTreeWidgetItem* item, int col);
+	void updateAttendanceLeader(QTreeWidgetItem * item, int col);//更新考勤班级
 
 	void ChangeCheckMonday(int state);
 	void ChangeCheckTuesday (int state);
@@ -69,12 +70,16 @@ private:
 	DataManager* dataManager;
 	QTreeWidget* attendancetree;
 	QTreeWidget* classtree;
+
+	QTreeWidget * leadertree;
+
 	QTableWidget* attendancetable;
 	QLineEdit* attendanceid;
 	QLineEdit* attendancename;
 	QLineEdit* attendanceclassroomid;
 	QDateTimeEdit* attendancestarttime;
 	QDateTimeEdit* attendanceendtime;
+	QLineEdit * attendanceleader;
 	QLineEdit* attendanceclass;
 	QPushButton* attendanceadd;
 	QPushButton* attendancemodify;

@@ -10,8 +10,6 @@
 #include <QtWidgets/QApplication>
 #include "TcpServer.h"
 
-
-
 #define  MAX_BUF_LEN 1024*1024
 #define MAX_ATTEND_TIME 20//系统向考勤设备发送待考勤数据的时间，不超过20分钟
 struct NETBAO//网络数据帧
@@ -237,15 +235,18 @@ class Device
 {
 public :
 	Device();
-	Device(QString qname,QString qip);
+	Device(QString qname,QString qid ,QString qip);
 	~Device();
 
 	void SetName(QString qname);
+	void SetId(QString qid);
 	void SetIp(QString qip);
 	QString GetName();
+	QString GetId();
 	QString GetIp();
 private:
 	QString name;
+	QString id;
 	QString ip;
 };
 
@@ -333,8 +334,8 @@ class Attendance
 
 public:
 	Attendance();
-	Attendance(QString id, QString mid, QString name, QString time, QString aclass);
-	Attendance(QString id, QString mid, QString name, QDateTime stime, QDateTime etime, QString aclass);
+	Attendance(QString id, QString mid, QString name, QString time, QString aclass,QString leader);
+	Attendance(QString id, QString mid, QString name, QDateTime stime, QDateTime etime, QString aclass,QString leader);
 
 	//QString TimeToString();
 	//QString StudentToString();
@@ -355,6 +356,10 @@ public:
 	{
 		return attendanceclass;
 	}
+	const QString GetLeader() const
+	{
+		return attendanceleader;
+	}
 	const QString GetSETime() const;
 
 	QVector<ATTENDTIME> attendancetime;//考勤时段
@@ -365,6 +370,7 @@ private:
 	QDateTime attendancestarttime;
 	QDateTime attendanceendtime;
 	QString attendanceclass;
+	QString attendanceleader;
 	
 };
 
@@ -375,6 +381,10 @@ class DataManager:public QObject
 	Q_OBJECT
 public:
 	explicit DataManager(QString configfile);
+
+	//查询现在是否已经有具有和考勤设备通讯的管理客户端
+
+	bool IsServerOnline(int op);
 
 	//数据库的更新（插入，删除）,通过op方式来确定，
 
@@ -489,4 +499,10 @@ typedef struct
 	DataManager *dm;
 	SOCKET ssock;
 }THREADARG;
+
+
+
+
+
+
 #endif // DATAMANAGER_H

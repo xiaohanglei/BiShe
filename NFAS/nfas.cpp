@@ -9,6 +9,7 @@
 #include "usertabwidget.hpp"
 #include "academicclassstudenttabwidget.hpp"
 #include "devicewidget.hpp"
+#include <QMessageBox>
 
 //#include <QtWidgets/QApplication>
 #include <QDesktopWidget>
@@ -17,21 +18,30 @@ NFAS::NFAS(DataManager *dm,QWidget *parent)
 	: QDialog(parent)
 {
 	dataManager = dm;
+	IsNetWork = false;;//
 	setupUi();
-
 	connect(main_tab, SIGNAL(currentChanged(int)), this, SLOT(UpdateTab(int)));
+
+	
+
+	//connect(testdeal, SIGNAL(&Deal::newPaper(QString)), this, SLOT(slotstestdeal(QString)));
+
+	//testdeal->sendtest();	
+
 }
 
 NFAS::~NFAS()
 {
-
+	
 }
 
 void NFAS::ExeMingLingProc(LPVOID another)
 {
 	DataManager * dm = (DataManager *)another;
 
+	
 	NETBAO xinxibao ;
+
 
 	while (1)
 	{
@@ -50,6 +60,8 @@ void NFAS::ExeMingLingProc(LPVOID another)
 
 		LeaveCriticalSection(dm->GetCriNetBao());
 
+		Deal tempdeal;
+
 		//检查设备列表中有无该设备
 		QString tempQS;
 		tempQS = QString(QLatin1String((char * )xinxibao.sostation));
@@ -64,12 +76,28 @@ void NFAS::ExeMingLingProc(LPVOID another)
 			Deal::Deal_Attendance_HuiZhi(xinxibao.sostation, xinxibao.sock,dm);//不用解析命令，直接回执
 			break;
 		case 0x12://推送考勤记录表命令
-			Deal::Deal_Result_MingLing(xinxibao);
+			Deal::Deal_Result_MingLing(xinxibao,dm);
 			break;
 
 		}		
 	}
 
+}
+
+void NFAS::closeEvent(QCloseEvent * event)
+{
+	QMessageBox::StandardButton button;
+	button = QMessageBox::question(this, tr("Exit"), QString(tr("Affirm Exit")), QMessageBox::Yes | QMessageBox::No);
+	if (button == QMessageBox::No)
+	{
+		event->ignore(); // 忽略退出信号，程序继续进行  
+	}
+	else if (button == QMessageBox::Yes)
+	{
+		if(IsNetWork)//当本身具有网络通讯功能的客户端时才能设置下线
+			dataManager->IsServerOnline(3);
+		event->accept(); // 接受退出信号，程序退出  
+	}
 }
 
 //选项卡切换
@@ -83,16 +111,19 @@ void NFAS::UpdateTab(int index)
 		switch (index)
 		{
 		case 0:
-			((AcademicClassStudentTabWidget*)widget)->UpdateTab();//学院、班级、学生选项卡
-			break;
-		case 1:
 			((AttendanceTabWidget*)widget)->UpdateTab();//考勤信息
+			break;		
+		case 1:
+			((ResultTabWidget*)widget)->UpdateTab();//考勤结果
 			break;
 		case 2:
-			((ResultTabWidget*)widget)->UpdateTab();//考勤结果
+			((AcademicClassStudentTabWidget*)widget)->UpdateTab();//学院、班级、学生选项卡
 			break;
 		case 3:
 			((UserTabWidget*)widget)->UpdateTab(); //用户管理
+			break;
+		case 4:
+			((devicewidget*)widget)->UpdateTab(); //设备信息
 			break;
 		default:
 			break;
@@ -109,10 +140,10 @@ void NFAS::setupUi()
 	//this->setFixedSize(QSize(1440,900));
 
 	QRect a = (QApplication::desktop())->availableGeometry();
-	this->setGeometry(0,30,1440,900);
+	this->setGeometry(400,320,1440,900);
 	//this->setFixedSize(QSize(a.width(), a.height()-100));
 	//this->showFullScreen();//全屏显示
-	this->showMaximized();	
+	//this->showMaximized();	
 
 	main_tab = new QTabWidget;
 
@@ -122,7 +153,9 @@ void NFAS::setupUi()
 		main_tab->addTab(new AttendanceTabWidget(dataManager), tr("attendance information"));//考勤信息
 			
 	}
-	main_tab->addTab(new ResultTabWidget(dataManager), tr("result information"));//考勤结果
+	ResultTabWidget * temp = new ResultTabWidget(dataManager);
+	main_tab->addTab(temp, tr("result information"));//考勤结果
+	//connect(testdeal, SIGNAL(&Deal::newPaper(QString)), temp, SLOT(&ResultTabWidget::slotstestdeal(QString)));
 
 	if (dataManager->GetCurrentUser().GetIdentify() == 0) 
 	{
@@ -136,11 +169,15 @@ void NFAS::setupUi()
 	main_layout->addWidget(main_tab);
 	this->setLayout(main_layout);
 
-	//开启线程
-	_beginthread(TcpServer::RecvClientProc, 0, dataManager);//接收客户端连接的线程
-
-	_beginthread(ExeMingLingProc, 0, dataManager);//处理考勤设备发来的命令
-
+	if (dataManager->GetCurrentUser().GetIdentify() == 0 && !dataManager->IsServerOnline(1))//只有当前用户为管理员且没有具有通讯功能的管理客户端在线时，才能开启网络通讯功能
+	{
+		//设置在线标记
+		dataManager->IsServerOnline(2);
+		IsNetWork = true;
+		//开启线程
+		_beginthread(TcpServer::RecvClientProc, 0, dataManager);//接收客户端连接的线程
+		_beginthread(ExeMingLingProc, 0, dataManager);//处理考勤设备发来的命令
+	}
 
 //测试
 	//UCHAR station[7] = "10-211";

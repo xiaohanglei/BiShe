@@ -23,12 +23,21 @@ public:
 	static void Deal_Attendance_MingLing(NETBAO bao);//请求考勤数据命令
 	static void Deal_Attendance_HuiZhi(UCHAR *sostation, SOCKET sock, DataManager * dm);//回执待考勤数据
 	
-	static void Deal_Result_MingLing(NETBAO bao);//处理考勤设备推送的考勤结果
-	static void Deal_Result_HuiZhi(UCHAR *sostation, SOCKET sock);//回执给考勤设备的处理结果
+	static void Deal_Result_MingLing(NETBAO bao, DataManager * dm);//处理考勤设备推送的考勤结果
+	static bool Result_Db(RESULT *result, DataManager * dm);//处理考勤设备推送的考勤结果
+
+	static void Deal_Result_HuiZhi(UCHAR *sostation, SOCKET sock, bool ret);//回执给考勤设备的处理结果
 
 
+	void sendtest()
+	{
+		emit newPaper("lxh");
+	}
+
+signals:
+	void newPaper(const QString &name);
+	
 private:
 	UCHAR *m_All10ClientRecvBuf;//解析数据的缓冲区
 	int m_buf10len;
-	
 };

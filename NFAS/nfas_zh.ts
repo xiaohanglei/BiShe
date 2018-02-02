@@ -340,60 +340,70 @@
 <context>
     <name>AttendanceTabWidget</name>
     <message>
-        <location filename="attendancetabwidget.cpp" line="470"/>
+        <location filename="attendancetabwidget.cpp" line="525"/>
         <source>student id</source>
         <translation>学生编号</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="470"/>
+        <location filename="attendancetabwidget.cpp" line="525"/>
         <source>student name</source>
         <translation>学生名称</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="470"/>
+        <location filename="attendancetabwidget.cpp" line="525"/>
         <source>student sex</source>
         <translation>学生性别</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="470"/>
+        <location filename="attendancetabwidget.cpp" line="525"/>
         <source>student academic</source>
         <translation>所在学院</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="470"/>
+        <location filename="attendancetabwidget.cpp" line="525"/>
         <source>student class</source>
         <translation>所在班级</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="470"/>
+        <location filename="attendancetabwidget.cpp" line="525"/>
         <source>student figure</source>
         <translation>学生指纹信息</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="968"/>
+        <location filename="attendancetabwidget.cpp" line="1025"/>
         <source>male</source>
         <translation>男</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="968"/>
+        <location filename="attendancetabwidget.cpp" line="1025"/>
         <source>female</source>
         <translation>女</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1492"/>
-        <location filename="attendancetabwidget.cpp" line="1497"/>
-        <location filename="attendancetabwidget.cpp" line="1502"/>
-        <location filename="attendancetabwidget.cpp" line="1507"/>
-        <location filename="attendancetabwidget.cpp" line="1512"/>
-        <location filename="attendancetabwidget.cpp" line="1521"/>
-        <location filename="attendancetabwidget.cpp" line="1526"/>
-        <location filename="attendancetabwidget.cpp" line="1538"/>
-        <location filename="attendancetabwidget.cpp" line="1621"/>
+        <location filename="attendancetabwidget.cpp" line="419"/>
+        <location filename="attendancetabwidget.cpp" line="424"/>
+        <location filename="attendancetabwidget.cpp" line="429"/>
+        <location filename="attendancetabwidget.cpp" line="434"/>
+        <location filename="attendancetabwidget.cpp" line="439"/>
+        <location filename="attendancetabwidget.cpp" line="444"/>
+        <location filename="attendancetabwidget.cpp" line="453"/>
+        <location filename="attendancetabwidget.cpp" line="458"/>
+        <location filename="attendancetabwidget.cpp" line="1565"/>
+        <location filename="attendancetabwidget.cpp" line="1570"/>
+        <location filename="attendancetabwidget.cpp" line="1575"/>
+        <location filename="attendancetabwidget.cpp" line="1580"/>
+        <location filename="attendancetabwidget.cpp" line="1585"/>
+        <location filename="attendancetabwidget.cpp" line="1590"/>
+        <location filename="attendancetabwidget.cpp" line="1599"/>
+        <location filename="attendancetabwidget.cpp" line="1604"/>
+        <location filename="attendancetabwidget.cpp" line="1614"/>
+        <location filename="attendancetabwidget.cpp" line="1726"/>
         <source>attendance add</source>
         <translation>添加考勤信息</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1492"/>
+        <location filename="attendancetabwidget.cpp" line="419"/>
+        <location filename="attendancetabwidget.cpp" line="1565"/>
         <source>length of attendance id must be 8</source>
         <translation>考勤信息编号长度必须为8</translation>
     </message>
@@ -402,26 +412,26 @@
         <translation type="obsolete">考勤机编号长度必须为6</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="205"/>
-        <location filename="attendancetabwidget.cpp" line="210"/>
-        <location filename="attendancetabwidget.cpp" line="416"/>
-        <location filename="attendancetabwidget.cpp" line="426"/>
+        <location filename="attendancetabwidget.cpp" line="206"/>
+        <location filename="attendancetabwidget.cpp" line="211"/>
+        <location filename="attendancetabwidget.cpp" line="471"/>
+        <location filename="attendancetabwidget.cpp" line="481"/>
         <source>attendance modify</source>
         <translation>考勤信息修改</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="205"/>
-        <location filename="attendancetabwidget.cpp" line="458"/>
+        <location filename="attendancetabwidget.cpp" line="206"/>
+        <location filename="attendancetabwidget.cpp" line="513"/>
         <source>please select attendance first</source>
         <translation>请先选择需修改的考勤信息</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="210"/>
+        <location filename="attendancetabwidget.cpp" line="211"/>
         <source>please select attendance class first</source>
         <translation>请选择需要修改的考勤班级信息</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="416"/>
+        <location filename="attendancetabwidget.cpp" line="471"/>
         <source>attendance modify successfully</source>
         <translation>考勤信息修改成功</translation>
     </message>
@@ -434,238 +444,270 @@
         <translation type="obsolete">学院修改失败</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="426"/>
+        <location filename="attendancetabwidget.cpp" line="481"/>
         <source>attendance modify failed</source>
         <translation>考勤信息修改失败</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="438"/>
+        <location filename="attendancetabwidget.cpp" line="493"/>
         <source>attendance delete successfully</source>
         <translation>考勤信息删除成功</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="453"/>
+        <location filename="attendancetabwidget.cpp" line="508"/>
         <source>attendance delete failed</source>
         <translation>考勤信息删除失败</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1497"/>
+        <location filename="attendancetabwidget.cpp" line="424"/>
+        <location filename="attendancetabwidget.cpp" line="1570"/>
         <source>length of attendance classroom id must be 6</source>
         <translation>考勤教室编号长度必须为6</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1502"/>
+        <location filename="attendancetabwidget.cpp" line="429"/>
+        <location filename="attendancetabwidget.cpp" line="1575"/>
         <source>The classroom has no available attendance equipment</source>
         <translation>该教室没有可用的考勤设备</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1507"/>
+        <location filename="attendancetabwidget.cpp" line="434"/>
+        <location filename="attendancetabwidget.cpp" line="1580"/>
         <source>attendance name is required</source>
         <translation>考勤信息名称必须填写</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1512"/>
+        <location filename="attendancetabwidget.cpp" line="439"/>
+        <location filename="attendancetabwidget.cpp" line="1585"/>
+        <source>leader name is required</source>
+        <translation>负责人不能为空</translation>
+    </message>
+    <message>
+        <location filename="attendancetabwidget.cpp" line="444"/>
+        <location filename="attendancetabwidget.cpp" line="1590"/>
         <source>please select attendance class</source>
         <translation>请选择待考勤班级</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1521"/>
+        <location filename="attendancetabwidget.cpp" line="453"/>
+        <location filename="attendancetabwidget.cpp" line="1599"/>
         <source>start time must later than now more than 10 mins</source>
         <translation>考勤开始时间必须比当前时间晚10分钟以上</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1526"/>
+        <location filename="attendancetabwidget.cpp" line="458"/>
+        <location filename="attendancetabwidget.cpp" line="1604"/>
         <source>end time must later than start time more than 30 mins</source>
         <translation>考勤结束时间必须比考勤结束时间晚30分钟以上</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1538"/>
+        <location filename="attendancetabwidget.cpp" line="1614"/>
         <source>attendance add successfully</source>
         <translation>考勤信息添加成功</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1548"/>
+        <location filename="attendancetabwidget.cpp" line="1624"/>
         <source>academic add</source>
         <translation>添加考勤信息</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1548"/>
+        <location filename="attendancetabwidget.cpp" line="1624"/>
         <source>academic add failed</source>
         <translation>考勤信息添加失败</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1558"/>
+        <location filename="attendancetabwidget.cpp" line="1634"/>
         <source>attendance information</source>
         <translation>考勤信息</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1568"/>
+        <location filename="attendancetabwidget.cpp" line="1644"/>
         <source>class information</source>
-        <translation>班级信息</translation>
+        <translation>    班级信息</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1571"/>
+        <location filename="attendancetabwidget.cpp" line="1650"/>
+        <source>leader information</source>
+        <translation>     负责人</translation>
+    </message>
+    <message>
+        <location filename="attendancetabwidget.cpp" line="1654"/>
         <source>attendance information administrate</source>
         <translation>考勤信息管理</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1579"/>
+        <location filename="attendancetabwidget.cpp" line="1662"/>
         <source>attendance id</source>
         <translation>考勤信息编号</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1580"/>
+        <location filename="attendancetabwidget.cpp" line="1663"/>
         <source>attendance name</source>
         <translation>考勤信息名称</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1581"/>
+        <location filename="attendancetabwidget.cpp" line="1664"/>
         <source>classroom id</source>
         <translation>教室编号</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1651"/>
+        <location filename="attendancetabwidget.cpp" line="1668"/>
+        <source>leader name</source>
+        <translation>负责人</translation>
+    </message>
+    <message>
+        <location filename="attendancetabwidget.cpp" line="1756"/>
         <source>Monday</source>
         <translation>周一</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1653"/>
-        <location filename="attendancetabwidget.cpp" line="1677"/>
-        <location filename="attendancetabwidget.cpp" line="1695"/>
-        <location filename="attendancetabwidget.cpp" line="1714"/>
-        <location filename="attendancetabwidget.cpp" line="1732"/>
+        <location filename="attendancetabwidget.cpp" line="1758"/>
+        <location filename="attendancetabwidget.cpp" line="1782"/>
+        <location filename="attendancetabwidget.cpp" line="1800"/>
+        <location filename="attendancetabwidget.cpp" line="1819"/>
+        <location filename="attendancetabwidget.cpp" line="1837"/>
         <source>time1</source>
         <translation>时段一</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1662"/>
-        <location filename="attendancetabwidget.cpp" line="1680"/>
-        <location filename="attendancetabwidget.cpp" line="1698"/>
-        <location filename="attendancetabwidget.cpp" line="1717"/>
-        <location filename="attendancetabwidget.cpp" line="1735"/>
+        <location filename="attendancetabwidget.cpp" line="1767"/>
+        <location filename="attendancetabwidget.cpp" line="1785"/>
+        <location filename="attendancetabwidget.cpp" line="1803"/>
+        <location filename="attendancetabwidget.cpp" line="1822"/>
+        <location filename="attendancetabwidget.cpp" line="1840"/>
         <source>time2</source>
         <translation>时段二</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1665"/>
-        <location filename="attendancetabwidget.cpp" line="1683"/>
-        <location filename="attendancetabwidget.cpp" line="1701"/>
-        <location filename="attendancetabwidget.cpp" line="1720"/>
-        <location filename="attendancetabwidget.cpp" line="1738"/>
+        <location filename="attendancetabwidget.cpp" line="1770"/>
+        <location filename="attendancetabwidget.cpp" line="1788"/>
+        <location filename="attendancetabwidget.cpp" line="1806"/>
+        <location filename="attendancetabwidget.cpp" line="1825"/>
+        <location filename="attendancetabwidget.cpp" line="1843"/>
         <source>time3</source>
         <translation>时段三</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1668"/>
-        <location filename="attendancetabwidget.cpp" line="1686"/>
-        <location filename="attendancetabwidget.cpp" line="1704"/>
-        <location filename="attendancetabwidget.cpp" line="1723"/>
-        <location filename="attendancetabwidget.cpp" line="1741"/>
+        <location filename="attendancetabwidget.cpp" line="1773"/>
+        <location filename="attendancetabwidget.cpp" line="1791"/>
+        <location filename="attendancetabwidget.cpp" line="1809"/>
+        <location filename="attendancetabwidget.cpp" line="1828"/>
+        <location filename="attendancetabwidget.cpp" line="1846"/>
         <source>time4</source>
         <translation>时段四</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1671"/>
-        <location filename="attendancetabwidget.cpp" line="1689"/>
-        <location filename="attendancetabwidget.cpp" line="1707"/>
-        <location filename="attendancetabwidget.cpp" line="1726"/>
-        <location filename="attendancetabwidget.cpp" line="1744"/>
+        <location filename="attendancetabwidget.cpp" line="1776"/>
+        <location filename="attendancetabwidget.cpp" line="1794"/>
+        <location filename="attendancetabwidget.cpp" line="1812"/>
+        <location filename="attendancetabwidget.cpp" line="1831"/>
+        <location filename="attendancetabwidget.cpp" line="1849"/>
         <source>time5</source>
         <translation>时段五</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1676"/>
+        <location filename="attendancetabwidget.cpp" line="1781"/>
         <source>Tuesday</source>
         <translation>周二</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1694"/>
+        <location filename="attendancetabwidget.cpp" line="1799"/>
         <source>Wednesday</source>
         <translation>周三</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1713"/>
+        <location filename="attendancetabwidget.cpp" line="1818"/>
         <source>Thursday</source>
         <translation>周四</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1731"/>
+        <location filename="attendancetabwidget.cpp" line="1836"/>
         <source>Friday</source>
         <translation>周五</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1749"/>
+        <location filename="attendancetabwidget.cpp" line="1854"/>
         <source>Saturday</source>
         <translation>周六</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1750"/>
+        <location filename="attendancetabwidget.cpp" line="1855"/>
         <source>Sunday</source>
         <translation>周天</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1766"/>
-        <location filename="attendancetabwidget.cpp" line="1774"/>
-        <location filename="attendancetabwidget.cpp" line="1782"/>
-        <location filename="attendancetabwidget.cpp" line="1790"/>
-        <location filename="attendancetabwidget.cpp" line="1797"/>
-        <location filename="attendancetabwidget.cpp" line="1815"/>
-        <location filename="attendancetabwidget.cpp" line="1822"/>
-        <location filename="attendancetabwidget.cpp" line="1829"/>
-        <location filename="attendancetabwidget.cpp" line="1836"/>
-        <location filename="attendancetabwidget.cpp" line="1843"/>
-        <location filename="attendancetabwidget.cpp" line="1860"/>
-        <location filename="attendancetabwidget.cpp" line="1867"/>
-        <location filename="attendancetabwidget.cpp" line="1874"/>
-        <location filename="attendancetabwidget.cpp" line="1881"/>
-        <location filename="attendancetabwidget.cpp" line="1888"/>
-        <location filename="attendancetabwidget.cpp" line="1907"/>
-        <location filename="attendancetabwidget.cpp" line="1914"/>
-        <location filename="attendancetabwidget.cpp" line="1921"/>
-        <location filename="attendancetabwidget.cpp" line="1928"/>
-        <location filename="attendancetabwidget.cpp" line="1935"/>
-        <location filename="attendancetabwidget.cpp" line="1954"/>
-        <location filename="attendancetabwidget.cpp" line="1961"/>
-        <location filename="attendancetabwidget.cpp" line="1968"/>
-        <location filename="attendancetabwidget.cpp" line="1975"/>
-        <location filename="attendancetabwidget.cpp" line="1982"/>
+        <location filename="attendancetabwidget.cpp" line="1871"/>
+        <location filename="attendancetabwidget.cpp" line="1879"/>
+        <location filename="attendancetabwidget.cpp" line="1887"/>
+        <location filename="attendancetabwidget.cpp" line="1895"/>
+        <location filename="attendancetabwidget.cpp" line="1902"/>
+        <location filename="attendancetabwidget.cpp" line="1920"/>
+        <location filename="attendancetabwidget.cpp" line="1927"/>
+        <location filename="attendancetabwidget.cpp" line="1934"/>
+        <location filename="attendancetabwidget.cpp" line="1941"/>
+        <location filename="attendancetabwidget.cpp" line="1948"/>
+        <location filename="attendancetabwidget.cpp" line="1965"/>
+        <location filename="attendancetabwidget.cpp" line="1972"/>
+        <location filename="attendancetabwidget.cpp" line="1979"/>
+        <location filename="attendancetabwidget.cpp" line="1986"/>
+        <location filename="attendancetabwidget.cpp" line="1993"/>
+        <location filename="attendancetabwidget.cpp" line="2012"/>
+        <location filename="attendancetabwidget.cpp" line="2019"/>
+        <location filename="attendancetabwidget.cpp" line="2026"/>
+        <location filename="attendancetabwidget.cpp" line="2033"/>
+        <location filename="attendancetabwidget.cpp" line="2040"/>
+        <location filename="attendancetabwidget.cpp" line="2059"/>
+        <location filename="attendancetabwidget.cpp" line="2066"/>
+        <location filename="attendancetabwidget.cpp" line="2073"/>
+        <location filename="attendancetabwidget.cpp" line="2080"/>
+        <location filename="attendancetabwidget.cpp" line="2087"/>
         <source> to </source>
         <translation>至</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="2049"/>
+        <location filename="attendancetabwidget.cpp" line="2154"/>
         <source>attendance time frame</source>
         <translation>考勤时段</translation>
+    </message>
+    <message>
+        <location filename="attendancetabwidget.cpp" line="2198"/>
+        <source>Administrators</source>
+        <translation>管理员</translation>
+    </message>
+    <message>
+        <location filename="attendancetabwidget.cpp" line="2199"/>
+        <source>Teachers</source>
+        <translation>教师</translation>
     </message>
     <message>
         <source>machine id</source>
         <translation type="obsolete">考勤机编号</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1582"/>
+        <location filename="attendancetabwidget.cpp" line="1665"/>
         <source>start time</source>
         <translation>考勤开始时间</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1583"/>
+        <location filename="attendancetabwidget.cpp" line="1666"/>
         <source>end time</source>
         <translation>考勤结束时间</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1584"/>
+        <location filename="attendancetabwidget.cpp" line="1667"/>
         <source>attendance class</source>
         <translation>待考勤班级</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="1622"/>
+        <location filename="attendancetabwidget.cpp" line="1727"/>
         <source>atendance modify</source>
         <translation>修改考勤信息</translation>
     </message>
     <message>
-        <location filename="attendancetabwidget.cpp" line="438"/>
-        <location filename="attendancetabwidget.cpp" line="453"/>
-        <location filename="attendancetabwidget.cpp" line="458"/>
-        <location filename="attendancetabwidget.cpp" line="1623"/>
+        <location filename="attendancetabwidget.cpp" line="493"/>
+        <location filename="attendancetabwidget.cpp" line="508"/>
+        <location filename="attendancetabwidget.cpp" line="513"/>
+        <location filename="attendancetabwidget.cpp" line="1728"/>
         <source>attendance delete</source>
         <translation>删除考勤信息</translation>
     </message>
@@ -681,17 +723,17 @@
         <translation type="obsolete">配置文件错误</translation>
     </message>
     <message>
-        <location filename="DataManager.cpp" line="180"/>
+        <location filename="DataManager.cpp" line="182"/>
         <source>Configuration file error</source>
         <translation>配置文件出错</translation>
     </message>
     <message>
-        <location filename="DataManager.cpp" line="180"/>
+        <location filename="DataManager.cpp" line="182"/>
         <source>The configuration file can not be found. Please check the configuration file!</source>
         <translation>找不到配置文件，请检查配置文件！</translation>
     </message>
     <message>
-        <location filename="DataManager.cpp" line="250"/>
+        <location filename="DataManager.cpp" line="252"/>
         <source>Cannot open database</source>
         <translation>数据库连接失败</translation>
     </message>
@@ -699,37 +741,39 @@
 <context>
     <name>Deal</name>
     <message>
-        <location filename="deal.cpp" line="152"/>
+        <location filename="deal.cpp" line="151"/>
         <source>Thursday</source>
         <translation>周四</translation>
     </message>
     <message>
-        <location filename="deal.cpp" line="140"/>
+        <location filename="deal.cpp" line="139"/>
         <source>Monday</source>
         <translation>周一</translation>
     </message>
     <message>
-        <location filename="deal.cpp" line="144"/>
+        <location filename="deal.cpp" line="143"/>
         <source>Tuesday</source>
         <translation>周二</translation>
     </message>
     <message>
-        <location filename="deal.cpp" line="148"/>
+        <location filename="deal.cpp" line="147"/>
         <source>Wednesday</source>
         <translation>周三</translation>
     </message>
     <message>
-        <location filename="deal.cpp" line="156"/>
+        <location filename="deal.cpp" line="155"/>
         <source>Friday</source>
         <translation>周五</translation>
     </message>
     <message>
-        <location filename="deal.cpp" line="288"/>
+        <location filename="deal.cpp" line="287"/>
+        <location filename="deal.cpp" line="498"/>
         <source>Feedback failure</source>
         <translation>回执失败</translation>
     </message>
     <message>
-        <location filename="deal.cpp" line="288"/>
+        <location filename="deal.cpp" line="287"/>
+        <location filename="deal.cpp" line="498"/>
         <source>fan kui shi bai ,kao qin jiao shi wei :</source>
         <translation>给考勤设备回执待考勤学生信息失败,教室号为:</translation>
     </message>
@@ -791,7 +835,7 @@
 <context>
     <name>NFAS</name>
     <message>
-        <location filename="nfas.cpp" line="105"/>
+        <location filename="nfas.cpp" line="136"/>
         <source>Network fingerprint attendance system</source>
         <translation>考勤系统</translation>
     </message>
@@ -800,27 +844,37 @@
         <translation type="obsolete">学生信息</translation>
     </message>
     <message>
-        <location filename="nfas.cpp" line="129"/>
+        <location filename="nfas.cpp" line="162"/>
         <source>Academic class student</source>
         <translation>信息管理</translation>
     </message>
     <message>
-        <location filename="nfas.cpp" line="122"/>
+        <location filename="nfas.cpp" line="153"/>
         <source>attendance information</source>
         <translation>考勤项目</translation>
     </message>
     <message>
-        <location filename="nfas.cpp" line="125"/>
+        <location filename="nfas.cpp" line="90"/>
+        <source>Exit</source>
+        <translation>退出程序</translation>
+    </message>
+    <message>
+        <location filename="nfas.cpp" line="90"/>
+        <source>Affirm Exit</source>
+        <translation>确认退出程序</translation>
+    </message>
+    <message>
+        <location filename="nfas.cpp" line="157"/>
         <source>result information</source>
         <translation>考勤统计</translation>
     </message>
     <message>
-        <location filename="nfas.cpp" line="130"/>
+        <location filename="nfas.cpp" line="163"/>
         <source>user information</source>
         <translation>用户管理</translation>
     </message>
     <message>
-        <location filename="nfas.cpp" line="131"/>
+        <location filename="nfas.cpp" line="164"/>
         <source>Device information</source>
         <translation>设备信息</translation>
     </message>
@@ -828,255 +882,258 @@
 <context>
     <name>ResultTabWidget</name>
     <message>
-        <location filename="resulttabwidget.cpp" line="545"/>
-        <location filename="resulttabwidget.cpp" line="642"/>
-        <location filename="resulttabwidget.cpp" line="655"/>
-        <location filename="resulttabwidget.cpp" line="851"/>
+        <location filename="resulttabwidget.cpp" line="554"/>
+        <location filename="resulttabwidget.cpp" line="654"/>
+        <location filename="resulttabwidget.cpp" line="667"/>
+        <location filename="resulttabwidget.cpp" line="865"/>
         <source>student id</source>
         <translation>学生编号</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="545"/>
-        <location filename="resulttabwidget.cpp" line="642"/>
-        <location filename="resulttabwidget.cpp" line="655"/>
-        <location filename="resulttabwidget.cpp" line="852"/>
+        <location filename="resulttabwidget.cpp" line="554"/>
+        <location filename="resulttabwidget.cpp" line="654"/>
+        <location filename="resulttabwidget.cpp" line="667"/>
+        <location filename="resulttabwidget.cpp" line="866"/>
         <source>student name</source>
         <translation>学生名称</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="545"/>
-        <location filename="resulttabwidget.cpp" line="642"/>
-        <location filename="resulttabwidget.cpp" line="656"/>
-        <location filename="resulttabwidget.cpp" line="853"/>
+        <location filename="resulttabwidget.cpp" line="554"/>
+        <location filename="resulttabwidget.cpp" line="654"/>
+        <location filename="resulttabwidget.cpp" line="668"/>
+        <location filename="resulttabwidget.cpp" line="867"/>
         <source>student academic</source>
         <translation>所在学院</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="545"/>
-        <location filename="resulttabwidget.cpp" line="642"/>
-        <location filename="resulttabwidget.cpp" line="656"/>
-        <location filename="resulttabwidget.cpp" line="854"/>
+        <location filename="resulttabwidget.cpp" line="554"/>
+        <location filename="resulttabwidget.cpp" line="654"/>
+        <location filename="resulttabwidget.cpp" line="668"/>
+        <location filename="resulttabwidget.cpp" line="868"/>
         <source>student class</source>
         <translation>所在班级</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="546"/>
-        <location filename="resulttabwidget.cpp" line="643"/>
-        <location filename="resulttabwidget.cpp" line="657"/>
-        <location filename="resulttabwidget.cpp" line="856"/>
+        <location filename="resulttabwidget.cpp" line="555"/>
+        <location filename="resulttabwidget.cpp" line="655"/>
+        <location filename="resulttabwidget.cpp" line="669"/>
+        <location filename="resulttabwidget.cpp" line="870"/>
         <source>in class</source>
         <translation>到课</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="546"/>
-        <location filename="resulttabwidget.cpp" line="643"/>
-        <location filename="resulttabwidget.cpp" line="658"/>
-        <location filename="resulttabwidget.cpp" line="857"/>
+        <location filename="resulttabwidget.cpp" line="555"/>
+        <location filename="resulttabwidget.cpp" line="655"/>
+        <location filename="resulttabwidget.cpp" line="670"/>
+        <location filename="resulttabwidget.cpp" line="871"/>
         <source>leave class</source>
         <translation>请假</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="546"/>
-        <location filename="resulttabwidget.cpp" line="643"/>
-        <location filename="resulttabwidget.cpp" line="658"/>
-        <location filename="resulttabwidget.cpp" line="858"/>
+        <location filename="resulttabwidget.cpp" line="555"/>
+        <location filename="resulttabwidget.cpp" line="655"/>
+        <location filename="resulttabwidget.cpp" line="670"/>
+        <location filename="resulttabwidget.cpp" line="872"/>
         <source>absencs class</source>
         <translation>缺课</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="546"/>
-        <location filename="resulttabwidget.cpp" line="643"/>
-        <location filename="resulttabwidget.cpp" line="657"/>
-        <location filename="resulttabwidget.cpp" line="855"/>
+        <location filename="resulttabwidget.cpp" line="555"/>
+        <location filename="resulttabwidget.cpp" line="655"/>
+        <location filename="resulttabwidget.cpp" line="669"/>
+        <location filename="resulttabwidget.cpp" line="869"/>
         <source>student figure</source>
         <translation>学生指纹信息</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="579"/>
-        <location filename="resulttabwidget.cpp" line="580"/>
-        <location filename="resulttabwidget.cpp" line="581"/>
-        <location filename="resulttabwidget.cpp" line="700"/>
-        <location filename="resulttabwidget.cpp" line="701"/>
-        <location filename="resulttabwidget.cpp" line="702"/>
-        <location filename="resulttabwidget.cpp" line="782"/>
-        <location filename="resulttabwidget.cpp" line="785"/>
-        <location filename="resulttabwidget.cpp" line="786"/>
-        <location filename="resulttabwidget.cpp" line="791"/>
-        <location filename="resulttabwidget.cpp" line="794"/>
+        <location filename="resulttabwidget.cpp" line="588"/>
+        <location filename="resulttabwidget.cpp" line="589"/>
+        <location filename="resulttabwidget.cpp" line="590"/>
+        <location filename="resulttabwidget.cpp" line="712"/>
+        <location filename="resulttabwidget.cpp" line="713"/>
+        <location filename="resulttabwidget.cpp" line="714"/>
         <location filename="resulttabwidget.cpp" line="795"/>
-        <location filename="resulttabwidget.cpp" line="800"/>
+        <location filename="resulttabwidget.cpp" line="798"/>
+        <location filename="resulttabwidget.cpp" line="799"/>
         <location filename="resulttabwidget.cpp" line="804"/>
-        <location filename="resulttabwidget.cpp" line="805"/>
+        <location filename="resulttabwidget.cpp" line="807"/>
+        <location filename="resulttabwidget.cpp" line="808"/>
+        <location filename="resulttabwidget.cpp" line="813"/>
+        <location filename="resulttabwidget.cpp" line="817"/>
+        <location filename="resulttabwidget.cpp" line="818"/>
         <source>no</source>
         <translation>否</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="649"/>
-        <location filename="resulttabwidget.cpp" line="895"/>
+        <location filename="resulttabwidget.cpp" line="661"/>
         <source>select attendance file</source>
         <translation>请选择考勤结果文件</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="660"/>
+        <location filename="resulttabwidget.cpp" line="672"/>
         <source>please select right file</source>
         <translation>请选择格式正确的考勤文件</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="877"/>
+        <location filename="resulttabwidget.cpp" line="891"/>
         <source>student information output:</source>
         <translation>学生信息输出：</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="81"/>
+        <location filename="resulttabwidget.cpp" line="89"/>
         <source>result add successfully</source>
         <translation>考勤结果添加成功</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="138"/>
+        <location filename="resulttabwidget.cpp" line="146"/>
         <source>result add failed</source>
         <translation>考勤结果添加失败</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="143"/>
+        <location filename="resulttabwidget.cpp" line="151"/>
         <source>please select attendance result file first</source>
         <translation>请先选择考勤结果文件</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="891"/>
+        <location filename="resulttabwidget.cpp" line="908"/>
         <source>result information</source>
         <translation>考勤结果</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="660"/>
-        <location filename="resulttabwidget.cpp" line="893"/>
+        <location filename="resulttabwidget.cpp" line="672"/>
         <source>attendance file select</source>
         <translation>考勤结果文件选择</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="81"/>
-        <location filename="resulttabwidget.cpp" line="138"/>
-        <location filename="resulttabwidget.cpp" line="143"/>
-        <location filename="resulttabwidget.cpp" line="899"/>
+        <location filename="resulttabwidget.cpp" line="89"/>
+        <location filename="resulttabwidget.cpp" line="146"/>
+        <location filename="resulttabwidget.cpp" line="151"/>
+        <location filename="resulttabwidget.cpp" line="916"/>
         <source>result add</source>
         <translation>考勤信息添加</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="200"/>
-        <location filename="resulttabwidget.cpp" line="315"/>
-        <location filename="resulttabwidget.cpp" line="320"/>
-        <location filename="resulttabwidget.cpp" line="325"/>
-        <location filename="resulttabwidget.cpp" line="901"/>
+        <location filename="resulttabwidget.cpp" line="209"/>
+        <location filename="resulttabwidget.cpp" line="324"/>
+        <location filename="resulttabwidget.cpp" line="329"/>
+        <location filename="resulttabwidget.cpp" line="334"/>
+        <location filename="resulttabwidget.cpp" line="918"/>
         <source>result modify</source>
         <translation>考勤信息修改</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="52"/>
-        <location filename="resulttabwidget.cpp" line="53"/>
-        <location filename="resulttabwidget.cpp" line="54"/>
-        <location filename="resulttabwidget.cpp" line="170"/>
-        <location filename="resulttabwidget.cpp" line="171"/>
-        <location filename="resulttabwidget.cpp" line="172"/>
-        <location filename="resulttabwidget.cpp" line="585"/>
-        <location filename="resulttabwidget.cpp" line="592"/>
-        <location filename="resulttabwidget.cpp" line="598"/>
-        <location filename="resulttabwidget.cpp" line="706"/>
-        <location filename="resulttabwidget.cpp" line="710"/>
-        <location filename="resulttabwidget.cpp" line="714"/>
-        <location filename="resulttabwidget.cpp" line="784"/>
-        <location filename="resulttabwidget.cpp" line="793"/>
-        <location filename="resulttabwidget.cpp" line="803"/>
+        <location filename="resulttabwidget.cpp" line="60"/>
+        <location filename="resulttabwidget.cpp" line="61"/>
+        <location filename="resulttabwidget.cpp" line="62"/>
+        <location filename="resulttabwidget.cpp" line="179"/>
+        <location filename="resulttabwidget.cpp" line="180"/>
+        <location filename="resulttabwidget.cpp" line="181"/>
+        <location filename="resulttabwidget.cpp" line="594"/>
+        <location filename="resulttabwidget.cpp" line="601"/>
+        <location filename="resulttabwidget.cpp" line="607"/>
+        <location filename="resulttabwidget.cpp" line="718"/>
+        <location filename="resulttabwidget.cpp" line="722"/>
+        <location filename="resulttabwidget.cpp" line="726"/>
+        <location filename="resulttabwidget.cpp" line="797"/>
+        <location filename="resulttabwidget.cpp" line="806"/>
         <location filename="resulttabwidget.cpp" line="816"/>
-        <location filename="resulttabwidget.cpp" line="820"/>
+        <location filename="resulttabwidget.cpp" line="829"/>
+        <location filename="resulttabwidget.cpp" line="833"/>
         <source>yes</source>
         <translation>是</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="200"/>
+        <location filename="resulttabwidget.cpp" line="16"/>
+        <source>Update Attendance Result</source>
+        <translation>更新考勤记录</translation>
+    </message>
+    <message>
+        <location filename="resulttabwidget.cpp" line="209"/>
         <source>result modify successfully</source>
         <translation>考勤结果修改成功</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="315"/>
+        <location filename="resulttabwidget.cpp" line="324"/>
         <source>result modify failed</source>
         <translation>考勤结果修改失败</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="320"/>
-        <location filename="resulttabwidget.cpp" line="325"/>
-        <location filename="resulttabwidget.cpp" line="337"/>
-        <location filename="resulttabwidget.cpp" line="405"/>
-        <location filename="resulttabwidget.cpp" line="474"/>
-        <location filename="resulttabwidget.cpp" line="479"/>
+        <location filename="resulttabwidget.cpp" line="329"/>
+        <location filename="resulttabwidget.cpp" line="334"/>
+        <location filename="resulttabwidget.cpp" line="346"/>
+        <location filename="resulttabwidget.cpp" line="414"/>
+        <location filename="resulttabwidget.cpp" line="483"/>
+        <location filename="resulttabwidget.cpp" line="488"/>
         <source>please select result first</source>
         <translation>请先选择考勤结果</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="337"/>
-        <location filename="resulttabwidget.cpp" line="394"/>
-        <location filename="resulttabwidget.cpp" line="400"/>
-        <location filename="resulttabwidget.cpp" line="405"/>
-        <location filename="resulttabwidget.cpp" line="422"/>
-        <location filename="resulttabwidget.cpp" line="469"/>
-        <location filename="resulttabwidget.cpp" line="474"/>
-        <location filename="resulttabwidget.cpp" line="479"/>
-        <location filename="resulttabwidget.cpp" line="902"/>
+        <location filename="resulttabwidget.cpp" line="346"/>
+        <location filename="resulttabwidget.cpp" line="403"/>
+        <location filename="resulttabwidget.cpp" line="409"/>
+        <location filename="resulttabwidget.cpp" line="414"/>
+        <location filename="resulttabwidget.cpp" line="431"/>
+        <location filename="resulttabwidget.cpp" line="478"/>
+        <location filename="resulttabwidget.cpp" line="483"/>
+        <location filename="resulttabwidget.cpp" line="488"/>
+        <location filename="resulttabwidget.cpp" line="919"/>
         <source>result delete</source>
         <translation>删除考勤信息</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="394"/>
-        <location filename="resulttabwidget.cpp" line="422"/>
+        <location filename="resulttabwidget.cpp" line="403"/>
+        <location filename="resulttabwidget.cpp" line="431"/>
         <source>result delete successfully</source>
         <translation>考勤结果删除成功</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="400"/>
-        <location filename="resulttabwidget.cpp" line="469"/>
+        <location filename="resulttabwidget.cpp" line="409"/>
+        <location filename="resulttabwidget.cpp" line="478"/>
         <source>result delete failed</source>
         <translation>考勤结果删除失败</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="494"/>
+        <location filename="resulttabwidget.cpp" line="503"/>
         <source>attendance id</source>
         <translation>考勤信息编号</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="494"/>
+        <location filename="resulttabwidget.cpp" line="503"/>
         <source>attendance name</source>
         <translation>考勤信息名称</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="494"/>
+        <location filename="resulttabwidget.cpp" line="503"/>
         <source>miss number</source>
         <translation>累计缺勤人数</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="494"/>
+        <location filename="resulttabwidget.cpp" line="503"/>
         <source>on rate</source>
         <translation>到课率</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="909"/>
+        <location filename="resulttabwidget.cpp" line="926"/>
         <source>total number</source>
         <translation>考勤人数</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="911"/>
+        <location filename="resulttabwidget.cpp" line="928"/>
         <source>leave number</source>
         <translation>请假人数</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="913"/>
+        <location filename="resulttabwidget.cpp" line="930"/>
         <source>absence number</source>
         <translation>缺勤人数</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="931"/>
+        <location filename="resulttabwidget.cpp" line="949"/>
         <source>result administrator</source>
         <translation>考勤结果管理</translation>
     </message>
     <message>
-        <location filename="resulttabwidget.cpp" line="942"/>
+        <location filename="resulttabwidget.cpp" line="962"/>
         <source>generate test file</source>
         <translation>生成考勤测试文件</translation>
     </message>
@@ -1128,9 +1185,13 @@
         <translation>添加用户</translation>
     </message>
     <message>
-        <location filename="usertabwidget.cpp" line="35"/>
         <source>length of user id must be 8</source>
-        <translation>用户编号长度必须为8</translation>
+        <translation type="vanished">用户编号长度必须为8</translation>
+    </message>
+    <message>
+        <location filename="usertabwidget.cpp" line="35"/>
+        <source>length of user id must be 1 - 8</source>
+        <translation>长度在1-8位</translation>
     </message>
     <message>
         <location filename="usertabwidget.cpp" line="40"/>
@@ -1196,14 +1257,19 @@
 <context>
     <name>devicewidget</name>
     <message>
-        <location filename="devicewidget.cpp" line="24"/>
+        <location filename="devicewidget.cpp" line="31"/>
         <source>Class room</source>
         <translation>教  室</translation>
     </message>
     <message>
-        <location filename="devicewidget.cpp" line="24"/>
+        <location filename="devicewidget.cpp" line="31"/>
         <source>Device IP</source>
         <translation>设备 IP</translation>
+    </message>
+    <message>
+        <location filename="devicewidget.cpp" line="31"/>
+        <source>Device id</source>
+        <translation>设备 Id</translation>
     </message>
 </context>
 </TS>

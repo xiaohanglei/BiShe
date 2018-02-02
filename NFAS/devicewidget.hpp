@@ -9,10 +9,12 @@ class devicewidget : public QWidget
 public:
 	devicewidget(DataManager* dm , QWidget * parent = 0);
 	~devicewidget();
+	void updateTable();
+	void UpdateTab();
 
 private:
 
-	void updateTable();
+	
 	
 	DataManager* dataManager;
 

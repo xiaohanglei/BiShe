@@ -13,9 +13,10 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableWidget>
-#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -23,16 +24,22 @@ QT_BEGIN_NAMESPACE
 class Ui_Form
 {
 public:
-    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout;
+    QSpacerItem *horizontalSpacer;
     QTableWidget *devicetable;
+    QSpacerItem *horizontalSpacer_2;
 
     void setupUi(QWidget *Form)
     {
         if (Form->objectName().isEmpty())
             Form->setObjectName(QStringLiteral("Form"));
         Form->resize(851, 590);
-        verticalLayout = new QVBoxLayout(Form);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        horizontalLayout = new QHBoxLayout(Form);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalSpacer = new QSpacerItem(271, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
         devicetable = new QTableWidget(Form);
         if (devicetable->columnCount() < 2)
             devicetable->setColumnCount(2);
@@ -45,7 +52,11 @@ public:
         devicetable->setColumnCount(2);
         devicetable->horizontalHeader()->setCascadingSectionResizes(true);
 
-        verticalLayout->addWidget(devicetable);
+        horizontalLayout->addWidget(devicetable);
+
+        horizontalSpacer_2 = new QSpacerItem(271, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_2);
 
 
         retranslateUi(Form);

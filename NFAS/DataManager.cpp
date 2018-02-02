@@ -124,11 +124,12 @@ Attendance::Attendance()
 }
 
 //考勤项目
-Attendance::Attendance(QString id, QString mid, QString name, QString time, QString aclass):
+Attendance::Attendance(QString id, QString mid, QString name, QString time, QString aclass,QString leader):
 	attendanceid(id),
 	attendancemachineid(mid),
 	attendancename(name),
-	attendanceclass(aclass)
+	attendanceclass(aclass),
+	attendanceleader(leader)
 {
 	auto times = time.split("-");
 	//设置考勤时间,实际没什么用
@@ -139,13 +140,14 @@ Attendance::Attendance(QString id, QString mid, QString name, QString time, QStr
 	}
 }
 
-Attendance::Attendance(QString id, QString mid, QString name, QDateTime stime, QDateTime etime, QString aclass):
+Attendance::Attendance(QString id, QString mid, QString name, QDateTime stime, QDateTime etime, QString aclass, QString leader):
 	attendanceid(id),
 	attendancemachineid(mid),
 	attendancename(name),
 	attendancestarttime(stime),
 	attendanceendtime(etime),
-	attendanceclass(aclass)
+	attendanceclass(aclass),
+	attendanceleader(leader)
 {
 }
 
@@ -263,6 +265,40 @@ bool DataManager::InitDataBase(QString server,QString database,QString uid,QStri
 	InitUser();
 	InitDevics();
 	return true;
+}
+
+bool DataManager::IsServerOnline(int op)
+{
+	if (op == 1)//判断是否有在线
+	{
+		QSqlQuery query("SELECT * FROM Server");
+		while (query.next())
+		{
+			int online = query.value(0).toInt();
+			if (online == 1)
+				return true;
+			else
+				return false;
+		}
+	}
+	else if (op == 2)//设置在线
+	{
+		QSqlQuery query;
+		query.prepare("update Server set Server = ? where Server = ?");
+		query.bindValue(0, 1);
+		query.bindValue(1, 0);
+		return query.exec();
+	}
+	else//设置下线
+	{
+		QSqlQuery query;
+		query.prepare("update Server set Server = ? where Server = ?");
+		query.bindValue(0, 0);
+		query.bindValue(1, 1);
+		return query.exec();
+	}
+	
+	return false;
 }
 
 bool DataManager::AcademicOP(const Academic& a, int op)
@@ -402,21 +438,23 @@ bool DataManager::AttendanceOP(const Attendance& a, int op)
 	switch (op)
 	{
 	case 0:
-		query.prepare("INSERT INTO attendancetable (attendanceid,attendancemachineid,attendancename,attendancetime,attendanceclass) VALUES (?,?,?,?,?)");
+		query.prepare("INSERT INTO attendancetable (attendanceid,attendancemachineid,attendancename,attendancetime,attendanceclass,attendanceleader) VALUES (?,?,?,?,?,?)");
 		query.bindValue(0, a.GetID());
 		query.bindValue(1, a.GetMID());
 		query.bindValue(2, a.GetName());
 		query.bindValue(3, a.GetSETime());
 		query.bindValue(4, a.GetAclass());
+		query.bindValue(5, a.GetLeader());
 		break;
 	case 1:
-		query.prepare("UPDATE attendancetable SET attendanceid = ?,attendancemachineid = ?,attendancename = ?,attendancetime = ?,attendanceclass = ? WHERE attendanceid=?");
+		query.prepare("UPDATE attendancetable SET attendanceid = ?,attendancemachineid = ?,attendancename = ?,attendancetime = ?,attendanceclass = ? ,attendanceleader = ? WHERE attendanceid=?");
 		query.bindValue(0, a.GetID());
 		query.bindValue(1, a.GetMID());
 		query.bindValue(2, a.GetName());
 		query.bindValue(3, a.GetSETime());
 		query.bindValue(4, a.GetAclass());
-		query.bindValue(5, a.GetID());
+		query.bindValue(5, a.GetLeader());
+		query.bindValue(6, a.GetID());
 		break;
 	case 2:
 		query.prepare("DELETE FROM attendancetable WHERE attendanceid=?");
@@ -638,7 +676,8 @@ void DataManager::InitAttendances()
 		QString name = query.value(2).toString();
 		QString time = query.value(3).toString();
 		QString aclass = query.value(4).toString();
-		attendances->append(Attendance(id, mid, name, time, aclass));
+		QString leader = query.value(5).toString();
+		attendances->append(Attendance(id, mid, name, time, aclass, leader));
 
 		//该考勤项目的考勤时段
 		//QString sql = "select * from attendancetimetable where attendanceid =?" ;
@@ -675,7 +714,7 @@ void DataManager::InitDevics()
 	{
 		tempQS = configIni->value("/ClientList/" + QString::number(i+1, 10)).toString();	
 		
-		devices->append(Device(tempQS.split("\t").first(), tempQS.split("\t").last()));
+		devices->append(Device(tempQS.split("\t").first(), tempQS.split("\t")[1] ,tempQS.split("\t").last()));
 	}
 	delete configIni;
 }
@@ -685,7 +724,7 @@ Device::Device()
 
 }
 
-Device::Device(QString qname, QString qip):name(qname),ip(qip)
+Device::Device(QString qname, QString qid, QString qip):name(qname),id(qid), ip(qip)
 {
 
 }
@@ -698,7 +737,10 @@ void Device::SetName(QString qname)
 {
 	name = qname;
 }
-
+void Device::SetId(QString qid)
+{
+	id = qid;
+}
 void Device::SetIp(QString qip)
 {
 	ip = qip;
@@ -708,6 +750,11 @@ QString Device::GetName()
 {
 	return name;
 }
+QString Device::GetId()
+{
+	return id;
+}
+
 
 QString Device::GetIp()
 {

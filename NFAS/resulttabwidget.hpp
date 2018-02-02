@@ -6,8 +6,9 @@
 #include <QPushButton>
 #include <QTableWidget>
 #include <QTreeWidget>
-#include <QtXlsx/QtXlsx>
+//#include <QtXlsx/QtXlsx>
 #include <QLabel>
+#include "deal.hpp"
 
 #if _MSC_VER > 1000  
 #pragma comment(lib,"Qt5Xlsxd.lib")  
@@ -42,6 +43,7 @@ public slots:
 	void CheckChange(QTableWidgetItem *item);//更新表格文件
 	void GeneTestData();//生成测试文件
 
+	
 private:
 	void setupUi();
 	void updateTree();
@@ -60,6 +62,8 @@ private:
 	Result attendanceresult;
 
 	int currenttablefrom = -1;
+
+
 
 #ifdef _DEBUG
 	QPushButton* debugfile;

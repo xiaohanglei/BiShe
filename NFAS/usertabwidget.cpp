@@ -30,9 +30,9 @@ void UserTabWidget::UserAdd()
 	QString psd = userpsd->text();
 	QString psda = userpsdagain->text();
 	int identify = useridentify->currentIndex();
-	if (uid.length() != 6)
+	if (uid.length() <= 0 || uid.length() > 8)
 	{
-		QMessageBox::information(0, tr("user add"), tr("length of user id must be 8"), QMessageBox::Ok);
+		QMessageBox::information(0, tr("user add"), tr("length of user id must be 1 - 8"), QMessageBox::Ok);
 		return;
 	}
 	if (psd.length() == 0) 
@@ -177,6 +177,12 @@ void UserTabWidget::setupUi()
 	main_layout->addLayout(psdlayout);
 	main_layout->addLayout(psdagalayout);
 	main_layout->addLayout(oplayout);
+
+	//QHBoxLayout* H_main_layout = new QHBoxLayout;
+	//H_main_layout->addStretch(1);
+	//H_main_layout->addLayout(main_layout);
+	//H_main_layout->addStretch(1);
+
 	this->setLayout(main_layout);
 
 	updateTable();

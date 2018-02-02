@@ -1,10 +1,11 @@
 ﻿#include "deal.hpp"
-#include <DataManager.h>
+//#include <DataManager.h>
 #include <QMessageBox>
 Deal::Deal(QObject * parent) : QObject(parent) 
 {
 	m_All10ClientRecvBuf = new UCHAR[MAX_BUFF];
 	m_buf10len = 0;
+	
 }
 
 Deal::~Deal()
@@ -107,9 +108,7 @@ void Deal::Deal_Attendance_MingLing(NETBAO bao)
 
 void Deal::Deal_Attendance_HuiZhi(UCHAR * sostation, SOCKET sock, DataManager * dm)
 {
-	//找到该考勤设备在当前时段所负责的考勤项目
-
-	
+	//找到该考勤设备在当前时段所负责的考勤项目	
 	QString tempQS;//考勤设备所在教室
 	QStringList aclass;//保存需要考勤的考勤项目下辖的班级
 	QString attendanceId;//需要考勤的考勤项目id
@@ -132,9 +131,7 @@ void Deal::Deal_Attendance_HuiZhi(UCHAR * sostation, SOCKET sock, DataManager * 
 			QString   weekday = QDateTime::currentDateTime().toString("ddd");//获得当前星期几
 
 			QTime   currtimemin = currdatetime;//当前日期作为最小值
-			QTime   currtimemax = currtimemin.addSecs(60 * MAX_ATTEND_TIME);//向后延迟 MAX_ATTEND_TIME 分钟
-
-	
+			QTime   currtimemax = currtimemin.addSecs(60 * MAX_ATTEND_TIME);//向后延迟 MAX_ATTEND_TIME 分钟	
 			
 			//汉字的星期数换成字符数字
 			if (QString::compare(weekday, tr("Monday")) == 0)
@@ -292,7 +289,7 @@ void Deal::Deal_Attendance_HuiZhi(UCHAR * sostation, SOCKET sock, DataManager * 
 	delete ptrSendData;
 }
 
-void Deal::Deal_Result_MingLing(NETBAO bao)
+void Deal::Deal_Result_MingLing(NETBAO bao, DataManager * dm)
 {
 	//解析命令
 	UCHAR * ptrXinXiBao = bao.xinxibao;
@@ -301,17 +298,18 @@ void Deal::Deal_Result_MingLing(NETBAO bao)
 	WORD count = 0;//记录数
 				   //QVector<STATTEND> students;
 
-	RESULT resultnet;
+	//RESULT resultnet;
+	RESULT *resultnet = new RESULT;
 
 	memcpy(attendid, &ptrXinXiBao[0], 8);
 	
 	memcpy(&count, &ptrXinXiBao[8], 2);
 
-	resultnet.attendid = QString(QLatin1String(attendid));
+	resultnet->attendid = QString(QLatin1String(attendid));
 
 	QDateTime currdatetime = QDateTime::currentDateTime();
 
-	resultnet.resultid = resultnet.attendid + "-" + currdatetime.toString("yyyyMMddHHmmss");
+	resultnet->resultid = resultnet->attendid + "-" + currdatetime.toString("yyyyMMddHHmmss");
 
 	char sid[9] = { 0 };//
 	bool isq;
@@ -326,16 +324,138 @@ void Deal::Deal_Result_MingLing(NETBAO bao)
 		else
 			tempstud.isq = false;
 
-		resultnet.students.append(tempstud);
+		resultnet->students.append(tempstud);
 	}
+
+	bool ret = Result_Db(resultnet, dm);//考勤结果直接入库，不用再界面中显示
+	
 
 	//回执
 
-	Deal_Result_HuiZhi(bao.sostation, bao.sock);
+	Deal_Result_HuiZhi(bao.sostation, bao.sock , ret);
 
 }
 
-void Deal::Deal_Result_HuiZhi(UCHAR *sostation, SOCKET sock)
+bool Deal::Result_Db(RESULT * result, DataManager * dataManager)
+{
+	Result attendanceresult;
+
+	int absence = 0;
+	int leave = 0;
+	QStringList absencsstudent;//缺勤学生的列表
+	QStringList leavestudent;//请假学生的列表 
+	int total = result->students.size();//考勤结果中学生的个数
+	for (int i = 0; i < total; i++)
+	{
+		QString itemid = result->students.at(i).sid;
+		//QString itemname;
+		//QString itemaca;
+		//QString itemcla;
+		//QString itemfigure ;
+		bool iteminclass = result->students.at(i).isq;//到课
+		//QString itemleaveclass ;//请假
+		QString itemabclass ;//缺勤
+
+		if (!iteminclass) //只要没签到
+		{
+			//if (itemleaveclass == 1) //如果没有签到，则判断是否请假
+			//{
+			//	leave++;//请假次数+1
+			//	leavestudent << itemid;//将该学生的id存入请假列表中
+			//}
+		
+			//if (itemabclass == 1)
+			//{
+			absence++;//缺勤人数+1
+			absencsstudent << itemid;//将缺勤的学生id放入列表中
+			//}
+
+		}
+	}
+	QString attenfileid = result->attendid;//取出考勤项目编号
+	attendanceresult.SetAID(attenfileid);
+
+	attendanceresult.SetRID(result->resultid);//考勤结果id
+	attendanceresult.SetANum(total - absence - leave);//实到人数
+	attendanceresult.SetTNum(total);//应签到人数
+	attendanceresult.SetLStu(leavestudent.join(","));//将学生id列表
+	attendanceresult.SetAStu(absencsstudent.join(","));
+	
+	attendanceresult.SetUID("No Submit");
+	//找到该考勤项目的负责人，作为提交人
+	for (auto it = dataManager->GetAttendance()->begin(); it != dataManager->GetAttendance()->end(); it++)
+	{
+		if (it->GetID() == attenfileid)
+		{
+			attendanceresult.SetUID(it->GetLeader());
+		}
+	}
+
+
+	if (dataManager->ResultOP(attendanceresult, 0)) //将该考勤结果插入数据库
+	{
+		dataManager->updateResult(dataManager->GetCurrentUser());//从数据库中重新加载考勤结果数据
+
+		for (auto it = dataManager->GetResult()->begin(); it != dataManager->GetResult()->end(); it++)
+		{
+			auto abstu = it->GetAStu().split(",");//缺勤学生的id列表
+			auto lestu = it->GetLStu().split(",");//请假学生的id列表
+
+			if (it->GetAID() == attendanceresult.GetAID() && it->GetRID() == attendanceresult.GetRID())//是否是当前的考勤结果
+			{
+				for (auto iter = dataManager->GetAttendance()->begin(); iter != dataManager->GetAttendance()->end(); iter++)//是否是当前的考勤项目
+				{
+					if (iter->GetID() == it->GetAID())//考勤结果的考勤编号和考勤项目的编号是否匹配
+					{
+						auto aclass = iter->GetAclass().split(",");//该考勤项目所属的考勤班级列表
+						for (int i = 0; i < aclass.size(); i++)//遍历该班级列表
+						{
+							for (auto its = dataManager->GetStudent()->begin(); its != dataManager->GetStudent()->end(); its++)
+							{
+								//遍历所有学生列表，找到该班级的所有学生
+								if (its->GetAclass() == aclass[i])//判断该学生所在班级和当前班级是否匹配
+								{
+									its->AddTotime();//考勤次数+1
+
+													 //统计该学生的考勤情况更新到数据库中
+									if (abstu.indexOf(its->GetID()) >= 0)//通过索引号判断该学生是否在缺勤列表中
+									{
+										its->AddAbtime();//缺勤次数+1
+
+														 //更新该学生在数据库中信息
+										dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", 0, 0, its->GetAbtimes(), its->GetTotimes()), 5);
+
+									}
+									else if (lestu.indexOf(its->GetID()) >= 0)
+									{
+										its->AddLetime();
+										dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", 0, its->GetLetimes(), 0, its->GetTotimes()), 4);
+									}
+									else
+									{
+										its->AddIntime();
+										dataManager->StudentOP(Student(its->GetID(), "", 0, "", "", "", its->GetIntimes(), 0, 0, its->GetTotimes()), 3);
+									}
+								}
+							}
+						}
+						break;
+					}
+				}
+				break;
+			}
+		}
+		//updateTree();
+	}
+	else
+	{
+		return false;
+	}
+
+	return true;
+}
+
+void Deal::Deal_Result_HuiZhi(UCHAR *sostation, SOCKET sock,bool ret)
 {
 	//组织数据，封装成数据帧
 	//
@@ -356,8 +476,11 @@ void Deal::Deal_Result_HuiZhi(UCHAR *sostation, SOCKET sock)
 	ptrSendData[18] = 0x12;//处理结果
 
 	sendlen += 2;
+	if (ret)//根据处理结果返回不同的值
+		ptrSendData[19] = 0x01;//00 表示出错，01表示成功
+	else
+		ptrSendData[19] = 0x00;//00 表示出错，01表示成功
 
-	ptrSendData[19] = 0x01;//00 表示出错，01表示成功
 	sendlen += 1;
 
 	ptrSendData[sendlen + 5] = 0xff;//结尾标记
@@ -378,3 +501,4 @@ void Deal::Deal_Result_HuiZhi(UCHAR *sostation, SOCKET sock)
 
 
 }
+

@@ -6,9 +6,6 @@
 #include <QString>
 #include <QVector>
 //
-
-
-
 struct CLIENTLIST//ÔÚÏß
 {
 	int num;//ÐòºÅ
@@ -53,7 +50,3 @@ public:
 private:
 
 };
-
-
-
-

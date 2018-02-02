@@ -8,19 +8,24 @@
 #include <QFileDialog>
 #include <QDateTime>
 
-ResultTabWidget::ResultTabWidget(DataManager *dm, QWidget * parent) : QWidget(parent) 
+ResultTabWidget::ResultTabWidget(DataManager *dm,QWidget * parent) : QWidget(parent) 
 {
 	dataManager = dm;
 	setupUi();
 
+	resultadd->setText(tr("Update Attendance Result"));
+
 	connect(resultadd, SIGNAL(clicked()), this, SLOT(ResultAdd()));
 	connect(resultmodify, SIGNAL(clicked()), this, SLOT(ResultAModify()));
 	connect(resultdelete, SIGNAL(clicked()), this, SLOT(ResultDelete()));
-	connect(attendancefileselect, SIGNAL(clicked()), this, SLOT(AttendanceFileGet()));
+
+	//connect(attendancefileselect, SIGNAL(clicked()), this, SLOT(AttendanceFileGet()));
+
 	connect(resulttree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(updateTable(QTreeWidgetItem*, int)));
 	connect(attendancetable, SIGNAL(itemDoubleClicked(QTableWidgetItem*)), this, SLOT(CheckChange(QTableWidgetItem*)));//双击s
 #ifdef _DEBUG
-	connect(debugfile, SIGNAL(clicked()), this, SLOT(GeneTestData()));
+	//connect(debugfile, SIGNAL(clicked()), this, SLOT(GeneTestData()));
+
 #endif
 }
 
@@ -35,6 +40,9 @@ void ResultTabWidget::UpdateTab()
 
 void ResultTabWidget::ResultAdd()
 {
+
+	updateTree();//手动更新考勤结果
+#if 0
 	if (currenttablefrom == 0)
 	{
 		int absence = 0;
@@ -142,11 +150,12 @@ void ResultTabWidget::ResultAdd()
 	{
 		QMessageBox::information(0, tr("result add"), tr("please select attendance result file first"), QMessageBox::Ok);
 	}
+#endif
 }
 
 void ResultTabWidget::ResultAModify()//修稿考勤结果数据
 {
-	if (currenttablefrom == 1)
+	if (/*currenttablefrom == */1)
 	{
 		auto items = resulttree->selectedItems();
 
@@ -328,7 +337,7 @@ void ResultTabWidget::ResultAModify()//修稿考勤结果数据
 
 void ResultTabWidget::ResultDelete()
 {
-	if (currenttablefrom == 1)
+	if (/*currenttablefrom  == */ 1)
 	{
 		auto items = resulttree->selectedItems();
 		auto parent = items[0]->parent();
@@ -482,7 +491,7 @@ void ResultTabWidget::ResultDelete()
 }
 
 void ResultTabWidget::updateTable(QTreeWidgetItem * item, int col)
-{
+{	
 	auto parent = item->parent();
 	if (parent == nullptr)
 	{
@@ -628,12 +637,15 @@ void ResultTabWidget::updateTable(QTreeWidgetItem * item, int col)
 		leavenumber->setText(QString::number(leave));
 		absencenumber->setText(QString::number(abnumber));
 	}
+	
+	//updateTree();//手动更新考勤结果
 }
 
 
 //获得考勤文件信息
 void ResultTabWidget::AttendanceFileGet()//获得 考勤文件中的数据加载到表格控件中
 {
+#if 0
 	currenttablefrom = 0;
 	attendancetable->clear();
 	attendancetable->setRowCount(0);//行数,初始化为0行
@@ -645,7 +657,7 @@ void ResultTabWidget::AttendanceFileGet()//获得 考勤文件中的数据加载
 
 
 	//----------xls文件操作
-
+#if 1
 	QString filename = QFileDialog::getOpenFileName(NULL, tr("select attendance file"), ".", "Excel Files(*.xlsx)");//通过文件选择空间来获得考勤文件的路径
 	attendencefile->setText(filename);
 	QXlsx::Document xlsx(filename);//打开考勤文件
@@ -662,7 +674,7 @@ void ResultTabWidget::AttendanceFileGet()//获得 考勤文件中的数据加载
 	}
 	// -------------------------
 
-
+#endif
 
 	int total = 0;//统计考勤人数
 	int absence = 0;
@@ -674,7 +686,7 @@ void ResultTabWidget::AttendanceFileGet()//获得 考勤文件中的数据加载
 	for (int row = 2;; row++) //跳过列号和字段名
 	{
 		//读取具体考勤信息
-
+#if 1
 		QString stuid = xlsx.read(row, 1).toString();
 		if (stuid == "")//结束条件
 			break;
@@ -686,7 +698,7 @@ void ResultTabWidget::AttendanceFileGet()//获得 考勤文件中的数据加载
 		int stuin = xlsx.read(row, 6).toInt();
 		int stuleave = xlsx.read(row, 7).toInt();
 		int stuabsencs = xlsx.read(row, 8).toInt();
-
+#endif
 		auto rowcount = attendancetable->rowCount();//行号下标
 		attendancetable->insertRow(rowcount);//插入一行
 		attendancetable->setItem(rowcount, 0, new QTableWidgetItem(stuid));
@@ -758,10 +770,11 @@ void ResultTabWidget::AttendanceFileGet()//获得 考勤文件中的数据加载
 	attendanceresult.SetRID(attenfileid + QString("-") + now.toString("yyyyMMddHHmmss"));//以当前时间戳为考勤结果的id
 
 
-	int a = attendanceresult.GetRID().length();
+	//int a = attendanceresult.GetRID().length();
 	totalnumber->setText(QString::number(total));
 	leavenumber->setText(QString::number(leave));
 	absencenumber->setText(QString::number(absence));
+#endif
 }
 
 void ResultTabWidget::CheckChange(QTableWidgetItem * item)
@@ -832,6 +845,7 @@ void ResultTabWidget::CheckChange(QTableWidgetItem * item)
 void ResultTabWidget::GeneTestData()
 {
 #ifdef _DEBUG//测试考勤结果生成
+#if 0
 	auto aid = attendance->currentText().split("-")[0];//获得考勤项目的编号
 	for (auto it = dataManager->GetAttendance()->begin(); it != dataManager->GetAttendance()->end(); it++)
 	{
@@ -883,17 +897,20 @@ void ResultTabWidget::GeneTestData()
 		}
 	}
 #endif
+#endif
 }
+
+
 
 void ResultTabWidget::setupUi()
 {
 	resulttree = new QTreeWidget;
 	resulttree->setHeaderLabel(tr("result information"));
-	resulttree->setMaximumWidth(150);
-	QLabel* labelattendancefile = new QLabel(tr("attendance file select"));
-	attendencefile = new QLineEdit;
-	attendancefileselect = new QPushButton(tr("select attendance file"));
-	attendancefileselect->setMinimumWidth(120);
+	resulttree->setMaximumWidth(230);
+	//QLabel* labelattendancefile = new QLabel(tr("attendance file select"));
+	//attendencefile = new QLineEdit;
+	//attendancefileselect = new QPushButton(tr("select attendance file"));
+	//attendancefileselect->setMinimumWidth(120);
 	attendancetable = new QTableWidget;
 	attendancetable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	resultadd = new QPushButton(tr("result add"));
@@ -901,9 +918,9 @@ void ResultTabWidget::setupUi()
 	resultmodify = new QPushButton(tr("result modify"));
 	resultdelete = new QPushButton(tr("result delete"));
 	QHBoxLayout* filelayout = new QHBoxLayout;
-	filelayout->addWidget(labelattendancefile);
-	filelayout->addWidget(attendencefile);
-	filelayout->addWidget(attendancefileselect);
+	//filelayout->addWidget(labelattendancefile);
+	//filelayout->addWidget(attendencefile);
+	//filelayout->addWidget(attendancefileselect);
 	QVBoxLayout* resultinfo = new QVBoxLayout;
 	QHBoxLayout* resultinfolayout = new QHBoxLayout;
 	QLabel* labeltotalnumber = new QLabel(tr("total number"));
@@ -923,6 +940,7 @@ void ResultTabWidget::setupUi()
 	resultinfolayout->addStretch(10);
 	resultinfo->addLayout(resultinfolayout);
 	QHBoxLayout* attendanceop = new QHBoxLayout;
+	
 	attendanceop->addStretch(1);
 	attendanceop->addWidget(resultadd);
 	attendanceop->addWidget(resultmodify);
@@ -936,9 +954,11 @@ void ResultTabWidget::setupUi()
 	rightlayout->addWidget(attendancetable);
 	rightlayout->addWidget(groupop);
 	main_layout->addWidget(resulttree);
+	
 	main_layout->addLayout(rightlayout);
 
 #ifdef _DEBUG//生成考勤测试文件
+#if 0
 	debugfile=new QPushButton(tr("generate test file"));
 	QHBoxLayout* debuglayout = new QHBoxLayout;
 	attendance = new QComboBox;
@@ -951,6 +971,7 @@ void ResultTabWidget::setupUi()
 	debuglayout->addWidget(debugfile);
 	rightlayout->addLayout(debuglayout);
 #endif
+#endif
 
 	this->setLayout(main_layout);
 
@@ -959,6 +980,8 @@ void ResultTabWidget::setupUi()
 
 void ResultTabWidget::updateTree()
 {
+	dataManager->updateResult(dataManager->GetCurrentUser());//从数据库中更新考勤结果
+
 	resulttree->clear();
 	QStringList current;
 	for (auto it = dataManager->GetResult()->begin(); it != dataManager->GetResult()->end(); it++) 
