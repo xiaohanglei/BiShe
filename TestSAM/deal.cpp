@@ -13,8 +13,9 @@ CDeal::~CDeal()
 
 }
 
-void CDeal::FenLiZhen(UCHAR * recvbuff, int len)
+void CDeal::FenLiZhen(UCHAR * recvbuff, int len, ATTEND * attendance)
 {
+#if 1
 	if (len <= 0) return;
 	//分离帧
 	if ((m_buf10len + len) > MAX_BUFF)
@@ -64,13 +65,57 @@ void CDeal::FenLiZhen(UCHAR * recvbuff, int len)
 			j = 0;
 			continue;;
 		}
+#endif
+
+		//处理数据
 		if (recvbuff[18] == 0x11)//判断回执类型
 		{
+			attendance->Stuends.clear();
 			//待考勤名单
 			if (recvbuff[19] == 0x01)//是否有考勤数据
 			{
 				//将考勤名单解析出来.
+				
+				char attendid[9] = { 0 };
+				int istarttime = 0;
+				int iendtime = 0;
+				WORD count = 0;
 
+				char ** stuid = nullptr;
+				char ** stufing = nullptr;
+
+				memcpy(attendid, &recvbuff[20], 8);//考勤编号
+				memcpy(&istarttime, &recvbuff[28], 4);//开始时间
+				memcpy(&iendtime, &recvbuff[32], 4);//结束时间
+
+				attendance->attendanceid = QString(attendid);
+				attendance->starttime = istarttime;
+				attendance->endtiem = iendtime;
+				
+				attendance->signcount = 0;
+
+				memcpy(&count, &recvbuff[36], 2);//记录数量
+				stuid = new char*[count];
+				stufing = new char*[count];
+
+				STUDENT tempStudent;
+				for (int i = 0; i < count; i++)
+				{
+					stuid[i] = new char[9];
+					stufing[i] = new char[33];
+					memset(stuid[i], 0, 9);
+					memset(stufing[i], 0, 33);
+
+					memcpy(stuid[i], &recvbuff[38 + i * 40], 8);
+					memcpy(stufing[i], &recvbuff[46 + i * 40], 32);
+
+					tempStudent.StuId = QString(stuid[i]);
+					tempStudent.StuFinger = QString(stufing[i]);
+					tempStudent.StuSign = false;
+					attendance->Stuends.append(tempStudent);
+
+				}
+				
 			}
 			
 		}
@@ -81,6 +126,7 @@ void CDeal::FenLiZhen(UCHAR * recvbuff, int len)
 
 			}
 		}
+		emit RecvAttenance();//将考勤名单解析出来以后，发射一个信号，
 	
 		
 	}

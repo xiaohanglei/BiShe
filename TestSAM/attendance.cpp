@@ -1,16 +1,25 @@
 #include "attendance.h"
 #include <QPushButton>
+#include <windows.h>
+#include <process.h>
 AttendanceM	::AttendanceM(QString clroom, TcpClient * tcpc, int method, QWidget *parent)
 	: classroom(clroom),tcpclient(tcpc), m_method(method),QWidget(parent)
 {
-	Stuends = new QVector<STUDENT>;
+	attendance = new ATTEND;
 	isLeisure = true;//初始空闲状态
 	iscomplete = false;//
+	isrecvdata = false;
 	//ui.setupUi(this);
 	SetupUi();
 
 	connect(buttok, SIGNAL(clicked()), this, SLOT(SendReQuest()));
 	QObject::connect(tcpclient->GetSock(), &QTcpSocket::readyRead, this, &AttendanceM::RecvHuiZhiPro);
+	QObject::connect(&deal, &CDeal::RecvAttenance, this, &AttendanceM::slotSign);
+	
+
+
+	_beginthread(SendOrderPro, 0, this);
+	
 }
 
 AttendanceM::~AttendanceM()
@@ -19,51 +28,58 @@ AttendanceM::~AttendanceM()
 }
 void AttendanceM::SendOrderPro(PVOID another)
 {
+	AttendanceM * attend = (AttendanceM *)another;
+
 	while (1)
 	{
 		Sleep(60000 * 5);//分钟
-		if (isLeisure)//是否空闲
+		if (attend->isLeisure)//是否空闲
 		{
 			//发送请求待考勤名单命令
-			SendReQuest();
+			SendReQuest(attend);
 
 			//等待回执
 			int waittime = 0;
-			while (!isrecvdata)
+			while (!attend->isrecvdata)
 			{
-				Sleep(1000 * 5);
+				Sleep(1000 * 2);
 				waittime++;
 
-				if (waittime == 5 * 12 * 2)//如果超过2分钟则放弃等待
+				if (waittime == 12 * 2)//如果超过2分钟则放弃等待
 					break;
 				
 			}
-			if (isrecvdata)//收到回执
+			if (attend->isrecvdata)//收到回执
 			{
-				isLeisure = false;//将状态设置非空闲
+				attend->isLeisure = false;//将状态设置非空闲
+				attend->isrecvdata = false;
 
-				//准备开始考勤
+				if (attend->attendance->Stuends.size() != 0)
+				{
+					//准备开始考勤()
+					Attend(NULL);
+				}
+				
 			}
 			
 		}
 		else//如果不是空闲状态，则判断是否考勤完毕
 		{
-			if (iscomplete)
+			if (attend->iscomplete)
 			{
 				//推送考勤结果命令
+				attend->isLeisure = true;//将状态设置空闲
 
-				//等待回执
+				attend->iscomplete = false;
+
 
 			}
 			continue;
 		}
 	}
 }
-void AttendanceM::FenLiZhen(UCHAR * recvbuff, int len)
-{
 
-}
-void AttendanceM::SendReQuest()
+void AttendanceM::SendReQuest(AttendanceM * another)
 {
 	UCHAR * ptrSendData = new UCHAR[MAX_BUFF];
 	int sendlen = 0;
@@ -71,7 +87,7 @@ void AttendanceM::SendReQuest()
 
 	char mdzm[7] = "Server";
 	char *sozm = nullptr;
-	QByteArray tempQB = classroom.toLatin1();
+	QByteArray tempQB = another->classroom.toLatin1();
 	sozm = tempQB.data();
 
 	memcpy(&ptrSendData[5], mdzm, 6);
@@ -85,7 +101,7 @@ void AttendanceM::SendReQuest()
 	sendlen += 1;
 	memcpy(&ptrSendData[0], &sendlen, 4);
 
-	tcpclient->GetSock()->write(((char *)ptrSendData),sendlen + 5);
+	another->tcpclient->GetSock()->write(((char *)ptrSendData),sendlen + 5);
 
 
 	delete[]ptrSendData;
@@ -101,26 +117,29 @@ void AttendanceM::RecvHuiZhiPro()
 	int recvlen = recvbyte.size();
 	UCHAR * netbao = 0;
 	netbao = (UCHAR *)recvbyte.data();
-	/*if (netbao[0] == 0xff)
-	{
-		QMessageBox::information(0, tr("Success"), tr("Recv Data"), QMessageBox::Ok);
-	}*/
-	CDeal deal;
-	deal.FenLiZhen(netbao, recvlen);
+
+	
+	deal.FenLiZhen(netbao, recvlen, attendance);//调用处理模块将接受到的数据分帧 
 
 
 }
+
 void AttendanceM::slotSign()
 {
+	//
+	isrecvdata = true;//收到数据
+
+#if 1
 	QString input = editinput->text();
 
-	for (auto it = Stuends->begin(); it != Stuends->end(); it++)
+	for (auto it = attendance->Stuends.begin(); it != attendance->Stuends.end(); it++)
 	{
 		if (m_method == 0)//学号签到
 		{
 			if (input == it->StuId)
 			{
 				it->StuSign = true;
+				attendance->signcount++;//签到一个人，记录一下
 			}
 		}
 		else//指纹签到
@@ -132,9 +151,31 @@ void AttendanceM::slotSign()
 
 		}
 	}
-
+#endif
 }
 
+void AttendanceM::Attend(AttendanceM * another)
+{
+	//
+
+	int currtime = QDateTime::currentDateTime().toTime_t();//当前时间的时间戳
+
+	//
+	Sleep(another->attendance->starttime - currtime);//延时等待到开始时间
+
+
+
+	while (1)
+	{
+		Sleep(5000);
+		currtime = QDateTime::currentDateTime().toTime_t();//当前时间的时间戳
+		if ( currtime > another->attendance->endtiem || another->attendance->signcount == another->attendance->Stuends.size())//当考勤时间结束或者，已经全部签到完毕以后
+		{
+			another->iscomplete = true;//完成考勤
+			break;
+		}
+	}	
+}
 
 void AttendanceM::SetupUi()
 {

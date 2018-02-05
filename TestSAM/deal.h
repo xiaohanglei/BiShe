@@ -1,9 +1,26 @@
 #pragma once
 #include <QObject>
 #include <windows.h>
+#include <QVector>
 #define ATTENDANCEMAX 100//单次考勤最大数量
 #define MAX_BUFF 1024 * 1024//分帧缓冲区大小
 
+struct STUDENT
+{
+	QString StuId;
+	QString StuFinger;
+	bool StuSign;
+};
+
+struct ATTEND
+{
+	QString attendanceid;
+	int starttime;
+	int endtiem;
+	QVector<STUDENT> Stuends;
+
+	int signcount;//已经签到人数
+};
 
 
 
@@ -15,7 +32,10 @@ public:
 	CDeal(QObject * parent = Q_NULLPTR);
 	~CDeal();
 
-	void FenLiZhen(UCHAR * recvbuff, int len);//分帧
+	void FenLiZhen(UCHAR * recvbuff, int len, ATTEND * attend);//分帧
+
+signals:
+	void RecvAttenance();
 
 
 private:

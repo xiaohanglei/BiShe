@@ -15,12 +15,6 @@
 
 #define ATTENDANCEMAX 100//单次考勤最大数量
 #define MAX_BUFF 1024 * 1024//分帧缓冲区大小
-struct STUDENT
-{
-	QString StuId;
-	QString StuFinger;
-	bool StuSign;
-};
 
 class AttendanceM : public QWidget
 {
@@ -33,35 +27,33 @@ public:
 	bool iscomplete;//是否完成
 	bool isrecvdata;//是否收到回执
 
-	QVector<STUDENT> * GetStudent()
-	{
-		return Stuends;
-	}
-
-	 void SendOrderPro(PVOID another);
-	 void FenLiZhen(UCHAR * recvbuff, int len);
+	static void SendOrderPro(PVOID another);
 	 
 	 void RecvHuiZhiPro();
 
-
+	 static void Attend(AttendanceM * another);//考勤
 public slots:
 
+
 void slotSign();
-void SendReQuest();
+static void SendReQuest(AttendanceM* another);
 
 	
 private:
 	void SetupUi();
+public:
 	TcpClient * tcpclient;
 	QLineEdit * editinput;
 	QPushButton * buttok;
 	int m_method;
+	CDeal deal;
 
 	QString classroom;
 
-	QVector<STUDENT> *Stuends;
+	ATTEND * attendance;
 
 	
 };
+
 
 #endif // ATTENDANCE_H
