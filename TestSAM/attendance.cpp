@@ -1,7 +1,7 @@
 #include "attendance.h"
 #include <QPushButton>
-AttendanceM	::AttendanceM(TcpClient * tcpc, int method, QWidget *parent)
-	:tcpclient(tcpc), m_method(method),QWidget(parent)
+AttendanceM	::AttendanceM(QString clroom, TcpClient * tcpc, int method, QWidget *parent)
+	: classroom(clroom),tcpclient(tcpc), m_method(method),QWidget(parent)
 {
 	Stuends = new QVector<STUDENT>;
 	isLeisure = true;//³õÊ¼¿ÕÏÐ×´Ì¬
@@ -9,7 +9,7 @@ AttendanceM	::AttendanceM(TcpClient * tcpc, int method, QWidget *parent)
 	//ui.setupUi(this);
 	SetupUi();
 
-	connect(buttok, SIGNAL(clicked()), this, SLOT(slotSign()));
+	connect(buttok, SIGNAL(clicked()), this, SLOT(SendReQuest()));
 	QObject::connect(tcpclient->GetSock(), &QTcpSocket::readyRead, this, &AttendanceM::RecvHuiZhiPro);
 }
 
@@ -25,6 +25,7 @@ void AttendanceM::SendOrderPro(PVOID another)
 		if (isLeisure)//ÊÇ·ñ¿ÕÏÐ
 		{
 			//·¢ËÍÇëÇó´ý¿¼ÇÚÃûµ¥ÃüÁî
+			SendReQuest();
 
 			//µÈ´ý»ØÖ´
 			int waittime = 0;
@@ -58,6 +59,38 @@ void AttendanceM::SendOrderPro(PVOID another)
 		}
 	}
 }
+void AttendanceM::FenLiZhen(UCHAR * recvbuff, int len)
+{
+
+}
+void AttendanceM::SendReQuest()
+{
+	UCHAR * ptrSendData = new UCHAR[MAX_BUFF];
+	int sendlen = 0;
+	ptrSendData[4] = 0x8f;
+
+	char mdzm[7] = "Server";
+	char *sozm = nullptr;
+	QByteArray tempQB = classroom.toLatin1();
+	sozm = tempQB.data();
+
+	memcpy(&ptrSendData[5], mdzm, 6);
+	memcpy(&ptrSendData[11], sozm, 6);
+	ptrSendData[17] = 0x01;
+	ptrSendData[18] = 0x11;
+
+	sendlen += 14;
+
+	ptrSendData[sendlen + 5] = 0xff;
+	sendlen += 1;
+	memcpy(&ptrSendData[0], &sendlen, 4);
+
+	tcpclient->GetSock()->write(((char *)ptrSendData),sendlen + 5);
+
+
+	delete[]ptrSendData;
+
+}
 void AttendanceM::RecvHuiZhiPro()
 {
 	//
@@ -65,15 +98,16 @@ void AttendanceM::RecvHuiZhiPro()
 
 	recvbyte = tcpclient->GetSock()->readAll();
 
-
 	int recvlen = recvbyte.size();
 	UCHAR * netbao = 0;
 	netbao = (UCHAR *)recvbyte.data();
-
-	if (netbao[0] == 0xff)
+	/*if (netbao[0] == 0xff)
 	{
 		QMessageBox::information(0, tr("Success"), tr("Recv Data"), QMessageBox::Ok);
-	}
+	}*/
+	Deal deal;
+	deal.FenLiZhen(netbao, recvlen);
+
 
 }
 void AttendanceM::slotSign()

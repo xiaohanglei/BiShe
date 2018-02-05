@@ -11,7 +11,10 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QVector>
+#include <deal.h>
 
+#define ATTENDANCEMAX 100//单次考勤最大数量
+#define MAX_BUFF 1024 * 1024//分帧缓冲区大小
 struct STUDENT
 {
 	QString StuId;
@@ -24,7 +27,7 @@ class AttendanceM : public QWidget
 	Q_OBJECT
 
 public:
-	AttendanceM(TcpClient *tcpc,int method,QWidget *parent = 0);
+	AttendanceM(QString classroom,TcpClient *tcpc,int method,QWidget *parent = 0);
 	~AttendanceM();
 	bool isLeisure;//是否空闲
 	bool iscomplete;//是否完成
@@ -36,12 +39,15 @@ public:
 	}
 
 	 void SendOrderPro(PVOID another);
+	 void FenLiZhen(UCHAR * recvbuff, int len);
+	 
 	 void RecvHuiZhiPro();
 
 
 public slots:
 
 void slotSign();
+void SendReQuest();
 
 	
 private:
@@ -50,6 +56,8 @@ private:
 	QLineEdit * editinput;
 	QPushButton * buttok;
 	int m_method;
+
+	QString classroom;
 
 	QVector<STUDENT> *Stuends;
 

@@ -64,7 +64,7 @@ void TestSAM::slotSubmit()
 	QMessageBox::information(0, tr("Error"), tr("Server Connection successful"), QMessageBox::Ok);
 
 	submit->setEnabled(false);
-	AttendanceM *attendm = new AttendanceM(tcpclient,0);
+	AttendanceM *attendm = new AttendanceM(editAttendClassRoom->text(),tcpclient,0);
 	//this->hide();
 	attendm->show();
 		

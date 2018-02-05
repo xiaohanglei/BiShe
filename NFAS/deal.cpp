@@ -217,6 +217,8 @@ void Deal::Deal_Attendance_HuiZhi(UCHAR * sostation, SOCKET sock, DataManager * 
 
 	if (students.size() != 0)//判断有无考勤数据
 	{
+		ptrSendData[19] = 0x01;//表示有考勤数据
+		sendlen += 1;
 		//获取时间戳
 		int istarttime = 0, iendtime = 0;
 
@@ -233,18 +235,18 @@ void Deal::Deal_Attendance_HuiZhi(UCHAR * sostation, SOCKET sock, DataManager * 
 		QByteArray tempQB = attendanceId.toLatin1();
 		char *id = nullptr;
 		id = tempQB.data();
-		memcpy(&ptrSendData[19], id, 8);//
+		memcpy(&ptrSendData[20], id, 8);//
 
 		sendlen += 8;
 
-		memcpy(&ptrSendData[27], &istarttime, 4);//开始时间
-		memcpy(&ptrSendData[31], &iendtime, 4);//结束时间
+		memcpy(&ptrSendData[28], &istarttime, 4);//开始时间
+		memcpy(&ptrSendData[32], &iendtime, 4);//结束时间
 
 		sendlen += 8;
 
 		WORD count = students.size();//需要考勤的学生数量
 
-		memcpy(&ptrSendData[35], &count, 2);//记录数
+		memcpy(&ptrSendData[36], &count, 2);//记录数
 
 		sendlen += 2;
 
@@ -260,8 +262,8 @@ void Deal::Deal_Attendance_HuiZhi(UCHAR * sostation, SOCKET sock, DataManager * 
 			sid = tempsid.data();
 			sfig = tempsfig.data();
 
-			memcpy(&ptrSendData[37 + i * 40], sid, 8);//学号
-			memcpy(&ptrSendData[45 + i * 40], sfig, 32);//指纹
+			memcpy(&ptrSendData[38 + i * 40], sid, 8);//学号
+			memcpy(&ptrSendData[46 + i * 40], sfig, 32);//指纹
 		}
 		sendlen += count * 40;	
 	}
