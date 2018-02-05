@@ -7,13 +7,13 @@
 
 
 
-class Deal : public QObject
+class CDeal : public QObject
 {
 	Q_OBJECT
 
 public:
-	Deal(QObject * parent = Q_NULLPTR);
-	~Deal();
+	CDeal(QObject * parent = Q_NULLPTR);
+	~CDeal();
 
 	void FenLiZhen(UCHAR * recvbuff, int len);//∑÷÷°
 

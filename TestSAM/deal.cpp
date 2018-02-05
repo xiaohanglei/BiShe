@@ -1,19 +1,19 @@
 #include "deal.h"
 //#include <DataManager.h>
 #include <QMessageBox>
-Deal::Deal(QObject * parent) : QObject(parent)
+CDeal::CDeal(QObject * parent) : QObject(parent)
 {
 	m_All10ClientRecvBuf = new UCHAR[MAX_BUFF];
 	m_buf10len = 0;
 
 }
 
-Deal::~Deal()
+CDeal::~CDeal()
 {
 
 }
 
-void Deal::FenLiZhen(UCHAR * recvbuff, int len)
+void CDeal::FenLiZhen(UCHAR * recvbuff, int len)
 {
 #if 1
 	if (len <= 0) return;
@@ -65,7 +65,6 @@ void Deal::FenLiZhen(UCHAR * recvbuff, int len)
 			j = 0;
 			continue;;
 		}
-
 #endif		
 		//处理数据
 

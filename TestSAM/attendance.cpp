@@ -105,7 +105,7 @@ void AttendanceM::RecvHuiZhiPro()
 	{
 		QMessageBox::information(0, tr("Success"), tr("Recv Data"), QMessageBox::Ok);
 	}*/
-	Deal deal;
+	CDeal deal;
 	deal.FenLiZhen(netbao, recvlen);
 
 
