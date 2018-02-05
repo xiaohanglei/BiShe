@@ -15,7 +15,6 @@ CDeal::~CDeal()
 
 void CDeal::FenLiZhen(UCHAR * recvbuff, int len)
 {
-#if 1
 	if (len <= 0) return;
 	//分离帧
 	if ((m_buf10len + len) > MAX_BUFF)
@@ -65,25 +64,24 @@ void CDeal::FenLiZhen(UCHAR * recvbuff, int len)
 			j = 0;
 			continue;;
 		}
-#endif		
-		//处理数据
-
-		//------------------------分离成功，开始解析数据帧------------------------------------
-		//判断回执数据类型
-		if (recvbuff[17] == 0x11)//待考勤数据
+		if (recvbuff[18] == 0x11)//判断回执类型
 		{
-			if (recvbuff[19] == 0x01)//有考勤数据
+			//待考勤名单
+			if (recvbuff[19] == 0x01)//是否有考勤数据
 			{
+				//将考勤名单解析出来.
 
 			}
+			
 		}
-		else if (recvbuff[17] == 0x12)//考勤记录处理结果
+		else//考勤记录处理结果
 		{
-			if (recvbuff[19] == 0x01)//处理成功 
+			if (recvbuff[19] == 0x01)//处理成功
 			{
 
 			}
 		}
 	
+		
 	}
 }
