@@ -93,7 +93,7 @@ void Deal::FenLiZhen(UCHAR * recvbuff, int len, SOCKET sock, DataManager * dm)
 		EnterCriticalSection(dm->GetCriNetBao());//命令入队，加锁
 
 		
-		dm->GetNetBao()->push_back(bao);//放到队列尾部
+		dm->GetNetBao()->append(bao);//放到队列尾部
 		
 		LeaveCriticalSection(dm->GetCriNetBao());
 		

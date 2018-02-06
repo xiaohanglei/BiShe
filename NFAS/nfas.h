@@ -33,6 +33,8 @@ private:
 
 	bool IsNetWork;//判断本客户端是否有网络通讯功能
 
+	Deal tempdeal;
+
 	
 };
 

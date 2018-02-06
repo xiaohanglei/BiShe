@@ -12,12 +12,11 @@ AttendanceM	::AttendanceM(QString clroom, TcpClient * tcpc, int method, QWidget 
 	//ui.setupUi(this);
 	SetupUi();
 
-	connect(buttok, SIGNAL(clicked()), this, SLOT(SendReQuest()));
+	//connect(buttok, SIGNAL(clicked()), this, SLOT(SendReQuest()));
 	QObject::connect(tcpclient->GetSock(), &QTcpSocket::readyRead, this, &AttendanceM::RecvHuiZhiPro);
 	QObject::connect(&deal, &CDeal::RecvAttenance, this, &AttendanceM::slotSign);
-	
 
-
+	//SendReQuest(this);
 	_beginthread(SendOrderPro, 0, this);
 	
 }
@@ -32,7 +31,8 @@ void AttendanceM::SendOrderPro(PVOID another)
 
 	while (1)
 	{
-		Sleep(60000 * 5);//分钟
+		//Sleep(60000 * 5);//3分钟
+		Sleep(10000);//10s
 		if (attend->isLeisure)//是否空闲
 		{
 			//发送请求待考勤名单命令
@@ -42,7 +42,7 @@ void AttendanceM::SendOrderPro(PVOID another)
 			int waittime = 0;
 			while (!attend->isrecvdata)
 			{
-				Sleep(1000 * 2);
+				Sleep(1000 * 5);
 				waittime++;
 
 				if (waittime == 12 * 2)//如果超过2分钟则放弃等待
@@ -51,13 +51,13 @@ void AttendanceM::SendOrderPro(PVOID another)
 			}
 			if (attend->isrecvdata)//收到回执
 			{
-				attend->isLeisure = false;//将状态设置非空闲
 				attend->isrecvdata = false;
-
 				if (attend->attendance->Stuends.size() != 0)
 				{
+					attend->isLeisure = false;//将状态设置非空闲
+					
 					//准备开始考勤()
-					Attend(NULL);
+					Attend(attend);
 				}
 				
 			}
@@ -68,6 +68,9 @@ void AttendanceM::SendOrderPro(PVOID another)
 			if (attend->iscomplete)
 			{
 				//推送考勤结果命令
+
+				SendResult(attend);
+
 				attend->isLeisure = true;//将状态设置空闲
 
 				attend->iscomplete = false;
@@ -102,11 +105,70 @@ void AttendanceM::SendReQuest(AttendanceM * another)
 	memcpy(&ptrSendData[0], &sendlen, 4);
 
 	another->tcpclient->GetSock()->write(((char *)ptrSendData),sendlen + 5);
-
+	another->tcpclient->GetSock()->waitForBytesWritten();
 
 	delete[]ptrSendData;
 
 }
+
+void AttendanceM::SendResult(AttendanceM * another)
+{
+	UCHAR * ptrSendData = new UCHAR[MAX_BUFF];
+	int sendlen = 0;
+	ptrSendData[4] = 0x8f;
+
+	char mdzm[7] = "Server";
+	char *sozm = nullptr;
+	QByteArray tempQB = another->classroom.toLatin1();
+	sozm = tempQB.data();
+
+	memcpy(&ptrSendData[5], mdzm, 6);
+	memcpy(&ptrSendData[11], sozm, 6);
+	ptrSendData[17] = 0x01;
+	ptrSendData[18] = 0x12;
+
+	sendlen += 14;
+
+	//考勤项目编号
+	QByteArray tempQBattid = another->attendance->attendanceid.toLatin1();
+	char * attid = tempQBattid.data();
+
+	memcpy(&ptrSendData[19], attid, 8);
+
+	//记录数
+	int count = another->attendance->Stuends.size();
+	memcpy(&ptrSendData[27], &count, 2);
+
+	sendlen += 10;
+
+	QByteArray tempQBSid;
+	char * tempid = nullptr;
+	for (int i = 0; i < count; i++)
+	{
+		tempQBSid = another->attendance->Stuends.at(i).StuId.toLatin1();
+		tempid = tempQBSid.data();
+
+		memcpy(&ptrSendData[29 + i * 9], tempid, 8);
+
+		if (another->attendance->Stuends.at(i).StuSign)
+			ptrSendData[37 + i * 9] = 0x01;
+		else
+			ptrSendData[37 + i * 9] = 0x00;
+	}
+	sendlen += count * 9;
+
+	ptrSendData[sendlen + 5] = 0xff;
+	sendlen += 1;
+	memcpy(&ptrSendData[0], &sendlen, 4);
+
+	another->tcpclient->GetSock()->write(((char *)ptrSendData), sendlen + 5);
+	another->tcpclient->GetSock()->waitForBytesWritten();
+
+	delete[]ptrSendData;
+
+}
+
+
 void AttendanceM::RecvHuiZhiPro()
 {
 	//
@@ -129,7 +191,7 @@ void AttendanceM::slotSign()
 	//
 	isrecvdata = true;//收到数据
 
-#if 1
+#if 0
 	QString input = editinput->text();
 
 	for (auto it = attendance->Stuends.begin(); it != attendance->Stuends.end(); it++)

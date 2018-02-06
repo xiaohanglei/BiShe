@@ -37,6 +37,7 @@ public slots:
 
 void slotSign();
 static void SendReQuest(AttendanceM* another);
+static void SendResult(AttendanceM * another);
 
 	
 private:

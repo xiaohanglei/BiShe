@@ -45,7 +45,7 @@ void NFAS::ExeMingLingProc(LPVOID another)
 
 	while (1)
 	{
-		Sleep(1000);
+		Sleep(10000);
 	
 		EnterCriticalSection(dm->GetCriNetBao());//线程锁
 		
@@ -55,12 +55,12 @@ void NFAS::ExeMingLingProc(LPVOID another)
 			continue;
 		}
 
-		xinxibao = dm->GetNetBao()->front();//取出命令队列中的首条命令
-		dm->GetNetBao()->pop_front();//取出要执行的命令以后，从队列中删除该条命令		
+		xinxibao = dm->GetNetBao()->first();//取出命令队列中的首条命令
+		dm->GetNetBao()->removeFirst();//取出要执行的命令以后，从队列中删除该条命令		
 
 		LeaveCriticalSection(dm->GetCriNetBao());
 
-		Deal tempdeal;
+		
 
 		//检查设备列表中有无该设备
 		QString tempQS;

@@ -117,16 +117,18 @@ void CDeal::FenLiZhen(UCHAR * recvbuff, int len, ATTEND * attendance)
 				}
 				
 			}
+			emit RecvAttenance();//将考勤名单解析出来以后，发射一个信号，
 			
 		}
 		else//考勤记录处理结果
 		{
+			//暂时忽略考勤记录处理结果的回执
 			if (recvbuff[19] == 0x01)//处理成功
 			{
 
 			}
 		}
-		emit RecvAttenance();//将考勤名单解析出来以后，发射一个信号，
+		
 	
 		
 	}
