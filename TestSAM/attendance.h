@@ -28,16 +28,18 @@ public:
 	bool isrecvdata;//是否收到回执
 
 	static void SendOrderPro(PVOID another);
+	static void SendReQuest(AttendanceM* another);
+	static void SendResult(AttendanceM * another);
 	 
 	 void RecvHuiZhiPro();
 
-	 static void Attend(AttendanceM * another);//考勤
+	 static void AttendPro(AttendanceM * another);//考勤终止条件判断
+	bool AttendFiltration();//考勤过滤
+
 public slots:
 
-
+void attend();
 void slotSign();
-static void SendReQuest(AttendanceM* another);
-static void SendResult(AttendanceM * another);
 
 	
 private:
@@ -51,7 +53,8 @@ public:
 
 	QString classroom;
 
-	ATTEND * attendance;
+	ATTEND * attendance;//当前考勤项目
+	QVector<ATTEND> * already_attend;
 
 	
 };

@@ -6,13 +6,14 @@ AttendanceM	::AttendanceM(QString clroom, TcpClient * tcpc, int method, QWidget 
 	: classroom(clroom),tcpclient(tcpc), m_method(method),QWidget(parent)
 {
 	attendance = new ATTEND;
+	already_attend = new QVector<ATTEND>;
 	isLeisure = true;//初始空闲状态
 	iscomplete = false;//
 	isrecvdata = false;
 	//ui.setupUi(this);
 	SetupUi();
 
-	//connect(buttok, SIGNAL(clicked()), this, SLOT(SendReQuest()));
+	connect(buttok, SIGNAL(clicked()), this, SLOT(attend()));
 	QObject::connect(tcpclient->GetSock(), &QTcpSocket::readyRead, this, &AttendanceM::RecvHuiZhiPro);
 	QObject::connect(&deal, &CDeal::RecvAttenance, this, &AttendanceM::slotSign);
 
@@ -52,12 +53,14 @@ void AttendanceM::SendOrderPro(PVOID another)
 			if (attend->isrecvdata)//收到回执
 			{
 				attend->isrecvdata = false;
-				if (attend->attendance->Stuends.size() != 0)
+
+				//当考勤名单中的学生数量不等于0   并且  该考勤项目没有考勤过，才能考勤(考勤过滤)
+				if (attend->attendance->Stuends.size() != 0 && !attend->AttendFiltration())
 				{
 					attend->isLeisure = false;//将状态设置非空闲
 					
 					//准备开始考勤()
-					Attend(attend);
+					AttendPro(attend);
 				}
 				
 			}
@@ -70,6 +73,19 @@ void AttendanceM::SendOrderPro(PVOID another)
 				//推送考勤结果命令
 
 				SendResult(attend);
+
+				//清空当前考勤项目内容
+				attend->attendance->signcount = 0;
+				attend->attendance->Stuends.clear();//清空考勤名单，只保留考勤编号和考勤时段
+
+				attend->already_attend->append(*attend->attendance);//将只有考勤编号和考勤时段的考勤项目存入已考勤列表，以便过滤相同考勤项目
+
+
+				attend->attendance->attendanceid = "0";//然后清空剩下的数据信息
+				attend->attendance->starttime = 0;
+				attend->attendance->endtiem = 0;
+				
+				
 
 				attend->isLeisure = true;//将状态设置空闲
 
@@ -185,13 +201,9 @@ void AttendanceM::RecvHuiZhiPro()
 
 
 }
-
-void AttendanceM::slotSign()
+void AttendanceM::attend()
 {
-	//
-	isrecvdata = true;//收到数据
-
-#if 0
+#if 1
 	QString input = editinput->text();
 
 	for (auto it = attendance->Stuends.begin(); it != attendance->Stuends.end(); it++)
@@ -215,8 +227,15 @@ void AttendanceM::slotSign()
 	}
 #endif
 }
+void AttendanceM::slotSign()
+{
+	//
+	isrecvdata = true;//收到数据
 
-void AttendanceM::Attend(AttendanceM * another)
+
+}
+
+void AttendanceM::AttendPro(AttendanceM * another)
 {
 	//
 
@@ -237,6 +256,25 @@ void AttendanceM::Attend(AttendanceM * another)
 			break;
 		}
 	}	
+}
+
+bool AttendanceM::AttendFiltration()
+{
+	for (auto it = already_attend->begin(); it != already_attend->end(); it++)
+	{
+		if (it->attendanceid == attendance->attendanceid)
+		{
+			if (it->starttime == attendance->starttime)
+			{
+				if (it->endtiem == attendance->endtiem)
+				{
+					return true;
+				}
+			}
+		}
+	}
+	
+	return false;
 }
 
 void AttendanceM::SetupUi()
