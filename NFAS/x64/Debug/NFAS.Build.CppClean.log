@@ -21,7 +21,6 @@ h:\bishe\bishe\bishe\nfas\x64\debug\attendancetabwidget.obj
 h:\bishe\bishe\bishe\nfas\x64\debug\academicclassstudenttabwidget.obj
 h:\bishe\bishe\bishe\nfas\x64\debug\qrc_nfas.obj
 h:\bishe\bishe\bishe\nfas\generatedfiles\debug\moc_nfas.cpp
-h:\bishe\bishe\bishe\nfas\generatedfiles\qrc_nfas.cpp
 h:\bishe\bishe\bishe\nfas\generatedfiles\debug\moc_logindialog.cpp
 h:\bishe\bishe\bishe\nfas\generatedfiles\debug\moc_usertabwidget.cpp
 h:\bishe\bishe\bishe\nfas\generatedfiles\debug\moc_resulttabwidget.cpp
@@ -31,6 +30,7 @@ h:\bishe\bishe\bishe\nfas\generatedfiles\debug\moc_datamanager.cpp
 h:\bishe\bishe\bishe\nfas\generatedfiles\debug\moc_academicclassstudenttabwidget.cpp
 h:\bishe\bishe\bishe\nfas\generatedfiles\debug\moc_devicewidget.cpp
 h:\bishe\bishe\bishe\nfas\generatedfiles\debug\moc_deal.cpp
+h:\bishe\bishe\bishe\nfas\generatedfiles\qrc_nfas.cpp
 h:\bishe\bishe\bishe\x64\debug\nfas.ilk
 h:\bishe\bishe\bishe\x64\debug\nfas.exe
 h:\bishe\bishe\bishe\x64\debug\nfas.pdb

@@ -36,18 +36,35 @@ public:
 	 static void AttendPro(AttendanceM * another);//¿¼ÇÚÖÕÖ¹Ìõ¼þÅÐ¶Ï
 	bool AttendFiltration();//¿¼ÇÚ¹ýÂË
 
+signals:
+	void chang();
+
 public slots:
+void Changeui();//
 
 void attend();
 void slotSign();
+void attendList();//
 
 	
 private:
 	void SetupUi();
 public:
+	QLabel * labelAttid;
+	QLabel * labelAttname;
+	QLabel * labelAttstarttime;
+	QLabel * labelAttendtime;
+
+	QLabel * edidAttid;
+	QLabel * edidAttname;
+	QLabel * edidAttstarttime;
+	QLabel * edidAttendtime;
+
+	QLabel * label1;
 	TcpClient * tcpclient;
 	QLineEdit * editinput;
 	QPushButton * buttok;
+	QPushButton * buttAttList;
 	int m_method;
 	CDeal deal;
 

@@ -1,0 +1,3 @@
+﻿  Rcc'ing nfas.qrc...
+  qrc_nfas.cpp
+LINK : fatal error LNK1104: 无法打开文件“H:\BiShe\BiShe\BiShe\x64\Release\\NFAS.exe”

@@ -201,8 +201,6 @@ DataManager::DataManager(QString configfile)//从配置文件中读取数据库连接信息
 
 	//新建数据类对象保存数据	
 	tcp->LoadWinSock();//开启tcp服务
-	tcp->StartServer();
-
 
 	//学院、学生、班级、考勤、用户、考勤结果
 	academics = new QVector<Academic>;

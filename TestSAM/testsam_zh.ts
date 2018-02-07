@@ -6,40 +6,61 @@
     <message>
         <location filename="attendance.ui" line="16"/>
         <source>Attendance</source>
-        <translation type="unfinished"></translation>
+        <translation>考勤</translation>
     </message>
 </context>
 <context>
     <name>AttendanceM</name>
     <message>
-        <location filename="attendance.cpp" line="75"/>
-        <source>Success</source>
-        <translation type="unfinished"></translation>
+        <location filename="attendance.cpp" line="310"/>
+        <source>Attendance Machine Simulator Attend</source>
+        <translation>考勤机（正在考勤）</translation>
     </message>
     <message>
-        <location filename="attendance.cpp" line="75"/>
-        <source>Recv Data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="attendance.cpp" line="107"/>
+        <location filename="attendance.cpp" line="340"/>
+        <location filename="attendance.cpp" line="358"/>
         <source>Attendance Machine Simulator</source>
-        <translation type="unfinished"></translation>
+        <translation>考勤机（空闲）</translation>
     </message>
     <message>
-        <location filename="attendance.cpp" line="119"/>
+        <location filename="attendance.cpp" line="365"/>
+        <source>Attendance id</source>
+        <translation>考勤编号</translation>
+    </message>
+    <message>
+        <location filename="attendance.cpp" line="366"/>
+        <source>Attendance name</source>
+        <translation>考勤名称</translation>
+    </message>
+    <message>
+        <location filename="attendance.cpp" line="367"/>
+        <source>Attendance starttime</source>
+        <translation>开始时间</translation>
+    </message>
+    <message>
+        <location filename="attendance.cpp" line="368"/>
+        <source>Attendance endtime</source>
+        <translation>结束时间</translation>
+    </message>
+    <message>
+        <location filename="attendance.cpp" line="388"/>
         <source>StuId</source>
-        <translation type="unfinished"></translation>
+        <translation>学号</translation>
     </message>
     <message>
-        <location filename="attendance.cpp" line="123"/>
+        <location filename="attendance.cpp" line="392"/>
         <source>Finger</source>
-        <translation type="unfinished"></translation>
+        <translation>指纹</translation>
     </message>
     <message>
-        <location filename="attendance.cpp" line="125"/>
+        <location filename="attendance.cpp" line="394"/>
         <source>submit</source>
-        <translation type="unfinished"></translation>
+        <translation>签到</translation>
+    </message>
+    <message>
+        <location filename="attendance.cpp" line="395"/>
+        <source>Attendance List</source>
+        <translation>考勤名单</translation>
     </message>
 </context>
 <context>
@@ -47,108 +68,108 @@
     <message>
         <location filename="tcpclient.cpp" line="55"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>出错</translation>
     </message>
     <message>
         <location filename="tcpclient.cpp" line="55"/>
         <source>Init NetWork Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>初始化网络环境失败</translation>
     </message>
 </context>
 <context>
     <name>TestSAM</name>
     <message>
         <location filename="testsam.cpp" line="25"/>
-        <location filename="testsam.cpp" line="32"/>
-        <location filename="testsam.cpp" line="39"/>
-        <location filename="testsam.cpp" line="46"/>
-        <location filename="testsam.cpp" line="52"/>
-        <location filename="testsam.cpp" line="61"/>
-        <location filename="testsam.cpp" line="64"/>
-        <location filename="testsam.cpp" line="86"/>
+        <location filename="testsam.cpp" line="34"/>
+        <location filename="testsam.cpp" line="41"/>
+        <location filename="testsam.cpp" line="48"/>
+        <location filename="testsam.cpp" line="54"/>
+        <location filename="testsam.cpp" line="63"/>
+        <location filename="testsam.cpp" line="66"/>
+        <location filename="testsam.cpp" line="88"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>出错</translation>
     </message>
     <message>
         <location filename="testsam.cpp" line="25"/>
         <source>Please Select Attendance Method</source>
-        <translation type="unfinished"></translation>
+        <translation>请选择考勤方式</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="32"/>
-        <location filename="testsam.cpp" line="39"/>
+        <location filename="testsam.cpp" line="34"/>
+        <location filename="testsam.cpp" line="41"/>
         <source>Ip Address Error</source>
-        <translation type="unfinished"></translation>
+        <translation>IP 地址错误</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="46"/>
+        <location filename="testsam.cpp" line="48"/>
         <source>Port Address Error</source>
-        <translation type="unfinished"></translation>
+        <translation>端口有误</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="52"/>
+        <location filename="testsam.cpp" line="54"/>
         <source>Class Room Error</source>
-        <translation type="unfinished"></translation>
+        <translation>教室编号错误</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="61"/>
+        <location filename="testsam.cpp" line="63"/>
         <source>Server Connection failed</source>
-        <translation type="unfinished"></translation>
+        <translation>服务器连接失败</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="64"/>
+        <location filename="testsam.cpp" line="66"/>
         <source>Server Connection successful</source>
-        <translation type="unfinished"></translation>
+        <translation>服务器连接成功</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="94"/>
+        <location filename="testsam.cpp" line="96"/>
         <source>Attendance Machine Simulator</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="testsam.cpp" line="119"/>
-        <source>Table</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="testsam.cpp" line="120"/>
-        <source>StuId</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="testsam.cpp" line="123"/>
-        <source>Server Ip</source>
-        <translation type="unfinished"></translation>
+        <translation>模拟考勤机</translation>
     </message>
     <message>
         <location filename="testsam.cpp" line="124"/>
-        <source>Server Port</source>
-        <translation type="unfinished"></translation>
+        <source>Table</source>
+        <translation>指纹</translation>
     </message>
     <message>
         <location filename="testsam.cpp" line="125"/>
+        <source>StuId</source>
+        <translation>学号</translation>
+    </message>
+    <message>
+        <location filename="testsam.cpp" line="128"/>
+        <source>Server Ip</source>
+        <translation>服务器IP</translation>
+    </message>
+    <message>
+        <location filename="testsam.cpp" line="129"/>
+        <source>Server Port</source>
+        <translation>端口</translation>
+    </message>
+    <message>
+        <location filename="testsam.cpp" line="130"/>
         <source>Class Room</source>
-        <translation type="unfinished"></translation>
+        <translation>教室</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="145"/>
+        <location filename="testsam.cpp" line="150"/>
         <source>Attendance Method</source>
-        <translation type="unfinished"></translation>
+        <translation>考勤方式</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="158"/>
+        <location filename="testsam.cpp" line="163"/>
         <source>Environment Setting </source>
-        <translation type="unfinished"></translation>
+        <translation>环境设置</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="161"/>
+        <location filename="testsam.cpp" line="166"/>
         <source>Submit</source>
-        <translation type="unfinished"></translation>
+        <translation>确定</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="164"/>
+        <location filename="testsam.cpp" line="169"/>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>发送</translation>
     </message>
 </context>
 <context>
@@ -156,7 +177,35 @@
     <message>
         <location filename="testsam.ui" line="16"/>
         <source>TestSAM</source>
-        <translation type="unfinished"></translation>
+        <translation>测试</translation>
+    </message>
+</context>
+<context>
+    <name>attlist</name>
+    <message>
+        <location filename="attlist.ui" line="16"/>
+        <source>attlist</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="attlist.cpp" line="19"/>
+        <source>Attendance List</source>
+        <translation>考勤名单</translation>
+    </message>
+    <message>
+        <location filename="attlist.cpp" line="30"/>
+        <source>Student Id</source>
+        <translation>学号</translation>
+    </message>
+    <message>
+        <location filename="attlist.cpp" line="30"/>
+        <source>Student Finger</source>
+        <translation>指纹</translation>
+    </message>
+    <message>
+        <location filename="attlist.cpp" line="30"/>
+        <source>Sign In</source>
+        <translation>签到</translation>
     </message>
 </context>
 </TS>

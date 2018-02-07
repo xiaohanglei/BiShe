@@ -131,6 +131,9 @@ void UserTabWidget::updateTable()
 void UserTabWidget::setupUi()
 {
 	usertable = new QTableWidget;
+	usertable->setMaximumWidth(1920);
+
+
 	QLabel* labeluserid = new QLabel(tr("user id"));
 	QLabel* labeluserpsd = new QLabel(tr("user password"));
 	QLabel* labeluserpsdagain = new QLabel(tr("user password again"));
@@ -178,12 +181,12 @@ void UserTabWidget::setupUi()
 	main_layout->addLayout(psdagalayout);
 	main_layout->addLayout(oplayout);
 
-	//QHBoxLayout* H_main_layout = new QHBoxLayout;
-	//H_main_layout->addStretch(1);
-	//H_main_layout->addLayout(main_layout);
-	//H_main_layout->addStretch(1);
+	QHBoxLayout* H_main_layout = new QHBoxLayout;
+	H_main_layout->addStretch(1);
+	H_main_layout->addLayout(main_layout);
+	H_main_layout->addStretch(1);
 
-	this->setLayout(main_layout);
+	this->setLayout(H_main_layout);
 
 	updateTable();
 }

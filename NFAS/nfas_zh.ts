@@ -741,27 +741,27 @@
 <context>
     <name>Deal</name>
     <message>
-        <location filename="deal.cpp" line="151"/>
+        <location filename="deal.cpp" line="149"/>
         <source>Thursday</source>
         <translation>周四</translation>
     </message>
     <message>
-        <location filename="deal.cpp" line="139"/>
+        <location filename="deal.cpp" line="137"/>
         <source>Monday</source>
         <translation>周一</translation>
     </message>
     <message>
-        <location filename="deal.cpp" line="143"/>
+        <location filename="deal.cpp" line="141"/>
         <source>Tuesday</source>
         <translation>周二</translation>
     </message>
     <message>
-        <location filename="deal.cpp" line="147"/>
+        <location filename="deal.cpp" line="145"/>
         <source>Wednesday</source>
         <translation>周三</translation>
     </message>
     <message>
-        <location filename="deal.cpp" line="155"/>
+        <location filename="deal.cpp" line="153"/>
         <source>Friday</source>
         <translation>周五</translation>
     </message>
@@ -837,7 +837,7 @@
     <message>
         <location filename="nfas.cpp" line="136"/>
         <source>Network fingerprint attendance system</source>
-        <translation>考勤系统</translation>
+        <translation type="unfinished">考勤系统（客户端）</translation>
     </message>
     <message>
         <source>student information</source>
@@ -877,6 +877,11 @@
         <location filename="nfas.cpp" line="164"/>
         <source>Device information</source>
         <translation>设备信息</translation>
+    </message>
+    <message>
+        <location filename="nfas.cpp" line="177"/>
+        <source>Network fingerprint attendance system online</source>
+        <translation>考勤系统（服务器）</translation>
     </message>
 </context>
 <context>
@@ -1172,7 +1177,7 @@
     <message>
         <location filename="usertabwidget.cpp" line="136"/>
         <source>user password again</source>
-        <translation>请再次输入用户密码</translation>
+        <translation>重复密码</translation>
     </message>
     <message>
         <location filename="usertabwidget.cpp" line="35"/>

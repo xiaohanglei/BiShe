@@ -1,4 +1,5 @@
 <RCC>
-    <qresource prefix="TestSAM">
+    <qresource prefix="/TestSAM">
+        <file>testsam_zh.qm</file>
     </qresource>
 </RCC>

@@ -19,12 +19,14 @@ TestSAM::~TestSAM()
 void TestSAM::slotSubmit()
 {
 	
-
-	if (!radioStuId->isChecked() && !radioStuId->isChecked())
+	int method = 0;
+	if (!(radioStuId->isChecked() || radioTable->isChecked()))
 	{
 		QMessageBox::information(0, tr("Error"), tr("Please Select Attendance Method"), QMessageBox::Ok);
 		return;
 	}
+	if (radioTable->isChecked())
+		method = 1;
 
 	QStringList bip = editServerIp->text().split(".");
 	if (bip.size()!= 4)
@@ -64,8 +66,8 @@ void TestSAM::slotSubmit()
 	QMessageBox::information(0, tr("Error"), tr("Server Connection successful"), QMessageBox::Ok);
 
 	submit->setEnabled(false);
-	AttendanceM *attendm = new AttendanceM(editAttendClassRoom->text(),tcpclient,0);
-	//this->hide();
+	AttendanceM *attendm = new AttendanceM(editAttendClassRoom->text(),tcpclient,method);
+	this->hide();
 	attendm->show();
 		
 }
@@ -106,14 +108,17 @@ void TestSAM::SetupUi()
 
 	editServerIp = new QLineEdit;
 	editServerIp->setMaxLength(15);
+	editServerIp->setText("127.0.0.1");
 	
 
 	editServerPort = new QLineEdit;
 	editServerPort->setMaxLength(15);
 	editServerPort->setValidator(new QIntValidator(1024, 65536, this));
 	editServerPort->setMaximumWidth(40);
+	editServerPort->setText("9696");
 
 	editAttendClassRoom = new QLineEdit;
+	editAttendClassRoom->setText("10-211");
 	groupAttend = new QButtonGroup;//(tr("Attendance Method"))
 
 	radioTable = new QRadioButton(tr("Table"));

@@ -174,6 +174,9 @@ void NFAS::setupUi()
 		//设置在线标记
 		dataManager->IsServerOnline(2);
 		IsNetWork = true;
+		this->setWindowTitle(tr("Network fingerprint attendance system online"));
+
+		dataManager->GetTcp()->StartServer();//启动网络服务
 		//开启线程
 		_beginthread(TcpServer::RecvClientProc, 0, dataManager);//接收客户端连接的线程
 		_beginthread(ExeMingLingProc, 0, dataManager);//处理考勤设备发来的命令
