@@ -837,7 +837,7 @@
     <message>
         <location filename="nfas.cpp" line="136"/>
         <source>Network fingerprint attendance system</source>
-        <translation type="unfinished">考勤系统（客户端）</translation>
+        <translation>考勤系统（客户端）</translation>
     </message>
     <message>
         <source>student information</source>
@@ -1050,7 +1050,7 @@
     <message>
         <location filename="resulttabwidget.cpp" line="16"/>
         <source>Update Attendance Result</source>
-        <translation>更新考勤记录</translation>
+        <translation type="unfinished">更新最新记录</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="209"/>

@@ -495,7 +495,7 @@ void Deal::Deal_Result_HuiZhi(UCHAR *sostation, SOCKET sock,bool ret)
 	int sendvlen = 0;
 	if ((sendvlen = send(sock, (char*)ptrSendData, sendlen + 5, 0)) == SOCKET_ERROR)
 	{
-		QMessageBox::information(0, tr("Feedback failure"), tr("fan kui shi bai ,kao qin jiao shi wei :"), QMessageBox::Ok);
+		//QMessageBox::information(0, tr("Feedback failure"), tr("fan kui shi bai ,kao qin jiao shi wei :"), QMessageBox::Ok);
 		return;
 	}
 
