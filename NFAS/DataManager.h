@@ -384,7 +384,7 @@ public:
 
 	//查询现在是否已经有具有和考勤设备通讯的管理客户端
 
-	bool IsServerOnline(int op);
+	bool IsServerOnline(int op, QString &qsip = QString("NULL"));
 
 	//数据库的更新（插入，删除）,通过op方式来确定，
 

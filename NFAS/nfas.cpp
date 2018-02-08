@@ -10,6 +10,7 @@
 #include "academicclassstudenttabwidget.hpp"
 #include "devicewidget.hpp"
 #include <QMessageBox>
+#include <QTcpSocket>
 
 //#include <QtWidgets/QApplication>
 #include <QDesktopWidget>
@@ -169,7 +170,9 @@ void NFAS::setupUi()
 	main_layout->addWidget(main_tab);
 	this->setLayout(main_layout);
 
-	if (dataManager->GetCurrentUser().GetIdentify() == 0 && !dataManager->IsServerOnline(1))//只有当前用户为管理员且没有具有通讯功能的管理客户端在线时，才能开启网络通讯功能
+
+	QString testip;//获得在线服务器的ip
+	if (dataManager->GetCurrentUser().GetIdentify() == 0 && !dataManager->IsServerOnline(1,testip))//只有当前用户为管理员且没有具有通讯功能的管理客户端在线时，才能开启网络通讯功能
 	{
 		//设置在线标记
 		dataManager->IsServerOnline(2);
@@ -180,6 +183,55 @@ void NFAS::setupUi()
 		//开启线程
 		_beginthread(TcpServer::RecvClientProc, 0, dataManager);//接收客户端连接的线程
 		_beginthread(ExeMingLingProc, 0, dataManager);//处理考勤设备发来的命令
+	}
+	else//如果已经有服务在线，则先判断在线的服务器是否处于正常的网络通信状态
+	{
+		testip = "127.0.0.1";//获得在线服务器的ip
+		if (testip.length() != 0)//当没有获取到服务器的ip，则将当前系统设置为服务器
+		{
+
+			QTcpSocket testNet;
+			testNet.connectToHost(testip, 9696);
+
+			if (testNet.waitForConnected(10000))//设置等待连接时间为 10s
+			{
+				//连接成功，则证明当前服务器正常。
+
+				testNet.disconnectFromHost();//断开连接
+				testNet.waitForDisconnected();
+			}
+			else//要是连接失败，则将当前系统设置为服务器
+			{
+				testNet.disconnectFromHost();//断开连接
+				testNet.waitForDisconnected();
+
+
+				//设置在线标记
+				dataManager->IsServerOnline(2);
+				IsNetWork = true;
+				this->setWindowTitle(tr("Network fingerprint attendance system online"));
+
+				dataManager->GetTcp()->StartServer();//启动网络服务
+													 //开启线程
+				_beginthread(TcpServer::RecvClientProc, 0, dataManager);//接收客户端连接的线程
+				_beginthread(ExeMingLingProc, 0, dataManager);//处理考勤设备发来的命令
+
+			}
+		}
+		else
+		{
+			
+			//设置在线标记
+			dataManager->IsServerOnline(2);
+			IsNetWork = true;
+			this->setWindowTitle(tr("Network fingerprint attendance system online"));
+
+			dataManager->GetTcp()->StartServer();//启动网络服务
+												 //开启线程
+			_beginthread(TcpServer::RecvClientProc, 0, dataManager);//接收客户端连接的线程
+			_beginthread(ExeMingLingProc, 0, dataManager);//处理考勤设备发来的命令
+		}
+
 	}
 
 //测试

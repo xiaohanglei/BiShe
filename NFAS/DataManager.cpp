@@ -265,16 +265,19 @@ bool DataManager::InitDataBase(QString server,QString database,QString uid,QStri
 	return true;
 }
 
-bool DataManager::IsServerOnline(int op)
+bool DataManager::IsServerOnline(int op, QString &qsip)
 {
 	if (op == 1)//判断是否有在线
 	{
-		QSqlQuery query("SELECT * FROM Server");
+		QSqlQuery query("SELECT Server,Ip FROM Server");
 		while (query.next())
 		{
 			int online = query.value(0).toInt();
 			if (online == 1)
+			{
+				qsip = query.value(1).toString();
 				return true;
+			}
 			else
 				return false;
 		}
@@ -282,17 +285,17 @@ bool DataManager::IsServerOnline(int op)
 	else if (op == 2)//设置在线
 	{
 		QSqlQuery query;
-		query.prepare("update Server set Server = ? where Server = ?");
+		query.prepare("update Server set Server = ? ,Ip = ?");
 		query.bindValue(0, 1);
-		query.bindValue(1, 0);
+		query.bindValue(1, GetTcp()->m_IpAadress);
 		return query.exec();
 	}
-	else//设置下线
+	else if (op == 3)//设置下线
 	{
 		QSqlQuery query;
-		query.prepare("update Server set Server = ? where Server = ?");
+		query.prepare("update Server set Server = ? ,Ip = ?");
 		query.bindValue(0, 0);
-		query.bindValue(1, 1);
+		query.bindValue(1, "NULL");
 		return query.exec();
 	}
 	
