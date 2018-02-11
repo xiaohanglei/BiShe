@@ -103,9 +103,10 @@ void NFAS::closeEvent(QCloseEvent * event)
 
 //选项卡切换
 void NFAS::UpdateTab(int index)
-
 {
+
 	//只有当前用户为管理员则可以显示所有选项卡，切换
+
 	if (dataManager->GetCurrentUser().GetIdentify() == 0)
 	{
 		auto widget = main_tab->currentWidget();
@@ -113,6 +114,7 @@ void NFAS::UpdateTab(int index)
 		{
 		case 0:
 			((AttendanceTabWidget*)widget)->UpdateTab();//考勤信息
+			//dataManager->InitAttendances();
 			break;		
 		case 1:
 			((ResultTabWidget*)widget)->UpdateTab();//考勤结果
@@ -134,7 +136,12 @@ void NFAS::UpdateTab(int index)
 
 void NFAS::setupUi()
 {
+#ifdef SERVER
+	this->setWindowTitle(tr("Network fingerprint attendance system online"));
+
+#else
 	this->setWindowTitle(tr("Network fingerprint attendance system"));
+#endif
 	this->setWindowFlags(Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint/*| Qt::Widget | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint*/);//关闭和最小化按钮
 	//this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint);
 
@@ -144,7 +151,7 @@ void NFAS::setupUi()
 	this->setGeometry(400,320,1440,900);
 	//this->setFixedSize(QSize(a.width(), a.height()-100));
 	//this->showFullScreen();//全屏显示
-	//this->showMaximized();	
+	this->showMaximized();	
 
 	main_tab = new QTabWidget;
 
@@ -170,9 +177,20 @@ void NFAS::setupUi()
 	main_layout->addWidget(main_tab);
 	this->setLayout(main_layout);
 
+#ifdef SERVER
+	if (dataManager->GetCurrentUser().GetIdentify() == 0)//只有当前用户为管理员
+	{
+		IsNetWork = true;
+		this->setWindowTitle(tr("Network fingerprint attendance system online"));
 
+		dataManager->GetTcp()->StartServer();//启动网络服务
+											 //开启线程
+		_beginthread(TcpServer::RecvClientProc, 0, dataManager);//接收客户端连接的线程
+		_beginthread(ExeMingLingProc, 0, dataManager);//处理考勤设备发来的命令
+	}
+#if 0
 	QString testip;//获得在线服务器的ip
-	if (dataManager->GetCurrentUser().GetIdentify() == 0 && !dataManager->IsServerOnline(1,testip))//只有当前用户为管理员且没有具有通讯功能的管理客户端在线时，才能开启网络通讯功能
+	if (dataManager->GetCurrentUser().GetIdentify() == 0 && !dataManager->IsServerOnline(1, testip))//只有当前用户为管理员且没有具有通讯功能的管理客户端在线时，才能开启网络通讯功能
 	{
 		//设置在线标记
 		dataManager->IsServerOnline(2);
@@ -180,13 +198,13 @@ void NFAS::setupUi()
 		this->setWindowTitle(tr("Network fingerprint attendance system online"));
 
 		dataManager->GetTcp()->StartServer();//启动网络服务
-		//开启线程
+											 //开启线程
 		_beginthread(TcpServer::RecvClientProc, 0, dataManager);//接收客户端连接的线程
 		_beginthread(ExeMingLingProc, 0, dataManager);//处理考勤设备发来的命令
 	}
 	else//如果已经有服务在线，则先判断在线的服务器是否处于正常的网络通信状态
 	{
-		testip = "127.0.0.1";//获得在线服务器的ip
+		//testip = "127.0.0.1";//获得在线服务器的ip
 		if (testip.length() != 0)//当没有获取到服务器的ip，则将当前系统设置为服务器
 		{
 
@@ -220,7 +238,7 @@ void NFAS::setupUi()
 		}
 		else
 		{
-			
+
 			//设置在线标记
 			dataManager->IsServerOnline(2);
 			IsNetWork = true;
@@ -233,6 +251,11 @@ void NFAS::setupUi()
 		}
 
 	}
+#endif
+#endif // SERVER
+
+
+	
 
 //测试
 	//UCHAR station[7] = "10-211";

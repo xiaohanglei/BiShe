@@ -112,6 +112,10 @@ void UserTabWidget::updateTable()
 	QStringList header;
 	header << tr("user id") << tr("user identify");
 	usertable->setHorizontalHeaderLabels(header);
+
+	QFont font;
+	font.setPointSize(10);
+	usertable->setFont(font);
 	for (auto it = dataManager->GetUser()->begin(); it != dataManager->GetUser()->end(); it++)
 	{
 		auto rowcount = usertable->rowCount();
@@ -125,6 +129,7 @@ void UserTabWidget::updateTable()
 		}
 		usertable->setCellWidget(rowcount, 1, itembox);
 		//usertable->setItem(rowcount, 1, new QTableWidgetItem(its->GetName()));
+		usertable->item(rowcount, 0)->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 	}
 }
 

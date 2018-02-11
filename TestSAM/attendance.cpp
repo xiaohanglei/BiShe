@@ -3,6 +3,7 @@
 #include <windows.h>
 #include <process.h>
 #include <attlist.h>
+#include <QtWidgets/QApplication>
 AttendanceM	::AttendanceM(QString clroom, TcpClient * tcpc, int method, QWidget *parent)
 	: classroom(clroom),tcpclient(tcpc), m_method(method),QWidget(parent)
 {
@@ -18,6 +19,7 @@ AttendanceM	::AttendanceM(QString clroom, TcpClient * tcpc, int method, QWidget 
 	connect(buttAttList, SIGNAL(clicked()), this, SLOT(attendList()));
 	QObject::connect(this, &AttendanceM::chang, this, &AttendanceM::Changeui);
 	QObject::connect(tcpclient->GetSock(), &QTcpSocket::readyRead, this, &AttendanceM::RecvHuiZhiPro);
+	//QObject::connect(tcpclient->GetSock(), &QTcpSocket::disconnected, this, &AttendanceM::Disconnectdeal);
 	QObject::connect(&deal, &CDeal::RecvAttenance, this, &AttendanceM::slotSign);
 
 	
@@ -211,6 +213,11 @@ void AttendanceM::RecvHuiZhiPro()
 
 
 }
+void AttendanceM::Disconnectdeal()
+{
+
+	
+}
 void AttendanceM::attend()
 {
 #if 1
@@ -307,7 +314,7 @@ void AttendanceM::Changeui()
 {
 	if (!isLeisure)
 	{
-		this->setWindowTitle(tr("Attendance Machine Simulator Attend"));
+		this->setWindowTitle(classroom + tr("Attendance Machine Simulator Attend"));
 		if (this->attendance->starttime <= QDateTime::currentDateTime().toTime_t())//正式开始考勤
 		{
 			this->editinput->setVisible(true);
@@ -337,7 +344,7 @@ void AttendanceM::Changeui()
 	}
 	else
 	{
-		this->setWindowTitle(tr("Attendance Machine Simulator"));
+		this->setWindowTitle(classroom + tr("Attendance Machine Simulator"));
 		this->editinput->setVisible(false);
 		this->label1->setVisible(false);
 		this->buttok->setVisible(false);
@@ -356,13 +363,17 @@ void AttendanceM::Changeui()
 
 void AttendanceM::SetupUi()
 {
-	this->setWindowTitle(tr("Attendance Machine Simulator"));
+	this->setWindowTitle(classroom + tr("Attendance Machine Simulator"));
 	this->setWindowFlags(Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint/* | Qt::WindowMaximizeButtonHint*//*| Qt::Widget | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint*/);//关闭和最小化按钮
 																																																					  //this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint);
 
 	this->setFixedSize(QSize(500, 400));
 
 	//提示信息
+
+	labelTiShi = new QLabel(tr("Reconnecting"));
+	labelTiShi->setVisible(false);
+
 	labelAttid = new QLabel(tr("Attendance id"));
 	labelAttname = new QLabel(tr("Attendance name"));
 	labelAttstarttime = new QLabel(tr("Attendance starttime"));
@@ -404,6 +415,11 @@ void AttendanceM::SetupUi()
 	layout_top1->addWidget(edidAttname);
 	layout_top1->addStretch(2);
 
+	QHBoxLayout * layout_tishi = new QHBoxLayout;
+	layout_tishi->addStretch(1);
+	layout_tishi->addWidget(labelTiShi);
+	layout_tishi->addStretch(1);
+
 	QHBoxLayout * layout_top2 = new QHBoxLayout;
 	layout_top2->addStretch(2);
 	layout_top2->addWidget(labelAttstarttime);
@@ -427,6 +443,7 @@ void AttendanceM::SetupUi()
 	QVBoxLayout * layout_main = new QVBoxLayout;
 	layout_main->addStretch(2);
 	layout_main->addLayout(layout_top1);
+	layout_main->addLayout(layout_tishi);
 	layout_main->addLayout(layout_top2);
 	layout_main->addStretch(1);
 	layout_main->addLayout(layout_border);

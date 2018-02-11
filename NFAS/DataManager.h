@@ -11,7 +11,8 @@
 #include "TcpServer.h"
 
 #define  MAX_BUF_LEN 1024*1024
-#define MAX_ATTEND_TIME 20//系统向考勤设备发送待考勤数据的时间，不超过20分钟
+#define MAX_ATTEND_TIME 10//系统向考勤设备发送待考勤数据的时间，不超过20分钟
+//#define SERVER //服务器
 struct NETBAO//网络数据帧
 {
 	UCHAR mdstation[7];//目的电报码
@@ -462,12 +463,14 @@ public:
 		return g_cNETBAO;
 	}
 
-
+	//void InitAllData();
 private:
 
 	//数据库连接
 	bool InitDataBase(QString server, QString database, QString uid, QString pwd);
 
+	
+public:
 	//初始化数据信息，
 	//将数据库中的数据更新到程序中
 	void InitAcademics();

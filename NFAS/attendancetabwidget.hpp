@@ -65,6 +65,7 @@ public slots:
 	
 private:
 	void setupUi();
+public:
 	void updateTree();
 
 	DataManager* dataManager;

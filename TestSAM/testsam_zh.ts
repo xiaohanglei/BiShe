@@ -12,53 +12,58 @@
 <context>
     <name>AttendanceM</name>
     <message>
-        <location filename="attendance.cpp" line="310"/>
+        <location filename="attendance.cpp" line="317"/>
         <source>Attendance Machine Simulator Attend</source>
         <translation>考勤机（正在考勤）</translation>
     </message>
     <message>
-        <location filename="attendance.cpp" line="340"/>
-        <location filename="attendance.cpp" line="358"/>
+        <location filename="attendance.cpp" line="347"/>
+        <location filename="attendance.cpp" line="366"/>
         <source>Attendance Machine Simulator</source>
         <translation>考勤机（空闲）</translation>
     </message>
     <message>
-        <location filename="attendance.cpp" line="365"/>
+        <location filename="attendance.cpp" line="374"/>
+        <source>Reconnecting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="attendance.cpp" line="377"/>
         <source>Attendance id</source>
         <translation>考勤编号</translation>
     </message>
     <message>
-        <location filename="attendance.cpp" line="366"/>
+        <location filename="attendance.cpp" line="378"/>
         <source>Attendance name</source>
         <translation>考勤名称</translation>
     </message>
     <message>
-        <location filename="attendance.cpp" line="367"/>
+        <location filename="attendance.cpp" line="379"/>
         <source>Attendance starttime</source>
         <translation>开始时间</translation>
     </message>
     <message>
-        <location filename="attendance.cpp" line="368"/>
+        <location filename="attendance.cpp" line="380"/>
         <source>Attendance endtime</source>
         <translation>结束时间</translation>
     </message>
     <message>
-        <location filename="attendance.cpp" line="388"/>
+        <location filename="attendance.cpp" line="400"/>
         <source>StuId</source>
         <translation>学号</translation>
     </message>
     <message>
-        <location filename="attendance.cpp" line="392"/>
+        <location filename="attendance.cpp" line="404"/>
         <source>Finger</source>
         <translation>指纹</translation>
     </message>
     <message>
-        <location filename="attendance.cpp" line="394"/>
+        <location filename="attendance.cpp" line="406"/>
         <source>submit</source>
         <translation>签到</translation>
     </message>
     <message>
-        <location filename="attendance.cpp" line="395"/>
+        <location filename="attendance.cpp" line="407"/>
         <source>Attendance List</source>
         <translation>考勤名单</translation>
     </message>
@@ -79,95 +84,117 @@
 <context>
     <name>TestSAM</name>
     <message>
-        <location filename="testsam.cpp" line="25"/>
-        <location filename="testsam.cpp" line="34"/>
-        <location filename="testsam.cpp" line="41"/>
-        <location filename="testsam.cpp" line="48"/>
-        <location filename="testsam.cpp" line="54"/>
-        <location filename="testsam.cpp" line="63"/>
-        <location filename="testsam.cpp" line="66"/>
-        <location filename="testsam.cpp" line="88"/>
+        <location filename="testsam.cpp" line="27"/>
+        <location filename="testsam.cpp" line="36"/>
+        <location filename="testsam.cpp" line="43"/>
+        <location filename="testsam.cpp" line="50"/>
+        <location filename="testsam.cpp" line="56"/>
+        <location filename="testsam.cpp" line="65"/>
+        <location filename="testsam.cpp" line="130"/>
         <source>Error</source>
         <translation>出错</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="25"/>
+        <location filename="testsam.cpp" line="27"/>
         <source>Please Select Attendance Method</source>
         <translation>请选择考勤方式</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="34"/>
-        <location filename="testsam.cpp" line="41"/>
+        <location filename="testsam.cpp" line="36"/>
+        <location filename="testsam.cpp" line="43"/>
         <source>Ip Address Error</source>
         <translation>IP 地址错误</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="48"/>
+        <location filename="testsam.cpp" line="50"/>
         <source>Port Address Error</source>
         <translation>端口有误</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="54"/>
+        <location filename="testsam.cpp" line="56"/>
         <source>Class Room Error</source>
         <translation>教室编号错误</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="63"/>
+        <location filename="testsam.cpp" line="65"/>
         <source>Server Connection failed</source>
         <translation>服务器连接失败</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="66"/>
         <source>Server Connection successful</source>
-        <translation>服务器连接成功</translation>
+        <translation type="vanished">服务器连接成功</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="96"/>
+        <location filename="testsam.cpp" line="84"/>
+        <location filename="testsam.cpp" line="95"/>
+        <source>Exit</source>
+        <translation>退出</translation>
+    </message>
+    <message>
+        <source>Server Disconnect,Is Reconnect?</source>
+        <translation type="vanished">服务器断开连接，是否重连？</translation>
+    </message>
+    <message>
+        <source>Reconnect Failed,Is Continue Reconnect?</source>
+        <translation type="vanished">重连失败，是否继续重连</translation>
+    </message>
+    <message>
+        <location filename="testsam.cpp" line="84"/>
+        <source>Server Disconnect,Reconnectint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="testsam.cpp" line="95"/>
+        <source>Reconnectint Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="testsam.cpp" line="138"/>
         <source>Attendance Machine Simulator</source>
         <translation>模拟考勤机</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="124"/>
+        <location filename="testsam.cpp" line="166"/>
         <source>Table</source>
         <translation>指纹</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="125"/>
+        <location filename="testsam.cpp" line="167"/>
         <source>StuId</source>
         <translation>学号</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="128"/>
+        <location filename="testsam.cpp" line="170"/>
         <source>Server Ip</source>
         <translation>服务器IP</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="129"/>
+        <location filename="testsam.cpp" line="171"/>
         <source>Server Port</source>
         <translation>端口</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="130"/>
+        <location filename="testsam.cpp" line="172"/>
         <source>Class Room</source>
         <translation>教室</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="150"/>
+        <location filename="testsam.cpp" line="192"/>
         <source>Attendance Method</source>
         <translation>考勤方式</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="163"/>
+        <location filename="testsam.cpp" line="205"/>
         <source>Environment Setting </source>
         <translation>环境设置</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="166"/>
+        <location filename="testsam.cpp" line="208"/>
         <source>Submit</source>
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="testsam.cpp" line="169"/>
+        <location filename="testsam.cpp" line="211"/>
         <source>Send</source>
         <translation>发送</translation>
     </message>

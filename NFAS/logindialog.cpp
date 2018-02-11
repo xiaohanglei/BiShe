@@ -50,7 +50,14 @@ void LoginDialog::Login()
 	{
 		userid->setText("");
 		userpassword->setText("");
+
+#ifdef SERVER
+		QMessageBox::information(0, tr("user login"), tr("user id or user password is not match or not is Admini"), QMessageBox::Ok);
+#else
 		QMessageBox::information(0, tr("user login"), tr("user id or user password is not match"), QMessageBox::Ok);
+#endif
+
+		
 		QDialog::rejected();
 	}
 }
@@ -70,7 +77,11 @@ void LoginDialog::setupUi()//界面函数
 	logolayout->addWidget(logo);//图标
 	logolayout->addStretch(1);//右占位符
 
-	QLabel* sysinfo = new QLabel(tr("Network fingerprint attendance system"));//标题,网络指纹考勤系统
+#ifdef SERVER	
+	QLabel* sysinfo = new QLabel(tr("Network fingerprint attendance system Server"));//标题,网络指纹考勤系统
+#else
+	QLabel* sysinfo = new QLabel(tr("Network fingerprint attendance system "));//标题,网络指纹考勤系统
+#endif
 	QFont ft;
 	ft.setPointSize(20);//设置字体大小	
 	sysinfo->setFont(ft);

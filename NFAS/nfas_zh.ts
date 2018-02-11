@@ -741,39 +741,37 @@
 <context>
     <name>Deal</name>
     <message>
-        <location filename="deal.cpp" line="149"/>
+        <location filename="deal.cpp" line="154"/>
         <source>Thursday</source>
         <translation>周四</translation>
     </message>
     <message>
-        <location filename="deal.cpp" line="137"/>
+        <location filename="deal.cpp" line="142"/>
         <source>Monday</source>
         <translation>周一</translation>
     </message>
     <message>
-        <location filename="deal.cpp" line="141"/>
+        <location filename="deal.cpp" line="146"/>
         <source>Tuesday</source>
         <translation>周二</translation>
     </message>
     <message>
-        <location filename="deal.cpp" line="145"/>
+        <location filename="deal.cpp" line="150"/>
         <source>Wednesday</source>
         <translation>周三</translation>
     </message>
     <message>
-        <location filename="deal.cpp" line="153"/>
+        <location filename="deal.cpp" line="158"/>
         <source>Friday</source>
         <translation>周五</translation>
     </message>
     <message>
-        <location filename="deal.cpp" line="287"/>
-        <location filename="deal.cpp" line="498"/>
+        <location filename="deal.cpp" line="292"/>
         <source>Feedback failure</source>
         <translation>回执失败</translation>
     </message>
     <message>
-        <location filename="deal.cpp" line="287"/>
-        <location filename="deal.cpp" line="498"/>
+        <location filename="deal.cpp" line="292"/>
         <source>fan kui shi bai ,kao qin jiao shi wei :</source>
         <translation>给考勤设备回执待考勤学生信息失败,教室号为:</translation>
     </message>
@@ -791,8 +789,9 @@
     <message>
         <location filename="logindialog.cpp" line="31"/>
         <location filename="logindialog.cpp" line="37"/>
-        <location filename="logindialog.cpp" line="53"/>
-        <location filename="logindialog.cpp" line="60"/>
+        <location filename="logindialog.cpp" line="55"/>
+        <location filename="logindialog.cpp" line="57"/>
+        <location filename="logindialog.cpp" line="67"/>
         <source>user login</source>
         <translation>用户登录</translation>
     </message>
@@ -807,27 +806,41 @@
         <translation>用户密码必须填写</translation>
     </message>
     <message>
-        <location filename="logindialog.cpp" line="53"/>
+        <location filename="logindialog.cpp" line="55"/>
+        <source>user id or user password is not match or not is Admini</source>
+        <translation>用户编号与密码不匹配或者没有管理员权限</translation>
+    </message>
+    <message>
+        <location filename="logindialog.cpp" line="57"/>
         <source>user id or user password is not match</source>
         <translation>用户编号与密码不匹配</translation>
     </message>
     <message>
-        <location filename="logindialog.cpp" line="73"/>
-        <source>Network fingerprint attendance system</source>
-        <translation>考勤系统</translation>
+        <location filename="logindialog.cpp" line="81"/>
+        <source>Network fingerprint attendance system Server</source>
+        <translation>指纹考勤系统-服务器</translation>
     </message>
     <message>
-        <location filename="logindialog.cpp" line="84"/>
+        <location filename="logindialog.cpp" line="83"/>
+        <source>Network fingerprint attendance system </source>
+        <translation>指纹考勤系统</translation>
+    </message>
+    <message>
+        <source>Network fingerprint attendance system</source>
+        <translation type="vanished">考勤系统</translation>
+    </message>
+    <message>
+        <location filename="logindialog.cpp" line="95"/>
         <source>user id</source>
         <translation>用户编号</translation>
     </message>
     <message>
-        <location filename="logindialog.cpp" line="87"/>
+        <location filename="logindialog.cpp" line="98"/>
         <source>user password</source>
         <translation>用户密码</translation>
     </message>
     <message>
-        <location filename="logindialog.cpp" line="90"/>
+        <location filename="logindialog.cpp" line="101"/>
         <source>login</source>
         <translation>登  录</translation>
     </message>
@@ -835,7 +848,7 @@
 <context>
     <name>NFAS</name>
     <message>
-        <location filename="nfas.cpp" line="136"/>
+        <location filename="nfas.cpp" line="143"/>
         <source>Network fingerprint attendance system</source>
         <translation>考勤系统（客户端）</translation>
     </message>
@@ -844,42 +857,46 @@
         <translation type="obsolete">学生信息</translation>
     </message>
     <message>
-        <location filename="nfas.cpp" line="162"/>
+        <location filename="nfas.cpp" line="170"/>
         <source>Academic class student</source>
         <translation>信息管理</translation>
     </message>
     <message>
-        <location filename="nfas.cpp" line="153"/>
+        <location filename="nfas.cpp" line="161"/>
         <source>attendance information</source>
         <translation>考勤项目</translation>
     </message>
     <message>
-        <location filename="nfas.cpp" line="90"/>
+        <location filename="nfas.cpp" line="91"/>
         <source>Exit</source>
         <translation>退出程序</translation>
     </message>
     <message>
-        <location filename="nfas.cpp" line="90"/>
+        <location filename="nfas.cpp" line="91"/>
         <source>Affirm Exit</source>
         <translation>确认退出程序</translation>
     </message>
     <message>
-        <location filename="nfas.cpp" line="157"/>
+        <location filename="nfas.cpp" line="165"/>
         <source>result information</source>
         <translation>考勤统计</translation>
     </message>
     <message>
-        <location filename="nfas.cpp" line="163"/>
+        <location filename="nfas.cpp" line="171"/>
         <source>user information</source>
         <translation>用户管理</translation>
     </message>
     <message>
-        <location filename="nfas.cpp" line="164"/>
+        <location filename="nfas.cpp" line="172"/>
         <source>Device information</source>
         <translation>设备信息</translation>
     </message>
     <message>
-        <location filename="nfas.cpp" line="177"/>
+        <location filename="nfas.cpp" line="140"/>
+        <location filename="nfas.cpp" line="184"/>
+        <location filename="nfas.cpp" line="198"/>
+        <location filename="nfas.cpp" line="230"/>
+        <location filename="nfas.cpp" line="245"/>
         <source>Network fingerprint attendance system online</source>
         <translation>考勤系统（服务器）</translation>
     </message>
@@ -1050,7 +1067,7 @@
     <message>
         <location filename="resulttabwidget.cpp" line="16"/>
         <source>Update Attendance Result</source>
-        <translation type="unfinished">更新最新记录</translation>
+        <translation>更新最新记录</translation>
     </message>
     <message>
         <location filename="resulttabwidget.cpp" line="209"/>
@@ -1147,35 +1164,35 @@
     <name>UserTabWidget</name>
     <message>
         <location filename="usertabwidget.cpp" line="113"/>
-        <location filename="usertabwidget.cpp" line="134"/>
+        <location filename="usertabwidget.cpp" line="142"/>
         <source>user id</source>
         <translation>用户编号</translation>
     </message>
     <message>
         <location filename="usertabwidget.cpp" line="113"/>
-        <location filename="usertabwidget.cpp" line="137"/>
+        <location filename="usertabwidget.cpp" line="145"/>
         <source>user identify</source>
         <translation>用户身份</translation>
     </message>
     <message>
-        <location filename="usertabwidget.cpp" line="121"/>
-        <location filename="usertabwidget.cpp" line="152"/>
+        <location filename="usertabwidget.cpp" line="125"/>
+        <location filename="usertabwidget.cpp" line="160"/>
         <source>administrator</source>
         <translation>管理员</translation>
     </message>
     <message>
-        <location filename="usertabwidget.cpp" line="121"/>
-        <location filename="usertabwidget.cpp" line="152"/>
+        <location filename="usertabwidget.cpp" line="125"/>
+        <location filename="usertabwidget.cpp" line="160"/>
         <source>teacher</source>
         <translation>教师</translation>
     </message>
     <message>
-        <location filename="usertabwidget.cpp" line="135"/>
+        <location filename="usertabwidget.cpp" line="143"/>
         <source>user password</source>
         <translation>用户密码</translation>
     </message>
     <message>
-        <location filename="usertabwidget.cpp" line="136"/>
+        <location filename="usertabwidget.cpp" line="144"/>
         <source>user password again</source>
         <translation>重复密码</translation>
     </message>
@@ -1185,7 +1202,7 @@
         <location filename="usertabwidget.cpp" line="45"/>
         <location filename="usertabwidget.cpp" line="50"/>
         <location filename="usertabwidget.cpp" line="59"/>
-        <location filename="usertabwidget.cpp" line="144"/>
+        <location filename="usertabwidget.cpp" line="152"/>
         <source>user add</source>
         <translation>添加用户</translation>
     </message>
@@ -1221,7 +1238,7 @@
     <message>
         <location filename="usertabwidget.cpp" line="74"/>
         <location filename="usertabwidget.cpp" line="79"/>
-        <location filename="usertabwidget.cpp" line="146"/>
+        <location filename="usertabwidget.cpp" line="154"/>
         <source>user modify</source>
         <translation>修改用户</translation>
     </message>
@@ -1239,7 +1256,7 @@
         <location filename="usertabwidget.cpp" line="91"/>
         <location filename="usertabwidget.cpp" line="97"/>
         <location filename="usertabwidget.cpp" line="102"/>
-        <location filename="usertabwidget.cpp" line="148"/>
+        <location filename="usertabwidget.cpp" line="156"/>
         <source>user delete</source>
         <translation>删除用户</translation>
     </message>

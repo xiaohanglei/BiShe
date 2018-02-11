@@ -46,6 +46,7 @@ public slots:
 	
 private:
 	void setupUi();
+public:
 	void updateTree();
 	QLabel* totalnumber;
 	QLabel* absencenumber;

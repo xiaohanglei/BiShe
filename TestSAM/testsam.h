@@ -25,7 +25,7 @@ public:
 	~TestSAM();
 
 public slots:
-
+void SendXinTiao();
 void slotSubmit();
 void slotTestSend();
 void RecvMsg();
@@ -48,9 +48,6 @@ private:
 	QRadioButton * radioStuId;
 
 	QPushButton * submit;
-
-
-
 
 };
 

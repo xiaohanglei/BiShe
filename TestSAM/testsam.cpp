@@ -1,14 +1,16 @@
 #include "testsam.h"
 #include <QValidator>
 #include "attendance.h"
+#include <QtWidgets/QApplication>
 TestSAM::TestSAM(QWidget *parent)
 	: QWidget(parent)
 {
 	tcpclient = new TcpClient;
 	SetupUi();
 	connect(submit, SIGNAL(clicked()), this, SLOT(slotSubmit()));
-	connect(buttTestSendMsg, SIGNAL(clicked()), this, SLOT(slotTestSend()));
+	//connect(buttTestSendMsg, SIGNAL(clicked()), this, SLOT(slotTestSend()));
 	//QObject::connect(tcpclient->GetSock(), &QTcpSocket::readyRead, this, &TestSAM::RecvMsg);
+	//QObject::connect(tcpclient->GetSock(), &QTcpSocket::disconnected, this, &TestSAM::slotTestSend);
 }
 
 TestSAM::~TestSAM()
@@ -63,7 +65,7 @@ void TestSAM::slotSubmit()
 		QMessageBox::information(0, tr("Error"), tr("Server Connection failed"), QMessageBox::Ok);
 		return;
 	}
-	QMessageBox::information(0, tr("Error"), tr("Server Connection successful"), QMessageBox::Ok);
+	//QMessageBox::information(0, tr("Error"), tr("Server Connection successful"), QMessageBox::Ok);
 
 	submit->setEnabled(false);
 	AttendanceM *attendm = new AttendanceM(editAttendClassRoom->text(),tcpclient,method);
@@ -71,10 +73,50 @@ void TestSAM::slotSubmit()
 	attendm->show();
 		
 }
+void TestSAM::SendXinTiao()
+{
+	
+}
 
 void TestSAM::slotTestSend()
 {
-	tcpclient->SendMsg("teste");
+	QMessageBox::StandardButton button;
+	button = QMessageBox::information(this, tr("Exit"), QString(tr("Server Disconnect,Reconnectint")), QMessageBox::Ok );
+
+	int waitcount = 0;
+
+	while (!tcpclient->ConnectServer())
+	{
+		Sleep(1000 * 10);
+		waitcount++;
+
+		if (waitcount > 30)//5分钟都重连不上，则直接退出程序
+		{
+			button = QMessageBox::information(this, tr("Exit"), QString(tr("Reconnectint Failed")), QMessageBox::Ok);
+			QApplication::exit();
+		}
+
+	}
+
+
+	/*
+	while (button == QMessageBox::Yes)
+	{
+		if (tcpclient->ConnectServer())
+		{
+			break;
+		}
+		else
+		{
+			button = QMessageBox::question(this, tr("Exit"), QString(tr("Reconnect Failed,Is Continue Reconnect?")), QMessageBox::Yes | QMessageBox::No);
+		}
+	}
+
+	if (button == QMessageBox::No)
+	{
+		QApplication::exit();
+	}
+	*/
 }
 void TestSAM::RecvMsg()
 {

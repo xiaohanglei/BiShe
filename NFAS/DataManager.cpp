@@ -214,6 +214,8 @@ DataManager::DataManager(QString configfile)//从配置文件中读取数据库连接信息
 	netbao = new QList<NETBAO>;
 
 	g_cNETBAO = new CRITICAL_SECTION;
+	InitializeCriticalSection(g_cNETBAO);
+
 
 	if (!InitDataBase(server, database, uid, pwd)) //数据库连接
 	{
@@ -264,7 +266,18 @@ bool DataManager::InitDataBase(QString server,QString database,QString uid,QStri
 	InitDevics();
 	return true;
 }
-
+//void DataManager::InitAllData()
+//{
+//	InitAcademics();
+//	InitStudents();
+//	InitClasss();
+//	InitAttendances();
+//
+//	//InitResult();
+//
+//	InitUser();
+//	InitDevics();
+//}
 bool DataManager::IsServerOnline(int op, QString &qsip)
 {
 	if (op == 1)//判断是否有在线
@@ -654,9 +667,18 @@ void DataManager::InitUser()
 
 bool DataManager::UserLogin(User user)
 {
+	//int useridentify = 0;
+	
+
+#ifdef SERVER
+	QSqlQuery query(QString("SELECT * FROM admintable WHERE userid='%1' AND userpassword='%2' AND useridentify=0")
+		.arg(user.GetUID())
+		.arg(user.GetPsd()));
+#else
 	QSqlQuery query(QString("SELECT * FROM admintable WHERE userid='%1' AND userpassword='%2'")
 		.arg(user.GetUID())
 		.arg(user.GetPsd()));
+#endif
 	//如果匹配到该用户，则设置为当前操作用户
 	while (query.next())
 	{

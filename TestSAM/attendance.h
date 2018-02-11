@@ -41,6 +41,7 @@ signals:
 
 public slots:
 void Changeui();//
+void Disconnectdeal();
 
 void attend();
 void slotSign();
@@ -50,6 +51,7 @@ void attendList();//
 private:
 	void SetupUi();
 public:
+	QLabel * labelTiShi;
 	QLabel * labelAttid;
 	QLabel * labelAttname;
 	QLabel * labelAttstarttime;
