@@ -555,7 +555,9 @@ void ResultTabWidget::updateTable(QTreeWidgetItem * item, int col)
 			<< tr("student figure") << tr("in class") << tr("leave class") << tr("absencs class");
 		auto aid = parent->text(0).split("-")[0];
 		attendancetable->setHorizontalHeaderLabels(header);
-		auto rid = item->text(0);
+
+		QString tempqst = parent->text(0).split("-")[0];
+		auto rid = tempqst + "-" + item->text(0);
 		auto total = 0;
 		auto leave = 0;
 		auto abnumber = 0;
@@ -997,7 +999,7 @@ void ResultTabWidget::updateTree()
 			{
 				if (iter->GetAID() == it->GetAID()) 
 				{
-					parent->addChild(new QTreeWidgetItem(QStringList() << iter->GetRID()));//同一个考勤项目的考勤结果都作为子树
+					parent->addChild(new QTreeWidgetItem(QStringList() << iter->GetRID().split("-")[1]));//同一个考勤项目的考勤结果都作为子树
 				}
 			}
 			resulttree->addTopLevelItem(parent);

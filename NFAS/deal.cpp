@@ -109,10 +109,6 @@ void Deal::Deal_Attendance_MingLing(NETBAO bao)
 void Deal::Deal_Attendance_HuiZhi(UCHAR * sostation, SOCKET sock, DataManager * dm)
 {
 
-	dm->InitAttendances();
-	dm->InitClasss();
-	dm->InitStudents();
-
 	//找到该考勤设备在当前时段所负责的考勤项目	
 	QString tempQS;//考勤设备所在教室
 	QStringList aclass;//保存需要考勤的考勤项目下辖的班级

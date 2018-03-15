@@ -113,16 +113,21 @@ void NFAS::UpdateTab(int index)
 		switch (index)
 		{
 		case 0:
-			((AttendanceTabWidget*)widget)->UpdateTab();//考勤信息
-			//dataManager->InitAttendances();
+			//dataManager->updateAttendance();
+			((AttendanceTabWidget*)widget)->UpdateTab();//考勤信息			
 			break;		
 		case 1:
+			//dataManager->updateResult(dataManager->GetCurrentUser());
 			((ResultTabWidget*)widget)->UpdateTab();//考勤结果
 			break;
 		case 2:
+			//dataManager->updateAcademic();
+			//dataManager->updateClass();
+			//dataManager->updateStudent();
 			((AcademicClassStudentTabWidget*)widget)->UpdateTab();//学院、班级、学生选项卡
 			break;
 		case 3:
+			//dataManager->updateUser();
 			((UserTabWidget*)widget)->UpdateTab(); //用户管理
 			break;
 		case 4:
@@ -148,7 +153,7 @@ void NFAS::setupUi()
 	//this->setFixedSize(QSize(1440,900));
 
 	QRect a = (QApplication::desktop())->availableGeometry();
-	this->setGeometry(400,320,1440,900);
+	//this->setGeometry(400,320,1440,900);
 	//this->setFixedSize(QSize(a.width(), a.height()-100));
 	//this->showFullScreen();//全屏显示
 	this->showMaximized();	
@@ -253,9 +258,7 @@ void NFAS::setupUi()
 	}
 #endif
 #endif // SERVER
-
-
-	
+		
 
 //测试
 	//UCHAR station[7] = "10-211";

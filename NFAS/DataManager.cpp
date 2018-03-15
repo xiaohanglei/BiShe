@@ -628,7 +628,7 @@ void DataManager::InitClasss()
 
 void DataManager::InitResult(User user)
 {
-	QSqlQuery query("SELECT * FROM resulttable");
+	QSqlQuery query("SELECT * FROM resulttable order by submituser ,resultid");
 	while (query.next()) 
 	{
 		QString rid = query.value(0).toString();

@@ -9,15 +9,3 @@
   moc_nfas.cpp
   moc_resulttabwidget.cpp
   moc_usertabwidget.cpp
-  TcpServer.cpp
-  academicclassstudenttabwidget.cpp
-  attendancetabwidget.cpp
-  deal.cpp
-  devicewidget.cpp
-  logindialog.cpp
-  main.cpp
-  nfas.cpp
-  resulttabwidget.cpp
-  usertabwidget.cpp
-  正在生成代码...
-  NFAS.vcxproj -> H:\BiShe\BiShe\BiShe\x64\Release\NFAS.exe

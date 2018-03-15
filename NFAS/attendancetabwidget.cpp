@@ -196,6 +196,7 @@ void AttendanceTabWidget::RestAttendanceTime()
 }
 void AttendanceTabWidget::UpdateTab()
 {
+	updateTree();
 }
 
 void AttendanceTabWidget::AttendanceModify()
