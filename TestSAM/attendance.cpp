@@ -334,7 +334,7 @@ void AttendanceM::Changeui()
 		this->edidAttendtime->setVisible(true);
 
 		this->edidAttid->setText(attendance->attendanceid);
-		this->edidAttname->setText("N/A");
+		this->edidAttname->setText(attendance->attendancename);
 
 		QDateTime tempdatetime(QDateTime::fromTime_t(attendance->starttime));
 		this->edidAttstarttime->setText(tempdatetime.toString("yyyy-MM-dd HH:mm"));

@@ -1,6 +1,7 @@
 #include "deal.h"
 //#include <DataManager.h>
 #include <QMessageBox>
+#include <QTextCodec>  
 CDeal::CDeal(QObject * parent) : QObject(parent)
 {
 	m_All10ClientRecvBuf = new UCHAR[MAX_BUFF];
@@ -34,7 +35,7 @@ void CDeal::FenLiZhen(UCHAR * recvbuff, int len, ATTEND * attendance)
 		DWORD DATALEN = 0;
 
 		memcpy(&DATALEN, PTR + j, 4);
-		if (DATALEN > 5 * 1024 || DATALEN <= 0) //判断数据长度的有效性
+		if (DATALEN > 100 * 1024 || DATALEN < 14) //判断数据长度的有效性
 		{
 			j++;
 			continue;
@@ -77,6 +78,7 @@ void CDeal::FenLiZhen(UCHAR * recvbuff, int len, ATTEND * attendance)
 				//将考勤名单解析出来.
 				
 				char attendid[9] = { 0 };
+				char attendname[50] = {0};
 				int istarttime = 0;
 				int iendtime = 0;
 				WORD count = 0;
@@ -84,17 +86,29 @@ void CDeal::FenLiZhen(UCHAR * recvbuff, int len, ATTEND * attendance)
 				char ** stuid = nullptr;
 				char ** stufing = nullptr;
 
+				int namelen = 0;
 				memcpy(attendid, &recvbuff[20], 8);//考勤编号
-				memcpy(&istarttime, &recvbuff[28], 4);//开始时间
-				memcpy(&iendtime, &recvbuff[32], 4);//结束时间
+
+
+				//考勤名称长度和考勤名称
+				memcpy(&namelen, &recvbuff[28], 2);
+				
+				memcpy(attendname, &recvbuff[30], namelen);
+				attendname[namelen] = '\0';
+
+
+				memcpy(&istarttime, &recvbuff[30 +  namelen], 4);//开始时间
+				memcpy(&iendtime, &recvbuff[30 + namelen + 4], 4);//结束时间
 
 				attendance->attendanceid = QString(attendid);
+				
+				attendance->attendancename = codec->toUnicode(attendname);
 				attendance->starttime = istarttime;
 				attendance->endtiem = iendtime;
 				
 				attendance->signcount = 0;
 
-				memcpy(&count, &recvbuff[36], 2);//记录数量
+				memcpy(&count, &recvbuff[30 + namelen + 4 + 4], 2);//记录数量
 				stuid = new char*[count];
 				stufing = new char*[count];
 
@@ -106,8 +120,8 @@ void CDeal::FenLiZhen(UCHAR * recvbuff, int len, ATTEND * attendance)
 					memset(stuid[i], 0, 9);
 					memset(stufing[i], 0, 33);
 
-					memcpy(stuid[i], &recvbuff[38 + i * 40], 8);
-					memcpy(stufing[i], &recvbuff[46 + i * 40], 32);
+					memcpy(stuid[i], &recvbuff[30 + namelen + 4 + 4 + 2 + i * 40], 8);
+					memcpy(stufing[i], &recvbuff[30 + namelen + 4 + 4 + 2 + 8 + i * 40], 32);
 
 					tempStudent.StuId = QString(stuid[i]);
 					tempStudent.StuFinger = QString(stufing[i]);

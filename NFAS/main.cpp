@@ -5,13 +5,16 @@
 #include "logindialog.hpp"
 #include <TcpServer.h>
 #include <QDir>
-
+#include <QTextCodec>  
 
 
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
+
+	QTextCodec::setCodecForLocale(QTextCodec::codecForName("GBK"));
+	
 	QTranslator qtTranslator;
 	qtTranslator.load(":/NFAS/nfas_zh.qm");//º”‘ÿ”Ô—‘∑≠“ÎŒƒº˛
 	a.installTranslator(&qtTranslator);

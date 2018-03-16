@@ -34,7 +34,7 @@ void Deal::FenLiZhen(UCHAR * recvbuff, int len, SOCKET sock, DataManager * dm)
 		DWORD DATALEN = 0;
 
 		memcpy(&DATALEN, PTR + j, 4);
-		if (DATALEN > 5 * 1024 || DATALEN <= 0) //判断数据长度的有效性
+		if (DATALEN > 100 * 1024 || DATALEN < 14) //判断数据长度的有效性
 		{
 			j++;
 			continue;
@@ -113,6 +113,7 @@ void Deal::Deal_Attendance_HuiZhi(UCHAR * sostation, SOCKET sock, DataManager * 
 	QString tempQS;//考勤设备所在教室
 	QStringList aclass;//保存需要考勤的考勤项目下辖的班级
 	QString attendanceId;//需要考勤的考勤项目id
+	QString attendanceName;//需要考勤的考勤名称
 	ATTENDTIME atttime;//需要考勤的时段
 	QVector<Student> students;//保存需要考勤的考勤项目下辖的所有学生列表
 
@@ -166,6 +167,7 @@ void Deal::Deal_Attendance_HuiZhi(UCHAR * sostation, SOCKET sock, DataManager * 
 					if (tempTime > currtimemin && tempTime < currtimemax)   //判断当前考勤时段的开始时间是否在当前时间  至  其后的  MAX_ATTEND_TIME 分钟之内
 					{
 						attendanceId = it->GetID();
+						attendanceName = it->GetName();
 						aclass = it->GetAclass().split(",");//获得该考勤项目下辖的班级
 
 						//根据考勤项目id找到找到该考勤项目下辖的所有学生信息
@@ -240,14 +242,26 @@ void Deal::Deal_Attendance_HuiZhi(UCHAR * sostation, SOCKET sock, DataManager * 
 
 		sendlen += 8;
 
-		memcpy(&ptrSendData[28], &istarttime, 4);//开始时间
-		memcpy(&ptrSendData[32], &iendtime, 4);//结束时间
+		//考勤项目名称
+		int namelen = attendanceName.size();
+		tempQB = attendanceName.toLocal8Bit();
+		char *name = nullptr;
+		name = tempQB.data();
+		namelen = strlen(name);
+
+		memcpy(&ptrSendData[28], &namelen, 2);
+		memcpy(&ptrSendData[30], name, namelen);
+		sendlen += 2 + namelen;
+
+
+		memcpy(&ptrSendData[30 + namelen], &istarttime, 4);//开始时间
+		memcpy(&ptrSendData[30 + namelen + 4], &iendtime, 4);//结束时间
 
 		sendlen += 8;
 
 		WORD count = students.size();//需要考勤的学生数量
 
-		memcpy(&ptrSendData[36], &count, 2);//记录数
+		memcpy(&ptrSendData[30 + namelen + 4 + 4], &count, 2);//记录数
 
 		sendlen += 2;
 
@@ -263,8 +277,8 @@ void Deal::Deal_Attendance_HuiZhi(UCHAR * sostation, SOCKET sock, DataManager * 
 			sid = tempsid.data();
 			sfig = tempsfig.data();
 
-			memcpy(&ptrSendData[38 + i * 40], sid, 8);//学号
-			memcpy(&ptrSendData[46 + i * 40], sfig, 32);//指纹
+			memcpy(&ptrSendData[30 + namelen + 4 + 4 + 2 + i * 40], sid, 8);//学号
+			memcpy(&ptrSendData[30 + namelen + 4 + 4 + 2 + 8 + i * 40], sfig, 32);//指纹
 		}
 		sendlen += count * 40;	
 	}
@@ -285,7 +299,7 @@ void Deal::Deal_Attendance_HuiZhi(UCHAR * sostation, SOCKET sock, DataManager * 
 	int sendvlen = 0;
 	if ((sendvlen = send(sock, (char*)ptrSendData, sendlen + 5, 0)) == SOCKET_ERROR)
 	{
-		QMessageBox::information(0, tr("Feedback failure"), tr("fan kui shi bai ,kao qin jiao shi wei :"), QMessageBox::Ok);
+		//QMessageBox::information(0, tr("Feedback failure"), tr("fan kui shi bai ,kao qin jiao shi wei :"), QMessageBox::Ok);
 		return;
 	}
 

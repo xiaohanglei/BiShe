@@ -4,6 +4,7 @@
 #include <QVector>
 #define ATTENDANCEMAX 100//单次考勤最大数量
 #define MAX_BUFF 1024 * 1024//分帧缓冲区大小
+#include <QTextCodec>  
 
 struct STUDENT
 {
@@ -15,6 +16,7 @@ struct STUDENT
 struct ATTEND
 {
 	QString attendanceid;
+	QString attendancename;
 	int starttime;
 	int endtiem;
 	QVector<STUDENT> Stuends;
@@ -41,4 +43,5 @@ signals:
 private:
 	UCHAR *m_All10ClientRecvBuf;//解析数据的缓冲区
 	int m_buf10len;
+	QTextCodec *codec = QTextCodec::codecForName("GBK");//指定QString的编码方式
 };
