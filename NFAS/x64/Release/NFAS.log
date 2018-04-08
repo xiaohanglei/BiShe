@@ -1,11 +1,3 @@
-﻿  Moc'ing DataManager.h...
-  DataManager.cpp
-  moc_DataManager.cpp
-  moc_academicclassstudenttabwidget.cpp
-  moc_attendancetabwidget.cpp
-  moc_deal.cpp
-  moc_devicewidget.cpp
-  moc_logindialog.cpp
-  moc_nfas.cpp
-  moc_resulttabwidget.cpp
-  moc_usertabwidget.cpp
+﻿  nfas.cpp
+  NFAS.vcxproj -> H:\BiShe\BiShe\BiShe\x64\Release\NFAS.exe
+  NFAS.vcxproj -> H:\BiShe\BiShe\BiShe\x64\Release\NFAS.pdb (Full PDB)

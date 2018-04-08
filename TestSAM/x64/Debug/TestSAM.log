@@ -1,1 +1,15 @@
-﻿
+﻿  moc_attendance.cpp
+  moc_attlist.cpp
+  moc_deal.cpp
+  moc_tcpclient.cpp
+  moc_testsam.cpp
+  attendance.cpp
+  attlist.cpp
+  deal.cpp
+  main.cpp
+  tcpclient.cpp
+  testsam.cpp
+  正在生成代码...
+  qrc_testsam.cpp
+  TestSAM.vcxproj -> H:\BiShe\BiShe\BiShe\x64\Debug\TestSAM.exe
+  TestSAM.vcxproj -> H:\BiShe\BiShe\BiShe\x64\Debug\TestSAM.pdb (Full PDB)

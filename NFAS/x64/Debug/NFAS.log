@@ -1,1 +1,24 @@
-﻿
+﻿  Moc'ing DataManager.h...
+  DataManager.cpp
+  moc_DataManager.cpp
+  moc_academicclassstudenttabwidget.cpp
+  moc_attendancetabwidget.cpp
+  moc_deal.cpp
+  moc_devicewidget.cpp
+  moc_logindialog.cpp
+  moc_nfas.cpp
+  moc_resulttabwidget.cpp
+  moc_usertabwidget.cpp
+  TcpServer.cpp
+  academicclassstudenttabwidget.cpp
+  attendancetabwidget.cpp
+  deal.cpp
+  devicewidget.cpp
+  logindialog.cpp
+  main.cpp
+  nfas.cpp
+  resulttabwidget.cpp
+  usertabwidget.cpp
+  正在生成代码...
+  NFAS.vcxproj -> H:\BiShe\BiShe\BiShe\x64\Debug\NFAS.exe
+  NFAS.vcxproj -> H:\BiShe\BiShe\BiShe\x64\Debug\NFAS.pdb (Full PDB)

@@ -54,7 +54,7 @@ void NFAS::ExeMingLingProc(LPVOID another)
 		{
 			LeaveCriticalSection(dm->GetCriNetBao());
 			continue;
-		}
+		} 
 
 		xinxibao = dm->GetNetBao()->first();//取出命令队列中的首条命令
 		dm->GetNetBao()->removeFirst();//取出要执行的命令以后，从队列中删除该条命令		
@@ -145,7 +145,7 @@ void NFAS::setupUi()
 	this->setWindowTitle(tr("Network fingerprint attendance system online"));
 
 #else
-	this->setWindowTitle(tr("Network fingerprint attendance system"));
+	this->setWindowTitle(tr("Network fingerprint attendance system online"));
 #endif
 	this->setWindowFlags(Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint/*| Qt::Widget | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint*/);//关闭和最小化按钮
 	//this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint);
