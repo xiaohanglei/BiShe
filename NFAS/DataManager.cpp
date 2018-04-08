@@ -368,13 +368,17 @@ bool DataManager::StudentOP(const Student& s, int op)
 	switch (op)
 	{
 	case 0:
-		query1.prepare("INSERT INTO studenttable (studentid,studentname,studentsex,studentacademic,studentclass,studentfigure) VALUES (?,?,?,?,?,?)");
+		query1.prepare("INSERT INTO studenttable (studentid,studentname,studentsex,studentacademic,studentclass,studentfigure,intimes,letimes,abtimes,totimes) VALUES (?,?,?,?,?,?,?,?,?,?)");
 		query1.bindValue(0, s.GetID());
 		query1.bindValue(1, s.GetName());
 		query1.bindValue(2, s.GetSex());
 		query1.bindValue(3, s.GetAcademic());
 		query1.bindValue(4, s.GetAclass());
 		query1.bindValue(5, s.GetFigure());
+		query1.bindValue(6, 0);
+		query1.bindValue(7, 0);
+		query1.bindValue(8, 0);
+		query1.bindValue(9, 0);
 		break;
 	case 1://修改学生信息
 		query1.prepare("UPDATE studenttable SET studentname=?,studentsex=?,studentacademic=?,studentclass=? WHERE studentid=?");

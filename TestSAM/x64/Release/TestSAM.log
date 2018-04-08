@@ -1,8 +1,10 @@
-﻿  Moc'ing testsam.h...
-  Moc'ing attendance.h...
+﻿  Moc'ing deal.h...
   moc_attendance.cpp
-  moc_testsam.cpp
+  moc_attlist.cpp
+  moc_deal.cpp
   attendance.cpp
+  attlist.cpp
+  deal.cpp
   main.cpp
   testsam.cpp
   正在生成代码...

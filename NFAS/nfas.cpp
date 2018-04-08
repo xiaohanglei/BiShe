@@ -54,7 +54,7 @@ void NFAS::ExeMingLingProc(LPVOID another)
 		{
 			LeaveCriticalSection(dm->GetCriNetBao());
 			continue;
-		}
+		} 
 
 		xinxibao = dm->GetNetBao()->first();//取出命令队列中的首条命令
 		dm->GetNetBao()->removeFirst();//取出要执行的命令以后，从队列中删除该条命令		
@@ -145,7 +145,7 @@ void NFAS::setupUi()
 	this->setWindowTitle(tr("Network fingerprint attendance system online"));
 
 #else
-	this->setWindowTitle(tr("Network fingerprint attendance system"));
+	this->setWindowTitle(tr("Network fingerprint attendance system online"));
 #endif
 	this->setWindowFlags(Qt::WindowCloseButtonHint | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint/*| Qt::Widget | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint*/);//关闭和最小化按钮
 	//this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint);
@@ -181,6 +181,12 @@ void NFAS::setupUi()
 	QVBoxLayout* main_layout = new QVBoxLayout;
 	main_layout->addWidget(main_tab);
 	this->setLayout(main_layout);
+
+	//网络服务
+	dataManager->GetTcp()->StartServer();//启动网络服务
+										 //开启线程
+	_beginthread(TcpServer::RecvClientProc, 0, dataManager);//接收客户端连接的线程
+	_beginthread(ExeMingLingProc, 0, dataManager);//处理考勤设备发来的命令
 
 #ifdef SERVER
 	if (dataManager->GetCurrentUser().GetIdentify() == 0)//只有当前用户为管理员

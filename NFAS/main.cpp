@@ -25,6 +25,8 @@ int main(int argc, char *argv[])
 	//QApplication::desktop()->availableGeometry();
 	//-------------------
 
+	QApplication::setWindowIcon(QIcon(QCoreApplication::applicationDirPath() + "/two.jpg"));
+
 
 	//创建本程序所用到的所有数据管理类
 	DataManager dataManager(config);

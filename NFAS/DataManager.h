@@ -12,7 +12,7 @@
 
 #define  MAX_BUF_LEN 1024*1024
 #define MAX_ATTEND_TIME 10//系统向考勤设备发送待考勤数据的时间，不超过20分钟
-#define SERVER //服务器
+//#define SERVER //服务器
 struct NETBAO//网络数据帧
 {
 	UCHAR mdstation[7];//目的电报码
@@ -321,8 +321,8 @@ public:
 private:
 	QString resultid;
 	QString attendanceid;
-	int theorynumber;
-	int actualnumber;
+	int theorynumber;//应到人数
+	int actualnumber;//实到人数
 	QString absencestudent;
 	QString leavestudent;
 	QString submituser;

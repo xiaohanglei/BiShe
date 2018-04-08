@@ -177,6 +177,9 @@
     <None Include="nfas_zh.ts">
       <Filter>Translation Files</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TcpServer.h">
