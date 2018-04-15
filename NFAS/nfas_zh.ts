@@ -816,7 +816,11 @@
     <message>
         <location filename="logindialog.cpp" line="81"/>
         <source>Network fingerprint attendance system Server</source>
+<<<<<<< HEAD
         <translation>考勤管理系统</translation>
+=======
+        <translation type="unfinished">指纹考勤系统</translation>
+>>>>>>> c236796d460b3665acf92734d06faa648eb5dee0
     </message>
     <message>
         <location filename="logindialog.cpp" line="83"/>
@@ -846,6 +850,7 @@
 <context>
     <name>NFAS</name>
     <message>
+<<<<<<< HEAD
         <location filename="nfas.cpp" line="145"/>
         <location filename="nfas.cpp" line="148"/>
         <location filename="nfas.cpp" line="189"/>
@@ -855,6 +860,11 @@
         <source>Network fingerprint attendance system online</source>
         <oldsource>Network fingerprint attendance system</oldsource>
         <translation>考勤系统</translation>
+=======
+        <location filename="nfas.cpp" line="148"/>
+        <source>Network fingerprint attendance system</source>
+        <translation>考勤系统（客户端）</translation>
+>>>>>>> c236796d460b3665acf92734d06faa648eb5dee0
     </message>
     <message>
         <source>student information</source>
@@ -895,6 +905,18 @@
         <source>Device information</source>
         <translation>设备信息</translation>
     </message>
+<<<<<<< HEAD
+=======
+    <message>
+        <location filename="nfas.cpp" line="145"/>
+        <location filename="nfas.cpp" line="189"/>
+        <location filename="nfas.cpp" line="203"/>
+        <location filename="nfas.cpp" line="235"/>
+        <location filename="nfas.cpp" line="250"/>
+        <source>Network fingerprint attendance system online</source>
+        <translation>考勤系统（服务器）</translation>
+    </message>
+>>>>>>> c236796d460b3665acf92734d06faa648eb5dee0
 </context>
 <context>
     <name>ResultTabWidget</name>
